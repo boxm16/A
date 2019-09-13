@@ -5,6 +5,7 @@
  */
 package GUI;
 
+import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
@@ -19,9 +20,9 @@ public class MainFrame extends javax.swing.JFrame {
      */
     public MainFrame() {
         initComponents();
-      /*  Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        /*  Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         this.setSize(screenSize.width, screenSize.height-35);
-        */
+         */
     }
 
     /**
@@ -32,7 +33,6 @@ public class MainFrame extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         jScrollPane1 = new javax.swing.JScrollPane();
         RootPanel = new javax.swing.JPanel();
@@ -42,47 +42,50 @@ public class MainFrame extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         HeadPanel = new javax.swing.JPanel();
         CombinedPanel = new javax.swing.JPanel();
-        ID_Label = new javax.swing.JLabel();
-        ID_TextField = new javax.swing.JTextField();
-        FirstName_Label = new javax.swing.JLabel();
-        FirstName_TextField = new javax.swing.JTextField();
-        LastName_Label = new javax.swing.JLabel();
-        LastName_TextField = new javax.swing.JTextField();
-        Mobile_Label = new javax.swing.JLabel();
-        LandLine_Label = new javax.swing.JLabel();
-        Mobile_Field = new javax.swing.JFormattedTextField();
-        LandLine_Field = new javax.swing.JFormattedTextField();
+        idLabel = new javax.swing.JLabel();
+        lastlNameLabel = new javax.swing.JLabel();
+        lastNameTextField = new javax.swing.JTextField();
+        firstNameLabel = new javax.swing.JLabel();
+        firstNameTextField = new javax.swing.JTextField();
+        landLineLabel = new javax.swing.JLabel();
+        mobileLabel = new javax.swing.JLabel();
+        landLineField = new javax.swing.JFormattedTextField();
+        mobileField = new javax.swing.JFormattedTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        NewCustomer_Button = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        noteField = new javax.swing.JTextArea();
+        searchButton = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        createNewCustomerButton = new javax.swing.JButton();
+        saveNewCustomerButton = new javax.swing.JButton();
+        idField = new javax.swing.JFormattedTextField();
         AdressPanel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
-        jLabel29 = new javax.swing.JLabel();
-        AdressPanel1 = new javax.swing.JPanel();
-        jLabel30 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
-        jLabel31 = new javax.swing.JLabel();
-        jTextField11 = new javax.swing.JTextField();
-        jLabel32 = new javax.swing.JLabel();
-        jTextField12 = new javax.swing.JTextField();
-        jLabel33 = new javax.swing.JLabel();
-        jTextField13 = new javax.swing.JTextField();
-        jLabel34 = new javax.swing.JLabel();
-        jTextField14 = new javax.swing.JTextField();
-        jLabel35 = new javax.swing.JLabel();
+        alternativeStreetLabel = new javax.swing.JLabel();
+        alternativeStreetField = new javax.swing.JTextField();
+        alternativeDistrictLabel = new javax.swing.JLabel();
+        alternativeDistrictField = new javax.swing.JTextField();
+        alternativeBellNameLabel = new javax.swing.JLabel();
+        alternativeFloorField = new javax.swing.JTextField();
+        AlternativePostalCode_Label = new javax.swing.JLabel();
+        alternativeFloorLabel = new javax.swing.JLabel();
+        alternativeBellNameField = new javax.swing.JTextField();
+        alternativeAddressLabel = new javax.swing.JLabel();
+        alternativePostalCodeField = new javax.swing.JFormattedTextField();
+        AddressPanel1 = new javax.swing.JPanel();
+        streetLabel = new javax.swing.JLabel();
+        streetField = new javax.swing.JTextField();
+        districtLabel = new javax.swing.JLabel();
+        districtField = new javax.swing.JTextField();
+        bellNameLabel = new javax.swing.JLabel();
+        floorField = new javax.swing.JTextField();
+        postalCodeLabel = new javax.swing.JLabel();
+        floorLabel = new javax.swing.JLabel();
+        bellNameField = new javax.swing.JTextField();
+        addressLabel = new javax.swing.JLabel();
+        postalCodeField = new javax.swing.JFormattedTextField();
+        menuPanel = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1300, 1024));
 
         RootPanel.setBackground(new java.awt.Color(102, 255, 102));
         RootPanel.setPreferredSize(new java.awt.Dimension(1280, 1024));
@@ -106,7 +109,7 @@ public class MainFrame extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 21, Short.MAX_VALUE))
+                .addGap(0, 32, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,40 +125,72 @@ public class MainFrame extends javax.swing.JFrame {
 
         CombinedPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        ID_Label.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        ID_Label.setText("ID ΠΕΛΑΤΗ");
+        idLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        idLabel.setText("ID ΠΕΛΑΤΗ");
 
-        ID_TextField.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        lastlNameLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        lastlNameLabel.setText("ΕΠΙΘΕΤΟ");
 
-        FirstName_Label.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        FirstName_Label.setText("ΟΝΟΜΑ");
+        lastNameTextField.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
 
-        FirstName_TextField.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        firstNameLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        firstNameLabel.setText("ΟΝΟΜΑ");
 
-        LastName_Label.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        LastName_Label.setText("ΕΠΙΘΕΤΟ");
+        firstNameTextField.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
 
-        LastName_TextField.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        landLineLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        landLineLabel.setText("ΣΤΑΘΕΡΟ");
 
-        Mobile_Label.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        Mobile_Label.setText("ΚΙΝΗΤΟ");
+        mobileLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        mobileLabel.setText("ΚΙΝΗΤΟ");
 
-        LandLine_Label.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        LandLine_Label.setText("ΣΤΑΘΕΡΟ");
+        try {
+            landLineField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##########")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        landLineField.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
 
-        Mobile_Field.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        try {
+            mobileField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("69########")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        mobileField.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
 
-        LandLine_Field.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        noteField.setEditable(false);
+        noteField.setColumns(20);
+        noteField.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        noteField.setLineWrap(true);
+        noteField.setRows(5);
+        jScrollPane3.setViewportView(noteField);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane3.setViewportView(jTextArea1);
+        searchButton.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        searchButton.setText("ΒΡΕΣ");
 
-        NewCustomer_Button.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
-        NewCustomer_Button.setText("ΚΑΙΝΟΥΡΙΟΣ ΠΕΛΑΤΗΣ");
+        jPanel1.setLayout(new java.awt.CardLayout());
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
-        jButton1.setText("ΒΡΕΣ");
+        createNewCustomerButton.setBackground(new java.awt.Color(153, 153, 255));
+        createNewCustomerButton.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        createNewCustomerButton.setText("ΚΑΙΝΟΥΡΓΙΟΣ ΠΕΛΑΤΗΣ");
+        createNewCustomerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createNewCustomerButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(createNewCustomerButton, "card3");
+
+        saveNewCustomerButton.setBackground(new java.awt.Color(0, 204, 51));
+        saveNewCustomerButton.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        saveNewCustomerButton.setText("ΑΠΟΘΗΚΕΥΣΗ");
+        saveNewCustomerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveNewCustomerButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(saveNewCustomerButton, "card2");
+
+        idField.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
 
         javax.swing.GroupLayout CombinedPanelLayout = new javax.swing.GroupLayout(CombinedPanel);
         CombinedPanel.setLayout(CombinedPanelLayout);
@@ -168,33 +203,32 @@ public class MainFrame extends javax.swing.JFrame {
                         .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(CombinedPanelLayout.createSequentialGroup()
                                 .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Mobile_Label)
-                                    .addComponent(LandLine_Label))
+                                    .addComponent(landLineLabel)
+                                    .addComponent(mobileLabel))
                                 .addGap(24, 24, 24)
                                 .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(Mobile_Field, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
-                                    .addComponent(LandLine_Field))
+                                    .addComponent(landLineField, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
+                                    .addComponent(mobileField))
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 14, Short.MAX_VALUE))
                             .addGroup(CombinedPanelLayout.createSequentialGroup()
                                 .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(FirstName_Label)
-                                    .addComponent(LastName_Label)
-                                    .addComponent(ID_Label))
+                                    .addComponent(lastlNameLabel)
+                                    .addComponent(idLabel)
+                                    .addComponent(firstNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(CombinedPanelLayout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(FirstName_TextField)
+                                            .addComponent(lastNameTextField)
                                             .addGroup(CombinedPanelLayout.createSequentialGroup()
-                                                .addComponent(ID_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(74, 74, 74)
-                                                .addComponent(NewCustomer_Button)
-                                                .addGap(0, 0, Short.MAX_VALUE))))
+                                                .addComponent(idField, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(34, 34, 34)
+                                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                                     .addGroup(CombinedPanelLayout.createSequentialGroup()
                                         .addGap(5, 5, 5)
-                                        .addComponent(LastName_TextField))))))
+                                        .addComponent(firstNameTextField))))))
                     .addComponent(jScrollPane3))
                 .addContainerGap())
         );
@@ -202,72 +236,73 @@ public class MainFrame extends javax.swing.JFrame {
             CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CombinedPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ID_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ID_Label)
-                    .addComponent(NewCustomer_Button))
+                .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(idField, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(idLabel)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(CombinedPanelLayout.createSequentialGroup()
-                        .addComponent(FirstName_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lastNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(2, 2, 2))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CombinedPanelLayout.createSequentialGroup()
-                        .addComponent(FirstName_Label)
+                        .addComponent(lastlNameLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(LastName_Label)
-                    .addComponent(LastName_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(firstNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(firstNameLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Mobile_Field, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Mobile_Label))
+                    .addComponent(landLineField, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(landLineLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(LandLine_Field, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(LandLine_Label))
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(mobileField, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(mobileLabel))
+                    .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45))
         );
 
-        CombinedPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {FirstName_TextField, ID_TextField, LandLine_Field, LastName_TextField, Mobile_Field, NewCustomer_Button});
+        CombinedPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {firstNameTextField, landLineField, lastNameTextField, mobileField});
 
         AdressPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setText("ΟΔΟΣ");
+        alternativeStreetLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        alternativeStreetLabel.setText("ΟΔΟΣ");
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jTextField1.setText("jTextField1");
+        alternativeStreetField.setEditable(false);
+        alternativeStreetField.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel2.setText("ΠΕΡΙΟΧΗ");
+        alternativeDistrictLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        alternativeDistrictLabel.setText("ΠΕΡΙΟΧΗ");
 
-        jTextField2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jTextField2.setText("jTextField2");
+        alternativeDistrictField.setEditable(false);
+        alternativeDistrictField.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel3.setText("ΟΝΟΜΑ ΣΤΟ ΚΟΥΔΟΥΝΟΙ");
+        alternativeBellNameLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        alternativeBellNameLabel.setText("ΟΝΟΜΑ ΣΤΟ ΚΟΥΔΟΥΝΟΙ");
 
-        jTextField3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jTextField3.setText("jTextField3");
+        alternativeFloorField.setEditable(false);
+        alternativeFloorField.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel4.setText("Τ.Κ.");
+        AlternativePostalCode_Label.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        AlternativePostalCode_Label.setText("Τ.Κ.");
 
-        jTextField4.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jTextField4.setText("jTextField4");
+        alternativeFloorLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        alternativeFloorLabel.setText("ΟΡΟΦΟΣ");
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel5.setText("ΟΡΟΦΟΣ");
+        alternativeBellNameField.setEditable(false);
+        alternativeBellNameField.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
-        jTextField9.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jTextField9.setText("jTextField9");
+        alternativeAddressLabel.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        alternativeAddressLabel.setText("ΕΝΑΛΛΑΚΤΙΚΗ ΔΙΕΥΘΥΝΣΗ");
 
-        jLabel29.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
-        jLabel29.setText("ΔΙΕΥΘΥΝΣΗ");
+        alternativePostalCodeField.setEditable(false);
+        alternativePostalCodeField.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
         javax.swing.GroupLayout AdressPanelLayout = new javax.swing.GroupLayout(AdressPanel);
         AdressPanel.setLayout(AdressPanelLayout);
@@ -275,151 +310,170 @@ public class MainFrame extends javax.swing.JFrame {
             AdressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AdressPanelLayout.createSequentialGroup()
                 .addGap(230, 230, 230)
-                .addComponent(jLabel29)
+                .addComponent(alternativeAddressLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdressPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(AdressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(AdressPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel3)
+                        .addComponent(alternativeBellNameLabel)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField9))
+                        .addComponent(alternativeBellNameField))
                     .addGroup(AdressPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(alternativeStreetLabel)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField1))
+                        .addComponent(alternativeStreetField))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AdressPanelLayout.createSequentialGroup()
                         .addGroup(AdressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(alternativeDistrictLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AlternativePostalCode_Label, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(AdressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(AdressPanelLayout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AdressPanelLayout.createSequentialGroup()
                                 .addGap(10, 10, 10)
-                                .addComponent(jTextField4)
-                                .addGap(37, 37, 37)
-                                .addComponent(jLabel5)
-                                .addGap(32, 32, 32)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jTextField2)))))
+                                .addComponent(alternativePostalCodeField, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(alternativeFloorLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(alternativeFloorField))
+                            .addComponent(alternativeDistrictField)))))
         );
         AdressPanelLayout.setVerticalGroup(
             AdressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(AdressPanelLayout.createSequentialGroup()
-                .addComponent(jLabel29)
+                .addComponent(alternativeAddressLabel)
                 .addGap(2, 2, 2)
                 .addGroup(AdressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(alternativeStreetField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(alternativeStreetLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(AdressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(alternativeDistrictField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(alternativeDistrictLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(AdressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(alternativeFloorField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AlternativePostalCode_Label)
+                    .addComponent(alternativePostalCodeField)
+                    .addComponent(alternativeFloorLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(AdressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(41, Short.MAX_VALUE))
+                    .addComponent(alternativeBellNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(alternativeBellNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(33, 33, 33))
         );
 
-        AdressPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        AddressPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel30.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel30.setText("ΟΔΟΣ");
+        streetLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        streetLabel.setText("ΟΔΟΣ");
 
-        jTextField10.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jTextField10.setText("jTextField1");
+        streetField.setEditable(false);
+        streetField.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
-        jLabel31.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel31.setText("ΠΕΡΙΟΧΗ");
+        districtLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        districtLabel.setText("ΠΕΡΙΟΧΗ");
 
-        jTextField11.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jTextField11.setText("jTextField2");
+        districtField.setEditable(false);
+        districtField.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
-        jLabel32.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel32.setText("ΟΝΟΜΑ ΣΤΟ ΚΟΥΔΟΥΝΟΙ");
+        bellNameLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        bellNameLabel.setText("ΟΝΟΜΑ ΣΤΟ ΚΟΥΔΟΥΝΟΙ");
 
-        jTextField12.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jTextField12.setText("jTextField3");
+        floorField.setEditable(false);
+        floorField.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
-        jLabel33.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel33.setText("Τ.Κ.");
+        postalCodeLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        postalCodeLabel.setText("Τ.Κ.");
 
-        jTextField13.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jTextField13.setText("jTextField4");
+        floorLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        floorLabel.setText("ΟΡΟΦΟΣ");
 
-        jLabel34.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel34.setText("ΟΡΟΦΟΣ");
+        bellNameField.setEditable(false);
+        bellNameField.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
-        jTextField14.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jTextField14.setText("jTextField9");
+        addressLabel.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        addressLabel.setText("ΔΙΕΥΘΥΝΣΗ");
 
-        jLabel35.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
-        jLabel35.setText("ΔΙΕΥΘΥΝΣΗ");
+        postalCodeField.setEditable(false);
+        postalCodeField.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
-        javax.swing.GroupLayout AdressPanel1Layout = new javax.swing.GroupLayout(AdressPanel1);
-        AdressPanel1.setLayout(AdressPanel1Layout);
-        AdressPanel1Layout.setHorizontalGroup(
-            AdressPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AdressPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout AddressPanel1Layout = new javax.swing.GroupLayout(AddressPanel1);
+        AddressPanel1.setLayout(AddressPanel1Layout);
+        AddressPanel1Layout.setHorizontalGroup(
+            AddressPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AddressPanel1Layout.createSequentialGroup()
                 .addGap(230, 230, 230)
-                .addComponent(jLabel35)
+                .addComponent(addressLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdressPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AddressPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(AdressPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(AdressPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel32)
+                .addGroup(AddressPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(AddressPanel1Layout.createSequentialGroup()
+                        .addComponent(bellNameLabel)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField14))
-                    .addGroup(AdressPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel30)
+                        .addComponent(bellNameField))
+                    .addGroup(AddressPanel1Layout.createSequentialGroup()
+                        .addComponent(streetLabel)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField10))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AdressPanel1Layout.createSequentialGroup()
-                        .addGroup(AdressPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(streetField))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AddressPanel1Layout.createSequentialGroup()
+                        .addGroup(AddressPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(districtLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(postalCodeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(AdressPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(AdressPanel1Layout.createSequentialGroup()
+                        .addGroup(AddressPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(districtField)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AddressPanel1Layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
-                                .addComponent(jTextField13)
-                                .addGap(37, 37, 37)
-                                .addComponent(jLabel34)
-                                .addGap(32, 32, 32)
-                                .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jTextField11)))))
+                                .addComponent(postalCodeField, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(floorLabel)
+                                .addGap(18, 18, 18)
+                                .addComponent(floorField))))))
         );
-        AdressPanel1Layout.setVerticalGroup(
-            AdressPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AdressPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel35)
+        AddressPanel1Layout.setVerticalGroup(
+            AddressPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AddressPanel1Layout.createSequentialGroup()
+                .addComponent(addressLabel)
                 .addGap(2, 2, 2)
-                .addGroup(AdressPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(AddressPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(streetField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(streetLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(AdressPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel31, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(AddressPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(districtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(districtLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(AdressPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel34)
-                    .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel33))
+                .addGroup(AddressPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
+                    .addComponent(postalCodeLabel)
+                    .addComponent(floorLabel)
+                    .addComponent(floorField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(postalCodeField, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(AdressPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel32, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(AddressPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bellNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bellNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(16, Short.MAX_VALUE))
+        );
+
+        jButton1.setText("jButton1");
+
+        javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
+        menuPanel.setLayout(menuPanelLayout);
+        menuPanelLayout.setHorizontalGroup(
+            menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(menuPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        menuPanelLayout.setVerticalGroup(
+            menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(menuPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout HeadPanelLayout = new javax.swing.GroupLayout(HeadPanel);
@@ -427,11 +481,13 @@ public class MainFrame extends javax.swing.JFrame {
         HeadPanelLayout.setHorizontalGroup(
             HeadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HeadPanelLayout.createSequentialGroup()
-                .addComponent(CombinedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(HeadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(CombinedPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(menuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(HeadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(AdressPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(AdressPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(AddressPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         HeadPanelLayout.setVerticalGroup(
@@ -440,9 +496,11 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(HeadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(HeadPanelLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(CombinedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(HeadPanelLayout.createSequentialGroup()
-                        .addComponent(AdressPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(AddressPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(AdressPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -453,7 +511,7 @@ public class MainFrame extends javax.swing.JFrame {
         RootPanelLayout.setHorizontalGroup(
             RootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jTabbedPane1)
-            .addComponent(HeadPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1280, Short.MAX_VALUE)
+            .addComponent(HeadPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1291, Short.MAX_VALUE)
         );
         RootPanelLayout.setVerticalGroup(
             RootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -481,6 +539,20 @@ public class MainFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void createNewCustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createNewCustomerButtonActionPerformed
+
+        makeFieldsEditable();
+        CardLayout card = (CardLayout) jPanel1.getLayout();
+        card.show(jPanel1, "card2");
+    }//GEN-LAST:event_createNewCustomerButtonActionPerformed
+
+    private void saveNewCustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveNewCustomerButtonActionPerformed
+        makeFieldsUneditable();
+        CardLayout card = (CardLayout) jPanel1.getLayout();
+        card.show(jPanel1, "card3");
+
+    }//GEN-LAST:event_saveNewCustomerButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -518,87 +590,86 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel AddressPanel1;
     private javax.swing.JPanel AdressPanel;
-    private javax.swing.JPanel AdressPanel1;
+    private javax.swing.JLabel AlternativePostalCode_Label;
     private javax.swing.JPanel CombinedPanel;
-    private javax.swing.JLabel FirstName_Label;
-    private javax.swing.JTextField FirstName_TextField;
     private javax.swing.JPanel HeadPanel;
-    private javax.swing.JLabel ID_Label;
-    private javax.swing.JTextField ID_TextField;
-    private javax.swing.JFormattedTextField LandLine_Field;
-    private javax.swing.JLabel LandLine_Label;
-    private javax.swing.JLabel LastName_Label;
-    private javax.swing.JTextField LastName_TextField;
-    private javax.swing.JFormattedTextField Mobile_Field;
-    private javax.swing.JLabel Mobile_Label;
-    private javax.swing.JButton NewCustomer_Button;
     private javax.swing.JPanel RootPanel;
-    private javax.swing.JFormattedTextField ftf_PostalCode;
-    private javax.swing.JFormattedTextField ftf_PostalCode1;
-    private javax.swing.JFormattedTextField ftf_PostalCode2;
+    private javax.swing.JLabel addressLabel;
+    private javax.swing.JLabel alternativeAddressLabel;
+    private javax.swing.JTextField alternativeBellNameField;
+    private javax.swing.JLabel alternativeBellNameLabel;
+    private javax.swing.JTextField alternativeDistrictField;
+    private javax.swing.JLabel alternativeDistrictLabel;
+    private javax.swing.JTextField alternativeFloorField;
+    private javax.swing.JLabel alternativeFloorLabel;
+    private javax.swing.JFormattedTextField alternativePostalCodeField;
+    private javax.swing.JTextField alternativeStreetField;
+    private javax.swing.JLabel alternativeStreetLabel;
+    private javax.swing.JTextField bellNameField;
+    private javax.swing.JLabel bellNameLabel;
+    private javax.swing.JButton createNewCustomerButton;
+    private javax.swing.JTextField districtField;
+    private javax.swing.JLabel districtLabel;
+    private javax.swing.JLabel firstNameLabel;
+    private javax.swing.JTextField firstNameTextField;
+    private javax.swing.JTextField floorField;
+    private javax.swing.JLabel floorLabel;
+    private javax.swing.JFormattedTextField idField;
+    private javax.swing.JLabel idLabel;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField9;
-    private javax.swing.JTextField tf_District;
-    private javax.swing.JTextField tf_District1;
-    private javax.swing.JTextField tf_District2;
-    private javax.swing.JTextField tf_Floor;
-    private javax.swing.JTextField tf_Floor1;
-    private javax.swing.JTextField tf_Floor2;
-    private javax.swing.JTextField tf_NameOnBell;
-    private javax.swing.JTextField tf_NameOnBell1;
-    private javax.swing.JTextField tf_NameOnBell2;
-    private javax.swing.JTextField tf_Street;
-    private javax.swing.JTextField tf_Street1;
-    private javax.swing.JTextField tf_Street2;
+    private javax.swing.JFormattedTextField landLineField;
+    private javax.swing.JLabel landLineLabel;
+    private javax.swing.JTextField lastNameTextField;
+    private javax.swing.JLabel lastlNameLabel;
+    private javax.swing.JPanel menuPanel;
+    private javax.swing.JFormattedTextField mobileField;
+    private javax.swing.JLabel mobileLabel;
+    private javax.swing.JTextArea noteField;
+    private javax.swing.JFormattedTextField postalCodeField;
+    private javax.swing.JLabel postalCodeLabel;
+    private javax.swing.JButton saveNewCustomerButton;
+    private javax.swing.JButton searchButton;
+    private javax.swing.JTextField streetField;
+    private javax.swing.JLabel streetLabel;
     // End of variables declaration//GEN-END:variables
+
+    private void makeFieldsEditable() {
+        noteField.setEditable(true);
+        streetField.setEditable(true);
+        districtField.setEditable(true);
+        postalCodeField.setEditable(true);
+        floorField.setEditable(true);
+        bellNameField.setEditable(true);
+
+        alternativeStreetField.setEditable(true);
+        alternativeDistrictField.setEditable(true);
+        alternativePostalCodeField.setEditable(true);
+        alternativeFloorField.setEditable(true);
+        alternativeBellNameField.setEditable(true);
+
+    }
+
+    private void makeFieldsUneditable() {
+        noteField.setEditable(false);
+        streetField.setEditable(false);
+        districtField.setEditable(false);
+        postalCodeField.setEditable(false);
+        floorField.setEditable(false);
+        bellNameField.setEditable(false);
+
+        alternativeStreetField.setEditable(false);
+        alternativeDistrictField.setEditable(false);
+        alternativePostalCodeField.setEditable(false);
+        alternativeFloorField.setEditable(false);
+        alternativeBellNameField.setEditable(false);
+    }
 }
