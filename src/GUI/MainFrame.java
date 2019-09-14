@@ -61,14 +61,14 @@ public class MainFrame extends javax.swing.JFrame {
         mobileField = new javax.swing.JFormattedTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         noteField = new javax.swing.JTextArea();
-        newCustomerPanel = new javax.swing.JPanel();
-        createNewCustomerButton = new javax.swing.JButton();
+        buttonsPanle = new javax.swing.JPanel();
+        newCustomerEditCustomerPanel = new javax.swing.JPanel();
+        newCustomerButton = new javax.swing.JButton();
+        editCustomerButton = new javax.swing.JButton();
         saveCancelPanel = new javax.swing.JPanel();
         saveNewCustomerButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         customerIdField = new javax.swing.JTextField();
-        editCustomerPanel = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
         AdressPanel = new javax.swing.JPanel();
         alternativeStreetLabel = new javax.swing.JLabel();
         alternativeStreetField = new javax.swing.JTextField();
@@ -119,16 +119,16 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(50, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1254, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(196, 196, 196)
+                .addGap(221, 221, 221)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(222, Short.MAX_VALUE))
+                .addContainerGap(197, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("tab1", jPanel2);
@@ -201,20 +201,32 @@ public class MainFrame extends javax.swing.JFrame {
         noteField.setRows(5);
         jScrollPane3.setViewportView(noteField);
 
-        newCustomerPanel.setLayout(new java.awt.CardLayout());
+        buttonsPanle.setLayout(new java.awt.CardLayout());
 
-        createNewCustomerButton.setBackground(new java.awt.Color(153, 153, 255));
-        createNewCustomerButton.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
-        createNewCustomerButton.setText("ΚΑΙΝΟΥΡΓΙΟΣ ΠΕΛΑΤΗΣ");
-        createNewCustomerButton.addActionListener(new java.awt.event.ActionListener() {
+        newCustomerButton.setBackground(new java.awt.Color(153, 153, 255));
+        newCustomerButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        newCustomerButton.setText("<html><center>ΚΑΙΝΟΥΡΓΙΟΣ<br> ΠΕΛΑΤΗΣ</center></html>");
+        newCustomerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createNewCustomerButtonActionPerformed(evt);
+                newCustomerButtonActionPerformed(evt);
             }
         });
-        newCustomerPanel.add(createNewCustomerButton, "card3");
+        newCustomerEditCustomerPanel.add(newCustomerButton);
+
+        editCustomerButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        editCustomerButton.setText("<html><center>ΔΙΟΡΘΩΣΗ<br>ΣΤΟΙΧΙΩΝ</center></html>");
+        editCustomerButton.setEnabled(false);
+        editCustomerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editCustomerButtonActionPerformed(evt);
+            }
+        });
+        newCustomerEditCustomerPanel.add(editCustomerButton);
+
+        buttonsPanle.add(newCustomerEditCustomerPanel, "card1");
 
         saveNewCustomerButton.setBackground(new java.awt.Color(0, 204, 51));
-        saveNewCustomerButton.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        saveNewCustomerButton.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         saveNewCustomerButton.setText("ΑΠΟΘΗΚΕΥΣΗ");
         saveNewCustomerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -224,7 +236,7 @@ public class MainFrame extends javax.swing.JFrame {
         saveCancelPanel.add(saveNewCustomerButton);
 
         cancelButton.setBackground(new java.awt.Color(255, 102, 102));
-        cancelButton.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        cancelButton.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         cancelButton.setText("ΑΚΥΡΩΣΗ");
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -233,7 +245,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
         saveCancelPanel.add(cancelButton);
 
-        newCustomerPanel.add(saveCancelPanel, "card2");
+        buttonsPanle.add(saveCancelPanel, "card2");
 
         customerIdField.setEditable(false);
         customerIdField.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
@@ -245,12 +257,6 @@ public class MainFrame extends javax.swing.JFrame {
                 customerIdFieldKeyTyped(evt);
             }
         });
-
-        editCustomerPanel.setLayout(new java.awt.CardLayout());
-
-        jButton1.setBackground(new java.awt.Color(102, 255, 255));
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
-        jButton1.setText("<html><center>ΔΙΟΡΘΩΣΗ<br>ΣΤΟΙΧΙΩΝ<center></html>");
 
         javax.swing.GroupLayout CombinedPanelLayout = new javax.swing.GroupLayout(CombinedPanel);
         CombinedPanel.setLayout(CombinedPanelLayout);
@@ -269,10 +275,7 @@ public class MainFrame extends javax.swing.JFrame {
                                 .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(mobileField, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(landLineField, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(editCustomerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(CombinedPanelLayout.createSequentialGroup()
                                 .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lastlNameLabel)
@@ -283,7 +286,7 @@ public class MainFrame extends javax.swing.JFrame {
                                     .addGroup(CombinedPanelLayout.createSequentialGroup()
                                         .addComponent(customerIdField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(newCustomerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(buttonsPanle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addComponent(firstNameField)
                                     .addComponent(lastNameField)))))
                     .addComponent(jScrollPane3))
@@ -295,16 +298,17 @@ public class MainFrame extends javax.swing.JFrame {
         CombinedPanelLayout.setVerticalGroup(
             CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CombinedPanelLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CombinedPanelLayout.createSequentialGroup()
-                        .addComponent(idLabel)
+                    .addGroup(CombinedPanelLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(idLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(customerIdField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(16, 16, 16))
                     .addGroup(CombinedPanelLayout.createSequentialGroup()
-                        .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(newCustomerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(customerIdField, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addContainerGap()
+                        .addComponent(buttonsPanle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(CombinedPanelLayout.createSequentialGroup()
                         .addComponent(lastNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -316,20 +320,14 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(firstNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(firstNameLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(CombinedPanelLayout.createSequentialGroup()
-                        .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(landLineLabel)
-                            .addComponent(landLineField, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(mobileField, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(mobileLabel)))
-                    .addGroup(CombinedPanelLayout.createSequentialGroup()
-                        .addComponent(editCustomerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
+                .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(landLineLabel)
+                    .addComponent(landLineField, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(mobileField, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mobileLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(57, 57, 57))
         );
@@ -582,7 +580,7 @@ public class MainFrame extends javax.swing.JFrame {
         RootPanelLayout.setHorizontalGroup(
             RootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jTabbedPane1)
-            .addComponent(HeadPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1321, Short.MAX_VALUE)
+            .addComponent(HeadPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1283, Short.MAX_VALUE)
         );
         RootPanelLayout.setVerticalGroup(
             RootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -609,26 +607,17 @@ public class MainFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void createNewCustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createNewCustomerButtonActionPerformed
+    private void findButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findButtonActionPerformed
         cleanFields();
-        makeSearchFieldsEditable();
-        makeFieldsEditable();
-        customerIdField.setEditable(false);
-
-        CardLayout card = (CardLayout) newCustomerPanel.getLayout();
-        card.show(newCustomerPanel, "card2");
-    }//GEN-LAST:event_createNewCustomerButtonActionPerformed
-
-    private void saveNewCustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveNewCustomerButtonActionPerformed
-        makeSearchFieldsUneditable();
         makeFieldsUneditable();
-        CardLayout card = (CardLayout) newCustomerPanel.getLayout();
-        card.show(newCustomerPanel, "card3");
+        makeSearchFieldsEditable();
+        CardLayout card = (CardLayout) buttonsPanle.getLayout();
+        card.show(buttonsPanle, "card1");
 
-    }//GEN-LAST:event_saveNewCustomerButtonActionPerformed
+    }//GEN-LAST:event_findButtonActionPerformed
 
     private void customerIdFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_customerIdFieldKeyTyped
-//making sure that only + signed integers will be typed
+        //making sure that only + signed integers will be typed
         char c = evt.getKeyChar();
         String input = customerIdField.getText();
         if (!(Character.isDigit(c))
@@ -646,34 +635,45 @@ public class MainFrame extends javax.swing.JFrame {
             dispalyCustomerById(id);
 
         }
-
     }//GEN-LAST:event_customerIdFieldKeyPressed
 
-    private void lastNameFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lastNameFieldKeyPressed
-        if (lastNameField.isEditable() && evt.getKeyCode() == 10) {
-            String lastName = lastNameField.getText().trim();
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        saveAndCancelButtonsActions();
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
-            ArrayList<Customer> customers = customerController.getCustomerByLastName(lastName);
-            SearchFrame searchFrame = new SearchFrame(this, customers);
-            searchFrame.setVisible(true);
-
-        }
-    }//GEN-LAST:event_lastNameFieldKeyPressed
-
-    private void firstNameFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_firstNameFieldKeyPressed
-
-    }//GEN-LAST:event_firstNameFieldKeyPressed
-
-    private void landLineFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_landLineFieldKeyPressed
-        if (landLineField.isEditable() && evt.getKeyCode() == 10) {
-            String landLine = landLineField.getText().trim();
-
-            ArrayList<Customer> customers = customerController.getCustomerByLandLineNumber(landLine);
-            SearchFrame searchFrame = new SearchFrame(this, customers);
-            searchFrame.setVisible(true);
+    private void saveNewCustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveNewCustomerButtonActionPerformed
+        if (idInputValid()) {//first check if input is valid, 
+            if (customerIdField.getText().equals("")) {// second checks if customer is new (equals("")
+                Customer customer = collectCustomerInformation();
+                customerController.saveNewCustomer(customer);
+            } else { //or is to be edited 
+                Customer customer = collectCustomerInformation();
+                customer.setId(Integer.parseInt(customerIdField.getText().trim()));//i guess, no need for trim(), but, just in case
+                customerController.editCustomer(customer);
+            }
 
         }
-    }//GEN-LAST:event_landLineFieldKeyPressed
+        saveAndCancelButtonsActions();
+    }//GEN-LAST:event_saveNewCustomerButtonActionPerformed
+
+    private void saveAndCancelButtonsActions() {
+        makeSearchFieldsUneditable();
+        makeFieldsUneditable();
+        editCustomerButton.setEnabled(false);
+        cleanFields();
+        CardLayout card = (CardLayout) buttonsPanle.getLayout();
+        card.show(buttonsPanle, "card1");
+    }
+
+    private void newCustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newCustomerButtonActionPerformed
+        cleanFields();
+        makeSearchFieldsEditable();
+        makeFieldsEditable();
+        customerIdField.setEditable(false);
+
+        CardLayout card = (CardLayout) buttonsPanle.getLayout();
+        card.show(buttonsPanle, "card2");
+    }//GEN-LAST:event_newCustomerButtonActionPerformed
 
     private void mobileFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mobileFieldKeyPressed
         if (mobileField.isEditable() && evt.getKeyCode() == 10) {
@@ -686,21 +686,41 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_mobileFieldKeyPressed
 
-    private void findButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findButtonActionPerformed
-        cleanFields();
-        makeFieldsUneditable();
+    private void landLineFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_landLineFieldKeyPressed
+        if (landLineField.isEditable() && evt.getKeyCode() == 10) {
+            String landLine = landLineField.getText().trim();
+
+            ArrayList<Customer> customers = customerController.getCustomerByLandLineNumber(landLine);
+            SearchFrame searchFrame = new SearchFrame(this, customers);
+            searchFrame.setVisible(true);
+
+        }
+    }//GEN-LAST:event_landLineFieldKeyPressed
+
+    private void firstNameFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_firstNameFieldKeyPressed
+
+    }//GEN-LAST:event_firstNameFieldKeyPressed
+
+    private void lastNameFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lastNameFieldKeyPressed
+        if (lastNameField.isEditable() && evt.getKeyCode() == 10) {
+            String lastName = lastNameField.getText().trim();
+
+            ArrayList<Customer> customers = customerController.getCustomerByLastName(lastName);
+            SearchFrame searchFrame = new SearchFrame(this, customers);
+            searchFrame.setVisible(true);
+
+        }
+    }//GEN-LAST:event_lastNameFieldKeyPressed
+
+    private void editCustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editCustomerButtonActionPerformed
+
         makeSearchFieldsEditable();
-        CardLayout card = (CardLayout) newCustomerPanel.getLayout();
-        card.show(newCustomerPanel, "card3");
+        makeFieldsEditable();
+        customerIdField.setEditable(false);
 
-    }//GEN-LAST:event_findButtonActionPerformed
-
-    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-        makeSearchFieldsUneditable();
-        makeFieldsUneditable();
-        CardLayout card = (CardLayout) newCustomerPanel.getLayout();
-        card.show(newCustomerPanel, "card3");
-    }//GEN-LAST:event_cancelButtonActionPerformed
+        CardLayout card = (CardLayout) buttonsPanle.getLayout();
+        card.show(buttonsPanle, "card2");
+    }//GEN-LAST:event_editCustomerButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -757,19 +777,18 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel alternativeStreetLabel;
     private javax.swing.JTextField bellNameField;
     private javax.swing.JLabel bellNameLabel;
+    private javax.swing.JPanel buttonsPanle;
     private javax.swing.JButton cancelButton;
-    private javax.swing.JButton createNewCustomerButton;
     private javax.swing.JTextField customerIdField;
     private javax.swing.JTextField districtField;
     private javax.swing.JLabel districtLabel;
-    private javax.swing.JPanel editCustomerPanel;
+    private javax.swing.JButton editCustomerButton;
     private javax.swing.JButton findButton;
     private javax.swing.JTextField firstNameField;
     private javax.swing.JLabel firstNameLabel;
     private javax.swing.JTextField floorField;
     private javax.swing.JLabel floorLabel;
     private javax.swing.JLabel idLabel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -783,7 +802,8 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel menuPanel;
     private javax.swing.JFormattedTextField mobileField;
     private javax.swing.JLabel mobileLabel;
-    private javax.swing.JPanel newCustomerPanel;
+    private javax.swing.JButton newCustomerButton;
+    private javax.swing.JPanel newCustomerEditCustomerPanel;
     private javax.swing.JTextArea noteField;
     private javax.swing.JFormattedTextField postalCodeField;
     private javax.swing.JLabel postalCodeLabel;
@@ -832,8 +852,13 @@ public class MainFrame extends javax.swing.JFrame {
 
     public void dispalyCustomerById(int id) {
         Customer customer = customerController.getCustomerById(id);
-        makeSearchFieldsUneditable();
-        displayCustomer(customer);
+        if (customer != null) {
+            makeSearchFieldsUneditable();
+            displayCustomer(customer);
+            editCustomerButton.setEnabled(true);
+        } else {
+            //here goes Modal window
+        }
     }
 
     private void displayCustomer(Customer customer) {
@@ -890,6 +915,18 @@ public class MainFrame extends javax.swing.JFrame {
         alternativePostalCodeField.setText("");
         alternativeFloorField.setText("");
         alternativeBellNameField.setText("");
+    }
+
+    private boolean idInputValid() {
+        System.out.println("idInputValid() need to be written");
+        return true;
+    }
+
+    private Customer collectCustomerInformation() {
+        Customer customer = new Customer();
+customer.setLastName(lastNameField.getText());
+        
+        return customer;
     }
 
 }

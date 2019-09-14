@@ -44,4 +44,12 @@ public class CustomerController {
         return customers;
     }
 
+    public void saveNewCustomer(Customer customer) {
+        throw new UnsupportedOperationException("Not supported yet. saveNew"); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void editCustomer(Customer customer) {
+        throw new UnsupportedOperationException("Not supported yet. Edit"); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

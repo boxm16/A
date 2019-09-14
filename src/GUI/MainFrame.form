@@ -51,7 +51,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jTabbedPane1" max="32767" attributes="0"/>
-                  <Component id="HeadPanel" alignment="0" pref="1321" max="32767" attributes="0"/>
+                  <Component id="HeadPanel" alignment="0" pref="1283" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -83,7 +83,7 @@
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace pref="50" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Component id="jScrollPane2" min="-2" pref="1254" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -92,9 +92,9 @@
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="196" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="221" max="-2" attributes="0"/>
                               <Component id="jScrollPane2" min="-2" pref="100" max="-2" attributes="0"/>
-                              <EmptySpace pref="222" max="32767" attributes="0"/>
+                              <EmptySpace pref="197" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -198,11 +198,7 @@
                                                   <Component id="mobileField" min="-2" pref="339" max="-2" attributes="0"/>
                                                   <Component id="landLineField" min="-2" pref="339" max="-2" attributes="0"/>
                                               </Group>
-                                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="editCustomerPanel" max="32767" attributes="0"/>
-                                                  <Component id="jButton1" pref="0" max="32767" attributes="0"/>
-                                              </Group>
+                                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
                                               <Group type="103" groupAlignment="0" attributes="0">
@@ -215,7 +211,7 @@
                                                   <Group type="102" attributes="0">
                                                       <Component id="customerIdField" min="-2" pref="120" max="-2" attributes="0"/>
                                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                      <Component id="newCustomerPanel" max="32767" attributes="0"/>
+                                                      <Component id="buttonsPanle" max="32767" attributes="0"/>
                                                   </Group>
                                                   <Component id="firstNameField" max="32767" attributes="0"/>
                                                   <Component id="lastNameField" max="32767" attributes="0"/>
@@ -232,18 +228,19 @@
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="idLabel" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="idLabel" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="customerIdField" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      </Group>
                                       <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="newCustomerPanel" min="-2" pref="53" max="-2" attributes="0"/>
-                                          <Component id="customerIdField" min="-2" pref="53" max="-2" attributes="0"/>
-                                      </Group>
                                       <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="buttonsPanle" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -261,25 +258,16 @@
                                   <Component id="firstNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="landLineLabel" min="-2" max="-2" attributes="0"/>
-                                          <Component id="landLineField" linkSize="4" min="-2" pref="52" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="mobileField" linkSize="4" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
-                                          <Component id="mobileLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="editCustomerPanel" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jButton1" max="32767" attributes="0"/>
-                                  </Group>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="landLineLabel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="landLineField" linkSize="4" min="-2" pref="52" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="mobileField" linkSize="4" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
+                                  <Component id="mobileLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
                               <Component id="jScrollPane3" min="-2" pref="63" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
                           </Group>
@@ -397,29 +385,47 @@
                         </Component>
                       </SubComponents>
                     </Container>
-                    <Container class="javax.swing.JPanel" name="newCustomerPanel">
+                    <Container class="javax.swing.JPanel" name="buttonsPanle">
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
                       <SubComponents>
-                        <Component class="javax.swing.JButton" name="createNewCustomerButton">
-                          <Properties>
-                            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                              <Color blue="ff" green="99" red="99" type="rgb"/>
-                            </Property>
-                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="Tahoma" size="30" style="0"/>
-                            </Property>
-                            <Property name="text" type="java.lang.String" value="&#x39a;&#x391;&#x399;&#x39d;&#x39f;&#x3a5;&#x3a1;&#x393;&#x399;&#x39f;&#x3a3; &#x3a0;&#x395;&#x39b;&#x391;&#x3a4;&#x397;&#x3a3;"/>
-                          </Properties>
-                          <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createNewCustomerButtonActionPerformed"/>
-                          </Events>
+                        <Container class="javax.swing.JPanel" name="newCustomerEditCustomerPanel">
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-                              <CardConstraints cardName="card3"/>
+                              <CardConstraints cardName="card1"/>
                             </Constraint>
                           </Constraints>
-                        </Component>
+
+                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+                          <SubComponents>
+                            <Component class="javax.swing.JButton" name="newCustomerButton">
+                              <Properties>
+                                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                  <Color blue="ff" green="99" red="99" type="rgb"/>
+                                </Property>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="18" style="0"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;center&gt;&#x39a;&#x391;&#x399;&#x39d;&#x39f;&#x3a5;&#x3a1;&#x393;&#x399;&#x39f;&#x3a3;&lt;br&gt; &#x3a0;&#x395;&#x39b;&#x391;&#x3a4;&#x397;&#x3a3;&lt;/center&gt;&lt;/html&gt;"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="newCustomerButtonActionPerformed"/>
+                              </Events>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="editCustomerButton">
+                              <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="18" style="0"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;center&gt;&#x394;&#x399;&#x39f;&#x3a1;&#x398;&#x3a9;&#x3a3;&#x397;&lt;br&gt;&#x3a3;&#x3a4;&#x39f;&#x399;&#x3a7;&#x399;&#x3a9;&#x39d;&lt;/center&gt;&lt;/html&gt;"/>
+                                <Property name="enabled" type="boolean" value="false"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editCustomerButtonActionPerformed"/>
+                              </Events>
+                            </Component>
+                          </SubComponents>
+                        </Container>
                         <Container class="javax.swing.JPanel" name="saveCancelPanel">
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
@@ -435,7 +441,7 @@
                                   <Color blue="33" green="cc" red="0" type="rgb"/>
                                 </Property>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Tahoma" size="30" style="0"/>
+                                  <Font name="Tahoma" size="24" style="0"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="&#x391;&#x3a0;&#x39f;&#x398;&#x397;&#x39a;&#x395;&#x3a5;&#x3a3;&#x397;"/>
                               </Properties>
@@ -449,7 +455,7 @@
                                   <Color blue="66" green="66" red="ff" type="rgb"/>
                                 </Property>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                                  <Font name="Tahoma" size="30" style="0"/>
+                                  <Font name="Tahoma" size="24" style="0"/>
                                 </Property>
                                 <Property name="text" type="java.lang.String" value="&#x391;&#x39a;&#x3a5;&#x3a1;&#x3a9;&#x3a3;&#x397;"/>
                               </Properties>
@@ -472,21 +478,6 @@
                         <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="customerIdFieldKeyPressed"/>
                         <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="customerIdFieldKeyTyped"/>
                       </Events>
-                    </Component>
-                    <Container class="javax.swing.JPanel" name="editCustomerPanel">
-
-                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
-                    </Container>
-                    <Component class="javax.swing.JButton" name="jButton1">
-                      <Properties>
-                        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                          <Color blue="ff" green="ff" red="66" type="rgb"/>
-                        </Property>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Tahoma" size="30" style="0"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;center&gt;&#x394;&#x399;&#x39f;&#x3a1;&#x398;&#x3a9;&#x3a3;&#x397;&lt;br&gt;&#x3a3;&#x3a4;&#x39f;&#x399;&#x3a7;&#x399;&#x3a9;&#x39d;&lt;center&gt;&lt;/html&gt;"/>
-                      </Properties>
                     </Component>
                   </SubComponents>
                 </Container>
