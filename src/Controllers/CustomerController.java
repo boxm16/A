@@ -7,6 +7,7 @@ package Controllers;
 
 import Dao.CustomerDao;
 import Models.Customer;
+import java.util.ArrayList;
 
 /**
  *
@@ -24,6 +25,23 @@ public class CustomerController {
 
         Customer customer = customerDao.getCustomerById(id);
         return customer;
+    }
+
+    public ArrayList<Customer> getCustomerByLastName(String lastName) {
+        ArrayList<Customer> customers = customerDao.getCustomersByLastName(lastName);
+        return customers;
+    }
+
+  
+
+    public ArrayList<Customer> getCustomerByLandLineNumber(String landLine) {
+        ArrayList<Customer> customers = customerDao.getCustomerByLandLineNumber(landLine);
+        return customers;
+    }
+
+    public ArrayList<Customer> getCustomerByMobileNumber(String mobile) {
+        ArrayList<Customer> customers = customerDao.getCustomerByMobileNumber(mobile);
+        return customers;
     }
 
 }
