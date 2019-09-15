@@ -61,7 +61,7 @@ public class MainFrame extends javax.swing.JFrame {
         mobileField = new javax.swing.JFormattedTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         noteField = new javax.swing.JTextArea();
-        buttonsPanle = new javax.swing.JPanel();
+        buttonsPanel = new javax.swing.JPanel();
         newCustomerEditCustomerPanel = new javax.swing.JPanel();
         newCustomerButton = new javax.swing.JButton();
         editCustomerButton = new javax.swing.JButton();
@@ -69,7 +69,7 @@ public class MainFrame extends javax.swing.JFrame {
         saveNewCustomerButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         customerIdField = new javax.swing.JTextField();
-        AdressPanel = new javax.swing.JPanel();
+        AdressPanel2 = new javax.swing.JPanel();
         alternativeStreetLabel = new javax.swing.JLabel();
         alternativeStreetField = new javax.swing.JTextField();
         alternativeDistrictLabel = new javax.swing.JLabel();
@@ -201,7 +201,7 @@ public class MainFrame extends javax.swing.JFrame {
         noteField.setRows(5);
         jScrollPane3.setViewportView(noteField);
 
-        buttonsPanle.setLayout(new java.awt.CardLayout());
+        buttonsPanel.setLayout(new java.awt.CardLayout());
 
         newCustomerButton.setBackground(new java.awt.Color(153, 153, 255));
         newCustomerButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -223,7 +223,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
         newCustomerEditCustomerPanel.add(editCustomerButton);
 
-        buttonsPanle.add(newCustomerEditCustomerPanel, "card1");
+        buttonsPanel.add(newCustomerEditCustomerPanel, "card1");
 
         saveNewCustomerButton.setBackground(new java.awt.Color(0, 204, 51));
         saveNewCustomerButton.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -245,7 +245,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
         saveCancelPanel.add(cancelButton);
 
-        buttonsPanle.add(saveCancelPanel, "card2");
+        buttonsPanel.add(saveCancelPanel, "card2");
 
         customerIdField.setEditable(false);
         customerIdField.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
@@ -286,7 +286,7 @@ public class MainFrame extends javax.swing.JFrame {
                                     .addGroup(CombinedPanelLayout.createSequentialGroup()
                                         .addComponent(customerIdField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(buttonsPanle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(buttonsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addComponent(firstNameField)
                                     .addComponent(lastNameField)))))
                     .addComponent(jScrollPane3))
@@ -307,7 +307,7 @@ public class MainFrame extends javax.swing.JFrame {
                         .addGap(16, 16, 16))
                     .addGroup(CombinedPanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(buttonsPanle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(CombinedPanelLayout.createSequentialGroup()
@@ -334,7 +334,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         CombinedPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {firstNameField, landLineField, lastNameField, mobileField});
 
-        AdressPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        AdressPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         alternativeStreetLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         alternativeStreetLabel.setText("ΟΔΟΣ");
@@ -367,34 +367,39 @@ public class MainFrame extends javax.swing.JFrame {
         alternativeAddressLabel.setText("ΕΝΑΛΛΑΚΤΙΚΗ ΔΙΕΥΘΥΝΣΗ");
 
         alternativePostalCodeField.setEditable(false);
+        try {
+            alternativePostalCodeField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         alternativePostalCodeField.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
 
-        javax.swing.GroupLayout AdressPanelLayout = new javax.swing.GroupLayout(AdressPanel);
-        AdressPanel.setLayout(AdressPanelLayout);
-        AdressPanelLayout.setHorizontalGroup(
-            AdressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AdressPanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout AdressPanel2Layout = new javax.swing.GroupLayout(AdressPanel2);
+        AdressPanel2.setLayout(AdressPanel2Layout);
+        AdressPanel2Layout.setHorizontalGroup(
+            AdressPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AdressPanel2Layout.createSequentialGroup()
                 .addGap(230, 230, 230)
                 .addComponent(alternativeAddressLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdressPanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdressPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(AdressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(AdressPanelLayout.createSequentialGroup()
+                .addGroup(AdressPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(AdressPanel2Layout.createSequentialGroup()
                         .addComponent(alternativeBellNameLabel)
                         .addGap(18, 18, 18)
                         .addComponent(alternativeBellNameField))
-                    .addGroup(AdressPanelLayout.createSequentialGroup()
+                    .addGroup(AdressPanel2Layout.createSequentialGroup()
                         .addComponent(alternativeStreetLabel)
                         .addGap(18, 18, 18)
                         .addComponent(alternativeStreetField))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AdressPanelLayout.createSequentialGroup()
-                        .addGroup(AdressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AdressPanel2Layout.createSequentialGroup()
+                        .addGroup(AdressPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(alternativeDistrictLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(AlternativePostalCode_Label, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(AdressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AdressPanelLayout.createSequentialGroup()
+                        .addGroup(AdressPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AdressPanel2Layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addComponent(alternativePostalCodeField, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -403,27 +408,27 @@ public class MainFrame extends javax.swing.JFrame {
                                 .addComponent(alternativeFloorField))
                             .addComponent(alternativeDistrictField)))))
         );
-        AdressPanelLayout.setVerticalGroup(
-            AdressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AdressPanelLayout.createSequentialGroup()
+        AdressPanel2Layout.setVerticalGroup(
+            AdressPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AdressPanel2Layout.createSequentialGroup()
                 .addComponent(alternativeAddressLabel)
                 .addGap(2, 2, 2)
-                .addGroup(AdressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(AdressPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(alternativeStreetField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(alternativeStreetLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(AdressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(AdressPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(alternativeDistrictField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(alternativeDistrictLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(AdressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(AdressPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(alternativePostalCodeField, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(AdressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(AdressPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(alternativeFloorField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(AlternativePostalCode_Label)
                         .addComponent(alternativeFloorLabel)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(AdressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(AdressPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(alternativeBellNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(alternativeBellNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -462,6 +467,11 @@ public class MainFrame extends javax.swing.JFrame {
         addressLabel.setText("ΔΙΕΥΘΥΝΣΗ");
 
         postalCodeField.setEditable(false);
+        try {
+            postalCodeField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         postalCodeField.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
 
         javax.swing.GroupLayout AddressPanel1Layout = new javax.swing.GroupLayout(AddressPanel1);
@@ -555,7 +565,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(menuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(HeadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(AdressPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(AdressPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(AddressPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -571,7 +581,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, HeadPanelLayout.createSequentialGroup()
                         .addComponent(AddressPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(AdressPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(AdressPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -611,8 +621,8 @@ public class MainFrame extends javax.swing.JFrame {
         cleanFields();
         makeFieldsUneditable();
         makeSearchFieldsEditable();
-        CardLayout card = (CardLayout) buttonsPanle.getLayout();
-        card.show(buttonsPanle, "card1");
+        CardLayout card = (CardLayout) buttonsPanel.getLayout();
+        card.show(buttonsPanel, "card1");
 
     }//GEN-LAST:event_findButtonActionPerformed
 
@@ -643,11 +653,12 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void saveNewCustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveNewCustomerButtonActionPerformed
         if (idInputValid()) {//first check if input is valid, 
+            Customer customer = collectCustomerInformation();
             if (customerIdField.getText().equals("")) {// second checks if customer is new (equals("")
-                Customer customer = collectCustomerInformation();
+
                 customerController.saveNewCustomer(customer);
             } else { //or is to be edited 
-                Customer customer = collectCustomerInformation();
+
                 customer.setId(Integer.parseInt(customerIdField.getText().trim()));//i guess, no need for trim(), but, just in case
                 customerController.editCustomer(customer);
             }
@@ -661,8 +672,8 @@ public class MainFrame extends javax.swing.JFrame {
         makeFieldsUneditable();
         editCustomerButton.setEnabled(false);
         cleanFields();
-        CardLayout card = (CardLayout) buttonsPanle.getLayout();
-        card.show(buttonsPanle, "card1");
+        CardLayout card = (CardLayout) buttonsPanel.getLayout();
+        card.show(buttonsPanel, "card1");
     }
 
     private void newCustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newCustomerButtonActionPerformed
@@ -671,8 +682,8 @@ public class MainFrame extends javax.swing.JFrame {
         makeFieldsEditable();
         customerIdField.setEditable(false);
 
-        CardLayout card = (CardLayout) buttonsPanle.getLayout();
-        card.show(buttonsPanle, "card2");
+        CardLayout card = (CardLayout) buttonsPanel.getLayout();
+        card.show(buttonsPanel, "card2");
     }//GEN-LAST:event_newCustomerButtonActionPerformed
 
     private void mobileFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mobileFieldKeyPressed
@@ -718,8 +729,8 @@ public class MainFrame extends javax.swing.JFrame {
         makeFieldsEditable();
         customerIdField.setEditable(false);
 
-        CardLayout card = (CardLayout) buttonsPanle.getLayout();
-        card.show(buttonsPanle, "card2");
+        CardLayout card = (CardLayout) buttonsPanel.getLayout();
+        card.show(buttonsPanel, "card2");
     }//GEN-LAST:event_editCustomerButtonActionPerformed
 
     /**
@@ -759,7 +770,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel AddressPanel1;
-    private javax.swing.JPanel AdressPanel;
+    private javax.swing.JPanel AdressPanel2;
     private javax.swing.JLabel AlternativePostalCode_Label;
     private javax.swing.JPanel CombinedPanel;
     private javax.swing.JPanel HeadPanel;
@@ -777,7 +788,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel alternativeStreetLabel;
     private javax.swing.JTextField bellNameField;
     private javax.swing.JLabel bellNameLabel;
-    private javax.swing.JPanel buttonsPanle;
+    private javax.swing.JPanel buttonsPanel;
     private javax.swing.JButton cancelButton;
     private javax.swing.JTextField customerIdField;
     private javax.swing.JTextField districtField;
@@ -924,8 +935,21 @@ public class MainFrame extends javax.swing.JFrame {
 
     private Customer collectCustomerInformation() {
         Customer customer = new Customer();
-customer.setLastName(lastNameField.getText());
-        
+        customer.setLastName(lastNameField.getText().trim());
+        customer.setFirstName(firstNameField.getText().trim());
+        customer.setLandlinePhone(landLineField.getText());
+        customer.setMobilePhone(mobileField.getText());
+        customer.setNote(noteField.getText().trim());
+        customer.setStreet(streetField.getText().trim());
+        customer.setDistrict(districtField.getText().trim());
+        customer.setPostalCode(postalCodeField.getText());
+        customer.setFloor(floorField.getText());
+        customer.setBellName(bellNameField.getText().trim());
+        customer.setAlternativeStreet(alternativeStreetField.getText().trim());
+        customer.setAlternativeDistrict(alternativeDistrictField.getText().trim());
+        customer.setAlternativePostalCode(alternativePostalCodeField.getText());
+        customer.setAlternativeFloor(alternativeFloorField.getText());
+        customer.setAlternativeBellName(alternativeBellNameField.getText().trim());
         return customer;
     }
 

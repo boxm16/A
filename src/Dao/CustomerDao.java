@@ -139,4 +139,65 @@ public class CustomerDao {
         }
         return customers;
     }
+
+    public void saveCustomer(Customer customer) {
+        String query = "INSERT INTO customer (last_name, first_name, landline_phone, mobile_phone, note, "
+                + "street, district, postal_code, floor, bell_name, "
+                + "alternative_street, alternative_district, alternative_postal_code, alternative_floor, alternative_bell_name) "
+                + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, customer.getLastName());
+            preparedStatement.setString(2, customer.getFirstName());
+            preparedStatement.setString(3, customer.getLandlinePhone());
+            preparedStatement.setString(4, customer.getMobilePhone());
+            preparedStatement.setString(5, customer.getNote());
+            preparedStatement.setString(6, customer.getStreet());
+            preparedStatement.setString(7, customer.getDistrict());
+            preparedStatement.setString(8, customer.getPostalCode());
+            preparedStatement.setString(9, customer.getFloor());
+            preparedStatement.setString(10, customer.getBellName());
+            preparedStatement.setString(11, customer.getAlternativeStreet());
+            preparedStatement.setString(12, customer.getAlternativeDistrict());
+            preparedStatement.setString(13, customer.getAlternativePostalCode());
+            preparedStatement.setString(14, customer.getAlternativeFloor());
+            preparedStatement.setString(15, customer.getAlternativeBellName());
+            preparedStatement.execute();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerDao.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+    }
+
+    public void editCustomer(Customer customer) {
+
+        String query = "UPDATE customer SET last_name=?, first_name=?, landline_phone=?, mobile_phone=?, note=?,"
+                + " street=?, district=?, postal_code=?, floor=?, bell_name=?,"
+                + " alternative_street=?, alternative_district=?, alternative_postal_code=?, alternative_floor=?, alternative_bell_name=?"
+                + " WHERE customer_id=?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, customer.getLastName());
+            preparedStatement.setString(2, customer.getFirstName());
+            preparedStatement.setString(3, customer.getLandlinePhone());
+            preparedStatement.setString(4, customer.getMobilePhone());
+            preparedStatement.setString(5, customer.getNote());
+            preparedStatement.setString(6, customer.getStreet());
+            preparedStatement.setString(7, customer.getDistrict());
+            preparedStatement.setString(8, customer.getPostalCode());
+            preparedStatement.setString(9, customer.getFloor());
+            preparedStatement.setString(10, customer.getBellName());
+            preparedStatement.setString(11, customer.getAlternativeStreet());
+            preparedStatement.setString(12, customer.getAlternativeDistrict());
+            preparedStatement.setString(13, customer.getAlternativePostalCode());
+            preparedStatement.setString(14, customer.getAlternativeFloor());
+            preparedStatement.setString(15, customer.getAlternativeBellName());
+            preparedStatement.setInt(16, customer.getId());
+            preparedStatement.execute();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerDao.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+
+    }
 }

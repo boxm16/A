@@ -32,8 +32,6 @@ public class CustomerController {
         return customers;
     }
 
-  
-
     public ArrayList<Customer> getCustomerByLandLineNumber(String landLine) {
         ArrayList<Customer> customers = customerDao.getCustomerByLandLineNumber(landLine);
         return customers;
@@ -45,11 +43,11 @@ public class CustomerController {
     }
 
     public void saveNewCustomer(Customer customer) {
-        throw new UnsupportedOperationException("Not supported yet. saveNew"); //To change body of generated methods, choose Tools | Templates.
+        customerDao.saveCustomer(customer);
     }
 
     public void editCustomer(Customer customer) {
-        throw new UnsupportedOperationException("Not supported yet. Edit"); //To change body of generated methods, choose Tools | Templates.
+        customerDao.editCustomer(customer);
     }
 
 }

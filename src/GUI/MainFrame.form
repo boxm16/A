@@ -142,7 +142,7 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="AdressPanel" max="32767" attributes="0"/>
+                              <Component id="AdressPanel2" max="32767" attributes="0"/>
                               <Component id="AddressPanel1" alignment="1" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -162,7 +162,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="AddressPanel1" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="AdressPanel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="AdressPanel2" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace pref="25" max="32767" attributes="0"/>
@@ -211,7 +211,7 @@
                                                   <Group type="102" attributes="0">
                                                       <Component id="customerIdField" min="-2" pref="120" max="-2" attributes="0"/>
                                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                      <Component id="buttonsPanle" max="32767" attributes="0"/>
+                                                      <Component id="buttonsPanel" max="32767" attributes="0"/>
                                                   </Group>
                                                   <Component id="firstNameField" max="32767" attributes="0"/>
                                                   <Component id="lastNameField" max="32767" attributes="0"/>
@@ -239,7 +239,7 @@
                                   </Group>
                                   <Group type="102" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="buttonsPanle" min="-2" max="-2" attributes="0"/>
+                                      <Component id="buttonsPanel" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
                                   </Group>
                               </Group>
@@ -385,7 +385,7 @@
                         </Component>
                       </SubComponents>
                     </Container>
-                    <Container class="javax.swing.JPanel" name="buttonsPanle">
+                    <Container class="javax.swing.JPanel" name="buttonsPanel">
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
                       <SubComponents>
@@ -481,7 +481,7 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Container class="javax.swing.JPanel" name="AdressPanel">
+                <Container class="javax.swing.JPanel" name="AdressPanel2">
                   <Properties>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -650,6 +650,9 @@
                     <Component class="javax.swing.JFormattedTextField" name="alternativePostalCodeField">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
+                        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
+                          <Format format="#####" subtype="-1" type="5"/>
+                        </Property>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Tahoma" size="24" style="1"/>
                         </Property>
@@ -826,10 +829,16 @@
                     <Component class="javax.swing.JFormattedTextField" name="postalCodeField">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
+                        <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor" preCode="try {" postCode="} catch (java.text.ParseException ex) {&#xa;ex.printStackTrace();&#xa;}">
+                          <Format format="#####" subtype="-1" type="5"/>
+                        </Property>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Tahoma" size="24" style="1"/>
                         </Property>
                       </Properties>
+                      <AuxValues>
+                        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField()"/>
+                      </AuxValues>
                     </Component>
                   </SubComponents>
                 </Container>
