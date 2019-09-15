@@ -8,11 +8,10 @@ package GUI;
 import Controllers.CustomerController;
 import Models.Customer;
 import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -640,8 +639,8 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void customerIdFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_customerIdFieldKeyPressed
 
-        if (customerIdField.isEditable() && evt.getKeyCode() == 10) {
-            int id = Integer.parseInt(customerIdField.getText().trim());//idField is checked onKeyTyped, so i dont worry about wrong input.
+        if (customerIdField.isEditable() && evt.getKeyCode() == 10 && customerIdInputValid()) {
+            int id = Integer.parseInt(customerIdField.getText());
             dispalyCustomerById(id);
 
         }
@@ -652,9 +651,10 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void saveNewCustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveNewCustomerButtonActionPerformed
-        if (idInputValid()) {//first check if input is valid, 
+        //no need to check if input is valid, it is ,because here id comes from database
+        if (customerInputsValid()) {
             Customer customer = collectCustomerInformation();
-            if (customerIdField.getText().equals("")) {// second checks if customer is new (equals("")
+            if (customerIdField.getText().equals("")) {// checks if customer is new (equals("")
 
                 customerController.saveNewCustomer(customer);
             } else { //or is to be edited 
@@ -663,8 +663,8 @@ public class MainFrame extends javax.swing.JFrame {
                 customerController.editCustomer(customer);
             }
 
+            saveAndCancelButtonsActions();
         }
-        saveAndCancelButtonsActions();
     }//GEN-LAST:event_saveNewCustomerButtonActionPerformed
 
     private void saveAndCancelButtonsActions() {
@@ -868,7 +868,10 @@ public class MainFrame extends javax.swing.JFrame {
             displayCustomer(customer);
             editCustomerButton.setEnabled(true);
         } else {
-            //here goes Modal window
+            JOptionPane.showMessageDialog(new javax.swing.JFrame(),
+                    "ΔΕΝ ΥΠΑΡΧΕΙ ΠΕΛΑΤΗΣ ΜΕ ΑΥΤΟ ΤΟΝ ΚΩΔΙΚΟ",
+                    "ΛΑΘΟΣ ΚΩΔΙΚΟΣ ΠΕΛΑΤΗ",
+                    JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
@@ -928,9 +931,46 @@ public class MainFrame extends javax.swing.JFrame {
         alternativeBellNameField.setText("");
     }
 
-    private boolean idInputValid() {
-        System.out.println("idInputValid() need to be written");
-        return true;
+    private boolean customerIdInputValid() {
+        boolean valid = true;
+        customerIdField.setText(customerIdField.getText().trim());
+
+        if (customerIdField.getText().equals("")) {
+            JOptionPane.showMessageDialog(new javax.swing.JFrame(),
+                    "Customer Id field is empty.",
+                    "Input Error",
+                    JOptionPane.ERROR_MESSAGE);
+            valid = false;
+        }
+        char[] characters = customerIdField.getText().toCharArray();
+        for (char c : characters) {
+            if (!(Character.isDigit(c))) {//in case of copy paste with wrong characters
+                valid = false;
+                JOptionPane.showMessageDialog(new javax.swing.JFrame(),
+                        "Only numbers allowed in this field.",
+                        "Input Error",
+                        JOptionPane.ERROR_MESSAGE);
+                break;
+            }
+
+        }
+
+        return valid;
+    }
+
+    private boolean customerInputsValid() {
+        boolean valid = true;
+        if (!lastNameInputValid() || !firstNameInputeValid() || !noteInputValid()
+                || !streetInputValid()
+                || !districtInputValid() || !postalCodeInputValid()
+                || !floorInputValid() || !bellNameInputValid()
+                || !alternativeStreetInputValid() || !alternativeDistrictInputValid()
+                || !alternativePostalCodeInputValid() || !alternativeFloorInputValid()
+                || !alternativeBellNameInputValid()) {
+            valid = false;
+        }
+
+        return valid;
     }
 
     private Customer collectCustomerInformation() {
@@ -951,6 +991,196 @@ public class MainFrame extends javax.swing.JFrame {
         customer.setAlternativeFloor(alternativeFloorField.getText());
         customer.setAlternativeBellName(alternativeBellNameField.getText().trim());
         return customer;
+    }
+
+    private boolean lastNameInputValid() {
+        boolean valid = true;
+        String lastName = lastNameField.getText().trim();
+        if (lastName.equals("")) {
+            JOptionPane.showMessageDialog(new JFrame(),
+                    "ΠΕΔΙΟ 'ΕΠΙΘΕΤΟ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΙΝΑΙ ΑΔΕΙΟ",
+                    "ΕΠΙΘΕΤΟ",
+                    JOptionPane.ERROR_MESSAGE);
+            valid = false;
+        }
+        if (lastName.length() > 45) {
+            JOptionPane.showMessageDialog(new JFrame(),
+                    "ΠΕΔΙΟ 'ΕΠΙΘΕΤΟ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΧΕΙ ΠΑΝΩ ΑΠΟ 45 ΓΡΑΜΜΑΤΑ",
+                    "ΕΠΙΘΕΤΟ",
+                    JOptionPane.ERROR_MESSAGE);
+            valid = false;
+        }
+        return valid;
+
+    }
+
+    private boolean firstNameInputeValid() {
+        boolean valid = true;
+        String firstName = firstNameField.getText().trim();
+
+        if (firstName.length() > 45) {
+            JOptionPane.showMessageDialog(new JFrame(),
+                    "ΠΕΔΙΟ 'ΟΝΟΜΑ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΧΕΙ ΠΑΝΩ ΑΠΟ 45 ΓΡΑΜΜΑΤΑ",
+                    "ΟΝΟΜΑ",
+                    JOptionPane.ERROR_MESSAGE);
+            valid = false;
+        }
+        return valid;
+    }
+
+    private boolean noteInputValid() {
+        boolean valid = true;
+        String note = noteField.getText().trim();
+
+        if (note.length() > 250) {
+            JOptionPane.showMessageDialog(new JFrame(),
+                    "ΠΕΔΙΟ 'ΣΗΜΕΙΩΜΑ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΧΕΙ ΠΑΝΩ ΑΠΟ 250 ΓΡΑΜΜΑΤΑ",
+                    "ΣΗΜΕΙΩΜΑ",
+                    JOptionPane.ERROR_MESSAGE);
+            valid = false;
+        }
+        return valid;
+    }
+
+    private boolean streetInputValid() {
+        boolean valid = true;
+        String street = streetField.getText().trim();
+
+        if (street.length() > 60) {
+            JOptionPane.showMessageDialog(new JFrame(),
+                    "ΠΕΔΙΟ 'ΟΔΟΣ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΧΕΙ ΠΑΝΩ ΑΠΟ 60 ΓΡΑΜΜΑΤΑ",
+                    "ΟΔΟΣ",
+                    JOptionPane.ERROR_MESSAGE);
+            valid = false;
+        }
+        return valid;
+    }
+
+    private boolean districtInputValid() {
+        boolean valid = true;
+        String district = districtField.getText().trim();
+
+        if (district.length() > 60) {
+            JOptionPane.showMessageDialog(new JFrame(),
+                    "ΠΕΔΙΟ 'ΠΕΡΙΟΧΗ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΧΕΙ ΠΑΝΩ ΑΠΟ 30 ΓΡΑΜΜΑΤΑ",
+                    "ΠΕΡΙΟΧΗ",
+                    JOptionPane.ERROR_MESSAGE);
+            valid = false;
+        }
+        return valid;
+
+    }
+
+    private boolean postalCodeInputValid() {
+        boolean valid = true;
+        String postalCode = postalCodeField.getText().trim();
+        System.out.println("need to change for real postal codes ");
+        if (postalCode.length() > 6 ) {
+            JOptionPane.showMessageDialog(new JFrame(),
+                    "ΛΑΘΟΣ ΤΑΧΙΔΡΟΜΙΚΟΣ ΚΩΔΙΚΟΣ",
+                    "ΤΑΧΙΔΡΟΜΙΚΟΣ ΚΩΔΙΚΟΣ",
+                    JOptionPane.ERROR_MESSAGE);
+            valid = false;
+        }
+        return valid;
+    }
+
+    private boolean floorInputValid() {
+        boolean valid = true;
+        System.out.println("need to change field for combobox with floors -10 to 100 with δομα and υπογειο ");
+        String floor = floorField.getText().trim();
+        if (floor.length() > 10) {
+            JOptionPane.showMessageDialog(new JFrame(),
+                    "ΠΕΔΙΟ 'ΟΡΟΦΟΣ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΧΕΙ ΠΑΝΩ ΑΠΟ 10 ΓΡΑΜΜΑΤΑ",
+                    "ΟΡΟΦΟΣ",
+                    JOptionPane.ERROR_MESSAGE);
+            valid = false;
+        }
+        return valid;
+    }
+
+    private boolean bellNameInputValid() {
+        boolean valid = true;
+        String bellName = bellNameField.getText().trim();
+
+        if (bellName.length() > 60) {
+            JOptionPane.showMessageDialog(new JFrame(),
+                    "ΠΕΔΙΟ 'ΟΝΟΜΑ ΣΤΟ ΚΟΥΔΟΥΝΙ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΧΕΙ ΠΑΝΩ ΑΠΟ 60 ΓΡΑΜΜΑΤΑ",
+                    "ΟΝΟΜΑ ΣΤΟ ΚΟΥΔΟΥΝΙ",
+                    JOptionPane.ERROR_MESSAGE);
+            valid = false;
+        }
+        return valid;
+    }
+
+    private boolean alternativeStreetInputValid() {
+        boolean valid = true;
+        String street = streetField.getText().trim();
+
+        if (street.length() > 60) {
+            JOptionPane.showMessageDialog(new JFrame(),
+                    "ΠΕΔΙΟ 'ΟΔΟΣ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΧΕΙ ΠΑΝΩ ΑΠΟ 60 ΓΡΑΜΜΑΤΑ",
+                    "ΟΔΟΣ(ΕΝΑΛΛΑΚΤΙΚΗ ΔΙΕΥΘΥΝΣΗ)",
+                    JOptionPane.ERROR_MESSAGE);
+            valid = false;
+        }
+        return valid;
+    }
+
+    private boolean alternativeDistrictInputValid() {
+        boolean valid = true;
+        String alternativeDistrict = alternativeDistrictField.getText().trim();
+
+        if (alternativeDistrict.length() > 60) {
+            JOptionPane.showMessageDialog(new JFrame(),
+                    "ΠΕΔΙΟ 'ΠΕΡΙΟΧΗ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΧΕΙ ΠΑΝΩ ΑΠΟ 30 ΓΡΑΜΜΑΤΑ",
+                    "ΠΕΡΙΟΧΗ(ΕΝΑΛΛΑΚΤΙΚΗ ΔΙΕΥΘΥΝΣΗ)",
+                    JOptionPane.ERROR_MESSAGE);
+            valid = false;
+        }
+        return valid;
+    }
+
+    private boolean alternativePostalCodeInputValid() {
+        boolean valid = true;
+        String alternativePostalCode = alternativePostalCodeField.getText().trim();
+        System.out.println("need to change for real postal codes ");
+        if (alternativePostalCode.length() > 6 ) {
+            JOptionPane.showMessageDialog(new JFrame(),
+                    "ΛΑΘΟΣ ΤΑΧΙΔΡΟΜΙΚΟΣ ΚΩΔΙΚΟΣ",
+                    "ΤΑΧΙΔΡΟΜΙΚΟΣ ΚΩΔΙΚΟΣ (ΕΝΑΛΛΑΚΤΙΚΗ ΔΙΕΥΘΥΝΣΗ)",
+                    JOptionPane.ERROR_MESSAGE);
+            valid = false;
+        }
+        return valid;
+    }
+
+    private boolean alternativeFloorInputValid() {
+        boolean valid = true;
+        System.out.println("need to change field for combobox with floors -10 to 100 with δομα and υπογειο ");
+        String alternativeFloor = alternativeFloorField.getText().trim();
+        if (alternativeFloor.length() > 10) {
+            JOptionPane.showMessageDialog(new JFrame(),
+                    "ΠΕΔΙΟ 'ΟΡΟΦΟΣ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΧΕΙ ΠΑΝΩ ΑΠΟ 10 ΓΡΑΜΜΑΤΑ",
+                    "ΟΡΟΦΟΣ(ΕΝΑΛΛΑΚΤΙΚΗ ΔΙΕΥΘΥΝΣΗ)",
+                    JOptionPane.ERROR_MESSAGE);
+            valid = false;
+        }
+        return valid;
+    }
+
+    private boolean alternativeBellNameInputValid() {
+        boolean valid = true;
+        String alternativeBellName = alternativeBellNameField.getText().trim();
+
+        if (alternativeBellName.length() > 60) {
+            JOptionPane.showMessageDialog(new JFrame(),
+                    "ΠΕΔΙΟ 'ΟΝΟΜΑ ΣΤΟ ΚΟΥΔΟΥΝΙ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΧΕΙ ΠΑΝΩ ΑΠΟ 60 ΓΡΑΜΜΑΤΑ",
+                    "ΟΝΟΜΑ ΣΤΟ ΚΟΥΔΟΥΝΙ(ΕΝΑΛΛΑΚΤΙΚΗ ΔΙΕΥΘΥΝΣΗ)",
+                    JOptionPane.ERROR_MESSAGE);
+            valid = false;
+        }
+        return valid;
     }
 
 }

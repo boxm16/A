@@ -53,6 +53,7 @@ public class CustomerDao {
 
             }
         } catch (SQLException ex) {
+            
             Logger.getLogger(CustomerDao.class.getName()).log(Level.SEVERE, null, ex);
 
         }
