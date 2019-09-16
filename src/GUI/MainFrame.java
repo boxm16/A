@@ -43,31 +43,13 @@ public class MainFrame extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         RootPanel = new javax.swing.JPanel();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel2 = new javax.swing.JPanel();
+        customerCardsTabbedPane = new javax.swing.JTabbedPane();
+        customerCardTab = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        newReceivingTab = new javax.swing.JPanel();
+        customerArchiveTab = new javax.swing.JPanel();
         HeadPanel = new javax.swing.JPanel();
-        CombinedPanel = new javax.swing.JPanel();
-        idLabel = new javax.swing.JLabel();
-        lastlNameLabel = new javax.swing.JLabel();
-        lastNameField = new javax.swing.JTextField();
-        firstNameLabel = new javax.swing.JLabel();
-        firstNameField = new javax.swing.JTextField();
-        landLineLabel = new javax.swing.JLabel();
-        mobileLabel = new javax.swing.JLabel();
-        landLineField = new javax.swing.JFormattedTextField();
-        mobileField = new javax.swing.JFormattedTextField();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        noteField = new javax.swing.JTextArea();
-        buttonsPanel = new javax.swing.JPanel();
-        newCustomerEditCustomerPanel = new javax.swing.JPanel();
-        newCustomerButton = new javax.swing.JButton();
-        editCustomerButton = new javax.swing.JButton();
-        saveCancelPanel = new javax.swing.JPanel();
-        saveNewCustomerButton = new javax.swing.JButton();
-        cancelButton = new javax.swing.JButton();
-        customerIdField = new javax.swing.JTextField();
         AdressPanel2 = new javax.swing.JPanel();
         alternativeStreetLabel = new javax.swing.JLabel();
         alternativeStreetField = new javax.swing.JTextField();
@@ -94,11 +76,33 @@ public class MainFrame extends javax.swing.JFrame {
         postalCodeField = new javax.swing.JFormattedTextField();
         menuPanel = new javax.swing.JPanel();
         findButton = new javax.swing.JButton();
+        CombinedPanel = new javax.swing.JPanel();
+        idLabel = new javax.swing.JLabel();
+        lastlNameLabel = new javax.swing.JLabel();
+        lastNameField = new javax.swing.JTextField();
+        firstNameLabel = new javax.swing.JLabel();
+        firstNameField = new javax.swing.JTextField();
+        landLineLabel = new javax.swing.JLabel();
+        mobileLabel = new javax.swing.JLabel();
+        landLineField = new javax.swing.JFormattedTextField();
+        mobileField = new javax.swing.JFormattedTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        noteField = new javax.swing.JTextArea();
+        buttonsPanel = new javax.swing.JPanel();
+        newCustomerEditCustomerPanel = new javax.swing.JPanel();
+        newCustomerButton = new javax.swing.JButton();
+        editCustomerButton = new javax.swing.JButton();
+        saveCancelPanel = new javax.swing.JPanel();
+        saveNewCustomerButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
+        customerIdField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         RootPanel.setBackground(new java.awt.Color(102, 255, 102));
         RootPanel.setPreferredSize(new java.awt.Dimension(1280, 1024));
+
+        customerCardsTabbedPane.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -113,225 +117,49 @@ public class MainFrame extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTable1);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1254, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+        javax.swing.GroupLayout customerCardTabLayout = new javax.swing.GroupLayout(customerCardTab);
+        customerCardTab.setLayout(customerCardTabLayout);
+        customerCardTabLayout.setHorizontalGroup(
+            customerCardTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1278, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(221, 221, 221)
+        customerCardTabLayout.setVerticalGroup(
+            customerCardTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(customerCardTabLayout.createSequentialGroup()
+                .addGap(66, 66, 66)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(197, Short.MAX_VALUE))
+                .addContainerGap(339, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("tab1", jPanel2);
+        customerCardsTabbedPane.addTab("ΚΑΡΤΕΛΑ", customerCardTab);
+
+        javax.swing.GroupLayout newReceivingTabLayout = new javax.swing.GroupLayout(newReceivingTab);
+        newReceivingTab.setLayout(newReceivingTabLayout);
+        newReceivingTabLayout.setHorizontalGroup(
+            newReceivingTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1278, Short.MAX_VALUE)
+        );
+        newReceivingTabLayout.setVerticalGroup(
+            newReceivingTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 505, Short.MAX_VALUE)
+        );
+
+        customerCardsTabbedPane.addTab("ΝΕΑ ΠΑΡΑΛΑΒΗ", newReceivingTab);
+
+        javax.swing.GroupLayout customerArchiveTabLayout = new javax.swing.GroupLayout(customerArchiveTab);
+        customerArchiveTab.setLayout(customerArchiveTabLayout);
+        customerArchiveTabLayout.setHorizontalGroup(
+            customerArchiveTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1278, Short.MAX_VALUE)
+        );
+        customerArchiveTabLayout.setVerticalGroup(
+            customerArchiveTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 505, Short.MAX_VALUE)
+        );
+
+        customerCardsTabbedPane.addTab("ΑΡΧΕΙΟ", customerArchiveTab);
 
         HeadPanel.setPreferredSize(new java.awt.Dimension(1024, 413));
-
-        CombinedPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        idLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        idLabel.setText("ID ΠΕΛΑΤΗ");
-
-        lastlNameLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        lastlNameLabel.setText("ΕΠΙΘΕΤΟ");
-
-        lastNameField.setEditable(false);
-        lastNameField.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        lastNameField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                lastNameFieldKeyPressed(evt);
-            }
-        });
-
-        firstNameLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        firstNameLabel.setText("ΟΝΟΜΑ");
-
-        firstNameField.setEditable(false);
-        firstNameField.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        firstNameField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                firstNameFieldKeyPressed(evt);
-            }
-        });
-
-        landLineLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        landLineLabel.setText("ΣΤΑΘΕΡΟ");
-
-        mobileLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        mobileLabel.setText("ΚΙΝΗΤΟ");
-
-        landLineField.setEditable(false);
-        try {
-            landLineField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("21########")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        landLineField.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        landLineField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                landLineFieldKeyPressed(evt);
-            }
-        });
-
-        mobileField.setEditable(false);
-        try {
-            mobileField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("69########")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        mobileField.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        mobileField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                mobileFieldKeyPressed(evt);
-            }
-        });
-
-        noteField.setEditable(false);
-        noteField.setColumns(20);
-        noteField.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        noteField.setLineWrap(true);
-        noteField.setRows(5);
-        jScrollPane3.setViewportView(noteField);
-
-        buttonsPanel.setLayout(new java.awt.CardLayout());
-
-        newCustomerButton.setBackground(new java.awt.Color(153, 153, 255));
-        newCustomerButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        newCustomerButton.setText("<html><center>ΚΑΙΝΟΥΡΓΙΟΣ<br> ΠΕΛΑΤΗΣ</center></html>");
-        newCustomerButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                newCustomerButtonActionPerformed(evt);
-            }
-        });
-        newCustomerEditCustomerPanel.add(newCustomerButton);
-
-        editCustomerButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        editCustomerButton.setText("<html><center>ΔΙΟΡΘΩΣΗ<br>ΣΤΟΙΧΙΩΝ</center></html>");
-        editCustomerButton.setEnabled(false);
-        editCustomerButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editCustomerButtonActionPerformed(evt);
-            }
-        });
-        newCustomerEditCustomerPanel.add(editCustomerButton);
-
-        buttonsPanel.add(newCustomerEditCustomerPanel, "card1");
-
-        saveNewCustomerButton.setBackground(new java.awt.Color(0, 204, 51));
-        saveNewCustomerButton.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        saveNewCustomerButton.setText("ΑΠΟΘΗΚΕΥΣΗ");
-        saveNewCustomerButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveNewCustomerButtonActionPerformed(evt);
-            }
-        });
-        saveCancelPanel.add(saveNewCustomerButton);
-
-        cancelButton.setBackground(new java.awt.Color(255, 102, 102));
-        cancelButton.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        cancelButton.setText("ΑΚΥΡΩΣΗ");
-        cancelButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelButtonActionPerformed(evt);
-            }
-        });
-        saveCancelPanel.add(cancelButton);
-
-        buttonsPanel.add(saveCancelPanel, "card2");
-
-        customerIdField.setEditable(false);
-        customerIdField.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        customerIdField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                customerIdFieldKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                customerIdFieldKeyTyped(evt);
-            }
-        });
-
-        javax.swing.GroupLayout CombinedPanelLayout = new javax.swing.GroupLayout(CombinedPanel);
-        CombinedPanel.setLayout(CombinedPanelLayout);
-        CombinedPanelLayout.setHorizontalGroup(
-            CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CombinedPanelLayout.createSequentialGroup()
-                .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(CombinedPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(CombinedPanelLayout.createSequentialGroup()
-                                .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(landLineLabel)
-                                    .addComponent(mobileLabel))
-                                .addGap(24, 24, 24)
-                                .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(mobileField, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(landLineField, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(CombinedPanelLayout.createSequentialGroup()
-                                .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lastlNameLabel)
-                                    .addComponent(idLabel)
-                                    .addComponent(firstNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(15, 15, 15)
-                                .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(CombinedPanelLayout.createSequentialGroup()
-                                        .addComponent(customerIdField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(buttonsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(firstNameField)
-                                    .addComponent(lastNameField)))))
-                    .addComponent(jScrollPane3))
-                .addContainerGap())
-        );
-
-        CombinedPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {firstNameLabel, idLabel, landLineLabel, lastlNameLabel, mobileLabel});
-
-        CombinedPanelLayout.setVerticalGroup(
-            CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CombinedPanelLayout.createSequentialGroup()
-                .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(CombinedPanelLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(idLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(customerIdField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(16, 16, 16))
-                    .addGroup(CombinedPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(buttonsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(CombinedPanelLayout.createSequentialGroup()
-                        .addComponent(lastNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CombinedPanelLayout.createSequentialGroup()
-                        .addComponent(lastlNameLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(firstNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(firstNameLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(landLineLabel)
-                    .addComponent(landLineField, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(mobileField, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(mobileLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(57, 57, 57))
-        );
-
-        CombinedPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {firstNameField, landLineField, lastNameField, mobileField});
 
         AdressPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -541,6 +369,205 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        CombinedPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        idLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        idLabel.setText("ID ΠΕΛΑΤΗ");
+
+        lastlNameLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        lastlNameLabel.setText("ΕΠΙΘΕΤΟ");
+
+        lastNameField.setEditable(false);
+        lastNameField.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        lastNameField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                lastNameFieldKeyPressed(evt);
+            }
+        });
+
+        firstNameLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        firstNameLabel.setText("ΟΝΟΜΑ");
+
+        firstNameField.setEditable(false);
+        firstNameField.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        firstNameField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                firstNameFieldKeyPressed(evt);
+            }
+        });
+
+        landLineLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        landLineLabel.setText("ΣΤΑΘΕΡΟ");
+
+        mobileLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        mobileLabel.setText("ΚΙΝΗΤΟ");
+
+        landLineField.setEditable(false);
+        try {
+            landLineField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("21########")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        landLineField.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        landLineField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                landLineFieldKeyPressed(evt);
+            }
+        });
+
+        mobileField.setEditable(false);
+        try {
+            mobileField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("69########")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        mobileField.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        mobileField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                mobileFieldKeyPressed(evt);
+            }
+        });
+
+        noteField.setEditable(false);
+        noteField.setColumns(20);
+        noteField.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        noteField.setLineWrap(true);
+        noteField.setRows(5);
+        jScrollPane3.setViewportView(noteField);
+
+        buttonsPanel.setLayout(new java.awt.CardLayout());
+
+        newCustomerButton.setBackground(new java.awt.Color(153, 153, 255));
+        newCustomerButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        newCustomerButton.setText("<html><center>ΚΑΙΝΟΥΡΓΙΟΣ<br> ΠΕΛΑΤΗΣ</center></html>");
+        newCustomerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newCustomerButtonActionPerformed(evt);
+            }
+        });
+        newCustomerEditCustomerPanel.add(newCustomerButton);
+
+        editCustomerButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        editCustomerButton.setText("<html><center>ΔΙΟΡΘΩΣΗ<br>ΣΤΟΙΧΙΩΝ</center></html>");
+        editCustomerButton.setEnabled(false);
+        editCustomerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editCustomerButtonActionPerformed(evt);
+            }
+        });
+        newCustomerEditCustomerPanel.add(editCustomerButton);
+
+        buttonsPanel.add(newCustomerEditCustomerPanel, "card1");
+
+        saveNewCustomerButton.setBackground(new java.awt.Color(0, 204, 51));
+        saveNewCustomerButton.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        saveNewCustomerButton.setText("ΑΠΟΘΗΚΕΥΣΗ");
+        saveNewCustomerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveNewCustomerButtonActionPerformed(evt);
+            }
+        });
+        saveCancelPanel.add(saveNewCustomerButton);
+
+        cancelButton.setBackground(new java.awt.Color(255, 102, 102));
+        cancelButton.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        cancelButton.setText("ΑΚΥΡΩΣΗ");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
+        saveCancelPanel.add(cancelButton);
+
+        buttonsPanel.add(saveCancelPanel, "card2");
+
+        customerIdField.setEditable(false);
+        customerIdField.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        customerIdField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                customerIdFieldKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                customerIdFieldKeyTyped(evt);
+            }
+        });
+
+        javax.swing.GroupLayout CombinedPanelLayout = new javax.swing.GroupLayout(CombinedPanel);
+        CombinedPanel.setLayout(CombinedPanelLayout);
+        CombinedPanelLayout.setHorizontalGroup(
+            CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CombinedPanelLayout.createSequentialGroup()
+                .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CombinedPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(CombinedPanelLayout.createSequentialGroup()
+                                .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(landLineLabel)
+                                    .addComponent(mobileLabel))
+                                .addGap(24, 24, 24)
+                                .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(mobileField, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(landLineField, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(CombinedPanelLayout.createSequentialGroup()
+                                .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lastlNameLabel)
+                                    .addComponent(idLabel)
+                                    .addComponent(firstNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(15, 15, 15)
+                                .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(CombinedPanelLayout.createSequentialGroup()
+                                        .addComponent(customerIdField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(buttonsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(firstNameField)
+                                    .addComponent(lastNameField)))))
+                    .addComponent(jScrollPane3))
+                .addContainerGap())
+        );
+
+        CombinedPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {firstNameLabel, idLabel, landLineLabel, lastlNameLabel, mobileLabel});
+
+        CombinedPanelLayout.setVerticalGroup(
+            CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CombinedPanelLayout.createSequentialGroup()
+                .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CombinedPanelLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(idLabel, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(customerIdField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(16, 16, 16))
+                    .addGroup(CombinedPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(buttonsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CombinedPanelLayout.createSequentialGroup()
+                        .addComponent(lastNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CombinedPanelLayout.createSequentialGroup()
+                        .addComponent(lastlNameLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(firstNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(firstNameLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(landLineLabel)
+                    .addComponent(landLineField, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(mobileField, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mobileLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(57, 57, 57))
+        );
+
+        CombinedPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {firstNameField, landLineField, lastNameField, mobileField});
+
         javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
         menuPanel.setLayout(menuPanelLayout);
         menuPanelLayout.setHorizontalGroup(
@@ -548,10 +575,15 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(menuPanelLayout.createSequentialGroup()
                 .addComponent(findButton)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(CombinedPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         menuPanelLayout.setVerticalGroup(
             menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(findButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(menuPanelLayout.createSequentialGroup()
+                .addComponent(findButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(CombinedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout HeadPanelLayout = new javax.swing.GroupLayout(HeadPanel);
@@ -559,9 +591,7 @@ public class MainFrame extends javax.swing.JFrame {
         HeadPanelLayout.setHorizontalGroup(
             HeadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HeadPanelLayout.createSequentialGroup()
-                .addGroup(HeadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(CombinedPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(menuPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(HeadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(AdressPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -571,32 +601,28 @@ public class MainFrame extends javax.swing.JFrame {
         HeadPanelLayout.setVerticalGroup(
             HeadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HeadPanelLayout.createSequentialGroup()
-                .addGap(0, 4, Short.MAX_VALUE)
-                .addGroup(HeadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, HeadPanelLayout.createSequentialGroup()
-                        .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(CombinedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(HeadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(menuPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, HeadPanelLayout.createSequentialGroup()
                         .addComponent(AddressPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(AdressPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(25, Short.MAX_VALUE))
+                        .addComponent(AdressPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         javax.swing.GroupLayout RootPanelLayout = new javax.swing.GroupLayout(RootPanel);
         RootPanel.setLayout(RootPanelLayout);
         RootPanelLayout.setHorizontalGroup(
             RootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(customerCardsTabbedPane)
             .addComponent(HeadPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1283, Short.MAX_VALUE)
         );
         RootPanelLayout.setVerticalGroup(
             RootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RootPanelLayout.createSequentialGroup()
-                .addComponent(HeadPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(HeadPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 548, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(customerCardsTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 548, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -790,6 +816,9 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel bellNameLabel;
     private javax.swing.JPanel buttonsPanel;
     private javax.swing.JButton cancelButton;
+    private javax.swing.JPanel customerArchiveTab;
+    private javax.swing.JPanel customerCardTab;
+    private javax.swing.JTabbedPane customerCardsTabbedPane;
     private javax.swing.JTextField customerIdField;
     private javax.swing.JTextField districtField;
     private javax.swing.JLabel districtLabel;
@@ -800,11 +829,9 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextField floorField;
     private javax.swing.JLabel floorLabel;
     private javax.swing.JLabel idLabel;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JFormattedTextField landLineField;
     private javax.swing.JLabel landLineLabel;
@@ -815,6 +842,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel mobileLabel;
     private javax.swing.JButton newCustomerButton;
     private javax.swing.JPanel newCustomerEditCustomerPanel;
+    private javax.swing.JPanel newReceivingTab;
     private javax.swing.JTextArea noteField;
     private javax.swing.JFormattedTextField postalCodeField;
     private javax.swing.JLabel postalCodeLabel;
