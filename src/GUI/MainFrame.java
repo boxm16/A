@@ -6,12 +6,29 @@
 package GUI;
 
 import Controllers.CustomerController;
+import Controllers.ItemController;
 import Models.Customer;
+import Models.Item;
+import Tools.MyTable;
+import Tools.MyTableModel;
 import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.KeyEvent;
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import javax.swing.BoxLayout;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import static javax.swing.JTable.AUTO_RESIZE_OFF;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 /**
  *
@@ -20,6 +37,7 @@ import javax.swing.JOptionPane;
 public class MainFrame extends javax.swing.JFrame {
 
     CustomerController customerController;
+    ItemController itemController;
 
     /**
      * Creates new form MainFrame
@@ -27,6 +45,7 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         initComponents();
         customerController = new CustomerController();
+        itemController = new ItemController();
         /*  Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         this.setSize(screenSize.width, screenSize.height-35);
          */
@@ -45,8 +64,15 @@ public class MainFrame extends javax.swing.JFrame {
         RootPanel = new javax.swing.JPanel();
         customerCardsTabbedPane = new javax.swing.JTabbedPane();
         customerCardTab = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        calculationDisplayPanel = new javax.swing.JPanel();
+        subTotalLabel = new javax.swing.JLabel();
+        subTotalSum = new javax.swing.JLabel();
+        fpaLabel = new javax.swing.JLabel();
+        fpaSum = new javax.swing.JLabel();
+        totalLabel = new javax.swing.JLabel();
+        totalSum = new javax.swing.JLabel();
+        processButton = new javax.swing.JButton();
+        customerCardPanel = new javax.swing.JPanel();
         newReceivingTab = new javax.swing.JPanel();
         customerArchiveTab = new javax.swing.JPanel();
         HeadPanel = new javax.swing.JPanel();
@@ -104,31 +130,89 @@ public class MainFrame extends javax.swing.JFrame {
 
         customerCardsTabbedPane.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(jTable1);
+        calculationDisplayPanel.setBackground(new java.awt.Color(51, 51, 255));
+
+        subTotalLabel.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        subTotalLabel.setText("ΜΕΡΙΚΟ ΣΥΝΟΛΟ:");
+
+        subTotalSum.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        subTotalSum.setText("0.0");
+
+        fpaLabel.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        fpaLabel.setText("ΦΠΑ:");
+
+        fpaSum.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        fpaSum.setText("0.0");
+
+        totalLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        totalLabel.setText("ΤΕΛΙΚΟ ΣΥΝΟΛΟ:");
+
+        totalSum.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        totalSum.setText("0.0");
+
+        processButton.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        processButton.setText("PROCESS");
+
+        javax.swing.GroupLayout calculationDisplayPanelLayout = new javax.swing.GroupLayout(calculationDisplayPanel);
+        calculationDisplayPanel.setLayout(calculationDisplayPanelLayout);
+        calculationDisplayPanelLayout.setHorizontalGroup(
+            calculationDisplayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(calculationDisplayPanelLayout.createSequentialGroup()
+                .addComponent(subTotalLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(subTotalSum, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(fpaLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(fpaSum)
+                .addGap(58, 58, 58)
+                .addComponent(totalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(totalSum, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(processButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        calculationDisplayPanelLayout.setVerticalGroup(
+            calculationDisplayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(subTotalLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(subTotalSum, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(fpaSum, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(fpaLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(totalSum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(totalLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(processButton, javax.swing.GroupLayout.DEFAULT_SIZE, 58, Short.MAX_VALUE)
+        );
+
+        customerCardPanel.setBackground(new java.awt.Color(0, 255, 0));
+
+        javax.swing.GroupLayout customerCardPanelLayout = new javax.swing.GroupLayout(customerCardPanel);
+        customerCardPanel.setLayout(customerCardPanelLayout);
+        customerCardPanelLayout.setHorizontalGroup(
+            customerCardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1263, Short.MAX_VALUE)
+        );
+        customerCardPanelLayout.setVerticalGroup(
+            customerCardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 431, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout customerCardTabLayout = new javax.swing.GroupLayout(customerCardTab);
         customerCardTab.setLayout(customerCardTabLayout);
         customerCardTabLayout.setHorizontalGroup(
             customerCardTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1278, Short.MAX_VALUE)
+            .addComponent(calculationDisplayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerCardTabLayout.createSequentialGroup()
+                .addComponent(customerCardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         customerCardTabLayout.setVerticalGroup(
             customerCardTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(customerCardTabLayout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(339, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerCardTabLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(calculationDisplayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(customerCardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(658, 658, 658))
         );
 
         customerCardsTabbedPane.addTab("ΚΑΡΤΕΛΑ", customerCardTab);
@@ -137,7 +221,7 @@ public class MainFrame extends javax.swing.JFrame {
         newReceivingTab.setLayout(newReceivingTabLayout);
         newReceivingTabLayout.setHorizontalGroup(
             newReceivingTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1278, Short.MAX_VALUE)
+            .addGap(0, 1275, Short.MAX_VALUE)
         );
         newReceivingTabLayout.setVerticalGroup(
             newReceivingTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,7 +234,7 @@ public class MainFrame extends javax.swing.JFrame {
         customerArchiveTab.setLayout(customerArchiveTabLayout);
         customerArchiveTabLayout.setHorizontalGroup(
             customerArchiveTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1278, Short.MAX_VALUE)
+            .addGap(0, 1275, Short.MAX_VALUE)
         );
         customerArchiveTabLayout.setVerticalGroup(
             customerArchiveTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -615,7 +699,7 @@ public class MainFrame extends javax.swing.JFrame {
         RootPanelLayout.setHorizontalGroup(
             RootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(customerCardsTabbedPane)
-            .addComponent(HeadPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1283, Short.MAX_VALUE)
+            .addComponent(HeadPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1280, Short.MAX_VALUE)
         );
         RootPanelLayout.setVerticalGroup(
             RootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -632,11 +716,17 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1306, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1245, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 955, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 955, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -668,6 +758,7 @@ public class MainFrame extends javax.swing.JFrame {
         if (customerIdField.isEditable() && evt.getKeyCode() == 10 && customerIdInputValid()) {
             int id = Integer.parseInt(customerIdField.getText());
             dispalyCustomerById(id);
+            fillTables();
 
         }
     }//GEN-LAST:event_customerIdFieldKeyPressed
@@ -815,8 +906,10 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextField bellNameField;
     private javax.swing.JLabel bellNameLabel;
     private javax.swing.JPanel buttonsPanel;
+    private javax.swing.JPanel calculationDisplayPanel;
     private javax.swing.JButton cancelButton;
     private javax.swing.JPanel customerArchiveTab;
+    private javax.swing.JPanel customerCardPanel;
     private javax.swing.JPanel customerCardTab;
     private javax.swing.JTabbedPane customerCardsTabbedPane;
     private javax.swing.JTextField customerIdField;
@@ -828,11 +921,11 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel firstNameLabel;
     private javax.swing.JTextField floorField;
     private javax.swing.JLabel floorLabel;
+    private javax.swing.JLabel fpaLabel;
+    private javax.swing.JLabel fpaSum;
     private javax.swing.JLabel idLabel;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
     private javax.swing.JFormattedTextField landLineField;
     private javax.swing.JLabel landLineLabel;
     private javax.swing.JTextField lastNameField;
@@ -846,10 +939,15 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextArea noteField;
     private javax.swing.JFormattedTextField postalCodeField;
     private javax.swing.JLabel postalCodeLabel;
+    private javax.swing.JButton processButton;
     private javax.swing.JPanel saveCancelPanel;
     private javax.swing.JButton saveNewCustomerButton;
     private javax.swing.JTextField streetField;
     private javax.swing.JLabel streetLabel;
+    private javax.swing.JLabel subTotalLabel;
+    private javax.swing.JLabel subTotalSum;
+    private javax.swing.JLabel totalLabel;
+    private javax.swing.JLabel totalSum;
     // End of variables declaration//GEN-END:variables
 
     private void makeFieldsEditable() {
@@ -1103,7 +1201,7 @@ public class MainFrame extends javax.swing.JFrame {
         boolean valid = true;
         String postalCode = postalCodeField.getText().trim();
         System.out.println("need to change for real postal codes ");
-        if (postalCode.length() > 6 ) {
+        if (postalCode.length() > 6) {
             JOptionPane.showMessageDialog(new JFrame(),
                     "ΛΑΘΟΣ ΤΑΧΙΔΡΟΜΙΚΟΣ ΚΩΔΙΚΟΣ",
                     "ΤΑΧΙΔΡΟΜΙΚΟΣ ΚΩΔΙΚΟΣ",
@@ -1173,7 +1271,7 @@ public class MainFrame extends javax.swing.JFrame {
         boolean valid = true;
         String alternativePostalCode = alternativePostalCodeField.getText().trim();
         System.out.println("need to change for real postal codes ");
-        if (alternativePostalCode.length() > 6 ) {
+        if (alternativePostalCode.length() > 6) {
             JOptionPane.showMessageDialog(new JFrame(),
                     "ΛΑΘΟΣ ΤΑΧΙΔΡΟΜΙΚΟΣ ΚΩΔΙΚΟΣ",
                     "ΤΑΧΙΔΡΟΜΙΚΟΣ ΚΩΔΙΚΟΣ (ΕΝΑΛΛΑΚΤΙΚΗ ΔΙΕΥΘΥΝΣΗ)",
@@ -1209,6 +1307,200 @@ public class MainFrame extends javax.swing.JFrame {
             valid = false;
         }
         return valid;
+    }
+
+    private void fillTables() {
+
+        String tabName = customerCardsTabbedPane.getTitleAt(customerCardsTabbedPane.getSelectedIndex());
+        switch (tabName) {
+            case "ΚΑΡΤΕΛΑ":
+                fillCardTable();
+                break;
+            case "ΝΕΑ ΠΑΡΑΛΑΒΗ":
+                System.out.println("nneed to write code here for new receiving");
+                break;
+            case "ΑΡΧΕΙΟ":
+                System.out.println("need to write code here for archive");
+                break;
+        }
+    }
+
+    private void fillCardTable() {
+        customerCardPanel.removeAll();
+        MyTableModel model = new MyTableModel();
+
+        Object[] columns = new Object[18];
+
+        columns[0] = "ΚΩΔΙΚΟΣ ΠΡΟΙΟΝΤΟΣ";
+        columns[1] = "ΠΕΡΙΓΡΑΦΗ";
+        columns[2] = "ΚΩΔΙΚΟΣ ΤΕΜΑΧΙΟΥ";
+        columns[3] = "ΚΑΘΑΡΙΣΜΑ";
+        columns[4] = "ΦΥΛΑΞΗ";
+        columns[5] = "ΕΠΙΔΙΟΘΡΩΣΗ";
+        columns[6] = "ΣΗΜΕΙΩΜΑ";
+
+        columns[7] = "ΤΙΜΗ ΓΙΑ ΚΑΘΑΡΙΣΜΑ";
+        columns[8] = "ΤΙΜΗ ΓΙΑ ΦΥΛΑΞΗ";
+
+        columns[9] = "ΜΗΚΟΣ";
+        columns[10] = "ΠΛΑΟΤΟΣ";
+        columns[11] = "ΤΕΤΡΑΓΩΝΙΚΑ";
+
+        columns[12] = "ΧΡΕΩΣΗ ΓΙΑ ΚΑΘΑΡΙΣΜΑ";
+        columns[13] = "ΧΡΕΩΣΗ ΓΙΑ ΦΥΛΑΞΗ";
+        columns[14] = "ΧΡΕΩΣΗ ΓΙΑ ΕΠΙΔΙΟΡΘΩΣΗ";
+
+        columns[15] = "ΣΥΝΟΛΟ ΧΡΕΩΣΗΣ ΤΕΜΑΧΙΟΥ";
+        columns[16] = "ΚΑΤΑΣΤΑΣΗ";
+        columns[17] = "ΔΙΑΛΟΓΗ";
+        model.setColumnIdentifiers(columns);
+
+        ArrayList<Item> items = itemController.getCustomerItems(Integer.parseInt(customerIdField.getText()));
+
+        for (Item item : items) {
+            Object[] row = new Object[18];
+
+            row[0] = item.getId();
+            row[1] = item.getCode();
+            row[2] = item.getDescription();
+
+            if (item.isForCleaning()) {
+                row[3] = "*";
+            } else {
+                row[3] = "-";
+            }
+            if (item.isForStoring()) {
+                row[4] = "*";
+            } else {
+                row[4] = "-";
+            }
+            if (item.isForMending()) {
+                row[5] = "*";
+            } else {
+                row[5] = "-";
+            }
+
+            row[6] = item.getNote();
+
+            row[7] = item.getCleaningPrice();
+            row[8] = item.getStoringPrice();
+
+            BigDecimal length, width, square;
+            row[9] = length = item.getLength();
+            row[10] = width = item.getWidth();
+            square = length.multiply(width);
+            row[11] = square;
+
+            BigDecimal cleaningCharge, storingCharge, mendingCharge, totalCharge;
+            row[12] = cleaningCharge = item.getCleaningCharge();
+            row[13] = storingCharge = item.getStoringCharge();
+            row[14] = mendingCharge = item.getMendingCharge();
+            totalCharge = cleaningCharge.add(storingCharge.add(mendingCharge));
+            row[15] = totalCharge;
+            row[16] = item.getStatus();
+            boolean status;
+            if (item.getStatus().equals("ready")) {
+                row[17] = status = Boolean.TRUE;
+            } else {
+                row[17] = status = Boolean.FALSE;
+            }
+
+            model.addRow(row, status);
+        }
+        JScrollPane sc = (JScrollPane) createTable(model);
+
+        customerCardPanel.add(sc);
+        customerCardPanel.setLayout(new BoxLayout(customerCardPanel, BoxLayout.LINE_AXIS));
+        pack();
+        countTotal(model);
+    }
+
+    private JComponent createTable(DefaultTableModel model) {
+
+        MyTable table = new MyTable() {
+            @Override
+            public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
+                Component c = super.prepareRenderer(renderer, row, column);
+
+                //  Color row based on a cell value
+                if (!isRowSelected(row)) {
+                    c.setBackground(getBackground());
+                    int modelRow = convertRowIndexToModel(row);
+                    String status = (String) getModel().getValueAt(modelRow, 16);
+                    boolean ready = (boolean) getModel().getValueAt(modelRow, 17);
+
+                    if (!"ready".equals(status)) {
+                        //model.setValueAt(false, modelRow, 17);
+                        c.setBackground(Color.RED);
+                    }
+
+                    if (ready) {
+                        c.setBackground(Color.GREEN);
+                    }
+
+                }
+
+                if (isRowSelected(row)) {
+                    //   c.setBackground(getBackground());
+                    int modelRow = convertRowIndexToModel(row);
+                    String status = (String) getModel().getValueAt(modelRow, 16);
+                    if (!"ready".equals(status)) {
+                        // model.setValueAt(false, modelRow, 17);
+                        c.setBackground(Color.PINK);
+
+                    }
+
+                }
+
+                return c;
+            }
+        };
+
+        table.getModel().addTableModelListener(
+                new TableModelListener() {
+
+            public void tableChanged(TableModelEvent evt) {
+                countTotal((DefaultTableModel) table.getModel());
+            }
+        }
+        );
+
+        table.setPreferredScrollableViewportSize(table.getPreferredSize());
+        table.setRowHeight(26);
+
+        table.setFont(new java.awt.Font("Tahoma", 0, 20));
+
+        table.changeSelection(0, 0, false, false);
+        table.setAutoCreateRowSorter(true);
+        table.setAutoResizeMode(AUTO_RESIZE_OFF);
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setViewportView(table);
+        int scrollPaneHeigth = (model.getRowCount() + 1) * table.getRowHeight();
+        scrollPane.setPreferredSize(new Dimension(scrollPane.getPreferredSize().width, scrollPaneHeigth));
+        return scrollPane;
+    }
+
+    private void countTotal(DefaultTableModel model) {
+
+        int rowCount = model.getRowCount();
+        BigDecimal subTotal = BigDecimal.ZERO;
+
+        for (int x = 0; x < rowCount; x++) {
+            if (!Boolean.valueOf(model.getValueAt(x, 17).toString())) {
+                continue;
+            }
+            //summing up of item`s total charges
+            subTotal = subTotal.add(new BigDecimal(model.getValueAt(x, 15).toString()));
+
+        }
+        subTotalSum.setText(subTotal.toString());
+
+        BigDecimal fpa = subTotal.multiply(new BigDecimal(24).divide(new BigDecimal(100)));
+        fpaSum.setText(fpa.toString());
+
+        BigDecimal total = subTotal.add(fpa);
+        totalSum.setText(total.toString());
+
     }
 
 }

@@ -24,7 +24,7 @@ public class CustomerDao {
     Connection connection;
 
     public CustomerDao() {
-        connection = DAO.DataBaseConnection.getDBCInstance().getConnection();
+        connection = DataBaseConnection.getDBCInstance().getConnection();
     }
 
     public Customer getCustomerById(int id) {
@@ -53,7 +53,7 @@ public class CustomerDao {
 
             }
         } catch (SQLException ex) {
-            
+
             Logger.getLogger(CustomerDao.class.getName()).log(Level.SEVERE, null, ex);
 
         }
@@ -63,7 +63,7 @@ public class CustomerDao {
 
     public ArrayList<Customer> getCustomersByLastName(String lastName) {
 
-        ArrayList<Customer> customers = new ArrayList();
+        ArrayList<Customer> customers = new ArrayList<>();
         String query = "SELECT customer_id, first_name, last_name, landline_phone, mobile_phone, street, district "
                 + "FROM customer WHERE LOWER(last_name) LIKE LOWER(?)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -90,7 +90,7 @@ public class CustomerDao {
     }
 
     public ArrayList<Customer> getCustomerByLandLineNumber(String landLine) {
-        ArrayList<Customer> customers = new ArrayList();
+        ArrayList<Customer> customers = new ArrayList<>();
         String query = "SELECT customer_id, first_name, last_name, landline_phone, mobile_phone, street, district "
                 + "FROM customer WHERE landline_phone LIKE ?;";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -116,7 +116,7 @@ public class CustomerDao {
     }
 
     public ArrayList<Customer> getCustomerByMobileNumber(String mobile) {
-        ArrayList<Customer> customers = new ArrayList();
+        ArrayList<Customer> customers = new ArrayList<>();
         String query = "SELECT customer_id, first_name, last_name, landline_phone, mobile_phone, street, district "
                 + "FROM customer WHERE mobile_phone LIKE ?;";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
