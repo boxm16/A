@@ -172,6 +172,7 @@ public class SearchFrame extends javax.swing.JFrame {
         if (selectedRow >= 0) {
             int customer_id = (int) display.getValueAt(selectedRow, 0);
             mainFrame.dispalyCustomerById(customer_id);
+            mainFrame.fillTables();
             this.dispose();
         }
     }

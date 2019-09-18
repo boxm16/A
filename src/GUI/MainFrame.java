@@ -9,7 +9,6 @@ import Controllers.CustomerController;
 import Controllers.ItemController;
 import Models.Customer;
 import Models.Item;
-import Tools.MyTable;
 import Tools.MyTableModel;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -17,6 +16,8 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import javax.swing.BoxLayout;
 import javax.swing.JComponent;
@@ -35,7 +36,7 @@ import javax.swing.table.TableCellRenderer;
  * @author Michail Sitmalidis
  */
 public class MainFrame extends javax.swing.JFrame {
-
+    
     CustomerController customerController;
     ItemController itemController;
 
@@ -74,6 +75,13 @@ public class MainFrame extends javax.swing.JFrame {
         processButton = new javax.swing.JButton();
         customerCardPanel = new javax.swing.JPanel();
         newReceivingTab = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
         customerArchiveTab = new javax.swing.JPanel();
         HeadPanel = new javax.swing.JPanel();
         AdressPanel2 = new javax.swing.JPanel();
@@ -130,8 +138,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         customerCardsTabbedPane.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
-        calculationDisplayPanel.setBackground(new java.awt.Color(51, 51, 255));
-
         subTotalLabel.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
         subTotalLabel.setText("ΜΕΡΙΚΟ ΣΥΝΟΛΟ:");
 
@@ -144,10 +150,10 @@ public class MainFrame extends javax.swing.JFrame {
         fpaSum.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
         fpaSum.setText("0.0");
 
-        totalLabel.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        totalLabel.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
         totalLabel.setText("ΤΕΛΙΚΟ ΣΥΝΟΛΟ:");
 
-        totalSum.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        totalSum.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         totalSum.setText("0.0");
 
         processButton.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
@@ -166,11 +172,11 @@ public class MainFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fpaSum)
                 .addGap(58, 58, 58)
-                .addComponent(totalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(totalSum, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(totalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(processButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(totalSum, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(processButton, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE))
         );
         calculationDisplayPanelLayout.setVerticalGroup(
             calculationDisplayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,7 +195,7 @@ public class MainFrame extends javax.swing.JFrame {
         customerCardPanel.setLayout(customerCardPanelLayout);
         customerCardPanelLayout.setHorizontalGroup(
             customerCardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1263, Short.MAX_VALUE)
+            .addGap(0, 1297, Short.MAX_VALUE)
         );
         customerCardPanelLayout.setVerticalGroup(
             customerCardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,15 +223,89 @@ public class MainFrame extends javax.swing.JFrame {
 
         customerCardsTabbedPane.addTab("ΚΑΡΤΕΛΑ", customerCardTab);
 
+        jDateChooser1.setDateFormatString("dd/MM/yyyy");
+        jDateChooser1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+
+        try {
+            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        jFormattedTextField1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel1.setText("ΗΜΕΡΟΜΗΝΙΑ");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel2.setText("ΑΡΙΘΜΟ ΔΕΛΤΙΟΥ");
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 25)); // NOI18N
+        jButton1.setText("ΠΡΟΣΘΕΣΗ ΤΕΜΑΧΙΟΥ");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addGap(99, 99, 99))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jFormattedTextField1))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+
+        jPanel2.setBackground(new java.awt.Color(153, 153, 255));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 394, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout newReceivingTabLayout = new javax.swing.GroupLayout(newReceivingTab);
         newReceivingTab.setLayout(newReceivingTabLayout);
         newReceivingTabLayout.setHorizontalGroup(
             newReceivingTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1275, Short.MAX_VALUE)
+            .addGroup(newReceivingTabLayout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         newReceivingTabLayout.setVerticalGroup(
             newReceivingTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 505, Short.MAX_VALUE)
+            .addGroup(newReceivingTabLayout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 41, Short.MAX_VALUE))
         );
 
         customerCardsTabbedPane.addTab("ΝΕΑ ΠΑΡΑΛΑΒΗ", newReceivingTab);
@@ -234,7 +314,7 @@ public class MainFrame extends javax.swing.JFrame {
         customerArchiveTab.setLayout(customerArchiveTabLayout);
         customerArchiveTabLayout.setHorizontalGroup(
             customerArchiveTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1275, Short.MAX_VALUE)
+            .addGap(0, 1309, Short.MAX_VALUE)
         );
         customerArchiveTabLayout.setVerticalGroup(
             customerArchiveTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -699,7 +779,7 @@ public class MainFrame extends javax.swing.JFrame {
         RootPanelLayout.setHorizontalGroup(
             RootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(customerCardsTabbedPane)
-            .addComponent(HeadPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1280, Short.MAX_VALUE)
+            .addComponent(HeadPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1314, Short.MAX_VALUE)
         );
         RootPanelLayout.setVerticalGroup(
             RootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -716,17 +796,13 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1245, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1280, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 955, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 968, Short.MAX_VALUE))
         );
 
         pack();
@@ -754,12 +830,12 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_customerIdFieldKeyTyped
 
     private void customerIdFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_customerIdFieldKeyPressed
-
+        
         if (customerIdField.isEditable() && evt.getKeyCode() == 10 && customerIdInputValid()) {
             int id = Integer.parseInt(customerIdField.getText());
             dispalyCustomerById(id);
             fillTables();
-
+            
         }
     }//GEN-LAST:event_customerIdFieldKeyPressed
 
@@ -779,11 +855,11 @@ public class MainFrame extends javax.swing.JFrame {
                 customer.setId(Integer.parseInt(customerIdField.getText().trim()));//i guess, no need for trim(), but, just in case
                 customerController.editCustomer(customer);
             }
-
+            
             saveAndCancelButtonsActions();
         }
     }//GEN-LAST:event_saveNewCustomerButtonActionPerformed
-
+    
     private void saveAndCancelButtonsActions() {
         makeSearchFieldsUneditable();
         makeFieldsUneditable();
@@ -798,7 +874,7 @@ public class MainFrame extends javax.swing.JFrame {
         makeSearchFieldsEditable();
         makeFieldsEditable();
         customerIdField.setEditable(false);
-
+        
         CardLayout card = (CardLayout) buttonsPanel.getLayout();
         card.show(buttonsPanel, "card2");
     }//GEN-LAST:event_newCustomerButtonActionPerformed
@@ -806,22 +882,22 @@ public class MainFrame extends javax.swing.JFrame {
     private void mobileFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mobileFieldKeyPressed
         if (mobileField.isEditable() && evt.getKeyCode() == 10) {
             String mobile = mobileField.getText().trim();
-
+            
             ArrayList<Customer> customers = customerController.getCustomerByMobileNumber(mobile);
             SearchFrame searchFrame = new SearchFrame(this, customers);
             searchFrame.setVisible(true);
-
+            
         }
     }//GEN-LAST:event_mobileFieldKeyPressed
 
     private void landLineFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_landLineFieldKeyPressed
         if (landLineField.isEditable() && evt.getKeyCode() == 10) {
             String landLine = landLineField.getText().trim();
-
+            
             ArrayList<Customer> customers = customerController.getCustomerByLandLineNumber(landLine);
             SearchFrame searchFrame = new SearchFrame(this, customers);
             searchFrame.setVisible(true);
-
+            
         }
     }//GEN-LAST:event_landLineFieldKeyPressed
 
@@ -832,23 +908,28 @@ public class MainFrame extends javax.swing.JFrame {
     private void lastNameFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lastNameFieldKeyPressed
         if (lastNameField.isEditable() && evt.getKeyCode() == 10) {
             String lastName = lastNameField.getText().trim();
-
+            
             ArrayList<Customer> customers = customerController.getCustomerByLastName(lastName);
             SearchFrame searchFrame = new SearchFrame(this, customers);
             searchFrame.setVisible(true);
-
+            
         }
     }//GEN-LAST:event_lastNameFieldKeyPressed
 
     private void editCustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editCustomerButtonActionPerformed
-
+        
         makeSearchFieldsEditable();
         makeFieldsEditable();
         customerIdField.setEditable(false);
-
+        
         CardLayout card = (CardLayout) buttonsPanel.getLayout();
         card.show(buttonsPanel, "card2");
     }//GEN-LAST:event_editCustomerButtonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        ItemFrame itemFrame = new ItemFrame(this);
+        itemFrame.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -924,6 +1005,13 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel fpaLabel;
     private javax.swing.JLabel fpaSum;
     private javax.swing.JLabel idLabel;
+    private javax.swing.JButton jButton1;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private javax.swing.JFormattedTextField jFormattedTextField1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JFormattedTextField landLineField;
@@ -951,42 +1039,42 @@ public class MainFrame extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void makeFieldsEditable() {
-
+        
         firstNameField.setEditable(true);
-
+        
         noteField.setEditable(true);
         streetField.setEditable(true);
         districtField.setEditable(true);
         postalCodeField.setEditable(true);
         floorField.setEditable(true);
         bellNameField.setEditable(true);
-
+        
         alternativeStreetField.setEditable(true);
         alternativeDistrictField.setEditable(true);
         alternativePostalCodeField.setEditable(true);
         alternativeFloorField.setEditable(true);
         alternativeBellNameField.setEditable(true);
-
+        
     }
-
+    
     private void makeFieldsUneditable() {
-
+        
         firstNameField.setEditable(false);
-
+        
         noteField.setEditable(false);
         streetField.setEditable(false);
         districtField.setEditable(false);
         postalCodeField.setEditable(false);
         floorField.setEditable(false);
         bellNameField.setEditable(false);
-
+        
         alternativeStreetField.setEditable(false);
         alternativeDistrictField.setEditable(false);
         alternativePostalCodeField.setEditable(false);
         alternativeFloorField.setEditable(false);
         alternativeBellNameField.setEditable(false);
     }
-
+    
     public void dispalyCustomerById(int id) {
         Customer customer = customerController.getCustomerById(id);
         if (customer != null) {
@@ -1000,7 +1088,7 @@ public class MainFrame extends javax.swing.JFrame {
                     JOptionPane.INFORMATION_MESSAGE);
         }
     }
-
+    
     private void displayCustomer(Customer customer) {
         customerIdField.setText(Integer.toString(customer.getId()));
         lastNameField.setText(customer.getLastName());
@@ -1019,48 +1107,48 @@ public class MainFrame extends javax.swing.JFrame {
         alternativeFloorField.setText(customer.getAlternativeFloor());
         alternativeBellNameField.setText(customer.getAlternativeBellName());
     }
-
+    
     private void makeSearchFieldsEditable() {
         customerIdField.setEditable(true);
         lastNameField.setEditable(true);
         landLineField.setEditable(true);
         mobileField.setEditable(true);
     }
-
+    
     private void makeSearchFieldsUneditable() {
         customerIdField.setEditable(false);
         lastNameField.setEditable(false);
         landLineField.setEditable(false);
         mobileField.setEditable(false);
     }
-
+    
     private void cleanFields() {
         customerIdField.setText("");
-
+        
         lastNameField.setText("");
         firstNameField.setText("");
         landLineField.setText("");
         mobileField.setText("");
-
+        
         noteField.setText("");
-
+        
         streetField.setText("");
         districtField.setText("");
         postalCodeField.setText("");
         floorField.setText("");
         bellNameField.setText("");
-
+        
         alternativeStreetField.setText("");
         alternativeDistrictField.setText("");
         alternativePostalCodeField.setText("");
         alternativeFloorField.setText("");
         alternativeBellNameField.setText("");
     }
-
+    
     private boolean customerIdInputValid() {
         boolean valid = true;
         customerIdField.setText(customerIdField.getText().trim());
-
+        
         if (customerIdField.getText().equals("")) {
             JOptionPane.showMessageDialog(new javax.swing.JFrame(),
                     "Customer Id field is empty.",
@@ -1078,12 +1166,12 @@ public class MainFrame extends javax.swing.JFrame {
                         JOptionPane.ERROR_MESSAGE);
                 break;
             }
-
+            
         }
-
+        
         return valid;
     }
-
+    
     private boolean customerInputsValid() {
         boolean valid = true;
         if (!lastNameInputValid() || !firstNameInputeValid() || !noteInputValid()
@@ -1095,10 +1183,10 @@ public class MainFrame extends javax.swing.JFrame {
                 || !alternativeBellNameInputValid()) {
             valid = false;
         }
-
+        
         return valid;
     }
-
+    
     private Customer collectCustomerInformation() {
         Customer customer = new Customer();
         customer.setLastName(lastNameField.getText().trim());
@@ -1118,7 +1206,7 @@ public class MainFrame extends javax.swing.JFrame {
         customer.setAlternativeBellName(alternativeBellNameField.getText().trim());
         return customer;
     }
-
+    
     private boolean lastNameInputValid() {
         boolean valid = true;
         String lastName = lastNameField.getText().trim();
@@ -1137,13 +1225,13 @@ public class MainFrame extends javax.swing.JFrame {
             valid = false;
         }
         return valid;
-
+        
     }
-
+    
     private boolean firstNameInputeValid() {
         boolean valid = true;
         String firstName = firstNameField.getText().trim();
-
+        
         if (firstName.length() > 45) {
             JOptionPane.showMessageDialog(new JFrame(),
                     "ΠΕΔΙΟ 'ΟΝΟΜΑ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΧΕΙ ΠΑΝΩ ΑΠΟ 45 ΓΡΑΜΜΑΤΑ",
@@ -1153,11 +1241,11 @@ public class MainFrame extends javax.swing.JFrame {
         }
         return valid;
     }
-
+    
     private boolean noteInputValid() {
         boolean valid = true;
         String note = noteField.getText().trim();
-
+        
         if (note.length() > 250) {
             JOptionPane.showMessageDialog(new JFrame(),
                     "ΠΕΔΙΟ 'ΣΗΜΕΙΩΜΑ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΧΕΙ ΠΑΝΩ ΑΠΟ 250 ΓΡΑΜΜΑΤΑ",
@@ -1167,11 +1255,11 @@ public class MainFrame extends javax.swing.JFrame {
         }
         return valid;
     }
-
+    
     private boolean streetInputValid() {
         boolean valid = true;
         String street = streetField.getText().trim();
-
+        
         if (street.length() > 60) {
             JOptionPane.showMessageDialog(new JFrame(),
                     "ΠΕΔΙΟ 'ΟΔΟΣ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΧΕΙ ΠΑΝΩ ΑΠΟ 60 ΓΡΑΜΜΑΤΑ",
@@ -1181,11 +1269,11 @@ public class MainFrame extends javax.swing.JFrame {
         }
         return valid;
     }
-
+    
     private boolean districtInputValid() {
         boolean valid = true;
         String district = districtField.getText().trim();
-
+        
         if (district.length() > 60) {
             JOptionPane.showMessageDialog(new JFrame(),
                     "ΠΕΔΙΟ 'ΠΕΡΙΟΧΗ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΧΕΙ ΠΑΝΩ ΑΠΟ 30 ΓΡΑΜΜΑΤΑ",
@@ -1194,9 +1282,9 @@ public class MainFrame extends javax.swing.JFrame {
             valid = false;
         }
         return valid;
-
+        
     }
-
+    
     private boolean postalCodeInputValid() {
         boolean valid = true;
         String postalCode = postalCodeField.getText().trim();
@@ -1210,7 +1298,7 @@ public class MainFrame extends javax.swing.JFrame {
         }
         return valid;
     }
-
+    
     private boolean floorInputValid() {
         boolean valid = true;
         System.out.println("need to change field for combobox with floors -10 to 100 with δομα and υπογειο ");
@@ -1224,11 +1312,11 @@ public class MainFrame extends javax.swing.JFrame {
         }
         return valid;
     }
-
+    
     private boolean bellNameInputValid() {
         boolean valid = true;
         String bellName = bellNameField.getText().trim();
-
+        
         if (bellName.length() > 60) {
             JOptionPane.showMessageDialog(new JFrame(),
                     "ΠΕΔΙΟ 'ΟΝΟΜΑ ΣΤΟ ΚΟΥΔΟΥΝΙ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΧΕΙ ΠΑΝΩ ΑΠΟ 60 ΓΡΑΜΜΑΤΑ",
@@ -1238,11 +1326,11 @@ public class MainFrame extends javax.swing.JFrame {
         }
         return valid;
     }
-
+    
     private boolean alternativeStreetInputValid() {
         boolean valid = true;
         String street = streetField.getText().trim();
-
+        
         if (street.length() > 60) {
             JOptionPane.showMessageDialog(new JFrame(),
                     "ΠΕΔΙΟ 'ΟΔΟΣ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΧΕΙ ΠΑΝΩ ΑΠΟ 60 ΓΡΑΜΜΑΤΑ",
@@ -1252,11 +1340,11 @@ public class MainFrame extends javax.swing.JFrame {
         }
         return valid;
     }
-
+    
     private boolean alternativeDistrictInputValid() {
         boolean valid = true;
         String alternativeDistrict = alternativeDistrictField.getText().trim();
-
+        
         if (alternativeDistrict.length() > 60) {
             JOptionPane.showMessageDialog(new JFrame(),
                     "ΠΕΔΙΟ 'ΠΕΡΙΟΧΗ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΧΕΙ ΠΑΝΩ ΑΠΟ 30 ΓΡΑΜΜΑΤΑ",
@@ -1266,7 +1354,7 @@ public class MainFrame extends javax.swing.JFrame {
         }
         return valid;
     }
-
+    
     private boolean alternativePostalCodeInputValid() {
         boolean valid = true;
         String alternativePostalCode = alternativePostalCodeField.getText().trim();
@@ -1280,7 +1368,7 @@ public class MainFrame extends javax.swing.JFrame {
         }
         return valid;
     }
-
+    
     private boolean alternativeFloorInputValid() {
         boolean valid = true;
         System.out.println("need to change field for combobox with floors -10 to 100 with δομα and υπογειο ");
@@ -1294,11 +1382,11 @@ public class MainFrame extends javax.swing.JFrame {
         }
         return valid;
     }
-
+    
     private boolean alternativeBellNameInputValid() {
         boolean valid = true;
         String alternativeBellName = alternativeBellNameField.getText().trim();
-
+        
         if (alternativeBellName.length() > 60) {
             JOptionPane.showMessageDialog(new JFrame(),
                     "ΠΕΔΙΟ 'ΟΝΟΜΑ ΣΤΟ ΚΟΥΔΟΥΝΙ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΧΕΙ ΠΑΝΩ ΑΠΟ 60 ΓΡΑΜΜΑΤΑ",
@@ -1308,9 +1396,9 @@ public class MainFrame extends javax.swing.JFrame {
         }
         return valid;
     }
-
-    private void fillTables() {
-
+    
+    public void fillTables() {
+        
         String tabName = customerCardsTabbedPane.getTitleAt(customerCardsTabbedPane.getSelectedIndex());
         switch (tabName) {
             case "ΚΑΡΤΕΛΑ":
@@ -1324,13 +1412,13 @@ public class MainFrame extends javax.swing.JFrame {
                 break;
         }
     }
-
+    
     private void fillCardTable() {
         customerCardPanel.removeAll();
         MyTableModel model = new MyTableModel();
-
+        
         Object[] columns = new Object[18];
-
+        
         columns[0] = "ΚΩΔΙΚΟΣ ΠΡΟΙΟΝΤΟΣ";
         columns[1] = "ΠΕΡΙΓΡΑΦΗ";
         columns[2] = "ΚΩΔΙΚΟΣ ΤΕΜΑΧΙΟΥ";
@@ -1338,32 +1426,32 @@ public class MainFrame extends javax.swing.JFrame {
         columns[4] = "ΦΥΛΑΞΗ";
         columns[5] = "ΕΠΙΔΙΟΘΡΩΣΗ";
         columns[6] = "ΣΗΜΕΙΩΜΑ";
-
+        
         columns[7] = "ΤΙΜΗ ΓΙΑ ΚΑΘΑΡΙΣΜΑ";
         columns[8] = "ΤΙΜΗ ΓΙΑ ΦΥΛΑΞΗ";
-
+        
         columns[9] = "ΜΗΚΟΣ";
         columns[10] = "ΠΛΑΟΤΟΣ";
         columns[11] = "ΤΕΤΡΑΓΩΝΙΚΑ";
-
+        
         columns[12] = "ΧΡΕΩΣΗ ΓΙΑ ΚΑΘΑΡΙΣΜΑ";
         columns[13] = "ΧΡΕΩΣΗ ΓΙΑ ΦΥΛΑΞΗ";
         columns[14] = "ΧΡΕΩΣΗ ΓΙΑ ΕΠΙΔΙΟΡΘΩΣΗ";
-
+        
         columns[15] = "ΣΥΝΟΛΟ ΧΡΕΩΣΗΣ ΤΕΜΑΧΙΟΥ";
         columns[16] = "ΚΑΤΑΣΤΑΣΗ";
         columns[17] = "ΔΙΑΛΟΓΗ";
         model.setColumnIdentifiers(columns);
-
+        
         ArrayList<Item> items = itemController.getCustomerItems(Integer.parseInt(customerIdField.getText()));
-
+        
         for (Item item : items) {
             Object[] row = new Object[18];
-
+            
             row[0] = item.getId();
             row[1] = item.getCode();
             row[2] = item.getDescription();
-
+            
             if (item.isForCleaning()) {
                 row[3] = "*";
             } else {
@@ -1379,23 +1467,28 @@ public class MainFrame extends javax.swing.JFrame {
             } else {
                 row[5] = "-";
             }
-
+            
             row[6] = item.getNote();
-
+            
             row[7] = item.getCleaningPrice();
             row[8] = item.getStoringPrice();
-
-            BigDecimal length, width, square;
-            row[9] = length = item.getLength();
-            row[10] = width = item.getWidth();
-            square = length.multiply(width);
-            row[11] = square;
-
-            BigDecimal cleaningCharge, storingCharge, mendingCharge, totalCharge;
+            
+            if (item.getLength() != null) {
+                BigDecimal length, width, square;
+                row[9] = length = item.getLength();
+                row[10] = width = item.getWidth();
+                square = length.multiply(width);
+                row[11] = square.setScale(2, RoundingMode.HALF_EVEN);
+            } else {
+                row[9] = "N/A";
+                row[10] = "N/A";
+                row[11] = "N/A";
+            }
+            BigDecimal cleaningCharge, storingCharge, mendingCharge, s, totalCharge;
             row[12] = cleaningCharge = item.getCleaningCharge();
             row[13] = storingCharge = item.getStoringCharge();
             row[14] = mendingCharge = item.getMendingCharge();
-            totalCharge = cleaningCharge.add(storingCharge.add(mendingCharge));
+            totalCharge = storingCharge.add(cleaningCharge);
             row[15] = totalCharge;
             row[16] = item.getStatus();
             boolean status;
@@ -1404,20 +1497,20 @@ public class MainFrame extends javax.swing.JFrame {
             } else {
                 row[17] = status = Boolean.FALSE;
             }
-
+            
             model.addRow(row, status);
         }
         JScrollPane sc = (JScrollPane) createTable(model);
-
+        
         customerCardPanel.add(sc);
         customerCardPanel.setLayout(new BoxLayout(customerCardPanel, BoxLayout.LINE_AXIS));
-        pack();
+        // pack();
         countTotal(model);
     }
-
+    
     private JComponent createTable(DefaultTableModel model) {
-
-        MyTable table = new MyTable() {
+//do not ask much about this, i don know how it works
+        JTable table = new JTable(model) {
             @Override
             public Component prepareRenderer(TableCellRenderer renderer, int row, int column) {
                 Component c = super.prepareRenderer(renderer, row, column);
@@ -1428,18 +1521,18 @@ public class MainFrame extends javax.swing.JFrame {
                     int modelRow = convertRowIndexToModel(row);
                     String status = (String) getModel().getValueAt(modelRow, 16);
                     boolean ready = (boolean) getModel().getValueAt(modelRow, 17);
-
+                    
                     if (!"ready".equals(status)) {
                         //model.setValueAt(false, modelRow, 17);
                         c.setBackground(Color.RED);
                     }
-
+                    
                     if (ready) {
                         c.setBackground(Color.GREEN);
                     }
-
+                    
                 }
-
+                
                 if (isRowSelected(row)) {
                     //   c.setBackground(getBackground());
                     int modelRow = convertRowIndexToModel(row);
@@ -1447,60 +1540,62 @@ public class MainFrame extends javax.swing.JFrame {
                     if (!"ready".equals(status)) {
                         // model.setValueAt(false, modelRow, 17);
                         c.setBackground(Color.PINK);
-
+                        
                     }
-
+                    
                 }
-
+                
                 return c;
             }
         };
-
+        
         table.getModel().addTableModelListener(
                 new TableModelListener() {
-
+            
             public void tableChanged(TableModelEvent evt) {
                 countTotal((DefaultTableModel) table.getModel());
             }
         }
         );
-
+        
         table.setPreferredScrollableViewportSize(table.getPreferredSize());
-        table.setRowHeight(26);
-
-        table.setFont(new java.awt.Font("Tahoma", 0, 20));
-
+        table.setRowHeight(36);
+        
+        table.setFont(new java.awt.Font("Tahoma", 0, 30));
+        
         table.changeSelection(0, 0, false, false);
         table.setAutoCreateRowSorter(true);
-        table.setAutoResizeMode(AUTO_RESIZE_OFF);
+        // table.setAutoResizeMode(AUTO_RESIZE_OFF);
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setViewportView(table);
-        int scrollPaneHeigth = (model.getRowCount() + 1) * table.getRowHeight();
+        int scrollPaneHeigth = (model.getRowCount() + 2) * table.getRowHeight();
         scrollPane.setPreferredSize(new Dimension(scrollPane.getPreferredSize().width, scrollPaneHeigth));
         return scrollPane;
     }
-
+    
     private void countTotal(DefaultTableModel model) {
-
+        
         int rowCount = model.getRowCount();
         BigDecimal subTotal = BigDecimal.ZERO;
-
+        
         for (int x = 0; x < rowCount; x++) {
             if (!Boolean.valueOf(model.getValueAt(x, 17).toString())) {
                 continue;
             }
             //summing up of item`s total charges
             subTotal = subTotal.add(new BigDecimal(model.getValueAt(x, 15).toString()));
-
+            subTotal = subTotal.setScale(2, RoundingMode.HALF_EVEN);
         }
         subTotalSum.setText(subTotal.toString());
-
+        
         BigDecimal fpa = subTotal.multiply(new BigDecimal(24).divide(new BigDecimal(100)));
+        fpa = fpa.setScale(2, RoundingMode.HALF_EVEN);
         fpaSum.setText(fpa.toString());
-
+        
         BigDecimal total = subTotal.add(fpa);
+        total.setScale(2, RoundingMode.HALF_EVEN);
         totalSum.setText(total.toString());
-
+        
     }
-
+    
 }

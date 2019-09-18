@@ -8,6 +8,7 @@ package Controllers;
 import Dao.ItemDao;
 import Models.Item;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 
 /**
@@ -32,11 +33,11 @@ public class ItemController {
             if (item.getLength() != null && item.getWidth() != null) {
                 BigDecimal length = item.getLength();
                 BigDecimal width = item.getWidth();
-                BigDecimal square = length.multiply(width);
+                BigDecimal square = length.multiply(width).setScale(2, RoundingMode.HALF_EVEN);
                 if (item.isForCleaning()) {
 
                     BigDecimal price = item.getCleaningPrice();
-                    BigDecimal charge = square.multiply(price);
+                    BigDecimal charge = square.multiply(price).setScale(2, RoundingMode.HALF_EVEN);
 
                     item.setCleaningCharge(charge);
                 } else {
@@ -44,15 +45,20 @@ public class ItemController {
                 }
                 if (item.isForStoring()) {
                     BigDecimal price = item.getStoringPrice();
-                    BigDecimal charge = square.multiply(price);
+                    BigDecimal charge = square.multiply(price).setScale(2, RoundingMode.HALF_EVEN);
                     item.setStoringCharge(charge);
                 } else {
                     item.setStoringCharge(BigDecimal.ZERO);
                 }
+
+            } else {
+                item.setCleaningCharge(BigDecimal.ZERO);
+                item.setStoringCharge(BigDecimal.ZERO);
+
             }
-              if(item.getMendingCharge()==null) {
-              item.setMendingCharge(BigDecimal.ZERO);
-              }
+            if (item.getMendingCharge() == null) {
+                item.setMendingCharge(BigDecimal.ZERO);
+            }
 
         }
 

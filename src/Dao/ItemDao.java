@@ -47,7 +47,7 @@ public class ItemDao {
 
                 item.setLength(rs.getBigDecimal("length"));
                 item.setWidth(rs.getBigDecimal("width"));
-                System.out.println(rs.getBoolean("cleaning"));
+             //   System.out.println(rs.getBoolean("cleaning"));
 
                 item.setForCleaning(rs.getBoolean("cleaning"));
                 item.setForStoring(rs.getBoolean("storing"));
