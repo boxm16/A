@@ -939,7 +939,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_editCustomerButtonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ItemFrame itemFrame = new ItemFrame(this);
+        ReceivingItemFrame itemFrame = new ReceivingItemFrame(this);
         itemFrame.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
