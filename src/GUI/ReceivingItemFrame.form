@@ -250,7 +250,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="itemIdLabel" min="-2" pref="260" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="itemIdField" min="-2" pref="132" max="-2" attributes="0"/>
+                      <Component id="itemCodeField" min="-2" pref="132" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="itemIdErrorLabel" max="32767" attributes="0"/>
                   </Group>
@@ -258,7 +258,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="itemIdField" alignment="0" max="32767" attributes="0"/>
+                  <Component id="itemCodeField" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -279,7 +279,7 @@
                 <Property name="text" type="java.lang.String" value="&#x39a;&#x3a9;&#x394;&#x399;&#x39a;&#x39f;&#x3a3; &#x3a4;&#x395;&#x39c;&#x391;&#x3a7;&#x399;&#x39f;&#x3a5;"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="itemIdField">
+            <Component class="javax.swing.JFormattedTextField" name="itemCodeField">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="99" green="ff" red="ff" type="rgb"/>
@@ -292,8 +292,9 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="itemIdFieldFocusLost"/>
-                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="itemIdFieldKeyPressed"/>
+                <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="itemCodeFieldFocusGained"/>
+                <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="itemCodeFieldFocusLost"/>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="itemCodeFieldKeyPressed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="itemIdErrorLabel">
@@ -550,6 +551,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="&#x391;&#x39a;&#x3a5;&#x3a1;&#x3a9;&#x3a3;&#x397;"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancelButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="submitButton">
           <Properties>
@@ -560,6 +564,7 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="submitButtonActionPerformed"/>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="submitButtonKeyPressed"/>
           </Events>
         </Component>
       </SubComponents>

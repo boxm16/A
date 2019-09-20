@@ -36,7 +36,7 @@ import javax.swing.table.TableCellRenderer;
  * @author Michail Sitmalidis
  */
 public class MainFrame extends javax.swing.JFrame {
-    
+
     CustomerController customerController;
     ItemController itemController;
 
@@ -242,9 +242,19 @@ public class MainFrame extends javax.swing.JFrame {
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton1.setText("ΠΡΟΣΘΕΣΗ ΤΕΜΑΧΙΟΥ");
+        jButton1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jButton1ItemStateChanged(evt);
+            }
+        });
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+        jButton1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButton1KeyPressed(evt);
             }
         });
 
@@ -842,12 +852,12 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_customerIdFieldKeyTyped
 
     private void customerIdFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_customerIdFieldKeyPressed
-        
+
         if (customerIdField.isEditable() && evt.getKeyCode() == 10 && customerIdInputValid()) {
             int id = Integer.parseInt(customerIdField.getText());
             dispalyCustomerById(id);
             fillTables();
-            
+
         }
     }//GEN-LAST:event_customerIdFieldKeyPressed
 
@@ -867,11 +877,11 @@ public class MainFrame extends javax.swing.JFrame {
                 customer.setId(Integer.parseInt(customerIdField.getText().trim()));//i guess, no need for trim(), but, just in case
                 customerController.editCustomer(customer);
             }
-            
+
             saveAndCancelButtonsActions();
         }
     }//GEN-LAST:event_saveNewCustomerButtonActionPerformed
-    
+
     private void saveAndCancelButtonsActions() {
         makeSearchFieldsUneditable();
         makeFieldsUneditable();
@@ -886,7 +896,7 @@ public class MainFrame extends javax.swing.JFrame {
         makeSearchFieldsEditable();
         makeFieldsEditable();
         customerIdField.setEditable(false);
-        
+
         CardLayout card = (CardLayout) buttonsPanel.getLayout();
         card.show(buttonsPanel, "card2");
     }//GEN-LAST:event_newCustomerButtonActionPerformed
@@ -894,22 +904,22 @@ public class MainFrame extends javax.swing.JFrame {
     private void mobileFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mobileFieldKeyPressed
         if (mobileField.isEditable() && evt.getKeyCode() == 10) {
             String mobile = mobileField.getText().trim();
-            
+
             ArrayList<Customer> customers = customerController.getCustomerByMobileNumber(mobile);
             SearchFrame searchFrame = new SearchFrame(this, customers);
             searchFrame.setVisible(true);
-            
+
         }
     }//GEN-LAST:event_mobileFieldKeyPressed
 
     private void landLineFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_landLineFieldKeyPressed
         if (landLineField.isEditable() && evt.getKeyCode() == 10) {
             String landLine = landLineField.getText().trim();
-            
+
             ArrayList<Customer> customers = customerController.getCustomerByLandLineNumber(landLine);
             SearchFrame searchFrame = new SearchFrame(this, customers);
             searchFrame.setVisible(true);
-            
+
         }
     }//GEN-LAST:event_landLineFieldKeyPressed
 
@@ -920,20 +930,20 @@ public class MainFrame extends javax.swing.JFrame {
     private void lastNameFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lastNameFieldKeyPressed
         if (lastNameField.isEditable() && evt.getKeyCode() == 10) {
             String lastName = lastNameField.getText().trim();
-            
+
             ArrayList<Customer> customers = customerController.getCustomerByLastName(lastName);
             SearchFrame searchFrame = new SearchFrame(this, customers);
             searchFrame.setVisible(true);
-            
+
         }
     }//GEN-LAST:event_lastNameFieldKeyPressed
 
     private void editCustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editCustomerButtonActionPerformed
-        
+
         makeSearchFieldsEditable();
         makeFieldsEditable();
         customerIdField.setEditable(false);
-        
+
         CardLayout card = (CardLayout) buttonsPanel.getLayout();
         card.show(buttonsPanel, "card2");
     }//GEN-LAST:event_editCustomerButtonActionPerformed
@@ -942,6 +952,16 @@ public class MainFrame extends javax.swing.JFrame {
         ReceivingItemFrame itemFrame = new ReceivingItemFrame(this);
         itemFrame.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jButton1ItemStateChanged
+
+    }//GEN-LAST:event_jButton1ItemStateChanged
+
+    private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyPressed
+        if (evt.getKeyCode() == 10) {
+            jButton1.doClick();
+        }
+    }//GEN-LAST:event_jButton1KeyPressed
 
     /**
      * @param args the command line arguments
@@ -1052,42 +1072,42 @@ public class MainFrame extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void makeFieldsEditable() {
-        
+
         firstNameField.setEditable(true);
-        
+
         noteField.setEditable(true);
         streetField.setEditable(true);
         districtField.setEditable(true);
         postalCodeField.setEditable(true);
         floorField.setEditable(true);
         bellNameField.setEditable(true);
-        
+
         alternativeStreetField.setEditable(true);
         alternativeDistrictField.setEditable(true);
         alternativePostalCodeField.setEditable(true);
         alternativeFloorField.setEditable(true);
         alternativeBellNameField.setEditable(true);
-        
+
     }
-    
+
     private void makeFieldsUneditable() {
-        
+
         firstNameField.setEditable(false);
-        
+
         noteField.setEditable(false);
         streetField.setEditable(false);
         districtField.setEditable(false);
         postalCodeField.setEditable(false);
         floorField.setEditable(false);
         bellNameField.setEditable(false);
-        
+
         alternativeStreetField.setEditable(false);
         alternativeDistrictField.setEditable(false);
         alternativePostalCodeField.setEditable(false);
         alternativeFloorField.setEditable(false);
         alternativeBellNameField.setEditable(false);
     }
-    
+
     public void dispalyCustomerById(int id) {
         Customer customer = customerController.getCustomerById(id);
         if (customer != null) {
@@ -1101,7 +1121,7 @@ public class MainFrame extends javax.swing.JFrame {
                     JOptionPane.INFORMATION_MESSAGE);
         }
     }
-    
+
     private void displayCustomer(Customer customer) {
         customerIdField.setText(Integer.toString(customer.getId()));
         lastNameField.setText(customer.getLastName());
@@ -1120,48 +1140,48 @@ public class MainFrame extends javax.swing.JFrame {
         alternativeFloorField.setText(customer.getAlternativeFloor());
         alternativeBellNameField.setText(customer.getAlternativeBellName());
     }
-    
+
     private void makeSearchFieldsEditable() {
         customerIdField.setEditable(true);
         lastNameField.setEditable(true);
         landLineField.setEditable(true);
         mobileField.setEditable(true);
     }
-    
+
     private void makeSearchFieldsUneditable() {
         customerIdField.setEditable(false);
         lastNameField.setEditable(false);
         landLineField.setEditable(false);
         mobileField.setEditable(false);
     }
-    
+
     private void cleanFields() {
         customerIdField.setText("");
-        
+
         lastNameField.setText("");
         firstNameField.setText("");
         landLineField.setText("");
         mobileField.setText("");
-        
+
         noteField.setText("");
-        
+
         streetField.setText("");
         districtField.setText("");
         postalCodeField.setText("");
         floorField.setText("");
         bellNameField.setText("");
-        
+
         alternativeStreetField.setText("");
         alternativeDistrictField.setText("");
         alternativePostalCodeField.setText("");
         alternativeFloorField.setText("");
         alternativeBellNameField.setText("");
     }
-    
+
     private boolean customerIdInputValid() {
         boolean valid = true;
         customerIdField.setText(customerIdField.getText().trim());
-        
+
         if (customerIdField.getText().equals("")) {
             JOptionPane.showMessageDialog(new javax.swing.JFrame(),
                     "Customer Id field is empty.",
@@ -1179,12 +1199,12 @@ public class MainFrame extends javax.swing.JFrame {
                         JOptionPane.ERROR_MESSAGE);
                 break;
             }
-            
+
         }
-        
+
         return valid;
     }
-    
+
     private boolean customerInputsValid() {
         boolean valid = true;
         if (!lastNameInputValid() || !firstNameInputeValid() || !noteInputValid()
@@ -1196,10 +1216,10 @@ public class MainFrame extends javax.swing.JFrame {
                 || !alternativeBellNameInputValid()) {
             valid = false;
         }
-        
+
         return valid;
     }
-    
+
     private Customer collectCustomerInformation() {
         Customer customer = new Customer();
         customer.setLastName(lastNameField.getText().trim());
@@ -1219,7 +1239,7 @@ public class MainFrame extends javax.swing.JFrame {
         customer.setAlternativeBellName(alternativeBellNameField.getText().trim());
         return customer;
     }
-    
+
     private boolean lastNameInputValid() {
         boolean valid = true;
         String lastName = lastNameField.getText().trim();
@@ -1238,13 +1258,13 @@ public class MainFrame extends javax.swing.JFrame {
             valid = false;
         }
         return valid;
-        
+
     }
-    
+
     private boolean firstNameInputeValid() {
         boolean valid = true;
         String firstName = firstNameField.getText().trim();
-        
+
         if (firstName.length() > 45) {
             JOptionPane.showMessageDialog(new JFrame(),
                     "ΠΕΔΙΟ 'ΟΝΟΜΑ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΧΕΙ ΠΑΝΩ ΑΠΟ 45 ΓΡΑΜΜΑΤΑ",
@@ -1254,11 +1274,11 @@ public class MainFrame extends javax.swing.JFrame {
         }
         return valid;
     }
-    
+
     private boolean noteInputValid() {
         boolean valid = true;
         String note = noteField.getText().trim();
-        
+
         if (note.length() > 250) {
             JOptionPane.showMessageDialog(new JFrame(),
                     "ΠΕΔΙΟ 'ΣΗΜΕΙΩΜΑ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΧΕΙ ΠΑΝΩ ΑΠΟ 250 ΓΡΑΜΜΑΤΑ",
@@ -1268,11 +1288,11 @@ public class MainFrame extends javax.swing.JFrame {
         }
         return valid;
     }
-    
+
     private boolean streetInputValid() {
         boolean valid = true;
         String street = streetField.getText().trim();
-        
+
         if (street.length() > 60) {
             JOptionPane.showMessageDialog(new JFrame(),
                     "ΠΕΔΙΟ 'ΟΔΟΣ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΧΕΙ ΠΑΝΩ ΑΠΟ 60 ΓΡΑΜΜΑΤΑ",
@@ -1282,11 +1302,11 @@ public class MainFrame extends javax.swing.JFrame {
         }
         return valid;
     }
-    
+
     private boolean districtInputValid() {
         boolean valid = true;
         String district = districtField.getText().trim();
-        
+
         if (district.length() > 60) {
             JOptionPane.showMessageDialog(new JFrame(),
                     "ΠΕΔΙΟ 'ΠΕΡΙΟΧΗ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΧΕΙ ΠΑΝΩ ΑΠΟ 30 ΓΡΑΜΜΑΤΑ",
@@ -1295,9 +1315,9 @@ public class MainFrame extends javax.swing.JFrame {
             valid = false;
         }
         return valid;
-        
+
     }
-    
+
     private boolean postalCodeInputValid() {
         boolean valid = true;
         String postalCode = postalCodeField.getText().trim();
@@ -1311,7 +1331,7 @@ public class MainFrame extends javax.swing.JFrame {
         }
         return valid;
     }
-    
+
     private boolean floorInputValid() {
         boolean valid = true;
         System.out.println("need to change field for combobox with floors -10 to 100 with δομα and υπογειο ");
@@ -1325,11 +1345,11 @@ public class MainFrame extends javax.swing.JFrame {
         }
         return valid;
     }
-    
+
     private boolean bellNameInputValid() {
         boolean valid = true;
         String bellName = bellNameField.getText().trim();
-        
+
         if (bellName.length() > 60) {
             JOptionPane.showMessageDialog(new JFrame(),
                     "ΠΕΔΙΟ 'ΟΝΟΜΑ ΣΤΟ ΚΟΥΔΟΥΝΙ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΧΕΙ ΠΑΝΩ ΑΠΟ 60 ΓΡΑΜΜΑΤΑ",
@@ -1339,11 +1359,11 @@ public class MainFrame extends javax.swing.JFrame {
         }
         return valid;
     }
-    
+
     private boolean alternativeStreetInputValid() {
         boolean valid = true;
         String street = streetField.getText().trim();
-        
+
         if (street.length() > 60) {
             JOptionPane.showMessageDialog(new JFrame(),
                     "ΠΕΔΙΟ 'ΟΔΟΣ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΧΕΙ ΠΑΝΩ ΑΠΟ 60 ΓΡΑΜΜΑΤΑ",
@@ -1353,11 +1373,11 @@ public class MainFrame extends javax.swing.JFrame {
         }
         return valid;
     }
-    
+
     private boolean alternativeDistrictInputValid() {
         boolean valid = true;
         String alternativeDistrict = alternativeDistrictField.getText().trim();
-        
+
         if (alternativeDistrict.length() > 60) {
             JOptionPane.showMessageDialog(new JFrame(),
                     "ΠΕΔΙΟ 'ΠΕΡΙΟΧΗ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΧΕΙ ΠΑΝΩ ΑΠΟ 30 ΓΡΑΜΜΑΤΑ",
@@ -1367,7 +1387,7 @@ public class MainFrame extends javax.swing.JFrame {
         }
         return valid;
     }
-    
+
     private boolean alternativePostalCodeInputValid() {
         boolean valid = true;
         String alternativePostalCode = alternativePostalCodeField.getText().trim();
@@ -1381,7 +1401,7 @@ public class MainFrame extends javax.swing.JFrame {
         }
         return valid;
     }
-    
+
     private boolean alternativeFloorInputValid() {
         boolean valid = true;
         System.out.println("need to change field for combobox with floors -10 to 100 with δομα and υπογειο ");
@@ -1395,11 +1415,11 @@ public class MainFrame extends javax.swing.JFrame {
         }
         return valid;
     }
-    
+
     private boolean alternativeBellNameInputValid() {
         boolean valid = true;
         String alternativeBellName = alternativeBellNameField.getText().trim();
-        
+
         if (alternativeBellName.length() > 60) {
             JOptionPane.showMessageDialog(new JFrame(),
                     "ΠΕΔΙΟ 'ΟΝΟΜΑ ΣΤΟ ΚΟΥΔΟΥΝΙ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΧΕΙ ΠΑΝΩ ΑΠΟ 60 ΓΡΑΜΜΑΤΑ",
@@ -1409,9 +1429,9 @@ public class MainFrame extends javax.swing.JFrame {
         }
         return valid;
     }
-    
+
     public void fillTables() {
-        
+
         String tabName = customerCardsTabbedPane.getTitleAt(customerCardsTabbedPane.getSelectedIndex());
         switch (tabName) {
             case "ΚΑΡΤΕΛΑ":
@@ -1425,13 +1445,13 @@ public class MainFrame extends javax.swing.JFrame {
                 break;
         }
     }
-    
+
     private void fillCardTable() {
         customerCardPanel.removeAll();
         MyTableModel model = new MyTableModel();
-        
+
         Object[] columns = new Object[18];
-        
+
         columns[0] = "ΚΩΔΙΚΟΣ ΠΡΟΙΟΝΤΟΣ";
         columns[1] = "ΠΕΡΙΓΡΑΦΗ";
         columns[2] = "ΚΩΔΙΚΟΣ ΤΕΜΑΧΙΟΥ";
@@ -1439,32 +1459,32 @@ public class MainFrame extends javax.swing.JFrame {
         columns[4] = "ΦΥΛΑΞΗ";
         columns[5] = "ΕΠΙΔΙΟΘΡΩΣΗ";
         columns[6] = "ΣΗΜΕΙΩΜΑ";
-        
+
         columns[7] = "ΤΙΜΗ ΓΙΑ ΚΑΘΑΡΙΣΜΑ";
         columns[8] = "ΤΙΜΗ ΓΙΑ ΦΥΛΑΞΗ";
-        
+
         columns[9] = "ΜΗΚΟΣ";
         columns[10] = "ΠΛΑΟΤΟΣ";
         columns[11] = "ΤΕΤΡΑΓΩΝΙΚΑ";
-        
+
         columns[12] = "ΧΡΕΩΣΗ ΓΙΑ ΚΑΘΑΡΙΣΜΑ";
         columns[13] = "ΧΡΕΩΣΗ ΓΙΑ ΦΥΛΑΞΗ";
         columns[14] = "ΧΡΕΩΣΗ ΓΙΑ ΕΠΙΔΙΟΡΘΩΣΗ";
-        
+
         columns[15] = "ΣΥΝΟΛΟ ΧΡΕΩΣΗΣ ΤΕΜΑΧΙΟΥ";
         columns[16] = "ΚΑΤΑΣΤΑΣΗ";
         columns[17] = "ΔΙΑΛΟΓΗ";
         model.setColumnIdentifiers(columns);
-        
+
         ArrayList<Item> items = itemController.getCustomerItems(Integer.parseInt(customerIdField.getText()));
-        
+
         for (Item item : items) {
             Object[] row = new Object[18];
-            
+
             row[0] = item.getId();
             row[1] = item.getCode();
             row[2] = item.getDescription();
-            
+
             if (item.isForCleaning()) {
                 row[3] = "*";
             } else {
@@ -1480,12 +1500,12 @@ public class MainFrame extends javax.swing.JFrame {
             } else {
                 row[5] = "-";
             }
-            
+
             row[6] = item.getNote();
-            
+
             row[7] = item.getCleaningPrice();
             row[8] = item.getStoringPrice();
-            
+
             if (item.getLength() != null) {
                 BigDecimal length, width, square;
                 row[9] = length = item.getLength();
@@ -1510,17 +1530,17 @@ public class MainFrame extends javax.swing.JFrame {
             } else {
                 row[17] = status = Boolean.FALSE;
             }
-            
+
             model.addRow(row, status);
         }
         JScrollPane sc = (JScrollPane) createTable(model);
-        
+
         customerCardPanel.add(sc);
         customerCardPanel.setLayout(new BoxLayout(customerCardPanel, BoxLayout.LINE_AXIS));
         // pack();
         countTotal(model);
     }
-    
+
     private JComponent createTable(DefaultTableModel model) {
 //do not ask much about this, i don know how it works
         JTable table = new JTable(model) {
@@ -1534,18 +1554,18 @@ public class MainFrame extends javax.swing.JFrame {
                     int modelRow = convertRowIndexToModel(row);
                     String status = (String) getModel().getValueAt(modelRow, 16);
                     boolean ready = (boolean) getModel().getValueAt(modelRow, 17);
-                    
+
                     if (!"ready".equals(status)) {
                         //model.setValueAt(false, modelRow, 17);
                         c.setBackground(Color.RED);
                     }
-                    
+
                     if (ready) {
                         c.setBackground(Color.GREEN);
                     }
-                    
+
                 }
-                
+
                 if (isRowSelected(row)) {
                     //   c.setBackground(getBackground());
                     int modelRow = convertRowIndexToModel(row);
@@ -1553,29 +1573,29 @@ public class MainFrame extends javax.swing.JFrame {
                     if (!"ready".equals(status)) {
                         // model.setValueAt(false, modelRow, 17);
                         c.setBackground(Color.PINK);
-                        
+
                     }
-                    
+
                 }
-                
+
                 return c;
             }
         };
-        
+
         table.getModel().addTableModelListener(
                 new TableModelListener() {
-            
+
             public void tableChanged(TableModelEvent evt) {
                 countTotal((DefaultTableModel) table.getModel());
             }
         }
         );
-        
+
         table.setPreferredScrollableViewportSize(table.getPreferredSize());
         table.setRowHeight(36);
-        
+
         table.setFont(new java.awt.Font("Tahoma", 0, 30));
-        
+
         table.changeSelection(0, 0, false, false);
         table.setAutoCreateRowSorter(true);
         // table.setAutoResizeMode(AUTO_RESIZE_OFF);
@@ -1585,12 +1605,12 @@ public class MainFrame extends javax.swing.JFrame {
         scrollPane.setPreferredSize(new Dimension(scrollPane.getPreferredSize().width, scrollPaneHeigth));
         return scrollPane;
     }
-    
+
     private void countTotal(DefaultTableModel model) {
-        
+
         int rowCount = model.getRowCount();
         BigDecimal subTotal = BigDecimal.ZERO;
-        
+
         for (int x = 0; x < rowCount; x++) {
             if (!Boolean.valueOf(model.getValueAt(x, 17).toString())) {
                 continue;
@@ -1600,15 +1620,15 @@ public class MainFrame extends javax.swing.JFrame {
             subTotal = subTotal.setScale(2, RoundingMode.HALF_EVEN);
         }
         subTotalSum.setText(subTotal.toString());
-        
+
         BigDecimal fpa = subTotal.multiply(new BigDecimal(24).divide(new BigDecimal(100)));
         fpa = fpa.setScale(2, RoundingMode.HALF_EVEN);
         fpaSum.setText(fpa.toString());
-        
+
         BigDecimal total = subTotal.add(fpa);
         total.setScale(2, RoundingMode.HALF_EVEN);
         totalSum.setText(total.toString());
-        
+
     }
-    
+
 }

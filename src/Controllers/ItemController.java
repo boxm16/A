@@ -65,4 +65,9 @@ public class ItemController {
         return customerItems;
     }
 
+    public boolean itemCodeRegisteredInDb(int itemCode) {
+        return itemDao.itemCodeRegisteredInDb(itemCode);
+
+    }
+
 }
