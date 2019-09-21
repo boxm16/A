@@ -20,18 +20,18 @@ import javax.swing.JOptionPane;
  * @author Michail Sitmalidis
  */
 public class ReceivingItemFrame extends javax.swing.JFrame {
-
+    
     MainFrame mainFrame;
     ProductController productController;
     ItemController itemController;
     Color focusInColor;
     Color focusOutColor;
-
+    
     public ReceivingItemFrame() {
         initComponents();
         myInitialization();
     }
-
+    
     public ReceivingItemFrame(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         productController = new ProductController();
@@ -39,7 +39,7 @@ public class ReceivingItemFrame extends javax.swing.JFrame {
         initComponents();
         myInitialization();
         fillProductFields();
-
+        
     }
 
     /**
@@ -332,8 +332,8 @@ public class ReceivingItemFrame extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(servicePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(storingField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(mendingField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cleaningField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cleaningField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(mendingField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         servicePanelLayout.setVerticalGroup(
@@ -348,14 +348,11 @@ public class ReceivingItemFrame extends javax.swing.JFrame {
                 .addGroup(servicePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(storingLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(storingField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(servicePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(servicePanelLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(mendingField))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, servicePanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(mendingLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                    .addComponent(mendingLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mendingField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21))
         );
 
         noteField.setBackground(new java.awt.Color(255, 255, 153));
@@ -533,7 +530,7 @@ public class ReceivingItemFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_productIdFieldFocusLost
 
     private void productIdFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_productIdFieldKeyReleased
-
+        
         productIdInputValid();
 
     }//GEN-LAST:event_productIdFieldKeyReleased
@@ -545,7 +542,7 @@ public class ReceivingItemFrame extends javax.swing.JFrame {
             productIdField.setBackground(focusOutColor);
             productDescriptionField.setBackground(focusOutColor);
             productIdErrorLabel.setText("");
-
+            
         }
 
     }//GEN-LAST:event_productDescriptionFieldItemStateChanged
@@ -568,7 +565,7 @@ public class ReceivingItemFrame extends javax.swing.JFrame {
 
     private void itemCodeFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_itemCodeFieldKeyPressed
         if (evt.getKeyCode() == 10) {
-
+            
             cleaningField.requestFocus();
         }
     }//GEN-LAST:event_itemCodeFieldKeyPressed
@@ -583,7 +580,7 @@ public class ReceivingItemFrame extends javax.swing.JFrame {
             } else {
                 cleaningField.setSelected(true);
             }
-
+            
         }
         if (evt.getKeyCode() == 10) {
             storingField.requestFocus();
@@ -616,7 +613,7 @@ public class ReceivingItemFrame extends javax.swing.JFrame {
             } else {
                 storingField.setSelected(true);
             }
-
+            
         }
         if (evt.getKeyCode() == 10) {
             mendingField.requestFocus();
@@ -639,7 +636,7 @@ public class ReceivingItemFrame extends javax.swing.JFrame {
             } else {
                 mendingField.setSelected(true);
             }
-
+            
         }
         if (evt.getKeyCode() == 10) {
             noteField.requestFocus();
@@ -663,7 +660,9 @@ public class ReceivingItemFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_noteFieldFocusLost
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
-        if (productChosen() && itemCodeGoodToGo() && serviceChosen()) {
+        if (productChosen() && itemCodeGoodToGo() && serviceChosen() && noteFieldInputValid()) {
+            Item receivedItem = collectItemInformation();
+            mainFrame.addItemToReceivingItemsTable(receivedItem);
             this.dispose();
         }
     }//GEN-LAST:event_submitButtonActionPerformed
@@ -678,11 +677,11 @@ public class ReceivingItemFrame extends javax.swing.JFrame {
     private void productDescriptionFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_productDescriptionFieldFocusLost
         if (productDescriptionField.getSelectedIndex() == -1) {
             productDescriptionField.setBackground(Color.red);
-
+            
         } else {
             productIdField.setBackground(focusOutColor);
             productDescriptionField.setBackground(focusOutColor);
-
+            
         }
     }//GEN-LAST:event_productDescriptionFieldFocusLost
 
@@ -690,24 +689,25 @@ public class ReceivingItemFrame extends javax.swing.JFrame {
         itemCodeInputValid();
 
     }//GEN-LAST:event_itemCodeFieldFocusLost
-
+    
     private boolean itemCodeInputValid() {
         boolean valid = false;
         String id = itemCodeField.getText().trim();
         if (id.length() < 5) {
-
+            
             itemIdErrorLabel.setText("ΚΩΔΙΚΟΣ ΤΕΜΑΧΙΟΥ ΠΡΕΠΕΙ ΝΑ ΕΧΕΙ 5 ΨΗΦΙΑ");
             itemCodeField.setBackground(Color.red);
-
+            
         } else {
             itemCodeField.setBackground(focusOutColor);
-
+            
             valid = true;
         }
         return valid;
     }
 
     private void itemCodeFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_itemCodeFieldFocusGained
+        itemCodeField.setCaretPosition(itemCodeField.getDocument().getLength());
         itemCodeField.setBackground(focusInColor);
         itemIdErrorLabel.setText("");
     }//GEN-LAST:event_itemCodeFieldFocusGained
@@ -759,16 +759,15 @@ public class ReceivingItemFrame extends javax.swing.JFrame {
         hiddenComboBox.removeAllItems();
         productDescriptionField.removeAllItems();
         ArrayList<Product> products = productController.getProducts();
-
+        
         for (Product product : products) {
             hiddenComboBox.addItem(String.valueOf(product.getId()));//it could be an array, or arrayList, i suppose
-            String id_description = String.valueOf(product.getId()) + "-" + product.getDescription();
-            productDescriptionField.addItem(id_description);
-
+            productDescriptionField.addItem(product.getDescription());
+            
         }
-
+        
     }
-
+    
     public boolean productIdInputValid() {
         boolean valid = false;
         if (!productIdField.getText().equals("")) {
@@ -781,16 +780,16 @@ public class ReceivingItemFrame extends javax.swing.JFrame {
                 productIdField.setBackground(new Color(255, 255, 255));
             } else {
                 productIdField.setBackground(Color.red);
-
+                
             }
         } else {
             productDescriptionField.setSelectedIndex(-1);
             productIdField.setBackground(Color.red);
-
+            
         }
         return valid;
     }
-
+    
     private boolean productChosen() {
         boolean chosen = false;
         if (productDescriptionField.getSelectedIndex() != -1) {
@@ -801,12 +800,12 @@ public class ReceivingItemFrame extends javax.swing.JFrame {
                     "ΔΕΝ ΕΧΕΙ ΓΙΝΕΙ ΕΠΙΛΟΓΗ ΠΡΟΙΟΝΤΟΣ",
                     "ΛΑΘΟΣ ΠΡΟΙΟΝ",
                     JOptionPane.ERROR_MESSAGE);
-
+            
         }
-
+        
         return chosen;
     }
-
+    
     private boolean itemCodeGoodToGo() {
         boolean goodToGo = false;
         switch (1) {
@@ -821,7 +820,7 @@ public class ReceivingItemFrame extends javax.swing.JFrame {
                     );
                     break;
                 }
-
+            
             case 2:
                 if (itemCodeRegisteredInDb()) {
                     JOptionPane.showMessageDialog(null,
@@ -830,6 +829,7 @@ public class ReceivingItemFrame extends javax.swing.JFrame {
                             JOptionPane.ERROR_MESSAGE
                     );
                     goodToGo = false;
+                    returnFocusToItemField();
                     break;
                 } else {
                     goodToGo = true;
@@ -842,6 +842,7 @@ public class ReceivingItemFrame extends javax.swing.JFrame {
                             JOptionPane.ERROR_MESSAGE
                     );
                     goodToGo = false;
+                    returnFocusToItemField();
                     break;//in case here comes case 4
                 } else {
                     goodToGo = true;
@@ -849,22 +850,74 @@ public class ReceivingItemFrame extends javax.swing.JFrame {
         }
         return goodToGo;
     }
-
+    
     private boolean itemCodeRegisteredInDb() {
         int itemCode = Integer.parseInt(itemCodeField.getText().toString());
-//not worried abut exception, field is checked by itemCodeInputValid in  switch above
+//not worried about exception, field is checked by itemCodeInputValid in  switch above
         return itemController.itemCodeRegisteredInDb(itemCode);
-      
-}
-
-private boolean itemCodeRegisteredInReceivingReport() {
-        System.out.println("need worke here, itemCodeInReceivingReport");
-        return true;
+        
     }
-
+    
+    private boolean itemCodeRegisteredInReceivingReport() {
+        
+        String itemCodeInput = itemCodeField.getText();//again, not worried about input, `cous its checked before
+        int rowCount = mainFrame.receivingItemsTableModel.getRowCount();
+        
+        if (rowCount > 0) {
+            
+            for (int x = 0; x < rowCount; x++) {
+                
+                String itemCodeInTable = mainFrame.receivingItemsTableModel.getValueAt(x, 2).toString();
+                System.out.println(itemCodeInTable);
+                if (itemCodeInput.equals(itemCodeInTable)) {
+                    return true;
+                }
+                
+            }
+            
+        }
+        return false;
+    }
+    
     private boolean serviceChosen() {
-        System.out.println("need worke here, serviceChosen");
+        if (cleaningField.isSelected() || storingField.isSelected() || mendingField.isSelected()) {
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "At least one service has to be chosen",
+                    "ΛΑΘΟΣ ΕΠΙΛΟΓΗ ΥΠΗΡΕΣΙΑΣ",
+                    JOptionPane.ERROR_MESSAGE
+            );
+            cleaningField.setBackground(Color.red);
+            storingField.setBackground(Color.red);
+            mendingField.setBackground(Color.red);
+            return false;
+        }
+        
+    }
+    
+    private Item collectItemInformation() {
+        Item item = new Item();
+        item.setId(Integer.parseInt(productIdField.getText()));
+        item.setDescription(productDescriptionField.getSelectedItem().toString());
+        item.setCode(Integer.parseInt(itemCodeField.getText()));
+        item.setForCleaning(cleaningField.isSelected());
+        item.setForStoring(storingField.isSelected());
+        item.setForMending(mendingField.isSelected());
+        item.setNote(noteField.getText());
+        return item;
+    }
+    
+    private boolean noteFieldInputValid() {
+        System.out.println("need some work here-noteFieldInputValid");
         return true;
     }
-
+    
+    private void returnFocusToItemField() {
+        
+        itemCodeField.requestFocus();
+        itemCodeField.setCaretPosition(itemCodeField.getText().trim().length());
+   //"I wanted to set carret to the end of text inside, but somehow its not working";
+    }
+    
 }

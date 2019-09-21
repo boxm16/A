@@ -14,21 +14,25 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.BoxLayout;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import static javax.swing.JTable.AUTO_RESIZE_OFF;
+import javax.swing.JTextField;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 
 /**
@@ -39,14 +43,17 @@ public class MainFrame extends javax.swing.JFrame {
 
     CustomerController customerController;
     ItemController itemController;
+    JTableHeader receivingItemsTableHeader;
+    DefaultTableModel receivingItemsTableModel;
+    JTextField receivingDatePickerTextField;
 
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
         initComponents();
-        customerController = new CustomerController();
-        itemController = new ItemController();
+        myInitialization();
+
         /*  Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         this.setSize(screenSize.width, screenSize.height-35);
          */
@@ -76,13 +83,15 @@ public class MainFrame extends javax.swing.JFrame {
         customerCardPanel = new javax.swing.JPanel();
         newReceivingTab = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        receivingDatePicker = new com.toedter.calendar.JDateChooser();
+        receivingReportNumber = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
+        addItemButton = new javax.swing.JButton();
+        saveReceivingReportButton = new javax.swing.JButton();
+        receivingItemsPanel = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        receivingItemsTable = new javax.swing.JTable();
         customerArchiveTab = new javax.swing.JPanel();
         HeadPanel = new javax.swing.JPanel();
         AdressPanel2 = new javax.swing.JPanel();
@@ -224,15 +233,20 @@ public class MainFrame extends javax.swing.JFrame {
 
         customerCardsTabbedPane.addTab("ΚΑΡΤΕΛΑ", customerCardTab);
 
-        jDateChooser1.setDateFormatString("dd/MM/yyyy");
-        jDateChooser1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        receivingDatePicker.setDateFormatString("dd/MM/yyyy");
+        receivingDatePicker.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
         try {
-            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
+            receivingReportNumber.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jFormattedTextField1.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        receivingReportNumber.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        receivingReportNumber.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                receivingReportNumberKeyPressed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setText("ΗΜΕΡΟΜΗΝΙΑ");
@@ -240,26 +254,31 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel2.setText("ΑΡΙΘΜΟΣ ΔΕΛΤΙΟΥ");
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jButton1.setText("ΠΡΟΣΘΕΣΗ ΤΕΜΑΧΙΟΥ");
-        jButton1.addItemListener(new java.awt.event.ItemListener() {
+        addItemButton.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        addItemButton.setText("ΠΡΟΣΘΕΣΗ ΤΕΜΑΧΙΟΥ");
+        addItemButton.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jButton1ItemStateChanged(evt);
+                addItemButtonItemStateChanged(evt);
             }
         });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        addItemButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                addItemButtonActionPerformed(evt);
             }
         });
-        jButton1.addKeyListener(new java.awt.event.KeyAdapter() {
+        addItemButton.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                jButton1KeyPressed(evt);
+                addItemButtonKeyPressed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jButton2.setText("ΑΠΟΘΗΚΕΥΣΗ ΔΕΛΤΙΟΥ");
+        saveReceivingReportButton.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        saveReceivingReportButton.setText("ΑΠΟΘΗΚΕΥΣΗ ΔΕΛΤΙΟΥ");
+        saveReceivingReportButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveReceivingReportButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -268,15 +287,15 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(receivingDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(receivingReportNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(addItemButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
+                .addComponent(saveReceivingReportButton)
                 .addGap(26, 26, 26))
         );
         jPanel1Layout.setVerticalGroup(
@@ -287,30 +306,50 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jFormattedTextField1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(receivingReportNumber, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(3, 3, 3)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(receivingDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(addItemButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(saveReceivingReportButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(1, 1, 1))))
         );
 
-        jPanel2.setBackground(new java.awt.Color(153, 153, 255));
+        receivingItemsPanel.setBackground(new java.awt.Color(153, 153, 255));
+        receivingItemsPanel.setLayout(new javax.swing.BoxLayout(receivingItemsPanel, javax.swing.BoxLayout.LINE_AXIS));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
-        );
+        receivingItemsTable.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        receivingItemsTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "ΠΕΡΙΓΡΑΦΗ ΠΡΟΙΟΝΤΟΣ", "ΚΩΔΙΚΟΣ ΤΕΜΑΧΙΟΥ", "ΚΑΘΑΡΙΣΜΑ", "ΦΥΛΑΞΗ", "ΕΠΙΔΙΟΡΘΩΣΗ", "ΣΗΜΕΙΩΜΑ"
+            }
+        ));
+        receivingItemsTable.setColumnSelectionAllowed(true);
+        receivingItemsTable.setEnabled(false);
+        receivingItemsTable.setRowHeight(36);
+        jScrollPane2.setViewportView(receivingItemsTable);
+        receivingItemsTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        if (receivingItemsTable.getColumnModel().getColumnCount() > 0) {
+            receivingItemsTable.getColumnModel().getColumn(0).setPreferredWidth(60);
+            receivingItemsTable.getColumnModel().getColumn(0).setMaxWidth(70);
+            receivingItemsTable.getColumnModel().getColumn(1).setPreferredWidth(200);
+            receivingItemsTable.getColumnModel().getColumn(2).setPreferredWidth(100);
+            receivingItemsTable.getColumnModel().getColumn(2).setMaxWidth(200);
+            receivingItemsTable.getColumnModel().getColumn(3).setPreferredWidth(100);
+            receivingItemsTable.getColumnModel().getColumn(3).setMaxWidth(200);
+            receivingItemsTable.getColumnModel().getColumn(4).setPreferredWidth(100);
+            receivingItemsTable.getColumnModel().getColumn(4).setMaxWidth(200);
+            receivingItemsTable.getColumnModel().getColumn(5).setPreferredWidth(100);
+            receivingItemsTable.getColumnModel().getColumn(5).setMaxWidth(200);
+        }
+
+        receivingItemsPanel.add(jScrollPane2);
 
         javax.swing.GroupLayout newReceivingTabLayout = new javax.swing.GroupLayout(newReceivingTab);
         newReceivingTab.setLayout(newReceivingTabLayout);
@@ -318,16 +357,16 @@ public class MainFrame extends javax.swing.JFrame {
             newReceivingTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(newReceivingTabLayout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(13, Short.MAX_VALUE))
+            .addComponent(receivingItemsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         newReceivingTabLayout.setVerticalGroup(
             newReceivingTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(newReceivingTabLayout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 59, Short.MAX_VALUE))
+                .addComponent(receivingItemsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 22, Short.MAX_VALUE))
         );
 
         customerCardsTabbedPane.addTab("ΝΕΑ ΠΑΡΑΛΑΒΗ", newReceivingTab);
@@ -830,6 +869,21 @@ public class MainFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void myInitialization() {
+        customerController = new CustomerController();
+        itemController = new ItemController();
+
+        Font headerFont = new Font("Tahoma", Font.BOLD, 14);
+        receivingItemsTableHeader = receivingItemsTable.getTableHeader();
+        receivingItemsTableHeader.setFont(headerFont);
+
+        receivingItemsTableModel = (DefaultTableModel) receivingItemsTable.getModel();
+
+        receivingDatePicker.setDate(new Date());
+        receivingDatePickerTextField = (JTextField) receivingDatePicker.getComponent(1);
+        receivingDatePickerTextField.setEditable(false);
+    }
+
     private void findButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findButtonActionPerformed
         cleanFields();
         makeFieldsUneditable();
@@ -948,20 +1002,30 @@ public class MainFrame extends javax.swing.JFrame {
         card.show(buttonsPanel, "card2");
     }//GEN-LAST:event_editCustomerButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void addItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addItemButtonActionPerformed
         ReceivingItemFrame itemFrame = new ReceivingItemFrame(this);
         itemFrame.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_addItemButtonActionPerformed
 
-    private void jButton1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jButton1ItemStateChanged
+    private void addItemButtonItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_addItemButtonItemStateChanged
 
-    }//GEN-LAST:event_jButton1ItemStateChanged
+    }//GEN-LAST:event_addItemButtonItemStateChanged
 
-    private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyPressed
+    private void addItemButtonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_addItemButtonKeyPressed
         if (evt.getKeyCode() == 10) {
-            jButton1.doClick();
+            addItemButton.doClick();
         }
-    }//GEN-LAST:event_jButton1KeyPressed
+    }//GEN-LAST:event_addItemButtonKeyPressed
+
+    private void receivingReportNumberKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_receivingReportNumberKeyPressed
+        if (evt.getKeyCode() == 10) {
+            addItemButton.doClick();
+        }
+    }//GEN-LAST:event_receivingReportNumberKeyPressed
+
+    private void saveReceivingReportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveReceivingReportButtonActionPerformed
+
+    }//GEN-LAST:event_saveReceivingReportButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1005,6 +1069,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel CombinedPanel;
     private javax.swing.JPanel HeadPanel;
     private javax.swing.JPanel RootPanel;
+    private javax.swing.JButton addItemButton;
     private javax.swing.JLabel addressLabel;
     private javax.swing.JLabel alternativeAddressLabel;
     private javax.swing.JTextField alternativeBellNameField;
@@ -1037,15 +1102,11 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel fpaLabel;
     private javax.swing.JLabel fpaSum;
     private javax.swing.JLabel idLabel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JFormattedTextField landLineField;
     private javax.swing.JLabel landLineLabel;
@@ -1061,8 +1122,13 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField postalCodeField;
     private javax.swing.JLabel postalCodeLabel;
     private javax.swing.JButton processButton;
+    private com.toedter.calendar.JDateChooser receivingDatePicker;
+    private javax.swing.JPanel receivingItemsPanel;
+    private javax.swing.JTable receivingItemsTable;
+    private javax.swing.JFormattedTextField receivingReportNumber;
     private javax.swing.JPanel saveCancelPanel;
     private javax.swing.JButton saveNewCustomerButton;
+    private javax.swing.JButton saveReceivingReportButton;
     private javax.swing.JTextField streetField;
     private javax.swing.JLabel streetLabel;
     private javax.swing.JLabel subTotalLabel;
@@ -1431,7 +1497,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     public void fillTables() {
-
+        System.out.println("maybe to drop switch, and fille all the table simultaniously, don know yet");
         String tabName = customerCardsTabbedPane.getTitleAt(customerCardsTabbedPane.getSelectedIndex());
         switch (tabName) {
             case "ΚΑΡΤΕΛΑ":
@@ -1629,6 +1695,31 @@ public class MainFrame extends javax.swing.JFrame {
         total.setScale(2, RoundingMode.HALF_EVEN);
         totalSum.setText(total.toString());
 
+    }
+
+    public void addItemToReceivingItemsTable(Item item) {
+        String[] row = new String[7];
+        row[0] = String.valueOf(item.getId());
+        row[1] = item.getDescription();
+        row[2] = String.valueOf(item.getCode());
+        if (item.isForCleaning()) {
+            row[3] = "*";
+        } else {
+            row[3] = "-";
+        }
+        if (item.isForStoring()) {
+            row[4] = "*";
+        } else {
+            row[4] = "-";
+        }
+        if (item.isForMending()) {
+            row[5] = "*";
+        } else {
+            row[5] = "-";
+        }
+        row[6] = item.getNote();
+
+        receivingItemsTableModel.addRow(row);
     }
 
 }
