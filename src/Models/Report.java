@@ -5,8 +5,8 @@
  */
 package Models;
 
-
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -16,20 +16,18 @@ public class Report {
 
     private int id;
 
-    private enum Type {
+    public enum Type {
         RECEIVING, DELIVERY
     }
     private Type type;
-    private String date;
+    private Date date;
     private int number;
     private Customer customer;
     private ArrayList<Item> items;
 
     public Report() {
-    }
-
-    public Report(Type type) {
-        this.type = type;
+        customer = new Customer();
+        items = new ArrayList();
     }
 
     public void setId(int id) {
@@ -40,7 +38,7 @@ public class Report {
         this.type = type;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -64,7 +62,7 @@ public class Report {
         return type;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
@@ -79,7 +77,5 @@ public class Report {
     public ArrayList<Item> getItems() {
         return items;
     }
-
-
 
 }

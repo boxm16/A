@@ -31,7 +31,7 @@ public class ItemDao {
         ArrayList<Item> customerItems = new ArrayList<Item>();
         String itemListQuery = "SELECT * FROM item "
                 + "INNER JOIN product ON item.product_id=product.product_id "
-                + "INNER JOIN receiving_report ON receiving_report.receiving_report_id=item.receiving_report_id"
+                + "INNER JOIN report ON report.id=item.receiving_report_id"
                 + " WHERE customer_id=?; ";
         try (PreparedStatement preparedStatement = connection.prepareStatement(itemListQuery)) {
             preparedStatement.setInt(1, customerId);
@@ -52,8 +52,7 @@ public class ItemDao {
 
                 item.setForCleaning(rs.getBoolean("cleaning"));
                 item.setForStoring(rs.getBoolean("storing"));
-
-                item.setMendingCharge(rs.getBigDecimal("mending_charge"));
+                item.setForStoring(rs.getBoolean("mending"));
 
                 item.setReceivingReportId(rs.getInt("receiving_report_id"));
                 item.setStatus(rs.getString("status"));

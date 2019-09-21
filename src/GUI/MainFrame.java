@@ -7,8 +7,10 @@ package GUI;
 
 import Controllers.CustomerController;
 import Controllers.ItemController;
+import Controllers.ReportController;
 import Models.Customer;
 import Models.Item;
+import Models.Report;
 import Tools.MyTableModel;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -43,6 +45,8 @@ public class MainFrame extends javax.swing.JFrame {
 
     CustomerController customerController;
     ItemController itemController;
+    ReportController reportController;
+
     JTableHeader receivingItemsTableHeader;
     DefaultTableModel receivingItemsTableModel;
     JTextField receivingDatePickerTextField;
@@ -84,7 +88,7 @@ public class MainFrame extends javax.swing.JFrame {
         newReceivingTab = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         receivingDatePicker = new com.toedter.calendar.JDateChooser();
-        receivingReportNumber = new javax.swing.JFormattedTextField();
+        receivingReportNumberField = new javax.swing.JFormattedTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         addItemButton = new javax.swing.JButton();
@@ -237,14 +241,14 @@ public class MainFrame extends javax.swing.JFrame {
         receivingDatePicker.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
         try {
-            receivingReportNumber.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
+            receivingReportNumberField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        receivingReportNumber.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
-        receivingReportNumber.addKeyListener(new java.awt.event.KeyAdapter() {
+        receivingReportNumberField.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        receivingReportNumberField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                receivingReportNumberKeyPressed(evt);
+                receivingReportNumberFieldKeyPressed(evt);
             }
         });
 
@@ -291,7 +295,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(receivingReportNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(receivingReportNumberField, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(addItemButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -306,7 +310,7 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(receivingReportNumber, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(receivingReportNumberField, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(3, 3, 3)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -872,6 +876,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void myInitialization() {
         customerController = new CustomerController();
         itemController = new ItemController();
+        reportController = new ReportController();
 
         Font headerFont = new Font("Tahoma", Font.BOLD, 14);
         receivingItemsTableHeader = receivingItemsTable.getTableHeader();
@@ -1017,13 +1022,19 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_addItemButtonKeyPressed
 
-    private void receivingReportNumberKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_receivingReportNumberKeyPressed
+    private void receivingReportNumberFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_receivingReportNumberFieldKeyPressed
         if (evt.getKeyCode() == 10) {
             addItemButton.doClick();
         }
-    }//GEN-LAST:event_receivingReportNumberKeyPressed
+    }//GEN-LAST:event_receivingReportNumberFieldKeyPressed
 
     private void saveReceivingReportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveReceivingReportButtonActionPerformed
+
+        if (reportGoodToGo()) {
+            Report report = collectReceivingReportInformation();
+            reportController.saveReport(report);
+        }
+
 
     }//GEN-LAST:event_saveReceivingReportButtonActionPerformed
 
@@ -1125,7 +1136,7 @@ public class MainFrame extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser receivingDatePicker;
     private javax.swing.JPanel receivingItemsPanel;
     private javax.swing.JTable receivingItemsTable;
-    private javax.swing.JFormattedTextField receivingReportNumber;
+    private javax.swing.JFormattedTextField receivingReportNumberField;
     private javax.swing.JPanel saveCancelPanel;
     private javax.swing.JButton saveNewCustomerButton;
     private javax.swing.JButton saveReceivingReportButton;
@@ -1548,9 +1559,8 @@ public class MainFrame extends javax.swing.JFrame {
             Object[] row = new Object[18];
 
             row[0] = item.getId();
-            row[1] = item.getCode();
-            row[2] = item.getDescription();
-
+            row[1] = item.getDescription();
+            row[2] = item.getCode();
             if (item.isForCleaning()) {
                 row[3] = "*";
             } else {
@@ -1720,6 +1730,45 @@ public class MainFrame extends javax.swing.JFrame {
         row[6] = item.getNote();
 
         receivingItemsTableModel.addRow(row);
+    }
+
+    private Report collectReceivingReportInformation() {
+        Report report = new Report();
+        report.setType(Report.Type.RECEIVING);
+        report.getCustomer().setId(Integer.parseInt(customerIdField.getText().toString()));
+        report.setDate(receivingDatePicker.getDate());
+        report.setNumber(Integer.parseInt(receivingReportNumberField.getText()));
+        DefaultTableModel model = (DefaultTableModel) receivingItemsTable.getModel();
+
+        for (int x = 0; x < model.getRowCount(); x++) {
+            Item item = new Item();
+            item.setId(Integer.parseInt(model.getValueAt(x, 0).toString()));
+            item.setCode(Integer.parseInt(model.getValueAt(x, 2).toString()));
+            if (model.getValueAt(x, 3).equals("*")) {
+                item.setForCleaning(true);
+            } else {
+                item.setForCleaning(false);
+            }
+            if (model.getValueAt(x, 4).equals("*")) {
+                item.setForStoring(true);
+            } else {
+                item.setForStoring(false);
+            }
+            if (model.getValueAt(x, 5).equals("*")) {
+                item.setForMending(true);
+            } else {
+                item.setForMending(false);
+            }
+            item.setNote(model.getValueAt(x, 6).toString());
+            report.getItems().add(item);
+        }
+
+        return report;
+    }
+
+    private boolean reportGoodToGo() {
+        System.out.println("reportGoodToGo, need some work here");
+        return true;
     }
 
 }
