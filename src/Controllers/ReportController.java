@@ -5,8 +5,10 @@
  */
 package Controllers;
 
+import Dao.CustomerDao;
 import Dao.ReportDao;
 import Models.Report;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,10 +20,10 @@ public class ReportController {
 
     public ReportController() {
         reportDao = new ReportDao();
+
     }
 
     public void saveReport(Report report) {
         reportDao.saveReport(report);
     }
-
 }

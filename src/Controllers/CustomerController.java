@@ -8,6 +8,7 @@ package Controllers;
 import Dao.CustomerDao;
 import Models.Customer;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -48,6 +49,20 @@ public class CustomerController {
 
     public void editCustomer(Customer customer) {
         customerDao.editCustomer(customer);
+    }
+
+    public boolean checkCustomerById(int id) {
+        Customer customer = getCustomerById(id);
+        if (customer == null) {
+            JOptionPane.showMessageDialog(null,
+                    "ΔΕΝ ΥΠΑΡΧΕΙ ΠΕΛΑΤΗΣ ΜΕ ΑΥΤΟ ΤΟΝ ΚΩΔΙΚΟ",
+                    "ΛΑΘΟΣ ΚΩΔΙΚΟΣ ΠΕΛΑΤΗ",
+                    JOptionPane.ERROR_MESSAGE);
+            return false;
+        } else {
+            return true;
+        }
+
     }
 
 }

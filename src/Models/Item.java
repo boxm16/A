@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 public class Item extends Product {
 
     int code;
+    int year;
 
     private BigDecimal length;
     private BigDecimal width;
@@ -133,6 +134,14 @@ public class Item extends Product {
 
     public int getDeliveryReportId() {
         return deliveryReportId;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public int getYear() {
+        return year;
     }
 
    

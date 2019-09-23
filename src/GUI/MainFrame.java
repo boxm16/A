@@ -18,9 +18,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Date;
@@ -50,6 +48,8 @@ public class MainFrame extends javax.swing.JFrame {
     JTableHeader receivingItemsTableHeader;
     DefaultTableModel receivingItemsTableModel;
     JTextField receivingDatePickerTextField;
+    Color focusInColor;
+    Color focusOutColor;
 
     /**
      * Creates new form MainFrame
@@ -712,6 +712,14 @@ public class MainFrame extends javax.swing.JFrame {
 
         customerIdField.setEditable(false);
         customerIdField.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        customerIdField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                customerIdFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                customerIdFieldFocusLost(evt);
+            }
+        });
         customerIdField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 customerIdFieldKeyPressed(evt);
@@ -878,6 +886,9 @@ public class MainFrame extends javax.swing.JFrame {
         itemController = new ItemController();
         reportController = new ReportController();
 
+        focusInColor = new Color(255, 255, 0);
+        focusOutColor = new Color(240, 240, 240);
+
         Font headerFont = new Font("Tahoma", Font.BOLD, 14);
         receivingItemsTableHeader = receivingItemsTable.getTableHeader();
         receivingItemsTableHeader.setFont(headerFont);
@@ -1033,10 +1044,21 @@ public class MainFrame extends javax.swing.JFrame {
         if (reportGoodToGo()) {
             Report report = collectReceivingReportInformation();
             reportController.saveReport(report);
+            cleanReceivingReport();
+
         }
 
 
     }//GEN-LAST:event_saveReceivingReportButtonActionPerformed
+
+    private void customerIdFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_customerIdFieldFocusGained
+
+    }//GEN-LAST:event_customerIdFieldFocusGained
+
+    private void customerIdFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_customerIdFieldFocusLost
+        customerIdField.setBackground(focusOutColor);
+        System.out.println("neewd to do some work here to -customerIdFieldFocusLost, MainFrame");
+    }//GEN-LAST:event_customerIdFieldFocusLost
 
     /**
      * @param args the command line arguments
@@ -1186,16 +1208,14 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     public void dispalyCustomerById(int id) {
-        Customer customer = customerController.getCustomerById(id);
-        if (customer != null) {
+
+        if (customerController.checkCustomerById(id)) {
+            Customer customer = customerController.getCustomerById(id);
             makeSearchFieldsUneditable();
             displayCustomer(customer);
             editCustomerButton.setEnabled(true);
         } else {
-            JOptionPane.showMessageDialog(new javax.swing.JFrame(),
-                    "ΔΕΝ ΥΠΑΡΧΕΙ ΠΕΛΑΤΗΣ ΜΕ ΑΥΤΟ ΤΟΝ ΚΩΔΙΚΟ",
-                    "ΛΑΘΟΣ ΚΩΔΙΚΟΣ ΠΕΛΑΤΗ",
-                    JOptionPane.INFORMATION_MESSAGE);
+
         }
     }
 
@@ -1261,9 +1281,10 @@ public class MainFrame extends javax.swing.JFrame {
 
         if (customerIdField.getText().equals("")) {
             JOptionPane.showMessageDialog(new javax.swing.JFrame(),
-                    "Customer Id field is empty.",
-                    "Input Error",
+                    "ΠΕΔΙΟ 'ID ΠΕΛΑΤΗ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΙΝΑΙ ΑΔΙΟ.",
+                    "ΛΑΘΟΣ ΚΩΔΙΚΟΣ ΠΕΛΑΤΗ",
                     JOptionPane.ERROR_MESSAGE);
+            customerIdField.setBackground(Color.red);
             valid = false;
         }
         char[] characters = customerIdField.getText().toCharArray();
@@ -1271,9 +1292,10 @@ public class MainFrame extends javax.swing.JFrame {
             if (!(Character.isDigit(c))) {//in case of copy paste with wrong characters
                 valid = false;
                 JOptionPane.showMessageDialog(new javax.swing.JFrame(),
-                        "Only numbers allowed in this field.",
-                        "Input Error",
+                        "ΣΤΟ ΠΕΔΙΟ 'ID ΠΕΛΑΤΗ' ΕΠΙΤΡΕΠΟΝΤΑΙ ΜΟΝΟ ΑΡΙΜΟΙ",
+                        "ΛΑΘΟΣ ΚΩΔΙΚΟΣ ΠΕΛΑΤΗ ",
                         JOptionPane.ERROR_MESSAGE);
+                customerIdField.setBackground(Color.red);
                 break;
             }
 
@@ -1508,7 +1530,10 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     public void fillTables() {
-        System.out.println("maybe to drop switch, and fille all the table simultaniously, don know yet");
+        fillCardTable();
+        /*
+System.out.println("maybe to drop switch, and fille all the table simultaniously, don know yet");
+
         String tabName = customerCardsTabbedPane.getTitleAt(customerCardsTabbedPane.getSelectedIndex());
         switch (tabName) {
             case "ΚΑΡΤΕΛΑ":
@@ -1521,90 +1546,93 @@ public class MainFrame extends javax.swing.JFrame {
                 System.out.println("need to write code here for archive");
                 break;
         }
+         */
     }
 
     private void fillCardTable() {
         customerCardPanel.removeAll();
         MyTableModel model = new MyTableModel();
 
-        Object[] columns = new Object[18];
+        Object[] columns = new Object[19];
 
         columns[0] = "ΚΩΔΙΚΟΣ ΠΡΟΙΟΝΤΟΣ";
         columns[1] = "ΠΕΡΙΓΡΑΦΗ";
         columns[2] = "ΚΩΔΙΚΟΣ ΤΕΜΑΧΙΟΥ";
-        columns[3] = "ΚΑΘΑΡΙΣΜΑ";
-        columns[4] = "ΦΥΛΑΞΗ";
-        columns[5] = "ΕΠΙΔΙΟΘΡΩΣΗ";
-        columns[6] = "ΣΗΜΕΙΩΜΑ";
+        columns[3] = "ΧΡΟΝΙΑ";
+        columns[4] = "ΚΑΘΑΡΙΣΜΑ";
+        columns[5] = "ΦΥΛΑΞΗ";
+        columns[6] = "ΕΠΙΔΙΟΘΡΩΣΗ";
+        columns[7] = "ΣΗΜΕΙΩΜΑ";
 
-        columns[7] = "ΤΙΜΗ ΓΙΑ ΚΑΘΑΡΙΣΜΑ";
-        columns[8] = "ΤΙΜΗ ΓΙΑ ΦΥΛΑΞΗ";
+        columns[8] = "ΤΙΜΗ ΓΙΑ ΚΑΘΑΡΙΣΜΑ";
+        columns[9] = "ΤΙΜΗ ΓΙΑ ΦΥΛΑΞΗ";
 
-        columns[9] = "ΜΗΚΟΣ";
-        columns[10] = "ΠΛΑΟΤΟΣ";
-        columns[11] = "ΤΕΤΡΑΓΩΝΙΚΑ";
+        columns[10] = "ΜΗΚΟΣ";
+        columns[11] = "ΠΛΑΟΤΟΣ";
+        columns[12] = "ΤΕΤΡΑΓΩΝΙΚΑ";
 
-        columns[12] = "ΧΡΕΩΣΗ ΓΙΑ ΚΑΘΑΡΙΣΜΑ";
-        columns[13] = "ΧΡΕΩΣΗ ΓΙΑ ΦΥΛΑΞΗ";
-        columns[14] = "ΧΡΕΩΣΗ ΓΙΑ ΕΠΙΔΙΟΡΘΩΣΗ";
+        columns[13] = "ΧΡΕΩΣΗ ΓΙΑ ΚΑΘΑΡΙΣΜΑ";
+        columns[14] = "ΧΡΕΩΣΗ ΓΙΑ ΦΥΛΑΞΗ";
+        columns[15] = "ΧΡΕΩΣΗ ΓΙΑ ΕΠΙΔΙΟΡΘΩΣΗ";
 
-        columns[15] = "ΣΥΝΟΛΟ ΧΡΕΩΣΗΣ ΤΕΜΑΧΙΟΥ";
-        columns[16] = "ΚΑΤΑΣΤΑΣΗ";
-        columns[17] = "ΔΙΑΛΟΓΗ";
+        columns[16] = "ΣΥΝΟΛΟ ΧΡΕΩΣΗΣ ΤΕΜΑΧΙΟΥ";
+        columns[17] = "ΚΑΤΑΣΤΑΣΗ";
+        columns[18] = "ΔΙΑΛΟΓΗ";
         model.setColumnIdentifiers(columns);
 
         ArrayList<Item> items = itemController.getCustomerItems(Integer.parseInt(customerIdField.getText()));
 
         for (Item item : items) {
-            Object[] row = new Object[18];
+            Object[] row = new Object[19];
 
             row[0] = item.getId();
             row[1] = item.getDescription();
             row[2] = item.getCode();
+            row[3] = item.getYear();
             if (item.isForCleaning()) {
-                row[3] = "*";
-            } else {
-                row[3] = "-";
-            }
-            if (item.isForStoring()) {
                 row[4] = "*";
             } else {
                 row[4] = "-";
             }
-            if (item.isForMending()) {
+            if (item.isForStoring()) {
                 row[5] = "*";
             } else {
                 row[5] = "-";
             }
+            if (item.isForMending()) {
+                row[6] = "*";
+            } else {
+                row[6] = "-";
+            }
 
-            row[6] = item.getNote();
+            row[7] = item.getNote();
 
-            row[7] = item.getCleaningPrice();
-            row[8] = item.getStoringPrice();
+            row[8] = item.getCleaningPrice();
+            row[9] = item.getStoringPrice();
 
             if (item.getLength() != null) {
                 BigDecimal length, width, square;
-                row[9] = length = item.getLength();
-                row[10] = width = item.getWidth();
+                row[10] = length = item.getLength();
+                row[11] = width = item.getWidth();
                 square = length.multiply(width);
-                row[11] = square.setScale(2, RoundingMode.HALF_EVEN);
+                row[12] = square.setScale(2, RoundingMode.HALF_EVEN);
             } else {
-                row[9] = "N/A";
                 row[10] = "N/A";
                 row[11] = "N/A";
+                row[12] = "N/A";
             }
             BigDecimal cleaningCharge, storingCharge, mendingCharge, s, totalCharge;
-            row[12] = cleaningCharge = item.getCleaningCharge();
-            row[13] = storingCharge = item.getStoringCharge();
-            row[14] = mendingCharge = item.getMendingCharge();
+            row[13] = cleaningCharge = item.getCleaningCharge();
+            row[14] = storingCharge = item.getStoringCharge();
+            row[15] = mendingCharge = item.getMendingCharge();
             totalCharge = storingCharge.add(cleaningCharge);
-            row[15] = totalCharge;
-            row[16] = item.getStatus();
+            row[16] = totalCharge;
+            row[17] = item.getStatus();
             boolean status;
             if (item.getStatus().equals("ready")) {
-                row[17] = status = Boolean.TRUE;
+                row[18] = status = Boolean.TRUE;
             } else {
-                row[17] = status = Boolean.FALSE;
+                row[18] = status = Boolean.FALSE;
             }
 
             model.addRow(row, status);
@@ -1613,7 +1641,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         customerCardPanel.add(sc);
         customerCardPanel.setLayout(new BoxLayout(customerCardPanel, BoxLayout.LINE_AXIS));
-        // pack();
+        pack();
         countTotal(model);
     }
 
@@ -1628,8 +1656,8 @@ public class MainFrame extends javax.swing.JFrame {
                 if (!isRowSelected(row)) {
                     c.setBackground(getBackground());
                     int modelRow = convertRowIndexToModel(row);
-                    String status = (String) getModel().getValueAt(modelRow, 16);
-                    boolean ready = (boolean) getModel().getValueAt(modelRow, 17);
+                    String status = (String) getModel().getValueAt(modelRow, 17);
+                    boolean ready = (boolean) getModel().getValueAt(modelRow, 18);
 
                     if (!"ready".equals(status)) {
                         //model.setValueAt(false, modelRow, 17);
@@ -1645,7 +1673,7 @@ public class MainFrame extends javax.swing.JFrame {
                 if (isRowSelected(row)) {
                     //   c.setBackground(getBackground());
                     int modelRow = convertRowIndexToModel(row);
-                    String status = (String) getModel().getValueAt(modelRow, 16);
+                    String status = (String) getModel().getValueAt(modelRow, 17);
                     if (!"ready".equals(status)) {
                         // model.setValueAt(false, modelRow, 17);
                         c.setBackground(Color.PINK);
@@ -1688,11 +1716,11 @@ public class MainFrame extends javax.swing.JFrame {
         BigDecimal subTotal = BigDecimal.ZERO;
 
         for (int x = 0; x < rowCount; x++) {
-            if (!Boolean.valueOf(model.getValueAt(x, 17).toString())) {
+            if (!Boolean.valueOf(model.getValueAt(x, 18).toString())) {
                 continue;
             }
             //summing up of item`s total charges
-            subTotal = subTotal.add(new BigDecimal(model.getValueAt(x, 15).toString()));
+            subTotal = subTotal.add(new BigDecimal(model.getValueAt(x, 16).toString()));
             subTotal = subTotal.setScale(2, RoundingMode.HALF_EVEN);
         }
         subTotalSum.setText(subTotal.toString());
@@ -1733,6 +1761,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     private Report collectReceivingReportInformation() {
+
         Report report = new Report();
         report.setType(Report.Type.RECEIVING);
         report.getCustomer().setId(Integer.parseInt(customerIdField.getText().toString()));
@@ -1767,8 +1796,52 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     private boolean reportGoodToGo() {
-        System.out.println("reportGoodToGo, need some work here");
-        return true;
+        if (customerIdInputValid() && receivingReportNumberGoodToGo() && receivingReportTableGoodToGo()) {
+            int customerId = Integer.parseInt(customerIdField.getText());
+            if (customerController.checkCustomerById(customerId)) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } else {
+            return false;
+        }
+
+    }
+
+    private boolean receivingReportNumberGoodToGo() {
+        if (receivingReportNumberField.getText().trim().length() > 0) {
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(null, "ΠΕΔΙΟ 'ΑΡΙΘΜΟΣ ΔΕΛΤΙΟΥ ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΙΝΑΙ ΑΔΙΟ",
+                    "ΛΑΘΟΣ ΑΡΙΘΜΟΣ ΔΕΛΤΙΟΥ",
+                    JOptionPane.ERROR_MESSAGE);
+            receivingReportNumberField.setBackground(Color.red);
+            receivingReportNumberField.requestFocus();
+            return false;
+        }
+
+    }
+
+    private boolean receivingReportTableGoodToGo() {
+        if (receivingItemsTable.getModel().getRowCount() > 0) {
+
+            return true;
+        } else {
+            JOptionPane.showMessageDialog(null, "ΠΡΕΠΕΙ ΝΑ ΥΠΑΡΧΕΙ ΤΟΥΛΑΧΙΣΤΟΝ ΕΝΑ ΤΕΜΑΧΙΟ ΣΤΟ ΔΕΛΤΙΟ ΠΑΡΑΛΑΒΗΣ",
+                    "ΛΑΘΟΣ ΤΕΜΑΧΙΑ",
+                    JOptionPane.ERROR_MESSAGE);
+            receivingReportNumberField.setBackground(Color.red);
+            receivingReportNumberField.requestFocus();
+            return false;
+        }
+    }
+
+    private void cleanReceivingReport() {
+        receivingReportNumberField.setText("");
+        receivingItemsTableModel.setRowCount(0);
+        cleanFields();
     }
 
 }

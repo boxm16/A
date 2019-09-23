@@ -35,8 +35,8 @@ public class ReportDao {
         String reportQuery = "INSERT INTO report (date, number, customer_id, type) "
                 + "VALUES (?,?,?,?);";
         String last_report_id_query = "SELECT MAX(id) AS AUTO_INCREMENT FROM report";
-        String itemQuery = "INSERT INTO item (product_id, item_code, cleaning, storing, mending, receiving_report_id, note, status)"
-                + " VALUES (?,?,?,?,?,?,?,?);";
+        String itemQuery = "INSERT INTO item (product_id, item_code, item_year, cleaning, storing, mending, receiving_report_id, note, status)"
+                + " VALUES (?,?,?,?,?,?,?,?,?);";
         try (PreparedStatement ps_report = connection.prepareStatement(reportQuery);
                 PreparedStatement ps_item = connection.prepareCall(itemQuery);
                 Statement last_report_id_st = connection.createStatement();) {
@@ -55,24 +55,26 @@ public class ReportDao {
 
                 ps_item.setInt(1, item.getId());
                 ps_item.setInt(2, item.getCode());
+                ps_item.setString(3, "2019");
+                System.out.println("need work here too ReportDao- 59");
                 if (item.isForCleaning()) {
-                    ps_item.setInt(3, 1);
-                } else {
-                    ps_item.setInt(3, 0);
-                }
-                if (item.isForStoring()) {
                     ps_item.setInt(4, 1);
                 } else {
                     ps_item.setInt(4, 0);
                 }
-                if (item.isForMending()) {
+                if (item.isForStoring()) {
                     ps_item.setInt(5, 1);
                 } else {
                     ps_item.setInt(5, 0);
                 }
-                ps_item.setInt(6, increment_number);
-                ps_item.setString(7, item.getNote());
-                ps_item.setString(8, "received");
+                if (item.isForMending()) {
+                    ps_item.setInt(6, 1);
+                } else {
+                    ps_item.setInt(6, 0);
+                }
+                ps_item.setInt(7, increment_number);
+                ps_item.setString(8, item.getNote());
+                ps_item.setString(9, "received");
                 ps_item.addBatch();
             }
             ps_item.executeBatch();
