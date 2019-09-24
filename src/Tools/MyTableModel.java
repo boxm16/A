@@ -16,10 +16,10 @@ public class MyTableModel extends DefaultTableModel {
 
     HashMap<Integer, Boolean> etidableCellsMap = new HashMap();
 
-//overrideing for all the columns except 17 to be uneditable, and all the rows that are not 'ready' also uneditable 
+//overrideing for all the columns except the column with CHECKBOXES to be uneditable, and all the rows that are not 'ready' also uneditable 
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
-        if (columnIndex == 17) {
+        if (columnIndex == 18) {
             return etidableCellsMap.get(rowIndex);
         } else {
             return false;
