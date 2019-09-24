@@ -11,6 +11,7 @@ import Tools.JNumericField;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.KeyListener;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
@@ -22,13 +23,14 @@ import javax.swing.JOptionPane;
  */
 public class MeasurementFrame extends javax.swing.JFrame {
 
-    JNumericField lengthField;
-    JNumericField widthField;
-    Font font;
-    SimpleDateFormat dateFormat;
-    Color focusInColor;
-    Color focusOutColor;
-    ItemController itemController;
+    private JNumericField lengthField;
+    private JNumericField widthField;
+    private Font font;
+    private SimpleDateFormat dateFormat;
+    private Color focusInColor;
+    private Color focusOutColor;
+    private ItemController itemController;
+    private Item item;
 
     public MeasurementFrame() {
         initComponents();
@@ -205,21 +207,31 @@ public class MeasurementFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_itemCodeFieldFocusLost
 
     private void itemCodeFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_itemCodeFieldFocusGained
-        itemCodeField.setCaretPosition(itemCodeField.getDocument().getLength());
+        //  itemCodeField.setCaretPosition(itemCodeField.getDocument().getLength());
         itemCodeField.setBackground(focusInColor);
         itemCodeErrorLabel.setText("");
     }//GEN-LAST:event_itemCodeFieldFocusGained
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        if(itemGoodToGo()){
-            System.out.println("here goes dimensions insert ");
+        if (itemGoodToGo()) {
+            item.setCode(Integer.parseInt(itemCodeField.getText()));
+            item.setYear(Integer.parseInt(itemYear.getSelectedItem().toString()));
+            item.setLength(new BigDecimal(lengthField.getText()));
+            item.setWidth(new BigDecimal(widthField.getText()));
+            itemController.updateItemDimensions(item);
         };
+        itemCodeField.setText("");
+        lengthField.setText("");
+        widthField.setText("");
+        itemCodeField.requestFocus();
     }//GEN-LAST:event_saveButtonActionPerformed
 
     /**
      * @param args the command line arguments
      */
     private void myInitialization() {
+        item = null;
+
         itemController = new ItemController();
         focusInColor = new Color(255, 255, 0);
         focusOutColor = new Color(240, 240, 240);
@@ -371,7 +383,7 @@ public class MeasurementFrame extends javax.swing.JFrame {
     }
 
     private boolean itemGoodToGo() {
-        Item item = null;
+
         boolean goodToGo = false;
         switch (1) {
             case 1:
@@ -432,8 +444,8 @@ public class MeasurementFrame extends javax.swing.JFrame {
                     break;
                 }
             case 5:
-                if (item.getLength() != null) {
-                    int result = JOptionPane.showConfirmDialog(null, "ΜΗΚΟΣ ΗΔΗ ΕΧΕΙ ΚΑΤΑΧΩΡΗΘΕΙ ΓΙΑ ΑΥΤΟΝ ΤΟΝ ΚΩΔΙΚΟ, ΘΕΣ ΝΑ ΤΟ ΑΛΛΑΞΕΙΣ?", "ΜΗΚΟΣ ΚΑΤΑΧΩΡΗΜΕΝΟ",
+                if (item.getLength() != null || item.getWidth() != null) {
+                    int result = JOptionPane.showConfirmDialog(null, "ΔΙΑΣΤΑΣΕΙΣ ΗΔΗ ΕΧΕΟΥΝ ΚΑΤΑΧΩΡΗΘΕΙ ΓΙΑ ΑΥΤΟΝ ΤΟΝ ΚΩΔΙΚΟ, ΘΕΣ ΝΑ ΤΟ ΑΛΛΑΞΕΙΣ?", "ΜΗΚΟΣ ΚΑΤΑΧΩΡΗΜΕΝΟ",
                             JOptionPane.YES_NO_OPTION,
                             JOptionPane.QUESTION_MESSAGE);
                     if (result == JOptionPane.YES_OPTION) {
@@ -443,20 +455,6 @@ public class MeasurementFrame extends javax.swing.JFrame {
                         break;
                     }
 
-                } else {
-                    goodToGo = true;
-                }
-            case 6:
-                if (item.getWidth() != null) {
-                    int result = JOptionPane.showConfirmDialog(null, "ΠΛΑΤΟΣ ΗΔΗ ΕΧΕΙ ΚΑΤΑΧΩΡΗΘΕΙ ΓΙΑ ΑΥΤΟΝ ΤΟΝ ΚΩΔΙΚΟ, ΘΕΣ ΝΑ ΤΟ ΑΛΛΑΞΕΙΣ?", "ΜΗΚΟΣ ΚΑΤΑΧΩΡΗΜΕΝΟ",
-                            JOptionPane.YES_NO_OPTION,
-                            JOptionPane.QUESTION_MESSAGE);
-                    if (result == JOptionPane.YES_OPTION) {
-                        goodToGo = true;
-                    } else if (result == JOptionPane.NO_OPTION) {
-                        goodToGo = false;
-                        break;
-                    }
                 } else {
                     goodToGo = true;
                 }

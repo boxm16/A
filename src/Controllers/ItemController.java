@@ -74,4 +74,8 @@ public class ItemController {
         return itemDao.getItemByCode(code, year);
     }
 
+    public void updateItemDimensions(Item item) {
+        itemDao.updateItemDimensions(item);
+    }
+
 }

@@ -109,6 +109,10 @@ public class ItemDao {
                 item.setForCleaning(rs.getBoolean("cleaning"));
                 item.setForStoring(rs.getBoolean("storing"));
                 item.setForMending(rs.getBoolean("mending"));
+                
+                item.setCleaningCharge(rs.getBigDecimal("cleaning_charge"));
+                item.setStoringCharge(rs.getBigDecimal("storing_charge"));
+                item.setMendingCharge(rs.getBigDecimal("mending_charge"));
 
                 item.setReceivingReportId(rs.getInt("receiving_report_id"));
                 item.setStatus(rs.getString("status"));
@@ -122,6 +126,26 @@ public class ItemDao {
         }
 
         return item;
+    }
+
+    public void updateItemDimensions(Item item) {
+
+        String query = "UPDATE item SET length=?, width=? WHERE item_code=? and item_year=?;";
+        
+        if (!item.isForMending()||(item.isForMending()&&item.getMendingCharge() != null)) {//εαν den ειναι για επιδιορωθση 'η ε'ιναι και εχει γινει επιδιορθωση, πλεον ειναι ετοιμο γα παραδοση
+            query = "UPDATE item SET length=?, width=?, status='ready' WHERE item_code=? and item_year=?;";
+        }
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setBigDecimal(1, item.getLength());
+            preparedStatement.setBigDecimal(2, item.getWidth());
+            preparedStatement.setInt(3, item.getCode());
+            preparedStatement.setInt(4, item.getYear());
+            preparedStatement.execute();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ItemDao.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
     }
 
 }
