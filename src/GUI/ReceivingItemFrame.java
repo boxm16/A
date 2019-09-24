@@ -853,6 +853,7 @@ public class ReceivingItemFrame extends javax.swing.JFrame {
     
     private boolean itemCodeRegisteredInDb() {
         int itemCode = Integer.parseInt(itemCodeField.getText().toString());
+       // int itemYear=Integer.parseInt(itemYearField.)
 //not worried about exception, field is checked by itemCodeInputValid in  switch above
         return itemController.itemCodeRegisteredInDb(itemCode);
         

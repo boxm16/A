@@ -70,4 +70,8 @@ public class ItemController {
 
     }
 
+    public Item getItemByCode(String code, String year) {
+        return itemDao.getItemByCode(code, year);
+    }
+
 }
