@@ -40,11 +40,11 @@ import javax.swing.table.TableCellRenderer;
  * @author Michail Sitmalidis
  */
 public class MainFrame extends javax.swing.JFrame {
-    
+
     CustomerController customerController;
     ItemController itemController;
     ReportController reportController;
-    
+
     JTableHeader receivingItemsTableHeader;
     DefaultTableModel receivingItemsTableModel;
     JTextField receivingDatePickerTextField;
@@ -124,6 +124,8 @@ public class MainFrame extends javax.swing.JFrame {
         postalCodeField = new javax.swing.JFormattedTextField();
         menuPanel = new javax.swing.JPanel();
         findButton = new javax.swing.JButton();
+        measurementButton = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         CombinedPanel = new javax.swing.JPanel();
         idLabel = new javax.swing.JLabel();
         lastlNameLabel = new javax.swing.JLabel();
@@ -144,7 +146,6 @@ public class MainFrame extends javax.swing.JFrame {
         saveNewCustomerButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         customerIdField = new javax.swing.JTextField();
-        measurementButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -591,13 +592,51 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
-        findButton.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        findButton.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
         findButton.setText("ΒΡΕΣ ");
         findButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 findButtonActionPerformed(evt);
             }
         });
+
+        measurementButton.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        measurementButton.setText("ΚΑΤΑΜΕΤΡΗΣΗ");
+        measurementButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                measurementButtonActionPerformed(evt);
+            }
+        });
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton1.setText("ΕΠΙΔΙΟΡΘΩΣΗ");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
+        menuPanel.setLayout(menuPanelLayout);
+        menuPanelLayout.setHorizontalGroup(
+            menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(menuPanelLayout.createSequentialGroup()
+                .addComponent(findButton, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(measurementButton, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addGap(0, 148, Short.MAX_VALUE))
+        );
+        menuPanelLayout.setVerticalGroup(
+            menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuPanelLayout.createSequentialGroup()
+                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(findButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(measurementButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
 
         CombinedPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -806,42 +845,14 @@ public class MainFrame extends javax.swing.JFrame {
 
         CombinedPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {firstNameField, landLineField, lastNameField, mobileField});
 
-        measurementButton.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        measurementButton.setText("ΚΑΤΑΜΕΤΡΗΣΗ");
-        measurementButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                measurementButtonActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
-        menuPanel.setLayout(menuPanelLayout);
-        menuPanelLayout.setHorizontalGroup(
-            menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(CombinedPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(menuPanelLayout.createSequentialGroup()
-                .addComponent(findButton, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(measurementButton)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        menuPanelLayout.setVerticalGroup(
-            menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menuPanelLayout.createSequentialGroup()
-                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(findButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(measurementButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CombinedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
         javax.swing.GroupLayout HeadPanelLayout = new javax.swing.GroupLayout(HeadPanel);
         HeadPanel.setLayout(HeadPanelLayout);
         HeadPanelLayout.setHorizontalGroup(
             HeadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HeadPanelLayout.createSequentialGroup()
-                .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(HeadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CombinedPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(HeadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(AdressPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -852,12 +863,16 @@ public class MainFrame extends javax.swing.JFrame {
             HeadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HeadPanelLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(HeadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(menuPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, HeadPanelLayout.createSequentialGroup()
+                .addGroup(HeadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(HeadPanelLayout.createSequentialGroup()
                         .addComponent(AddressPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(AdressPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(AdressPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(HeadPanelLayout.createSequentialGroup()
+                        .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(CombinedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(10, 10, 10))
         );
 
         javax.swing.GroupLayout RootPanelLayout = new javax.swing.GroupLayout(RootPanel);
@@ -898,16 +913,16 @@ public class MainFrame extends javax.swing.JFrame {
         customerController = new CustomerController();
         itemController = new ItemController();
         reportController = new ReportController();
-        
+
         focusInColor = new Color(255, 255, 0);
         focusOutColor = new Color(240, 240, 240);
-        
+
         Font headerFont = new Font("Tahoma", Font.BOLD, 14);
         receivingItemsTableHeader = receivingItemsTable.getTableHeader();
         receivingItemsTableHeader.setFont(headerFont);
-        
+
         receivingItemsTableModel = (DefaultTableModel) receivingItemsTable.getModel();
-        
+
         receivingDatePicker.setDate(new Date());
         receivingDatePickerTextField = (JTextField) receivingDatePicker.getComponent(1);
         receivingDatePickerTextField.setEditable(false);
@@ -935,12 +950,12 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_customerIdFieldKeyTyped
 
     private void customerIdFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_customerIdFieldKeyPressed
-        
+
         if (customerIdField.isEditable() && evt.getKeyCode() == 10 && customerIdInputValid()) {
             int id = Integer.parseInt(customerIdField.getText());
             dispalyCustomerById(id);
             fillTables();
-            
+
         }
     }//GEN-LAST:event_customerIdFieldKeyPressed
 
@@ -960,11 +975,11 @@ public class MainFrame extends javax.swing.JFrame {
                 customer.setId(Integer.parseInt(customerIdField.getText().trim()));//i guess, no need for trim(), but, just in case
                 customerController.editCustomer(customer);
             }
-            
+
             saveAndCancelButtonsActions();
         }
     }//GEN-LAST:event_saveNewCustomerButtonActionPerformed
-    
+
     private void saveAndCancelButtonsActions() {
         makeSearchFieldsUneditable();
         makeFieldsUneditable();
@@ -979,7 +994,7 @@ public class MainFrame extends javax.swing.JFrame {
         makeSearchFieldsEditable();
         makeFieldsEditable();
         customerIdField.setEditable(false);
-        
+
         CardLayout card = (CardLayout) buttonsPanel.getLayout();
         card.show(buttonsPanel, "card2");
     }//GEN-LAST:event_newCustomerButtonActionPerformed
@@ -987,22 +1002,22 @@ public class MainFrame extends javax.swing.JFrame {
     private void mobileFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mobileFieldKeyPressed
         if (mobileField.isEditable() && evt.getKeyCode() == 10) {
             String mobile = mobileField.getText().trim();
-            
+
             ArrayList<Customer> customers = customerController.getCustomerByMobileNumber(mobile);
             SearchFrame searchFrame = new SearchFrame(this, customers);
             searchFrame.setVisible(true);
-            
+
         }
     }//GEN-LAST:event_mobileFieldKeyPressed
 
     private void landLineFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_landLineFieldKeyPressed
         if (landLineField.isEditable() && evt.getKeyCode() == 10) {
             String landLine = landLineField.getText().trim();
-            
+
             ArrayList<Customer> customers = customerController.getCustomerByLandLineNumber(landLine);
             SearchFrame searchFrame = new SearchFrame(this, customers);
             searchFrame.setVisible(true);
-            
+
         }
     }//GEN-LAST:event_landLineFieldKeyPressed
 
@@ -1013,20 +1028,20 @@ public class MainFrame extends javax.swing.JFrame {
     private void lastNameFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lastNameFieldKeyPressed
         if (lastNameField.isEditable() && evt.getKeyCode() == 10) {
             String lastName = lastNameField.getText().trim();
-            
+
             ArrayList<Customer> customers = customerController.getCustomerByLastName(lastName);
             SearchFrame searchFrame = new SearchFrame(this, customers);
             searchFrame.setVisible(true);
-            
+
         }
     }//GEN-LAST:event_lastNameFieldKeyPressed
 
     private void editCustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editCustomerButtonActionPerformed
-        
+
         makeSearchFieldsEditable();
         makeFieldsEditable();
         customerIdField.setEditable(false);
-        
+
         CardLayout card = (CardLayout) buttonsPanel.getLayout();
         card.show(buttonsPanel, "card2");
     }//GEN-LAST:event_editCustomerButtonActionPerformed
@@ -1053,14 +1068,14 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_receivingReportNumberFieldKeyPressed
 
     private void saveReceivingReportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveReceivingReportButtonActionPerformed
-        
+
         if (reportGoodToGo()) {
             Report report = collectReceivingReportInformation();
             reportController.saveReport(report);
             cleanReceivingReport();
-            
+
         }
-        
+
 
     }//GEN-LAST:event_saveReceivingReportButtonActionPerformed
 
@@ -1077,6 +1092,11 @@ public class MainFrame extends javax.swing.JFrame {
         MeasurementFrame measurementFrame = new MeasurementFrame();
         measurementFrame.setVisible(true);
     }//GEN-LAST:event_measurementButtonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        MendingFrame mendingFrame = new MendingFrame();
+        mendingFrame.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1153,6 +1173,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel fpaLabel;
     private javax.swing.JLabel fpaSum;
     private javax.swing.JLabel idLabel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -1190,54 +1211,54 @@ public class MainFrame extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void makeFieldsEditable() {
-        
+
         firstNameField.setEditable(true);
-        
+
         noteField.setEditable(true);
         streetField.setEditable(true);
         districtField.setEditable(true);
         postalCodeField.setEditable(true);
         floorField.setEditable(true);
         bellNameField.setEditable(true);
-        
+
         alternativeStreetField.setEditable(true);
         alternativeDistrictField.setEditable(true);
         alternativePostalCodeField.setEditable(true);
         alternativeFloorField.setEditable(true);
         alternativeBellNameField.setEditable(true);
-        
+
     }
-    
+
     private void makeFieldsUneditable() {
-        
+
         firstNameField.setEditable(false);
-        
+
         noteField.setEditable(false);
         streetField.setEditable(false);
         districtField.setEditable(false);
         postalCodeField.setEditable(false);
         floorField.setEditable(false);
         bellNameField.setEditable(false);
-        
+
         alternativeStreetField.setEditable(false);
         alternativeDistrictField.setEditable(false);
         alternativePostalCodeField.setEditable(false);
         alternativeFloorField.setEditable(false);
         alternativeBellNameField.setEditable(false);
     }
-    
+
     public void dispalyCustomerById(int id) {
-        
+
         if (customerController.checkCustomerById(id)) {
             Customer customer = customerController.getCustomerById(id);
             makeSearchFieldsUneditable();
             displayCustomer(customer);
             editCustomerButton.setEnabled(true);
         } else {
-            
+
         }
     }
-    
+
     private void displayCustomer(Customer customer) {
         customerIdField.setText(Integer.toString(customer.getId()));
         lastNameField.setText(customer.getLastName());
@@ -1256,48 +1277,48 @@ public class MainFrame extends javax.swing.JFrame {
         alternativeFloorField.setText(customer.getAlternativeFloor());
         alternativeBellNameField.setText(customer.getAlternativeBellName());
     }
-    
+
     private void makeSearchFieldsEditable() {
         customerIdField.setEditable(true);
         lastNameField.setEditable(true);
         landLineField.setEditable(true);
         mobileField.setEditable(true);
     }
-    
+
     private void makeSearchFieldsUneditable() {
         customerIdField.setEditable(false);
         lastNameField.setEditable(false);
         landLineField.setEditable(false);
         mobileField.setEditable(false);
     }
-    
+
     private void cleanFields() {
         customerIdField.setText("");
-        
+
         lastNameField.setText("");
         firstNameField.setText("");
         landLineField.setText("");
         mobileField.setText("");
-        
+
         noteField.setText("");
-        
+
         streetField.setText("");
         districtField.setText("");
         postalCodeField.setText("");
         floorField.setText("");
         bellNameField.setText("");
-        
+
         alternativeStreetField.setText("");
         alternativeDistrictField.setText("");
         alternativePostalCodeField.setText("");
         alternativeFloorField.setText("");
         alternativeBellNameField.setText("");
     }
-    
+
     private boolean customerIdInputValid() {
         boolean valid = true;
         customerIdField.setText(customerIdField.getText().trim());
-        
+
         if (customerIdField.getText().equals("")) {
             JOptionPane.showMessageDialog(new javax.swing.JFrame(),
                     "ΠΕΔΙΟ 'ID ΠΕΛΑΤΗ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΙΝΑΙ ΑΔΙΟ.",
@@ -1317,12 +1338,12 @@ public class MainFrame extends javax.swing.JFrame {
                 customerIdField.setBackground(Color.red);
                 break;
             }
-            
+
         }
-        
+
         return valid;
     }
-    
+
     private boolean customerInputsValid() {
         boolean valid = true;
         if (!lastNameInputValid() || !firstNameInputeValid() || !noteInputValid()
@@ -1334,10 +1355,10 @@ public class MainFrame extends javax.swing.JFrame {
                 || !alternativeBellNameInputValid()) {
             valid = false;
         }
-        
+
         return valid;
     }
-    
+
     private Customer collectCustomerInformation() {
         Customer customer = new Customer();
         customer.setLastName(lastNameField.getText().trim());
@@ -1357,7 +1378,7 @@ public class MainFrame extends javax.swing.JFrame {
         customer.setAlternativeBellName(alternativeBellNameField.getText().trim());
         return customer;
     }
-    
+
     private boolean lastNameInputValid() {
         boolean valid = true;
         String lastName = lastNameField.getText().trim();
@@ -1376,13 +1397,13 @@ public class MainFrame extends javax.swing.JFrame {
             valid = false;
         }
         return valid;
-        
+
     }
-    
+
     private boolean firstNameInputeValid() {
         boolean valid = true;
         String firstName = firstNameField.getText().trim();
-        
+
         if (firstName.length() > 45) {
             JOptionPane.showMessageDialog(new JFrame(),
                     "ΠΕΔΙΟ 'ΟΝΟΜΑ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΧΕΙ ΠΑΝΩ ΑΠΟ 45 ΓΡΑΜΜΑΤΑ",
@@ -1392,11 +1413,11 @@ public class MainFrame extends javax.swing.JFrame {
         }
         return valid;
     }
-    
+
     private boolean noteInputValid() {
         boolean valid = true;
         String note = noteField.getText().trim();
-        
+
         if (note.length() > 250) {
             JOptionPane.showMessageDialog(new JFrame(),
                     "ΠΕΔΙΟ 'ΣΗΜΕΙΩΜΑ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΧΕΙ ΠΑΝΩ ΑΠΟ 250 ΓΡΑΜΜΑΤΑ",
@@ -1406,11 +1427,11 @@ public class MainFrame extends javax.swing.JFrame {
         }
         return valid;
     }
-    
+
     private boolean streetInputValid() {
         boolean valid = true;
         String street = streetField.getText().trim();
-        
+
         if (street.length() > 60) {
             JOptionPane.showMessageDialog(new JFrame(),
                     "ΠΕΔΙΟ 'ΟΔΟΣ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΧΕΙ ΠΑΝΩ ΑΠΟ 60 ΓΡΑΜΜΑΤΑ",
@@ -1420,11 +1441,11 @@ public class MainFrame extends javax.swing.JFrame {
         }
         return valid;
     }
-    
+
     private boolean districtInputValid() {
         boolean valid = true;
         String district = districtField.getText().trim();
-        
+
         if (district.length() > 60) {
             JOptionPane.showMessageDialog(new JFrame(),
                     "ΠΕΔΙΟ 'ΠΕΡΙΟΧΗ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΧΕΙ ΠΑΝΩ ΑΠΟ 30 ΓΡΑΜΜΑΤΑ",
@@ -1433,9 +1454,9 @@ public class MainFrame extends javax.swing.JFrame {
             valid = false;
         }
         return valid;
-        
+
     }
-    
+
     private boolean postalCodeInputValid() {
         boolean valid = true;
         String postalCode = postalCodeField.getText().trim();
@@ -1449,7 +1470,7 @@ public class MainFrame extends javax.swing.JFrame {
         }
         return valid;
     }
-    
+
     private boolean floorInputValid() {
         boolean valid = true;
         System.out.println("need to change field for combobox with floors -10 to 100 with δομα and υπογειο ");
@@ -1463,11 +1484,11 @@ public class MainFrame extends javax.swing.JFrame {
         }
         return valid;
     }
-    
+
     private boolean bellNameInputValid() {
         boolean valid = true;
         String bellName = bellNameField.getText().trim();
-        
+
         if (bellName.length() > 60) {
             JOptionPane.showMessageDialog(new JFrame(),
                     "ΠΕΔΙΟ 'ΟΝΟΜΑ ΣΤΟ ΚΟΥΔΟΥΝΙ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΧΕΙ ΠΑΝΩ ΑΠΟ 60 ΓΡΑΜΜΑΤΑ",
@@ -1477,11 +1498,11 @@ public class MainFrame extends javax.swing.JFrame {
         }
         return valid;
     }
-    
+
     private boolean alternativeStreetInputValid() {
         boolean valid = true;
         String street = streetField.getText().trim();
-        
+
         if (street.length() > 60) {
             JOptionPane.showMessageDialog(new JFrame(),
                     "ΠΕΔΙΟ 'ΟΔΟΣ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΧΕΙ ΠΑΝΩ ΑΠΟ 60 ΓΡΑΜΜΑΤΑ",
@@ -1491,11 +1512,11 @@ public class MainFrame extends javax.swing.JFrame {
         }
         return valid;
     }
-    
+
     private boolean alternativeDistrictInputValid() {
         boolean valid = true;
         String alternativeDistrict = alternativeDistrictField.getText().trim();
-        
+
         if (alternativeDistrict.length() > 60) {
             JOptionPane.showMessageDialog(new JFrame(),
                     "ΠΕΔΙΟ 'ΠΕΡΙΟΧΗ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΧΕΙ ΠΑΝΩ ΑΠΟ 30 ΓΡΑΜΜΑΤΑ",
@@ -1505,7 +1526,7 @@ public class MainFrame extends javax.swing.JFrame {
         }
         return valid;
     }
-    
+
     private boolean alternativePostalCodeInputValid() {
         boolean valid = true;
         String alternativePostalCode = alternativePostalCodeField.getText().trim();
@@ -1519,7 +1540,7 @@ public class MainFrame extends javax.swing.JFrame {
         }
         return valid;
     }
-    
+
     private boolean alternativeFloorInputValid() {
         boolean valid = true;
         System.out.println("need to change field for combobox with floors -10 to 100 with δομα and υπογειο ");
@@ -1533,11 +1554,11 @@ public class MainFrame extends javax.swing.JFrame {
         }
         return valid;
     }
-    
+
     private boolean alternativeBellNameInputValid() {
         boolean valid = true;
         String alternativeBellName = alternativeBellNameField.getText().trim();
-        
+
         if (alternativeBellName.length() > 60) {
             JOptionPane.showMessageDialog(new JFrame(),
                     "ΠΕΔΙΟ 'ΟΝΟΜΑ ΣΤΟ ΚΟΥΔΟΥΝΙ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΧΕΙ ΠΑΝΩ ΑΠΟ 60 ΓΡΑΜΜΑΤΑ",
@@ -1547,7 +1568,7 @@ public class MainFrame extends javax.swing.JFrame {
         }
         return valid;
     }
-    
+
     public void fillTables() {
         fillCardTable();
         /*
@@ -1567,13 +1588,13 @@ System.out.println("maybe to drop switch, and fille all the table simultaniously
         }
          */
     }
-    
+
     private void fillCardTable() {
         customerCardPanel.removeAll();
         MyTableModel model = new MyTableModel();
-        
+
         Object[] columns = new Object[19];
-        
+
         columns[0] = "ΚΩΔΙΚΟΣ ΠΡΟΙΟΝΤΟΣ";
         columns[1] = "ΠΕΡΙΓΡΑΦΗ";
         columns[2] = "ΚΩΔΙΚΟΣ ΤΕΜΑΧΙΟΥ";
@@ -1582,28 +1603,28 @@ System.out.println("maybe to drop switch, and fille all the table simultaniously
         columns[5] = "ΦΥΛΑΞΗ";
         columns[6] = "ΕΠΙΔΙΟΘΡΩΣΗ";
         columns[7] = "ΣΗΜΕΙΩΜΑ";
-        
+
         columns[8] = "ΤΙΜΗ ΓΙΑ ΚΑΘΑΡΙΣΜΑ";
         columns[9] = "ΤΙΜΗ ΓΙΑ ΦΥΛΑΞΗ";
-        
+
         columns[10] = "ΜΗΚΟΣ";
         columns[11] = "ΠΛΑΟΤΟΣ";
         columns[12] = "ΤΕΤΡΑΓΩΝΙΚΑ";
-        
+
         columns[13] = "ΧΡΕΩΣΗ ΓΙΑ ΚΑΘΑΡΙΣΜΑ";
         columns[14] = "ΧΡΕΩΣΗ ΓΙΑ ΦΥΛΑΞΗ";
         columns[15] = "ΧΡΕΩΣΗ ΓΙΑ ΕΠΙΔΙΟΡΘΩΣΗ";
-        
+
         columns[16] = "ΣΥΝΟΛΟ ΧΡΕΩΣΗΣ ΤΕΜΑΧΙΟΥ";
         columns[17] = "ΚΑΤΑΣΤΑΣΗ";
         columns[18] = "ΔΙΑΛΟΓΗ";
         model.setColumnIdentifiers(columns);
-        
+
         ArrayList<Item> items = itemController.getCustomerItems(Integer.parseInt(customerIdField.getText()));
-        
+
         for (Item item : items) {
             Object[] row = new Object[19];
-            
+
             row[0] = item.getId();
             row[1] = item.getDescription();
             row[2] = item.getCode();
@@ -1623,12 +1644,12 @@ System.out.println("maybe to drop switch, and fille all the table simultaniously
             } else {
                 row[6] = "-";
             }
-            
+
             row[7] = item.getNote();
-            
+
             row[8] = item.getCleaningPrice();
             row[9] = item.getStoringPrice();
-            
+
             if (item.getLength() != null) {
                 BigDecimal length, width, square;
                 row[10] = length = item.getLength();
@@ -1653,17 +1674,17 @@ System.out.println("maybe to drop switch, and fille all the table simultaniously
             } else {
                 row[18] = status = Boolean.FALSE;
             }
-            
+
             model.addRow(row, status);
         }
         JScrollPane sc = (JScrollPane) createTable(model);
-        
+
         customerCardPanel.add(sc);
         customerCardPanel.setLayout(new BoxLayout(customerCardPanel, BoxLayout.LINE_AXIS));
         pack();
         countTotal(model);
     }
-    
+
     private JComponent createTable(DefaultTableModel model) {
 //do not ask much about this, i don know how it works
         JTable table = new JTable(model) {
@@ -1677,18 +1698,18 @@ System.out.println("maybe to drop switch, and fille all the table simultaniously
                     int modelRow = convertRowIndexToModel(row);
                     String status = (String) getModel().getValueAt(modelRow, 17);
                     boolean ready = (boolean) getModel().getValueAt(modelRow, 18);
-                    
+
                     if (!"ready".equals(status)) {
                         //model.setValueAt(false, modelRow, 17);
                         c.setBackground(Color.RED);
                     }
-                    
+
                     if (ready) {
                         c.setBackground(Color.GREEN);
                     }
-                    
+
                 }
-                
+
                 if (isRowSelected(row)) {
                     //   c.setBackground(getBackground());
                     int modelRow = convertRowIndexToModel(row);
@@ -1696,29 +1717,29 @@ System.out.println("maybe to drop switch, and fille all the table simultaniously
                     if (!"ready".equals(status)) {
                         // model.setValueAt(false, modelRow, 17);
                         c.setBackground(Color.PINK);
-                        
+
                     }
-                    
+
                 }
-                
+
                 return c;
             }
         };
-        
+
         table.getModel().addTableModelListener(
                 new TableModelListener() {
-            
+
             public void tableChanged(TableModelEvent evt) {
                 countTotal((DefaultTableModel) table.getModel());
             }
         }
         );
-        
+
         table.setPreferredScrollableViewportSize(table.getPreferredSize());
         table.setRowHeight(36);
-        
+
         table.setFont(new java.awt.Font("Tahoma", 0, 30));
-        
+
         table.changeSelection(0, 0, false, false);
         table.setAutoCreateRowSorter(true);
         // table.setAutoResizeMode(AUTO_RESIZE_OFF);
@@ -1728,12 +1749,12 @@ System.out.println("maybe to drop switch, and fille all the table simultaniously
         scrollPane.setPreferredSize(new Dimension(scrollPane.getPreferredSize().width, scrollPaneHeigth));
         return scrollPane;
     }
-    
+
     private void countTotal(DefaultTableModel model) {
-        
+
         int rowCount = model.getRowCount();
         BigDecimal subTotal = BigDecimal.ZERO;
-        
+
         for (int x = 0; x < rowCount; x++) {
             if (!Boolean.valueOf(model.getValueAt(x, 18).toString())) {
                 continue;
@@ -1743,17 +1764,17 @@ System.out.println("maybe to drop switch, and fille all the table simultaniously
             subTotal = subTotal.setScale(2, RoundingMode.HALF_EVEN);
         }
         subTotalSum.setText(subTotal.toString());
-        
+
         BigDecimal fpa = subTotal.multiply(new BigDecimal(24).divide(new BigDecimal(100)));
         fpa = fpa.setScale(2, RoundingMode.HALF_EVEN);
         fpaSum.setText(fpa.toString());
-        
+
         BigDecimal total = subTotal.add(fpa);
         total.setScale(2, RoundingMode.HALF_EVEN);
         totalSum.setText(total.toString());
-        
+
     }
-    
+
     public void addItemToReceivingItemsTable(Item item) {
         String[] row = new String[7];
         row[0] = String.valueOf(item.getId());
@@ -1775,19 +1796,19 @@ System.out.println("maybe to drop switch, and fille all the table simultaniously
             row[5] = "-";
         }
         row[6] = item.getNote();
-        
+
         receivingItemsTableModel.addRow(row);
     }
-    
+
     private Report collectReceivingReportInformation() {
-        
+
         Report report = new Report();
         report.setType(Report.Type.RECEIVING);
         report.getCustomer().setId(Integer.parseInt(customerIdField.getText().toString()));
         report.setDate(receivingDatePicker.getDate());
         report.setNumber(Integer.parseInt(receivingReportNumberField.getText()));
         DefaultTableModel model = (DefaultTableModel) receivingItemsTable.getModel();
-        
+
         for (int x = 0; x < model.getRowCount(); x++) {
             Item item = new Item();
             item.setId(Integer.parseInt(model.getValueAt(x, 0).toString()));
@@ -1810,10 +1831,10 @@ System.out.println("maybe to drop switch, and fille all the table simultaniously
             item.setNote(model.getValueAt(x, 6).toString());
             report.getItems().add(item);
         }
-        
+
         return report;
     }
-    
+
     private boolean reportGoodToGo() {
         if (customerIdInputValid() && receivingReportNumberGoodToGo() && receivingReportTableGoodToGo()) {
             int customerId = Integer.parseInt(customerIdField.getText());
@@ -1822,13 +1843,13 @@ System.out.println("maybe to drop switch, and fille all the table simultaniously
             } else {
                 return false;
             }
-            
+
         } else {
             return false;
         }
-        
+
     }
-    
+
     private boolean receivingReportNumberGoodToGo() {
         if (receivingReportNumberField.getText().trim().length() > 0) {
             return true;
@@ -1840,12 +1861,12 @@ System.out.println("maybe to drop switch, and fille all the table simultaniously
             receivingReportNumberField.requestFocus();
             return false;
         }
-        
+
     }
-    
+
     private boolean receivingReportTableGoodToGo() {
         if (receivingItemsTable.getModel().getRowCount() > 0) {
-            
+
             return true;
         } else {
             JOptionPane.showMessageDialog(null, "ΠΡΕΠΕΙ ΝΑ ΥΠΑΡΧΕΙ ΤΟΥΛΑΧΙΣΤΟΝ ΕΝΑ ΤΕΜΑΧΙΟ ΣΤΟ ΔΕΛΤΙΟ ΠΑΡΑΛΑΒΗΣ",
@@ -1856,11 +1877,11 @@ System.out.println("maybe to drop switch, and fille all the table simultaniously
             return false;
         }
     }
-    
+
     private void cleanReceivingReport() {
         receivingReportNumberField.setText("");
         receivingItemsTableModel.setRowCount(0);
         cleanFields();
     }
-    
+
 }

@@ -230,6 +230,7 @@ public class MeasurementFrame extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     private void myInitialization() {
+        this.setTitle("ΚΑΤΑΧΩΡΗΣΗ ΔΙΑΣΤΑΣΕΩΝ");
         item = null;
 
         itemController = new ItemController();
