@@ -25,6 +25,7 @@ public class MeasurementFrame extends javax.swing.JFrame {
 
     private JNumericField lengthField;
     private JNumericField widthField;
+    private JNumericField mendingChargeField;
     private Font font;
     private SimpleDateFormat dateFormat;
     private Color focusInColor;
@@ -48,16 +49,23 @@ public class MeasurementFrame extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         itemYear = new javax.swing.JComboBox<>();
         itemCodeField = new javax.swing.JFormattedTextField();
-        lengthPanel = new javax.swing.JPanel();
-        widthPanel = new javax.swing.JPanel();
-        saveButton = new javax.swing.JButton();
         itemCodeErrorLabel = new javax.swing.JLabel();
-        lengthErrorLabel = new javax.swing.JLabel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
+        widthPanel = new javax.swing.JPanel();
         widthErrorLabel = new javax.swing.JLabel();
+        lengthErrorLabel = new javax.swing.JLabel();
+        saveButton = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        lengthPanel = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        mendingChargePanel = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        mendingChargeErrorLabel = new javax.swing.JLabel();
+        mendingChargeButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -66,12 +74,6 @@ public class MeasurementFrame extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel2.setText("ΚΩΔΙΚΟΣ ΤΕΜΑΧΙΟΥ");
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel3.setText("ΜΗΚΟΣ");
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel4.setText("ΠΛΑΤΟΣ");
 
         itemYear.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         itemYear.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030" }));
@@ -96,11 +98,19 @@ public class MeasurementFrame extends javax.swing.JFrame {
             }
         });
 
-        lengthPanel.setBackground(new java.awt.Color(102, 255, 102));
-        lengthPanel.setLayout(new javax.swing.BoxLayout(lengthPanel, javax.swing.BoxLayout.LINE_AXIS));
+        itemCodeErrorLabel.setFont(new java.awt.Font("Tahoma", 2, 15)); // NOI18N
+        itemCodeErrorLabel.setForeground(java.awt.Color.red);
+
+        jTabbedPane1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
         widthPanel.setBackground(new java.awt.Color(51, 255, 51));
         widthPanel.setLayout(new javax.swing.BoxLayout(widthPanel, javax.swing.BoxLayout.LINE_AXIS));
+
+        widthErrorLabel.setFont(new java.awt.Font("Tahoma", 2, 15)); // NOI18N
+        widthErrorLabel.setForeground(java.awt.Color.red);
+
+        lengthErrorLabel.setFont(new java.awt.Font("Tahoma", 2, 15)); // NOI18N
+        lengthErrorLabel.setForeground(java.awt.Color.red);
 
         saveButton.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         saveButton.setText("ΑΠΟΘΗΚΕΥΣΗ");
@@ -115,14 +125,106 @@ public class MeasurementFrame extends javax.swing.JFrame {
             }
         });
 
-        itemCodeErrorLabel.setFont(new java.awt.Font("Tahoma", 2, 15)); // NOI18N
-        itemCodeErrorLabel.setForeground(java.awt.Color.red);
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel3.setText("ΜΗΚΟΣ");
 
-        lengthErrorLabel.setFont(new java.awt.Font("Tahoma", 2, 15)); // NOI18N
-        lengthErrorLabel.setForeground(java.awt.Color.red);
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel4.setText("ΠΛΑΤΟΣ");
 
-        widthErrorLabel.setFont(new java.awt.Font("Tahoma", 2, 15)); // NOI18N
-        widthErrorLabel.setForeground(java.awt.Color.red);
+        lengthPanel.setBackground(new java.awt.Color(102, 255, 102));
+        lengthPanel.setLayout(new javax.swing.BoxLayout(lengthPanel, javax.swing.BoxLayout.LINE_AXIS));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(96, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel3))
+                        .addGap(33, 33, 33)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lengthPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(widthPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(saveButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(widthErrorLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lengthErrorLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lengthPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lengthErrorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4)
+                    .addComponent(widthPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addComponent(widthErrorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        jTabbedPane1.addTab("ΔΙΑΣΤΑΣΕΙΣ", jPanel1);
+
+        mendingChargePanel.setBackground(new java.awt.Color(51, 255, 51));
+        mendingChargePanel.setLayout(new javax.swing.BoxLayout(mendingChargePanel, javax.swing.BoxLayout.LINE_AXIS));
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        jLabel5.setText("ΧΡΕΩΣΗ ΕΠΙΔΙΟΡΘΩΣΗΣ");
+
+        mendingChargeErrorLabel.setFont(new java.awt.Font("Tahoma", 2, 15)); // NOI18N
+        mendingChargeErrorLabel.setForeground(java.awt.Color.red);
+
+        mendingChargeButton.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        mendingChargeButton.setText("ΑΠΟΘΗΚΕΥΣΗ");
+        mendingChargeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mendingChargeButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(mendingChargeErrorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                        .addComponent(mendingChargePanel, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(mendingChargeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(mendingChargePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(mendingChargeErrorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(mendingChargeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(83, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("ΕΠΙΔΙΟΡΘΩΣΗ", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -137,24 +239,13 @@ public class MeasurementFrame extends javax.swing.JFrame {
                         .addComponent(itemYear, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(saveButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel3)
-                                            .addComponent(jLabel4))
-                                        .addGap(47, 47, 47)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lengthPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(widthPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addComponent(widthErrorLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
-                                .addComponent(lengthErrorLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(itemCodeErrorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(itemCodeErrorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(jTabbedPane1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(itemCodeField, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -172,19 +263,7 @@ public class MeasurementFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(itemCodeErrorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lengthPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lengthErrorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(widthPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(widthErrorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -195,6 +274,7 @@ public class MeasurementFrame extends javax.swing.JFrame {
     private void itemCodeFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_itemCodeFieldKeyPressed
         if (evt.getKeyCode() == 10) {
             lengthField.requestFocus();
+            mendingChargeField.requestFocus();
         }
     }//GEN-LAST:event_itemCodeFieldKeyPressed
 
@@ -213,18 +293,28 @@ public class MeasurementFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_itemCodeFieldFocusGained
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        if (itemGoodToGo()) {
-            item.setCode(Integer.parseInt(itemCodeField.getText()));
-            item.setYear(Integer.parseInt(itemYear.getSelectedItem().toString()));
+        if (itemDimensionsGoodToGo()) {
+            // item.setCode(Integer.parseInt(itemCodeField.getText()));
+            // item.setYear(Integer.parseInt(itemYear.getSelectedItem().toString()));
             item.setLength(new BigDecimal(lengthField.getText()));
             item.setWidth(new BigDecimal(widthField.getText()));
             itemController.updateItemDimensions(item);
-        };
-        itemCodeField.setText("");
+        }
+        itemCodeField.setValue(null);
         lengthField.setText("");
         widthField.setText("");
         itemCodeField.requestFocus();
     }//GEN-LAST:event_saveButtonActionPerformed
+
+    private void mendingChargeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mendingChargeButtonActionPerformed
+        if (mendingChargeGoodToGo()) {
+            item.setMendingCharge(new BigDecimal(mendingChargeField.getText()));
+            itemController.updateItemMendingCharge(item);
+        }
+        itemCodeField.setValue(null);
+        mendingChargeField.setText("");
+        itemCodeField.requestFocus();
+    }//GEN-LAST:event_mendingChargeButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -293,6 +383,33 @@ public class MeasurementFrame extends javax.swing.JFrame {
             }
         });
 
+        mendingChargeField = new JNumericField();
+        mendingChargeField.setFont(font);
+        mendingChargeField.setMaxLength(3);
+        mendingChargeField.setAllowNegative(false);
+
+        mendingChargeField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                mendingChargeErrorLabel.setText("");
+                mendingChargeField.setBackground(focusInColor);
+            }
+
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                mendingChargeFieldGoodToGo();
+            }
+
+        });
+
+        mendingChargeField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                if (evt.getKeyCode() == 10) {
+                    mendingChargeButton.requestFocus();
+                }
+            }
+        });
+
+        mendingChargePanel.add(mendingChargeField);
+
         itemCodeField.requestFocus();
 
     }
@@ -305,8 +422,15 @@ public class MeasurementFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lengthErrorLabel;
     private javax.swing.JPanel lengthPanel;
+    private javax.swing.JButton mendingChargeButton;
+    private javax.swing.JLabel mendingChargeErrorLabel;
+    private javax.swing.JPanel mendingChargePanel;
     private javax.swing.JButton saveButton;
     private javax.swing.JLabel widthErrorLabel;
     private javax.swing.JPanel widthPanel;
@@ -383,7 +507,7 @@ public class MeasurementFrame extends javax.swing.JFrame {
         return goodToGo;
     }
 
-    private boolean itemGoodToGo() {
+    private boolean itemDimensionsGoodToGo() {
 
         boolean goodToGo = false;
         switch (1) {
@@ -464,4 +588,93 @@ public class MeasurementFrame extends javax.swing.JFrame {
         return goodToGo;
     }
 
+    private boolean mendingChargeFieldGoodToGo() {
+
+        String input = mendingChargeField.getText().trim();
+
+        if (dimensionInputEmpty(input)) {
+            mendingChargeField.setBackground(Color.red);
+            mendingChargeErrorLabel.setText("ΠΕΔΙΟ 'ΧΡΕΩΣΗ ΕΠΙΔΙΟΡΘΩΣΗΣ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΙΝΑΙ ΑΔΕΙΟ");
+            return false;
+        } else {
+            widthField.setBackground(focusOutColor);
+            return true;
+        }
+    }
+
+    private boolean mendingChargeGoodToGo() {
+        boolean goodToGo = false;
+        switch (1) {
+            case 1:
+                if (itemCodeInputValid()) {//first i check code input
+                    goodToGo = true;
+                } else {
+                    JOptionPane.showMessageDialog(null,
+                            "Ο ΚΩΔΙΚΟΣ ΤΕΜΑΧΙΟΥ ΠΡΕΠΕΙ ΝΑ ΕΧΕΙ 5 ΨΗΦΙΑ",
+                            "ΛΑΘΟΣ ΚΩΔΙΚΟΣ ΤΕΜΑΧΙΟΥ",
+                            JOptionPane.ERROR_MESSAGE
+                    );
+                    itemCodeField.setBackground(Color.red);
+                    itemCodeErrorLabel.setText("Ο ΚΩΔΙΚΟΣ ΤΕΜΑΧΙΟΥ ΠΡΕΠΕΙ ΝΑ ΕΧΕΙ 5 ΨΗΦΙΑ");
+
+                    break;
+                }
+            case 2:
+                //now i get item from db
+                item = itemController.getItemByCode(itemCodeField.getText().trim(), itemYear.getSelectedItem().toString());
+                if (item != null) {
+                    goodToGo = true;
+                } else {
+                    JOptionPane.showMessageDialog(null,
+                            "Ο ΚΩΔΙΚΟΣ ΤΕΜΑΧΙΟΥ ΔΕΝ ΥΠΑΡΧΕΙ ΣΤΗ ΒΑΣΗ",
+                            "ΛΑΘΟΣ ΚΩΔΙΚΟΣ ΤΕΜΑΧΙΟΥ",
+                            JOptionPane.ERROR_MESSAGE
+                    );
+                    goodToGo = false;
+                    itemCodeField.setBackground(Color.red);
+                    itemCodeErrorLabel.setText("Ο ΚΩΔΙΚΟΣ ΤΕΜΑΧΙΟΥ ΔΕΝ ΥΠΑΡΧΕΙ ΣΤΗ ΒΑΣΗ");
+                    itemCodeField.requestFocus();
+                    break;
+                }
+            case 3:
+                if (mendingChargeFieldGoodToGo()) {
+
+                } else {
+                    JOptionPane.showMessageDialog(null,
+                            "ΛΑΘΟΣ ΣΤΟ ΠΕΔΙΟ ΧΡΕΩΣΗ ΕΠΙΔΙΟΡΘΩΣΗΣ",
+                            "ΛΑΘΟΣ ΣΤΟ ΠΕΔΙΟ ΧΡΕΩΣΗ ΕΠΙΔΙΟΡΘΩΣΗΣ",
+                            JOptionPane.ERROR_MESSAGE
+                    );
+                    goodToGo = false;
+
+                    break;
+                }
+
+            case 4:
+                if (item.getMendingCharge() != null) {
+                    int result = JOptionPane.showConfirmDialog(null, "ΧΗ ΕΠΙΔΙΟΡΘΩΣΗ  ΗΔΗ ΕΧΕΙ ΧΡΕΩΘΕΙ, ΘΕΣ ΝΑ ΤΟ ΑΛΛΑΞΕΙΣ?", "ΕΠΙΔΙΟΡΘΩΣΗ ΧΡΕΟΜΕΝΟ",
+                            JOptionPane.YES_NO_OPTION,
+                            JOptionPane.QUESTION_MESSAGE);
+                    if (result == JOptionPane.YES_OPTION) {
+                        goodToGo = true;
+                    } else if (result == JOptionPane.NO_OPTION) {
+                        goodToGo = false;
+                        break;
+                    }
+
+                } else {
+                    goodToGo = true;
+                }
+            case 5:
+                if (!item.isForMending()) {
+                    JOptionPane.showConfirmDialog(null, "ΤΟ ΤΕΜΑΧΙΟ ΔΕΝ ΕΙΝΑΙ ΓΙΑ ΕΠΙΔΙΟΡΘΩΣΗ!!!", "ΛΟΘΟΣ ΤΕΜΑΧΙΟ!!!",
+                            JOptionPane.ERROR_MESSAGE);
+                    goodToGo = false;
+                    break;
+                } else {
+                    goodToGo = true;
+                }
+        }
+        return goodToGo;
+    }
 }

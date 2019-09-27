@@ -78,4 +78,8 @@ public class ItemController {
         itemDao.updateItemDimensions(item);
     }
 
+    public void updateItemMendingCharge(Item item) {
+        itemDao.updateItemMendingCharge(item);
+    }
+
 }

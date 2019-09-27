@@ -489,8 +489,11 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="menuPanel" min="-2" max="-2" attributes="0"/>
                               <Component id="CombinedPanel" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Component id="menuPanel" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -893,9 +896,6 @@
                               <Component id="findButton" min="-2" pref="148" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="measurementButton" min="-2" pref="169" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="148" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -905,7 +905,6 @@
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="findButton" alignment="0" max="32767" attributes="0"/>
                                   <Component id="measurementButton" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jButton1" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -927,23 +926,13 @@
                     <Component class="javax.swing.JButton" name="measurementButton">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Tahoma" size="20" style="0"/>
+                          <Font name="Tahoma" size="15" style="0"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="&#x39a;&#x391;&#x3a4;&#x391;&#x39c;&#x395;&#x3a4;&#x3a1;&#x397;&#x3a3;&#x397;"/>
+                        <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;center&gt;&#x394;&#x399;&#x391;&#x3a3;&#x3a4;&#x391;&#x3a3;&#x395;&#x399;&#x3a3; &#x39a;&#x391;&#x399;&lt;br&gt;&#x395;&#x3a0;&#x399;&#x394;&#x399;&#x39f;&#x3a1;&#x398;&#x3a9;&#x3a3;&#x397;&lt;/center&gt;&lt;/html&gt;"/>
+                        <Property name="actionCommand" type="java.lang.String" value="&lt;html&gt;&lt;center&gt;&#x394;&#x399;&#x391;&#x3a3;&#x3a4;&#x391;&#x3a3;&#x395;&#x399;&#x3a3; &#x39a;&#x391;&#x399;&lt;br&gt;&lt;ln&gt;&#x395;&#x3a0;&#x399;&#x394;&#x399;&#x39f;&#x3a1;&#x398;&#x3a9;&#x3a3;&#x397;&lt;/center&gt;&lt;/html&gt;"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="measurementButtonActionPerformed"/>
-                      </Events>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jButton1">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Tahoma" size="18" style="0"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="&#x395;&#x3a0;&#x399;&#x394;&#x399;&#x39f;&#x3a1;&#x398;&#x3a9;&#x3a3;&#x397;"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
                       </Events>
                     </Component>
                   </SubComponents>
@@ -988,7 +977,8 @@
                                                   <Group type="102" attributes="0">
                                                       <Component id="customerIdField" min="-2" pref="120" max="-2" attributes="0"/>
                                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                                      <Component id="buttonsPanel" max="32767" attributes="0"/>
+                                                      <Component id="buttonsPanel" min="-2" pref="286" max="-2" attributes="0"/>
+                                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                                   </Group>
                                                   <Component id="firstNameField" max="32767" attributes="0"/>
                                                   <Component id="lastNameField" max="32767" attributes="0"/>
@@ -1008,15 +998,15 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="idLabel" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="idLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="customerIdField" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="buttonsPanel" min="-2" max="-2" attributes="0"/>
-                                          <Component id="customerIdField" min="-2" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="buttonsPanel" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
                                   </Group>
                               </Group>
@@ -1254,6 +1244,7 @@
                       <Events>
                         <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="customerIdFieldFocusGained"/>
                         <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="customerIdFieldFocusLost"/>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="customerIdFieldMouseClicked"/>
                         <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="customerIdFieldKeyPressed"/>
                         <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="customerIdFieldKeyTyped"/>
                       </Events>

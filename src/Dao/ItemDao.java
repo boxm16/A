@@ -109,7 +109,7 @@ public class ItemDao {
                 item.setForCleaning(rs.getBoolean("cleaning"));
                 item.setForStoring(rs.getBoolean("storing"));
                 item.setForMending(rs.getBoolean("mending"));
-                
+
                 item.setCleaningCharge(rs.getBigDecimal("cleaning_charge"));
                 item.setStoringCharge(rs.getBigDecimal("storing_charge"));
                 item.setMendingCharge(rs.getBigDecimal("mending_charge"));
@@ -131,8 +131,8 @@ public class ItemDao {
     public void updateItemDimensions(Item item) {
 
         String query = "UPDATE item SET length=?, width=? WHERE item_code=? and item_year=?;";
-        
-        if (!item.isForMending()||(item.isForMending()&&item.getMendingCharge() != null)) {//εαν den ειναι για επιδιορωθση 'η ε'ιναι και εχει γινει επιδιορθωση, πλεον ειναι ετοιμο γα παραδοση
+
+        if (!item.isForMending() || (item.isForMending() && item.getMendingCharge() != null)) {//εαν den ειναι για επιδιορωθση 'η ε'ιναι και εχει γινει επιδιορθωση, πλεον ειναι ετοιμο γα παραδοση
             query = "UPDATE item SET length=?, width=?, status='ready' WHERE item_code=? and item_year=?;";
         }
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -146,6 +146,25 @@ public class ItemDao {
             Logger.getLogger(ItemDao.class.getName()).log(Level.SEVERE, null, ex);
 
         }
+    }
+
+    public void updateItemMendingCharge(Item item) {
+        String query = "UPDATE item SET mending_charge=? WHERE item_code=? and item_year=?;";
+
+        if (item.getLength() != null && item.getWidth() != null) {//αφου διαστασεις εχουν καταχωρηθει, πλεον ειναι ετοιμο γα παραδοση
+            query = "UPDATE item SET mending_charge=?, status='ready' WHERE item_code=? and item_year=?;";
+        }
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setBigDecimal(1, item.getMendingCharge());
+            preparedStatement.setInt(2, item.getCode());
+            preparedStatement.setInt(3, item.getYear());
+            preparedStatement.execute();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ItemDao.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+
     }
 
 }
