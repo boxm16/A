@@ -7,6 +7,7 @@ package GUI;
 
 import Controllers.CustomerController;
 import Controllers.ItemController;
+import Controllers.AddressController;
 import Controllers.ReportController;
 import Models.Customer;
 import Models.Item;
@@ -17,11 +18,15 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.EventListener;
+import java.util.HashMap;
 import javax.swing.BoxLayout;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -44,12 +49,18 @@ public class MainFrame extends javax.swing.JFrame {
     CustomerController customerController;
     ItemController itemController;
     ReportController reportController;
+    AddressController addressController;
 
     JTableHeader receivingItemsTableHeader;
     DefaultTableModel receivingItemsTableModel;
     JTextField receivingDatePickerTextField;
     Color focusInColor;
     Color focusOutColor;
+
+    ItemListener districtFieldItemSelectionListener;
+    ItemListener alternativeDistrictFieldItemSelectionListener;
+    ItemListener postalCodeFieldItemSelectionListener;
+    ItemListener alternativePostalCodeFieldItemSelectionListener;
 
     /**
      * Creates new form MainFrame
@@ -85,6 +96,7 @@ public class MainFrame extends javax.swing.JFrame {
         totalSum = new javax.swing.JLabel();
         processButton = new javax.swing.JButton();
         customerCardPanel = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
         newReceivingTab = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         receivingDatePicker = new com.toedter.calendar.JDateChooser();
@@ -98,35 +110,7 @@ public class MainFrame extends javax.swing.JFrame {
         receivingItemsTable = new javax.swing.JTable();
         customerArchiveTab = new javax.swing.JPanel();
         HeadPanel = new javax.swing.JPanel();
-        AdressPanel2 = new javax.swing.JPanel();
-        alternativeStreetLabel = new javax.swing.JLabel();
-        alternativeStreetField = new javax.swing.JTextField();
-        alternativeDistrictLabel = new javax.swing.JLabel();
-        alternativeDistrictField = new javax.swing.JTextField();
-        alternativeBellNameLabel = new javax.swing.JLabel();
-        alternativeFloorField = new javax.swing.JTextField();
-        AlternativePostalCode_Label = new javax.swing.JLabel();
-        alternativeFloorLabel = new javax.swing.JLabel();
-        alternativeBellNameField = new javax.swing.JTextField();
-        alternativeAddressLabel = new javax.swing.JLabel();
-        alternativePostalCodeField = new javax.swing.JFormattedTextField();
-        AddressPanel1 = new javax.swing.JPanel();
-        streetLabel = new javax.swing.JLabel();
-        streetField = new javax.swing.JTextField();
-        districtLabel = new javax.swing.JLabel();
-        districtField = new javax.swing.JTextField();
-        bellNameLabel = new javax.swing.JLabel();
-        floorField = new javax.swing.JTextField();
-        postalCodeLabel = new javax.swing.JLabel();
-        floorLabel = new javax.swing.JLabel();
-        bellNameField = new javax.swing.JTextField();
-        addressLabel = new javax.swing.JLabel();
-        postalCodeField = new javax.swing.JFormattedTextField();
-        menuPanel = new javax.swing.JPanel();
-        findButton = new javax.swing.JButton();
-        measurementButton = new javax.swing.JButton();
         CombinedPanel = new javax.swing.JPanel();
-        idLabel = new javax.swing.JLabel();
         lastlNameLabel = new javax.swing.JLabel();
         lastNameField = new javax.swing.JTextField();
         firstNameLabel = new javax.swing.JLabel();
@@ -145,10 +129,50 @@ public class MainFrame extends javax.swing.JFrame {
         saveNewCustomerButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
         customerIdField = new javax.swing.JTextField();
+        findButton = new javax.swing.JButton();
+        AdressPanel4 = new javax.swing.JPanel();
+        alternativeStreetLabel2 = new javax.swing.JLabel();
+        alternativeDistrictLabel2 = new javax.swing.JLabel();
+        alternativeBellNameLabel = new javax.swing.JLabel();
+        alternativeFloorField = new javax.swing.JTextField();
+        AlternativePostalCode_Label2 = new javax.swing.JLabel();
+        alternativeFloorLabel2 = new javax.swing.JLabel();
+        alternativeBellNameField = new javax.swing.JTextField();
+        alternativeAddressLabel2 = new javax.swing.JLabel();
+        alternativeDistrictField = new javax.swing.JComboBox<>();
+        alternativePostalCodeField = new javax.swing.JComboBox<>();
+        alternativeStreetField = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        jTextField4 = new javax.swing.JTextField();
+        jPanel5 = new javax.swing.JPanel();
+        alternativeAddressLabel3 = new javax.swing.JLabel();
+        districtLabel = new javax.swing.JLabel();
+        alternativeStreetLabel3 = new javax.swing.JLabel();
+        districtPanel = new javax.swing.JPanel();
+        dontChangePanel = new javax.swing.JPanel();
+        districtField = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        postalCodeField = new javax.swing.JTextField();
+        changePanel = new javax.swing.JPanel();
+        changeDistrictField = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        changePostalCodeField = new javax.swing.JComboBox<>();
+        addressChangeButtonsPanel = new javax.swing.JPanel();
+        changeButton = new javax.swing.JButton();
+        dontChangeButton = new javax.swing.JButton();
+        streetField = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jTextField5 = new javax.swing.JTextField();
+        alternativeFloorLabel3 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        floorField = new javax.swing.JTextField();
+        alternativeBellNameLabel1 = new javax.swing.JLabel();
+        bellNameField = new javax.swing.JTextField();
+        menuPanel = new javax.swing.JPanel();
+        measurementButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        RootPanel.setBackground(new java.awt.Color(102, 255, 102));
         RootPanel.setPreferredSize(new java.awt.Dimension(1280, 1024));
 
         customerCardsTabbedPane.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -191,7 +215,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(totalSum, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(processButton, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE))
+                .addComponent(processButton, javax.swing.GroupLayout.DEFAULT_SIZE, 1024, Short.MAX_VALUE))
         );
         calculationDisplayPanelLayout.setVerticalGroup(
             calculationDisplayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,15 +230,31 @@ public class MainFrame extends javax.swing.JFrame {
 
         customerCardPanel.setBackground(new java.awt.Color(0, 255, 0));
 
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 728, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 235, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout customerCardPanelLayout = new javax.swing.GroupLayout(customerCardPanel);
         customerCardPanel.setLayout(customerCardPanelLayout);
         customerCardPanelLayout.setHorizontalGroup(
             customerCardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1263, Short.MAX_VALUE)
+            .addGroup(customerCardPanelLayout.createSequentialGroup()
+                .addGap(549, 549, 549)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(762, Short.MAX_VALUE))
         );
         customerCardPanelLayout.setVerticalGroup(
             customerCardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 431, Short.MAX_VALUE)
+            .addGroup(customerCardPanelLayout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 196, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout customerCardTabLayout = new javax.swing.GroupLayout(customerCardTab);
@@ -362,7 +402,7 @@ public class MainFrame extends javax.swing.JFrame {
             newReceivingTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(newReceivingTabLayout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(789, Short.MAX_VALUE))
             .addComponent(receivingItemsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         newReceivingTabLayout.setVerticalGroup(
@@ -380,7 +420,7 @@ public class MainFrame extends javax.swing.JFrame {
         customerArchiveTab.setLayout(customerArchiveTabLayout);
         customerArchiveTabLayout.setHorizontalGroup(
             customerArchiveTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1275, Short.MAX_VALUE)
+            .addGap(0, 2051, Short.MAX_VALUE)
         );
         customerArchiveTabLayout.setVerticalGroup(
             customerArchiveTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -391,251 +431,13 @@ public class MainFrame extends javax.swing.JFrame {
 
         HeadPanel.setPreferredSize(new java.awt.Dimension(1024, 413));
 
-        AdressPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        alternativeStreetLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        alternativeStreetLabel.setText("ΟΔΟΣ");
-
-        alternativeStreetField.setEditable(false);
-        alternativeStreetField.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-
-        alternativeDistrictLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        alternativeDistrictLabel.setText("ΠΕΡΙΟΧΗ");
-
-        alternativeDistrictField.setEditable(false);
-        alternativeDistrictField.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-
-        alternativeBellNameLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        alternativeBellNameLabel.setText("ΟΝΟΜΑ ΣΤΟ ΚΟΥΔΟΥΝΟΙ");
-
-        alternativeFloorField.setEditable(false);
-        alternativeFloorField.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-
-        AlternativePostalCode_Label.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        AlternativePostalCode_Label.setText("Τ.Κ.");
-
-        alternativeFloorLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        alternativeFloorLabel.setText("ΟΡΟΦΟΣ");
-
-        alternativeBellNameField.setEditable(false);
-        alternativeBellNameField.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-
-        alternativeAddressLabel.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
-        alternativeAddressLabel.setText("ΕΝΑΛΛΑΚΤΙΚΗ ΔΙΕΥΘΥΝΣΗ");
-
-        alternativePostalCodeField.setEditable(false);
-        try {
-            alternativePostalCodeField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        alternativePostalCodeField.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-
-        javax.swing.GroupLayout AdressPanel2Layout = new javax.swing.GroupLayout(AdressPanel2);
-        AdressPanel2.setLayout(AdressPanel2Layout);
-        AdressPanel2Layout.setHorizontalGroup(
-            AdressPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AdressPanel2Layout.createSequentialGroup()
-                .addGap(230, 230, 230)
-                .addComponent(alternativeAddressLabel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdressPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(AdressPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(AdressPanel2Layout.createSequentialGroup()
-                        .addComponent(alternativeBellNameLabel)
-                        .addGap(18, 18, 18)
-                        .addComponent(alternativeBellNameField))
-                    .addGroup(AdressPanel2Layout.createSequentialGroup()
-                        .addComponent(alternativeStreetLabel)
-                        .addGap(18, 18, 18)
-                        .addComponent(alternativeStreetField))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AdressPanel2Layout.createSequentialGroup()
-                        .addGroup(AdressPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(alternativeDistrictLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(AlternativePostalCode_Label, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(AdressPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AdressPanel2Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(alternativePostalCodeField, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(alternativeFloorLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(alternativeFloorField))
-                            .addComponent(alternativeDistrictField)))))
-        );
-        AdressPanel2Layout.setVerticalGroup(
-            AdressPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AdressPanel2Layout.createSequentialGroup()
-                .addComponent(alternativeAddressLabel)
-                .addGap(2, 2, 2)
-                .addGroup(AdressPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(alternativeStreetField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(alternativeStreetLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(AdressPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(alternativeDistrictField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(alternativeDistrictLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(AdressPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(alternativePostalCodeField, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(AdressPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(alternativeFloorField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(AlternativePostalCode_Label)
-                        .addComponent(alternativeFloorLabel)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(AdressPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(alternativeBellNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(alternativeBellNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-
-        AddressPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        streetLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        streetLabel.setText("ΟΔΟΣ");
-
-        streetField.setEditable(false);
-        streetField.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-
-        districtLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        districtLabel.setText("ΠΕΡΙΟΧΗ");
-
-        districtField.setEditable(false);
-        districtField.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-
-        bellNameLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        bellNameLabel.setText("ΟΝΟΜΑ ΣΤΟ ΚΟΥΔΟΥΝΟΙ");
-
-        floorField.setEditable(false);
-        floorField.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-
-        postalCodeLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        postalCodeLabel.setText("Τ.Κ.");
-
-        floorLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        floorLabel.setText("ΟΡΟΦΟΣ");
-
-        bellNameField.setEditable(false);
-        bellNameField.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-
-        addressLabel.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
-        addressLabel.setText("ΔΙΕΥΘΥΝΣΗ");
-
-        postalCodeField.setEditable(false);
-        try {
-            postalCodeField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        postalCodeField.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-
-        javax.swing.GroupLayout AddressPanel1Layout = new javax.swing.GroupLayout(AddressPanel1);
-        AddressPanel1.setLayout(AddressPanel1Layout);
-        AddressPanel1Layout.setHorizontalGroup(
-            AddressPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AddressPanel1Layout.createSequentialGroup()
-                .addGap(230, 230, 230)
-                .addComponent(addressLabel)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AddressPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(AddressPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(AddressPanel1Layout.createSequentialGroup()
-                        .addComponent(bellNameLabel)
-                        .addGap(18, 18, 18)
-                        .addComponent(bellNameField))
-                    .addGroup(AddressPanel1Layout.createSequentialGroup()
-                        .addComponent(streetLabel)
-                        .addGap(18, 18, 18)
-                        .addComponent(streetField))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AddressPanel1Layout.createSequentialGroup()
-                        .addGroup(AddressPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(districtLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(postalCodeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(AddressPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(districtField)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AddressPanel1Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(postalCodeField, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(30, 30, 30)
-                                .addComponent(floorLabel)
-                                .addGap(18, 18, 18)
-                                .addComponent(floorField))))))
-        );
-        AddressPanel1Layout.setVerticalGroup(
-            AddressPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AddressPanel1Layout.createSequentialGroup()
-                .addComponent(addressLabel)
-                .addGap(2, 2, 2)
-                .addGroup(AddressPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(streetField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(streetLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(AddressPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(districtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(districtLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(AddressPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(floorLabel, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(floorField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(AddressPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(postalCodeLabel)
-                        .addComponent(postalCodeField, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(AddressPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bellNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bellNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(16, Short.MAX_VALUE))
-        );
-
-        findButton.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        findButton.setText("ΒΡΕΣ ");
-        findButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                findButtonActionPerformed(evt);
-            }
-        });
-
-        measurementButton.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        measurementButton.setText("<html><center>ΔΙΑΣΤΑΣΕΙΣ ΚΑΙ<br>ΕΠΙΔΙΟΡΘΩΣΗ</center></html>");
-        measurementButton.setActionCommand("<html><center>ΔΙΑΣΤΑΣΕΙΣ ΚΑΙ<br><ln>ΕΠΙΔΙΟΡΘΩΣΗ</center></html>");
-        measurementButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                measurementButtonActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
-        menuPanel.setLayout(menuPanelLayout);
-        menuPanelLayout.setHorizontalGroup(
-            menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menuPanelLayout.createSequentialGroup()
-                .addComponent(findButton, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(measurementButton, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        menuPanelLayout.setVerticalGroup(
-            menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menuPanelLayout.createSequentialGroup()
-                .addGroup(menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(findButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(measurementButton, javax.swing.GroupLayout.Alignment.LEADING))
-                .addContainerGap())
-        );
-
         CombinedPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        idLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        idLabel.setText("ID ΠΕΛΑΤΗ");
 
         lastlNameLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         lastlNameLabel.setText("ΕΠΙΘΕΤΟ");
 
         lastNameField.setEditable(false);
-        lastNameField.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        lastNameField.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
         lastNameField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 lastNameFieldKeyPressed(evt);
@@ -646,7 +448,7 @@ public class MainFrame extends javax.swing.JFrame {
         firstNameLabel.setText("ΟΝΟΜΑ");
 
         firstNameField.setEditable(false);
-        firstNameField.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        firstNameField.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
         firstNameField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 firstNameFieldKeyPressed(evt);
@@ -654,10 +456,10 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         landLineLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        landLineLabel.setText("ΣΤΑΘΕΡΟ");
+        landLineLabel.setText("ΣΤΑΘΕΡΟ ΤΗΛΕΦΩΝΟ");
 
         mobileLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        mobileLabel.setText("ΚΙΝΗΤΟ");
+        mobileLabel.setText("ΚΙΝΗΤΟ ΤΗΛΕΦΩΝΟ");
 
         landLineField.setEditable(false);
         try {
@@ -665,7 +467,7 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        landLineField.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        landLineField.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
         landLineField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 landLineFieldKeyPressed(evt);
@@ -678,7 +480,7 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        mobileField.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        mobileField.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
         mobileField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 mobileFieldKeyPressed(evt);
@@ -696,7 +498,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         newCustomerButton.setBackground(new java.awt.Color(153, 153, 255));
         newCustomerButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        newCustomerButton.setText("<html><center>ΚΑΙΝΟΥΡΓΙΟΣ<br> ΠΕΛΑΤΗΣ</center></html>");
+        newCustomerButton.setText("<html><center>ΚΑΙΝΟΥΡΓΙΟΣ ΠΕΛΑΤΗΣ</center></html>");
         newCustomerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 newCustomerButtonActionPerformed(evt);
@@ -705,7 +507,7 @@ public class MainFrame extends javax.swing.JFrame {
         newCustomerEditCustomerPanel.add(newCustomerButton);
 
         editCustomerButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        editCustomerButton.setText("<html><center>ΔΙΟΡΘΩΣΗ<br>ΣΤΟΙΧΙΩΝ</center></html>");
+        editCustomerButton.setText("<html><center>ΔΙΟΡΘΩΣΗ ΣΤΟΙΧΙΩΝ</center></html>");
         editCustomerButton.setEnabled(false);
         editCustomerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -762,126 +564,457 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        findButton.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
+        findButton.setText("ΒΡΕΣ ΠΕΛΑΤΗ ΜΕ ΚΩΔΙΚΟ");
+        findButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                findButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout CombinedPanelLayout = new javax.swing.GroupLayout(CombinedPanel);
         CombinedPanel.setLayout(CombinedPanelLayout);
         CombinedPanelLayout.setHorizontalGroup(
             CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CombinedPanelLayout.createSequentialGroup()
+                .addComponent(buttonsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(74, Short.MAX_VALUE))
+            .addGroup(CombinedPanelLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(CombinedPanelLayout.createSequentialGroup()
-                        .addContainerGap()
+                        .addComponent(lastlNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(CombinedPanelLayout.createSequentialGroup()
                         .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3)
                             .addGroup(CombinedPanelLayout.createSequentialGroup()
+                                .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(landLineLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
+                                    .addComponent(mobileLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(landLineLabel)
-                                    .addComponent(mobileLabel))
-                                .addGap(24, 24, 24)
-                                .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(mobileField, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(landLineField, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(mobileField)
+                                    .addComponent(landLineField)))
                             .addGroup(CombinedPanelLayout.createSequentialGroup()
-                                .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lastlNameLabel)
-                                    .addComponent(idLabel)
-                                    .addComponent(firstNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(15, 15, 15)
-                                .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(CombinedPanelLayout.createSequentialGroup()
-                                        .addComponent(customerIdField, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(buttonsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(firstNameField)
-                                    .addComponent(lastNameField)))))
-                    .addComponent(jScrollPane3))
-                .addContainerGap())
+                                .addGap(111, 111, 111)
+                                .addComponent(lastNameField))
+                            .addGroup(CombinedPanelLayout.createSequentialGroup()
+                                .addComponent(findButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(customerIdField, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(CombinedPanelLayout.createSequentialGroup()
+                                .addComponent(firstNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(firstNameField)))
+                        .addContainerGap())))
         );
 
-        CombinedPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {firstNameLabel, idLabel, landLineLabel, lastlNameLabel, mobileLabel});
+        CombinedPanelLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {firstNameLabel, lastlNameLabel});
 
         CombinedPanelLayout.setVerticalGroup(
             CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CombinedPanelLayout.createSequentialGroup()
-                .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(CombinedPanelLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(idLabel)
-                            .addComponent(customerIdField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(10, 10, 10))
-                    .addGroup(CombinedPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(buttonsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(CombinedPanelLayout.createSequentialGroup()
-                        .addComponent(lastNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(2, 2, 2))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CombinedPanelLayout.createSequentialGroup()
-                        .addComponent(lastlNameLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(firstNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(firstNameLabel))
+                .addComponent(buttonsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(findButton, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                    .addComponent(customerIdField, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lastNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lastlNameLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(firstNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 38, Short.MAX_VALUE)
+                    .addComponent(firstNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(landLineLabel)
-                    .addComponent(landLineField, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(landLineField, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
                 .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(mobileField, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(mobileField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(mobileLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(57, 57, 57))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
         );
 
-        CombinedPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {firstNameField, landLineField, lastNameField, mobileField});
+        CombinedPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {firstNameField, lastNameField});
+
+        CombinedPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {landLineField, mobileField});
+
+        AdressPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        alternativeStreetLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        alternativeStreetLabel2.setText("ΟΔΟΣ");
+
+        alternativeDistrictLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        alternativeDistrictLabel2.setText("ΠΕΡΙΟΧΗ");
+
+        alternativeBellNameLabel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        alternativeBellNameLabel.setText("ΟΝΟΜΑ ΣΤΟ ΚΟΥΔΟΥΝΟΙ");
+
+        alternativeFloorField.setEditable(false);
+        alternativeFloorField.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+
+        AlternativePostalCode_Label2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        AlternativePostalCode_Label2.setText("Τ.Κ.");
+
+        alternativeFloorLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        alternativeFloorLabel2.setText("ΟΡΟΦΟΣ");
+
+        alternativeBellNameField.setEditable(false);
+        alternativeBellNameField.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+
+        alternativeAddressLabel2.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        alternativeAddressLabel2.setText("ΕΝΑΛΛΑΚΤΙΚΗ ΔΙΕΥΘΥΝΣΗ");
+
+        alternativeDistrictField.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        alternativeDistrictField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        alternativePostalCodeField.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        alternativePostalCodeField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        alternativeStreetField.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        alternativeStreetField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel6.setText("#");
+
+        jTextField4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        jTextField4.setText("jTextField2");
+
+        javax.swing.GroupLayout AdressPanel4Layout = new javax.swing.GroupLayout(AdressPanel4);
+        AdressPanel4.setLayout(AdressPanel4Layout);
+        AdressPanel4Layout.setHorizontalGroup(
+            AdressPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AdressPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(AdressPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdressPanel4Layout.createSequentialGroup()
+                        .addGroup(AdressPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(AdressPanel4Layout.createSequentialGroup()
+                                .addGroup(AdressPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdressPanel4Layout.createSequentialGroup()
+                                        .addComponent(alternativeStreetLabel2)
+                                        .addGap(48, 48, 48))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdressPanel4Layout.createSequentialGroup()
+                                        .addComponent(alternativeDistrictLabel2)
+                                        .addGap(18, 18, 18)))
+                                .addGroup(AdressPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(alternativeStreetField, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(alternativeDistrictField, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(AdressPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(AlternativePostalCode_Label2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(10, 10, 10))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, AdressPanel4Layout.createSequentialGroup()
+                                .addComponent(alternativeAddressLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGroup(AdressPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(alternativePostalCodeField, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                    .addGroup(AdressPanel4Layout.createSequentialGroup()
+                        .addComponent(alternativeFloorLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(alternativeFloorField, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(alternativeBellNameLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(alternativeBellNameField)))
+                .addGap(40, 40, 40))
+        );
+        AdressPanel4Layout.setVerticalGroup(
+            AdressPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AdressPanel4Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(alternativePostalCodeField, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addGroup(AdressPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(AdressPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(alternativeStreetField, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
+            .addGroup(AdressPanel4Layout.createSequentialGroup()
+                .addComponent(alternativeAddressLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(AdressPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(alternativeDistrictField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(alternativeDistrictLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AlternativePostalCode_Label2))
+                .addGap(11, 11, 11)
+                .addComponent(alternativeStreetLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19)
+                .addGroup(AdressPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(alternativeFloorLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(alternativeFloorField)
+                    .addGroup(AdressPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(alternativeBellNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(alternativeBellNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+
+        jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        alternativeAddressLabel3.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        alternativeAddressLabel3.setText("ΔΙΕΥΘΥΝΣΗ");
+
+        districtLabel.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        districtLabel.setText("ΠΕΡΙΟΧΗ");
+
+        alternativeStreetLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        alternativeStreetLabel3.setText("ΟΔΟΣ");
+
+        districtPanel.setBackground(new java.awt.Color(255, 51, 51));
+        districtPanel.setLayout(new java.awt.CardLayout());
+
+        dontChangePanel.setBackground(new java.awt.Color(153, 255, 153));
+
+        districtField.setEditable(false);
+        districtField.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel4.setText("Τ.Κ.");
+
+        postalCodeField.setEditable(false);
+        postalCodeField.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+
+        javax.swing.GroupLayout dontChangePanelLayout = new javax.swing.GroupLayout(dontChangePanel);
+        dontChangePanel.setLayout(dontChangePanelLayout);
+        dontChangePanelLayout.setHorizontalGroup(
+            dontChangePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(dontChangePanelLayout.createSequentialGroup()
+                .addComponent(districtField, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(postalCodeField, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        dontChangePanelLayout.setVerticalGroup(
+            dontChangePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(districtField, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(postalCodeField)
+        );
+
+        districtPanel.add(dontChangePanel, "NO");
+
+        changePanel.setBackground(new java.awt.Color(51, 255, 153));
+
+        changeDistrictField.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel3.setText("Τ.Κ");
+
+        changePostalCodeField.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+
+        javax.swing.GroupLayout changePanelLayout = new javax.swing.GroupLayout(changePanel);
+        changePanel.setLayout(changePanelLayout);
+        changePanelLayout.setHorizontalGroup(
+            changePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(changePanelLayout.createSequentialGroup()
+                .addComponent(changeDistrictField, 0, 419, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(changePostalCodeField, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14))
+        );
+        changePanelLayout.setVerticalGroup(
+            changePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(changeDistrictField, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+            .addGroup(changePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(changePostalCodeField))
+        );
+
+        districtPanel.add(changePanel, "YES");
+
+        addressChangeButtonsPanel.setLayout(new java.awt.CardLayout());
+        addressChangeButtonsPanel.setVisible(false);
+
+        changeButton.setBackground(new java.awt.Color(0, 255, 0));
+        changeButton.setText("ΘΕΛΩ ΝΑ ΑΛΛΑΞΩ ΠΕΡΙΟΧΗ");
+        changeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                changeButtonActionPerformed(evt);
+            }
+        });
+        addressChangeButtonsPanel.add(changeButton, "YES");
+
+        dontChangeButton.setBackground(new java.awt.Color(255, 102, 102));
+        dontChangeButton.setText("ΔΕΝ ΘΕΛΩ ΝΑ ΑΛΛΑΞΩ ΠΕΡΙΟΧΗ");
+        dontChangeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dontChangeButtonActionPerformed(evt);
+            }
+        });
+        addressChangeButtonsPanel.add(dontChangeButton, "NO");
+
+        streetField.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel5.setText("#");
+
+        jTextField5.setText("jTextField5");
+
+        alternativeFloorLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        alternativeFloorLabel3.setText("ΟΡΟΦΟΣ");
+
+        floorField.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(floorField, javax.swing.GroupLayout.DEFAULT_SIZE, 54, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(floorField)
+                .addContainerGap())
+        );
+
+        alternativeBellNameLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        alternativeBellNameLabel1.setText("ΟΝΟΜΑ ΣΤΟ ΚΟΥΔΟΥΝΟΙ");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(139, 139, 139)
+                .addComponent(alternativeAddressLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(addressChangeButtonsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(districtLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(alternativeStreetLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(12, 12, 12)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(districtPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addComponent(streetField, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jTextField5)
+                                .addContainerGap())))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(alternativeFloorLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(alternativeBellNameLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bellNameField))))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(1, 1, 1)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(alternativeAddressLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addressChangeButtonsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(districtPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(districtLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(alternativeStreetLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(streetField, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(alternativeFloorLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(alternativeBellNameLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(bellNameField, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addContainerGap())))
+        );
 
         javax.swing.GroupLayout HeadPanelLayout = new javax.swing.GroupLayout(HeadPanel);
         HeadPanel.setLayout(HeadPanelLayout);
         HeadPanelLayout.setHorizontalGroup(
             HeadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HeadPanelLayout.createSequentialGroup()
+                .addComponent(CombinedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(HeadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(CombinedPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(HeadPanelLayout.createSequentialGroup()
-                        .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(HeadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(AdressPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(AddressPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                        .addComponent(AdressPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 719, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         HeadPanelLayout.setVerticalGroup(
             HeadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HeadPanelLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(HeadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addContainerGap()
+                .addGroup(HeadPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(HeadPanelLayout.createSequentialGroup()
-                        .addComponent(AddressPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(AdressPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(AdressPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10))
                     .addGroup(HeadPanelLayout.createSequentialGroup()
-                        .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(CombinedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(10, 10, 10))
+                        .addComponent(CombinedPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
+        );
+
+        measurementButton.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        measurementButton.setText("<html><center>ΔΙΑΣΤΑΣΕΙΣ ΚΑΙ<br>ΕΠΙΔΙΟΡΘΩΣΗ</center></html>");
+        measurementButton.setActionCommand("<html><center>ΔΙΑΣΤΑΣΕΙΣ ΚΑΙ<br><ln>ΕΠΙΔΙΟΡΘΩΣΗ</center></html>");
+        measurementButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                measurementButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout menuPanelLayout = new javax.swing.GroupLayout(menuPanel);
+        menuPanel.setLayout(menuPanelLayout);
+        menuPanelLayout.setHorizontalGroup(
+            menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(menuPanelLayout.createSequentialGroup()
+                .addGap(155, 155, 155)
+                .addComponent(measurementButton, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))
+        );
+        menuPanelLayout.setVerticalGroup(
+            menuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(measurementButton)
         );
 
         javax.swing.GroupLayout RootPanelLayout = new javax.swing.GroupLayout(RootPanel);
         RootPanel.setLayout(RootPanelLayout);
         RootPanelLayout.setHorizontalGroup(
             RootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(customerCardsTabbedPane)
-            .addComponent(HeadPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1280, Short.MAX_VALUE)
+            .addComponent(customerCardsTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addGroup(RootPanelLayout.createSequentialGroup()
+                .addComponent(HeadPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1274, Short.MAX_VALUE)
+                .addGap(782, 782, 782))
+            .addGroup(RootPanelLayout.createSequentialGroup()
+                .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         RootPanelLayout.setVerticalGroup(
             RootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RootPanelLayout.createSequentialGroup()
-                .addComponent(HeadPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(HeadPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(customerCardsTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 548, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -909,6 +1042,7 @@ public class MainFrame extends javax.swing.JFrame {
         customerController = new CustomerController();
         itemController = new ItemController();
         reportController = new ReportController();
+        addressController = new AddressController();
 
         focusInColor = new Color(255, 255, 0);
         focusOutColor = new Color(240, 240, 240);
@@ -922,11 +1056,51 @@ public class MainFrame extends javax.swing.JFrame {
         receivingDatePicker.setDate(new Date());
         receivingDatePickerTextField = (JTextField) receivingDatePicker.getComponent(1);
         receivingDatePickerTextField.setEditable(false);
+
+        //initializing comboboxListeners
+        districtFieldItemSelectionListener = new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED)//to fire only when item is selecet, otherwise event is fired 2 time, because, first /some/ item is disselected, and then some another item is selleceted
+                {
+                    districFieldItemSeleceted(evt);
+                }
+            }
+
+        };
+
+        alternativeDistrictFieldItemSelectionListener = new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED)//to fire only when item is selecet, otherwise event is fired 2 time, because, first /some/ item is disselected, and then some another item is selleceted
+                {
+                    alternativeDistricFieldItemSeleceted(evt);
+                }
+            }
+
+        };
+        postalCodeFieldItemSelectionListener = new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED)//to fire only when item is selecet, otherwise event is fired 2 time, because, first /some/ item is disselected, and then some another item is selleceted
+                {
+                    postalCodeFieldItemSeleceted(evt);
+                }
+            }
+
+        };
+
+        alternativePostalCodeFieldItemSelectionListener = new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED)//to fire only when item is selecet, otherwise event is fired 2 time, because, first /some/ item is disselected, and then some another item is selleceted
+                {
+                    alternativePostalCodeFieldItemSeleceted(evt);
+
+                }
+            }
+
+        };
     }
 
     private void findButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findButtonActionPerformed
         openFindUserFields();
-
     }//GEN-LAST:event_findButtonActionPerformed
 
     private void customerIdFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_customerIdFieldKeyTyped
@@ -979,6 +1153,11 @@ public class MainFrame extends javax.swing.JFrame {
         cleanFields();
         CardLayout card = (CardLayout) buttonsPanel.getLayout();
         card.show(buttonsPanel, "card1");
+
+        changeDistrictField.removeItemListener(districtFieldItemSelectionListener);
+        alternativeDistrictField.removeItemListener(alternativeDistrictFieldItemSelectionListener);
+
+        addressChangeButtonsPanel.setVisible(false);
     }
 
     private void newCustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newCustomerButtonActionPerformed
@@ -986,9 +1165,14 @@ public class MainFrame extends javax.swing.JFrame {
         makeSearchFieldsEditable();
         makeFieldsEditable();
         customerIdField.setEditable(false);
+        loadDistrictComboBoxes();
 
         CardLayout card = (CardLayout) buttonsPanel.getLayout();
         card.show(buttonsPanel, "card2");
+
+        CardLayout districtCard = (CardLayout) districtPanel.getLayout();
+        districtCard.show(districtPanel, "YES");
+
     }//GEN-LAST:event_newCustomerButtonActionPerformed
 
     private void mobileFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mobileFieldKeyPressed
@@ -1036,6 +1220,9 @@ public class MainFrame extends javax.swing.JFrame {
 
         CardLayout card = (CardLayout) buttonsPanel.getLayout();
         card.show(buttonsPanel, "card2");
+
+        addressChangeButtonsPanel.setVisible(true);
+        loadDistrictComboBoxes();
     }//GEN-LAST:event_editCustomerButtonActionPerformed
 
     private void addItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addItemButtonActionPerformed
@@ -1090,6 +1277,23 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_customerIdFieldMouseClicked
 
+    private void changeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeButtonActionPerformed
+
+        CardLayout changeButtonCard = (CardLayout) addressChangeButtonsPanel.getLayout();
+        changeButtonCard.show(addressChangeButtonsPanel, "NO");
+
+        CardLayout districtCard = (CardLayout) districtPanel.getLayout();
+        districtCard.show(districtPanel, "YES");
+    }//GEN-LAST:event_changeButtonActionPerformed
+
+    private void dontChangeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dontChangeButtonActionPerformed
+        CardLayout changeButtonCard = (CardLayout) addressChangeButtonsPanel.getLayout();
+        changeButtonCard.show(addressChangeButtonsPanel, "YES");
+
+        CardLayout districtCard = (CardLayout) districtPanel.getLayout();
+        districtCard.show(districtPanel, "NO");
+    }//GEN-LAST:event_dontChangeButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1126,29 +1330,35 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel AddressPanel1;
-    private javax.swing.JPanel AdressPanel2;
-    private javax.swing.JLabel AlternativePostalCode_Label;
+    private javax.swing.JPanel AdressPanel4;
+    private javax.swing.JLabel AlternativePostalCode_Label2;
     private javax.swing.JPanel CombinedPanel;
     private javax.swing.JPanel HeadPanel;
     private javax.swing.JPanel RootPanel;
     private javax.swing.JButton addItemButton;
-    private javax.swing.JLabel addressLabel;
-    private javax.swing.JLabel alternativeAddressLabel;
+    private javax.swing.JPanel addressChangeButtonsPanel;
+    private javax.swing.JLabel alternativeAddressLabel2;
+    private javax.swing.JLabel alternativeAddressLabel3;
     private javax.swing.JTextField alternativeBellNameField;
     private javax.swing.JLabel alternativeBellNameLabel;
-    private javax.swing.JTextField alternativeDistrictField;
-    private javax.swing.JLabel alternativeDistrictLabel;
+    private javax.swing.JLabel alternativeBellNameLabel1;
+    private javax.swing.JComboBox<String> alternativeDistrictField;
+    private javax.swing.JLabel alternativeDistrictLabel2;
     private javax.swing.JTextField alternativeFloorField;
-    private javax.swing.JLabel alternativeFloorLabel;
-    private javax.swing.JFormattedTextField alternativePostalCodeField;
-    private javax.swing.JTextField alternativeStreetField;
-    private javax.swing.JLabel alternativeStreetLabel;
+    private javax.swing.JLabel alternativeFloorLabel2;
+    private javax.swing.JLabel alternativeFloorLabel3;
+    private javax.swing.JComboBox<String> alternativePostalCodeField;
+    private javax.swing.JComboBox<String> alternativeStreetField;
+    private javax.swing.JLabel alternativeStreetLabel2;
+    private javax.swing.JLabel alternativeStreetLabel3;
     private javax.swing.JTextField bellNameField;
-    private javax.swing.JLabel bellNameLabel;
     private javax.swing.JPanel buttonsPanel;
     private javax.swing.JPanel calculationDisplayPanel;
     private javax.swing.JButton cancelButton;
+    private javax.swing.JButton changeButton;
+    private javax.swing.JComboBox<String> changeDistrictField;
+    private javax.swing.JPanel changePanel;
+    private javax.swing.JComboBox<String> changePostalCodeField;
     private javax.swing.JPanel customerArchiveTab;
     private javax.swing.JPanel customerCardPanel;
     private javax.swing.JPanel customerCardTab;
@@ -1156,21 +1366,31 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextField customerIdField;
     private javax.swing.JTextField districtField;
     private javax.swing.JLabel districtLabel;
+    private javax.swing.JPanel districtPanel;
+    private javax.swing.JButton dontChangeButton;
+    private javax.swing.JPanel dontChangePanel;
     private javax.swing.JButton editCustomerButton;
     private javax.swing.JButton findButton;
     private javax.swing.JTextField firstNameField;
     private javax.swing.JLabel firstNameLabel;
     private javax.swing.JTextField floorField;
-    private javax.swing.JLabel floorLabel;
     private javax.swing.JLabel fpaLabel;
     private javax.swing.JLabel fpaSum;
-    private javax.swing.JLabel idLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
     private javax.swing.JFormattedTextField landLineField;
     private javax.swing.JLabel landLineLabel;
     private javax.swing.JTextField lastNameField;
@@ -1183,8 +1403,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel newCustomerEditCustomerPanel;
     private javax.swing.JPanel newReceivingTab;
     private javax.swing.JTextArea noteField;
-    private javax.swing.JFormattedTextField postalCodeField;
-    private javax.swing.JLabel postalCodeLabel;
+    private javax.swing.JTextField postalCodeField;
     private javax.swing.JButton processButton;
     private com.toedter.calendar.JDateChooser receivingDatePicker;
     private javax.swing.JPanel receivingItemsPanel;
@@ -1194,7 +1413,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton saveNewCustomerButton;
     private javax.swing.JButton saveReceivingReportButton;
     private javax.swing.JTextField streetField;
-    private javax.swing.JLabel streetLabel;
     private javax.swing.JLabel subTotalLabel;
     private javax.swing.JLabel subTotalSum;
     private javax.swing.JLabel totalLabel;
@@ -1207,14 +1425,14 @@ public class MainFrame extends javax.swing.JFrame {
 
         noteField.setEditable(true);
         streetField.setEditable(true);
-        districtField.setEditable(true);
-        postalCodeField.setEditable(true);
+        // districtField.setEditable(true);
+        // postalCodeField.setEditable(true);
         floorField.setEditable(true);
         bellNameField.setEditable(true);
 
         alternativeStreetField.setEditable(true);
-        alternativeDistrictField.setEditable(true);
-        alternativePostalCodeField.setEditable(true);
+        //alternativeDistrictField.setEditable(true);
+        // alternativePostalCodeField.setEditable(true);
         alternativeFloorField.setEditable(true);
         alternativeBellNameField.setEditable(true);
 
@@ -1226,8 +1444,8 @@ public class MainFrame extends javax.swing.JFrame {
 
         noteField.setEditable(false);
         streetField.setEditable(false);
-        districtField.setEditable(false);
-        postalCodeField.setEditable(false);
+        changeDistrictField.setEditable(false);
+        changePostalCodeField.setEditable(false);
         floorField.setEditable(false);
         bellNameField.setEditable(false);
 
@@ -1257,16 +1475,32 @@ public class MainFrame extends javax.swing.JFrame {
         landLineField.setText(customer.getLandlinePhone());
         mobileField.setText(customer.getMobilePhone());
         noteField.setText(customer.getNote());
-        streetField.setText(customer.getStreet());
+
+        changeDistrictField.removeAllItems();
+        changeDistrictField.addItem(customer.getDistrict());
+
+        changePostalCodeField.removeAllItems();
+        changePostalCodeField.addItem(customer.getPostalCode());
+
         districtField.setText(customer.getDistrict());
-        floorField.setText(customer.getFloor());
+        streetField.setText(customer.getStreet());
         postalCodeField.setText(customer.getPostalCode());
+
+        floorField.setText(customer.getFloor());
         bellNameField.setText(customer.getBellName());
-        alternativeStreetField.setText(customer.getAlternativeStreet());
-        alternativeDistrictField.setText(customer.getAlternativeDistrict());
-        alternativePostalCodeField.setText(customer.getAlternativePostalCode());
+
+        alternativeDistrictField.removeAllItems();
+        alternativeDistrictField.addItem(customer.getAlternativeDistrict());
+
+        alternativePostalCodeField.removeAllItems();
+        alternativePostalCodeField.addItem(customer.getAlternativePostalCode());
+
+        alternativeStreetField.removeAllItems();
+        alternativeStreetField.addItem(customer.getAlternativeStreet());
+
         alternativeFloorField.setText(customer.getAlternativeFloor());
         alternativeBellNameField.setText(customer.getAlternativeBellName());
+
     }
 
     private void makeSearchFieldsEditable() {
@@ -1297,15 +1531,17 @@ public class MainFrame extends javax.swing.JFrame {
 
         noteField.setText("");
 
+        changeDistrictField.removeAllItems();
         streetField.setText("");
-        districtField.setText("");
-        postalCodeField.setText("");
+        changePostalCodeField.removeAllItems();
+
         floorField.setText("");
         bellNameField.setText("");
 
-        alternativeStreetField.setText("");
-        alternativeDistrictField.setText("");
-        alternativePostalCodeField.setText("");
+        alternativeDistrictField.removeAllItems();
+        alternativeStreetField.removeAllItems();
+        alternativePostalCodeField.removeAllItems();
+
         alternativeFloorField.setText("");
         alternativeBellNameField.setText("");
 
@@ -1362,14 +1598,16 @@ public class MainFrame extends javax.swing.JFrame {
         customer.setLandlinePhone(landLineField.getText());
         customer.setMobilePhone(mobileField.getText());
         customer.setNote(noteField.getText().trim());
-        customer.setStreet(streetField.getText().trim());
-        customer.setDistrict(districtField.getText().trim());
-        customer.setPostalCode(postalCodeField.getText());
+
+        customer.setDistrict(changeDistrictField.getEditor().getItem().toString());
+        customer.setPostalCode(changePostalCodeField.getEditor().getItem().toString());
+        customer.setStreet(streetField.getText());
         customer.setFloor(floorField.getText());
         customer.setBellName(bellNameField.getText().trim());
-        customer.setAlternativeStreet(alternativeStreetField.getText().trim());
-        customer.setAlternativeDistrict(alternativeDistrictField.getText().trim());
-        customer.setAlternativePostalCode(alternativePostalCodeField.getText());
+
+        customer.setAlternativeDistrict(alternativeDistrictField.getEditor().getItem().toString());
+        customer.setAlternativePostalCode(alternativePostalCodeField.getEditor().getItem().toString());
+        customer.setAlternativeStreet(alternativeStreetField.getEditor().getItem().toString());
         customer.setAlternativeFloor(alternativeFloorField.getText());
         customer.setAlternativeBellName(alternativeBellNameField.getText().trim());
         return customer;
@@ -1426,44 +1664,22 @@ public class MainFrame extends javax.swing.JFrame {
 
     private boolean streetInputValid() {
         boolean valid = true;
-        String street = streetField.getText().trim();
-
-        if (street.length() > 60) {
-            JOptionPane.showMessageDialog(new JFrame(),
-                    "ΠΕΔΙΟ 'ΟΔΟΣ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΧΕΙ ΠΑΝΩ ΑΠΟ 60 ΓΡΑΜΜΑΤΑ",
-                    "ΟΔΟΣ",
-                    JOptionPane.ERROR_MESSAGE);
-            valid = false;
-        }
+        System.out.println("streetInputValid-MainFrame- i think no need for this anymore");
         return valid;
     }
 
     private boolean districtInputValid() {
         boolean valid = true;
-        String district = districtField.getText().trim();
+        System.out.println("districtInputValid-MainFrame- i think no need for this anymore");
 
-        if (district.length() > 60) {
-            JOptionPane.showMessageDialog(new JFrame(),
-                    "ΠΕΔΙΟ 'ΠΕΡΙΟΧΗ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΧΕΙ ΠΑΝΩ ΑΠΟ 30 ΓΡΑΜΜΑΤΑ",
-                    "ΠΕΡΙΟΧΗ",
-                    JOptionPane.ERROR_MESSAGE);
-            valid = false;
-        }
         return valid;
 
     }
 
     private boolean postalCodeInputValid() {
         boolean valid = true;
-        String postalCode = postalCodeField.getText().trim();
-        System.out.println("need to change for real postal codes ");
-        if (postalCode.length() > 6) {
-            JOptionPane.showMessageDialog(new JFrame(),
-                    "ΛΑΘΟΣ ΤΑΧΙΔΡΟΜΙΚΟΣ ΚΩΔΙΚΟΣ",
-                    "ΤΑΧΙΔΡΟΜΙΚΟΣ ΚΩΔΙΚΟΣ",
-                    JOptionPane.ERROR_MESSAGE);
-            valid = false;
-        }
+        System.out.println("postalCodeInputValid-MainFrame- i think no need for this anymore");
+
         return valid;
     }
 
@@ -1497,43 +1713,19 @@ public class MainFrame extends javax.swing.JFrame {
 
     private boolean alternativeStreetInputValid() {
         boolean valid = true;
-        String street = streetField.getText().trim();
-
-        if (street.length() > 60) {
-            JOptionPane.showMessageDialog(new JFrame(),
-                    "ΠΕΔΙΟ 'ΟΔΟΣ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΧΕΙ ΠΑΝΩ ΑΠΟ 60 ΓΡΑΜΜΑΤΑ",
-                    "ΟΔΟΣ(ΕΝΑΛΛΑΚΤΙΚΗ ΔΙΕΥΘΥΝΣΗ)",
-                    JOptionPane.ERROR_MESSAGE);
-            valid = false;
-        }
+        System.out.println("alternativeStreetInputValid-no need anymore");
         return valid;
     }
 
     private boolean alternativeDistrictInputValid() {
         boolean valid = true;
-        String alternativeDistrict = alternativeDistrictField.getText().trim();
-
-        if (alternativeDistrict.length() > 60) {
-            JOptionPane.showMessageDialog(new JFrame(),
-                    "ΠΕΔΙΟ 'ΠΕΡΙΟΧΗ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΧΕΙ ΠΑΝΩ ΑΠΟ 30 ΓΡΑΜΜΑΤΑ",
-                    "ΠΕΡΙΟΧΗ(ΕΝΑΛΛΑΚΤΙΚΗ ΔΙΕΥΘΥΝΣΗ)",
-                    JOptionPane.ERROR_MESSAGE);
-            valid = false;
-        }
+        System.out.println("alternativeDistrictInputValid-no need anymore");
         return valid;
     }
 
     private boolean alternativePostalCodeInputValid() {
         boolean valid = true;
-        String alternativePostalCode = alternativePostalCodeField.getText().trim();
-        System.out.println("need to change for real postal codes ");
-        if (alternativePostalCode.length() > 6) {
-            JOptionPane.showMessageDialog(new JFrame(),
-                    "ΛΑΘΟΣ ΤΑΧΙΔΡΟΜΙΚΟΣ ΚΩΔΙΚΟΣ",
-                    "ΤΑΧΙΔΡΟΜΙΚΟΣ ΚΩΔΙΚΟΣ (ΕΝΑΛΛΑΚΤΙΚΗ ΔΙΕΥΘΥΝΣΗ)",
-                    JOptionPane.ERROR_MESSAGE);
-            valid = false;
-        }
+        System.out.println("alternativeDistrictInputValid-no need anymore");
         return valid;
     }
 
@@ -1677,9 +1869,9 @@ System.out.println("maybe to drop switch, and fille all the table simultaniously
 
         customerCardPanel.add(sc);
         customerCardPanel.setLayout(new BoxLayout(customerCardPanel, BoxLayout.LINE_AXIS));
-      //  pack();
+        //  pack();
 //if i dont put it, MainFrame shrinks to is original dimensions, even if i have it to full screen
-  //but i dont remeber what it does if i dont have it, for some reason (that i dont  remeber)
+        //but i dont remeber what it does if i dont have it, for some reason (that i dont  remeber)
         countTotal(model);
     }
 
@@ -1890,4 +2082,40 @@ System.out.println("maybe to drop switch, and fille all the table simultaniously
         card.show(buttonsPanel, "card1");
     }
 
+    private void loadDistrictComboBoxes() {
+
+        ArrayList<String> districtsList = addressController.getDistrictsList();
+        for (String district : districtsList) {
+            changeDistrictField.addItem(district);
+            changeDistrictField.setSelectedIndex(-1);
+            alternativeDistrictField.addItem(district);
+            alternativeDistrictField.setSelectedIndex(-1);
+        }
+        //adding listener now, and not before, because otherwise it works the moment field is loaded, and i dont want this to happen, i want it to start listeneing after field is loaded
+        changeDistrictField.addItemListener(districtFieldItemSelectionListener);
+        alternativeDistrictField.addItemListener(alternativeDistrictFieldItemSelectionListener);
+    }
+
+    private void districFieldItemSeleceted(ItemEvent evt) {
+        changePostalCodeField.removeAllItems();
+        String district = evt.getItem().toString();
+        ArrayList<String> postalCodesList = addressController.getPostalCodes(district);
+        for (String postalCode : postalCodesList) {
+            changePostalCodeField.addItem(postalCode);
+        }
+        changePostalCodeField.setSelectedIndex(-1);
+        changePostalCodeField.addItemListener(postalCodeFieldItemSelectionListener);
+    }
+
+    private void alternativeDistricFieldItemSeleceted(ItemEvent evt) {
+        System.out.println("gagagsd");
+    }
+
+    private void postalCodeFieldItemSeleceted(ItemEvent evt) {
+
+    }
+
+    private void alternativePostalCodeFieldItemSeleceted(ItemEvent evt) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
