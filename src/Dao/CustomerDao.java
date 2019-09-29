@@ -168,6 +168,7 @@ public class CustomerDao {
             Logger.getLogger(CustomerDao.class.getName()).log(Level.SEVERE, null, ex);
 
         }
+         System.out.println("fdfdf"+customer.getDistrict());
     }
 
     public void editCustomer(Customer customer) {
