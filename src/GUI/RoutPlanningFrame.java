@@ -6,18 +6,28 @@
 package GUI;
 
 import Tools.ImagePanel;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.MediaTracker;
+import java.awt.Polygon;
 import java.awt.Toolkit;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Vector;
 
 /**
  *
  * @author Michail Sitmalidis
  */
 public class RoutPlanningFrame extends javax.swing.JFrame implements PropertyChangeListener {
+
+    private int lot;
+    private HashMap<Integer, ArrayList<String>> lots;
 
     private ImagePanel imagePanel;
 
@@ -35,57 +45,114 @@ public class RoutPlanningFrame extends javax.swing.JFrame implements PropertyCha
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
+        mapPanel = new javax.swing.JPanel();
+        Panel = new javax.swing.JPanel();
+        districtsLabel = new javax.swing.JLabel();
+        X = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        Y = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
-        jPanel1.setBackground(new java.awt.Color(153, 255, 153));
+        mapPanel.setBackground(new java.awt.Color(153, 255, 153));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 833, Short.MAX_VALUE)
+        javax.swing.GroupLayout mapPanelLayout = new javax.swing.GroupLayout(mapPanel);
+        mapPanel.setLayout(mapPanelLayout);
+        mapPanelLayout.setHorizontalGroup(
+            mapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 868, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        mapPanelLayout.setVerticalGroup(
+            mapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 917, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel1);
+        getContentPane().add(mapPanel);
 
-        jPanel2.setBackground(new java.awt.Color(153, 153, 255));
+        Panel.setBackground(new java.awt.Color(153, 153, 255));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 403, Short.MAX_VALUE)
+        districtsLabel.setText("jLabel1");
+
+        X.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        X.setText("X");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel2.setText(":");
+
+        Y.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        Y.setText("Y");
+
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout PanelLayout = new javax.swing.GroupLayout(Panel);
+        Panel.setLayout(PanelLayout);
+        PanelLayout.setHorizontalGroup(
+            PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelLayout.createSequentialGroup()
+                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelLayout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(districtsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(X)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Y, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PanelLayout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(jButton1)))
+                .addContainerGap(162, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 917, Short.MAX_VALUE)
+        PanelLayout.setVerticalGroup(
+            PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(districtsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(83, 83, 83)
+                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(X, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(Y))
+                .addGap(18, 18, 18)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(654, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel2);
+        PanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {X, Y, jLabel2});
+
+        getContentPane().add(Panel);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        ArrayList<Integer> x = imagePanel.getXo();
+        ArrayList<Integer> y = imagePanel.getYo();
+        printLot(x, y);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    @Override
-    public void propertyChange(PropertyChangeEvent evt) {
-
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel Panel;
+    private javax.swing.JLabel X;
+    private javax.swing.JLabel Y;
+    private javax.swing.JLabel districtsLabel;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel mapPanel;
     // End of variables declaration//GEN-END:variables
 
     private void myInitialization() {
@@ -97,11 +164,152 @@ public class RoutPlanningFrame extends javax.swing.JFrame implements PropertyCha
             tracker.waitForAll();
         } catch (InterruptedException ie) {
         }
-        imagePanel = new ImagePanel(img);
+        imagePanel = new ImagePanel(img, this);
         imagePanel.setPreferredSize(new Dimension(img.getWidth(null), img.getHeight(null)));
-        
-        jPanel1.add(imagePanel);
-        jPanel1.setLayout(new java.awt.BorderLayout());
-        jPanel1.add(imagePanel, java.awt.BorderLayout.WEST);
+
+        mapPanel.add(imagePanel);
+        mapPanel.setLayout(new java.awt.BorderLayout());
+        mapPanel.add(imagePanel, java.awt.BorderLayout.WEST);
+
+        Vector<Polygon> polys = new Vector<Polygon>();
+        lots = new HashMap<Integer, ArrayList<String>>();
+
+        int[] x;
+        int[] y;
+        //--ΠΕΡΑΜΑ
+        x = new int[]{0, 4, 10, 16, 21, 26, 31, 34, 42, 54, 61, 67, 72, 79, 85, 90, 97, 106, 111, 121, 132, 133, 131, 124, 119, 118, 113, 110, 115, 123, 124, 119, 114, 109, 99, 87, 86, 87, 86, 80, 77, 74, 68, 63, 55, 42, 36, 17, 14, 12, 10, 4, 0};
+        y = new int[]{447, 443, 440, 439, 436, 432, 424, 418, 418, 419, 423, 423, 425, 425, 429, 431, 427, 428, 421, 425, 442, 450, 455, 462, 467, 471, 475, 480, 489, 502, 507, 514, 515, 515, 523, 524, 528, 536, 542, 542, 532, 527, 524, 524, 516, 516, 512, 512, 513, 512, 513, 513, 513};
+
+        polys.add(new Polygon(x, y, x.length));
+
+        ArrayList<String> lot_0 = new ArrayList<>();
+        lot_0.add("bubs");
+        lot_0.add("baba");
+        lot_0.add("bobo");
+
+        lots.put(0, lot_0);
+
+        //--ΚΕΡΑΤΣΙΝΙ
+        x = new int[]{121, 135, 145, 149, 155, 163, 168, 173, 184, 185, 183, 183, 177, 177, 177, 175, 184, 193, 192, 192, 188, 162, 157, 151, 144, 147, 146, 146, 143, 132, 127, 124, 124, 125, 126, 129, 133, 138, 139, 137, 137, 129, 125, 124, 123, 115, 110, 113, 118, 119, 124, 131, 133, 132, 121};
+        y = new int[]{425, 416, 429, 437, 441, 447, 452, 458, 465, 484, 489, 504, 514, 527, 532, 543, 548, 549, 555, 561, 566, 580, 581, 579, 574, 566, 559, 557, 555, 559, 559, 556, 551, 546, 542, 536, 533, 533, 529, 528, 524, 523, 517, 507, 502, 489, 480, 475, 471, 467, 462, 455, 450, 442, 425};
+
+        polys.add(new Polygon(x, y, x.length));
+
+        ArrayList<String> lot_1 = new ArrayList<>();
+        lot_1.add("bubs");
+        lot_1.add("baba");
+        lot_1.add("bobo");
+
+        lots.put(1, lot_1);
+
+        //--ΠΕΙΑΡΑΙΑΣ
+        x = new int[]{ 183, 177, 177, 177, 175, 184, 193,200,210,212,212,215,215,209,205,199,193,187,179,169,169,175,176,183,190,197,205,210,219,222,223,218,220,223,227,239,246,252,257,269,275,281,287,288,289,279,276,266,258,252,249,251,250,244,238,230,223,212,205,189,183};
+        y = new int[]{ 504, 514, 527, 532, 543, 548, 549,549,554,554,557,563,569,576,584,587,587,591,591,590,596,600,604,613,618,625,622,623,622,613,606,603,596,589,586,586,598,598,590,588,580,580,576,572,557,541,541,532,527,523,523,517,508,505,503,504,513,513,512,511,510,504};
+
+        polys.add(new Polygon(x, y, x.length));
+
+        ArrayList<String> lot_2 = new ArrayList<>();
+        lot_2.add("bubs");
+        lot_2.add("baba");
+        lot_2.add("bobo");
+
+        lots.put(2, lot_2);
+
+        //-----
+
+        /*
+        x = new int[]{671, 668, 673, 686, 696, 700, 708, 710, 712, 717, 724, 742, 750, 760, 792, 819, 824, 841, 849, 859, 869};
+          y = new int[]{0, 12, 25, 42, 53, 58, 68, 73, 76, 79, 80, 68, 75, 90, 115, 137, 145, 153, 163, 165, 0};
+        polys.add(new Polygon(x, y, x.length));
+
+        ArrayList<String> lot_0 = new ArrayList<>();
+        lot_0.add("ΑΓΙΟΣ ΣΤΕΦΑΝΟΣ");
+        lot_0.add("ΑΝΟΙΞΙΗ");
+        lot_0.add("ΔΙΟΝΥΣΟΣ");
+        lot_0.add("ΔΡΟΣΙΑ");
+        lot_0.add("ΚΡΥΟΝΕΡΙ");
+        lot_0.add("ΡΟΔΟΠΟΛΗ");
+        lot_0.add("ΣΤΑΜΑΤΑ");
+        lots.put(0, lot_0);
+//-----------------
+        x = new int[]{536, 537, 544, 565, 577, 593, 614, 638, 644, 648, 659, 667, 672, 685, 695, 699, 707, 709, 711, 716, 724};
+        y = new int[]{145, 125, 115, 103, 73, 71, 60, 59, 50, 47, 36, 36, 29, 42, 53, 58, 68, 73, 76, 79, 87};
+
+        System.out.println(x.length + " " + y.length);
+        polys.add(new Polygon(x, y, x.length));
+
+        ArrayList<String> lot_1 = new ArrayList<>();
+        lot_1.add("ΕΚΑΛΗ");
+        lot_1.add("ΠΟΛΙΤΕΙΑ");
+        lot_1.add("ΚΗΦΙΣΙΑ");
+
+        lots.put(1, lot_1);
+         */
+//----------
+//----------
+        imagePanel.setPolygons(polys);
+        imagePanel.setFill(Color.GREEN);
+
+        imagePanel.addPropertyChangeListener(this);
+
     }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent arg0) {
+        System.out.println("new value-" + arg0.getNewValue());
+        if (arg0.getSource().equals(imagePanel)) {
+            if (arg0.getNewValue() != null) {//otehrwise, when i clode the frame, it throws nullPointExcept. because getNewArgoument is null
+                int index = (Integer) arg0.getNewValue();
+
+                if (index > -1) {
+
+                    Iterator it = lots.entrySet().iterator();
+                    while (it.hasNext()) {
+                        Map.Entry pair = (Map.Entry) it.next();
+
+                        districtsLabel.setText(pair.getValue().toString());
+                        it.remove(); // avoids a ConcurrentModificationException
+                    }
+
+                    // aaa.setText(lots.get(lot).toString());
+                    //   rent.setText(prices.get(index));
+                    //   status.setText(statuses.get(index));
+                }
+            }
+        }
+    }
+
+    public void showDistricts(ArrayList<Integer> lotIndex) {
+        for (Integer lotNumber : lotIndex) {
+
+            ArrayList<String> districts = lots.get(lotNumber);
+
+            for (String district : districts) {
+                System.out.println(district);
+            }
+        }
+
+    }
+
+    // delete those 3 methods after
+    public void showX(int x) {
+
+        X.setText(String.valueOf(x));
+    }
+
+    public void showY(int y) {
+        Y.setText(String.valueOf(y));
+    }
+
+    public void printLot(ArrayList<Integer> x, ArrayList<Integer> y) {
+        System.out.println("X");
+        for (Integer a : x) {
+            System.out.print(a + ",");
+        }
+        System.out.println("\nY");
+        for (Integer a : y) {
+            System.out.print(a + ",");
+        }
+    }
+//--------
 }
