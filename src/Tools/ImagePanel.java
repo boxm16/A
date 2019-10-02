@@ -27,9 +27,8 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
     private int currentMap;
     private Color fill;
     private float alpha;
-    private HashSet<Integer> choosenMaps;
+    private HashSet<Integer> chosenLots;
     private RoutPlanningFrame routPlanningFrame;
-    private ArrayList<Integer> lotIndex;
 
     public ImagePanel(Image image) {
         this.img = image;
@@ -37,7 +36,7 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
         addMouseListener(this);
         alpha = 0.9f;//how deep is color
         fill = Color.GREEN;
-        choosenMaps = new HashSet<>();
+        chosenLots = new HashSet<>();
 
     }
 
@@ -49,8 +48,8 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
         addMouseMotionListener(this);
         alpha = 0.9f;//how deep is color
         fill = Color.GREEN;
-        choosenMaps = new HashSet<>();
-        lotIndex = new ArrayList<>();
+        chosenLots = new HashSet<>();
+
     }
 
     public void setPolygons(Vector<Polygon> polygons) {
@@ -73,8 +72,8 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, this.alpha));
         g2.setColor(this.fill);
         if (this.currentMap > -1) {
-            for (Integer choosenMap : choosenMaps) {
-                g2.fillPolygon(this.polys.get(choosenMap));
+            for (Integer lot : chosenLots) {
+                g2.fillPolygon(this.polys.get(lot));
             }
         }
     }
@@ -85,6 +84,7 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
     public ArrayList<Integer> getXo() {
         return x;
     }
+
     public ArrayList<Integer> getYo() {
         return x;
     }
@@ -99,39 +99,28 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
 
         for (int i = 0; i < polys.size(); i++) {
             if (polys.get(i).contains(e.getX(), e.getY())) {
-
                 if (e.getButton() == MouseEvent.BUTTON1) {
-
-                    if (!choosenMaps.contains(i)) {
+                    if (!chosenLots.contains(i)) {
                         currentMap = i;
-                        choosenMaps.add(currentMap);
-
-                        lotIndex.add(currentMap);
-                        routPlanningFrame.showDistricts(lotIndex);
+                        chosenLots.add(currentMap);
                     }
                 }
                 if (e.getButton() == MouseEvent.BUTTON3) {
-                    if (choosenMaps.contains(i)) {
-
+                    if (chosenLots.contains(i)) {
                         currentMap = i;
-                        choosenMaps.remove(currentMap);
-
-                        int x = lotIndex.indexOf(currentMap);
-                        if (x > -1) {
-                            lotIndex.remove(x);
-                        }
-
-                        routPlanningFrame.showDistricts(lotIndex);
+                        chosenLots.remove(currentMap);
                     }
                 }
                 repaint();
                 break; // no need to keep checking
-            } else {
-
-                routPlanningFrame.showDistricts(lotIndex);
             }
         }
+        routPlanningFrame.showChosenDistricts(chosenLots);
+    }
 
+    public void clearChosenLots() {
+        chosenLots.clear();
+      repaint();
     }
 
     // unused mouse
