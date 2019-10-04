@@ -5,32 +5,42 @@
  */
 package GUI;
 
+import Controllers.RoutController;
+import Models.Rout;
 import Tools.ImagePanel;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.MediaTracker;
 import java.awt.Polygon;
 import java.awt.Toolkit;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Map;
 import java.util.Vector;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
+import javax.swing.Popup;
+import javax.swing.PopupFactory;
 
 /**
  *
  * @author Michail Sitmalidis
  */
-public class RoutPlanningFrame extends javax.swing.JFrame implements PropertyChangeListener {
+public class RoutPlanningFrame extends javax.swing.JFrame {
     
     private int lot;
     private HashMap<Integer, ArrayList<String>> lots;
     
     private ImagePanel imagePanel;
+    
+    private Popup popup;
+    private Font popupFont;
+    
+    DefaultListModel districtsListModel;
+    RoutController routController;
     
     public RoutPlanningFrame() {
         initComponents();
@@ -48,10 +58,21 @@ public class RoutPlanningFrame extends javax.swing.JFrame implements PropertyCha
 
         mapPanel = new javax.swing.JPanel();
         Panel = new javax.swing.JPanel();
-        districtsLabel = new javax.swing.JLabel();
-        X = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        Y = new javax.swing.JLabel();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        disrtictListField = new javax.swing.JList<>();
+        routNameField = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
+        jButton2 = new javax.swing.JButton();
+        day_1Field = new javax.swing.JCheckBox();
+        day_2Field = new javax.swing.JCheckBox();
+        day_3Field = new javax.swing.JCheckBox();
+        day_4Field = new javax.swing.JCheckBox();
+        day_5Field = new javax.swing.JCheckBox();
+        day_6Field = new javax.swing.JCheckBox();
+        day_7Field = new javax.swing.JCheckBox();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -64,7 +85,7 @@ public class RoutPlanningFrame extends javax.swing.JFrame implements PropertyCha
         mapPanel.setLayout(mapPanelLayout);
         mapPanelLayout.setHorizontalGroup(
             mapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 868, Short.MAX_VALUE)
+            .addGap(0, 829, Short.MAX_VALUE)
         );
         mapPanelLayout.setVerticalGroup(
             mapPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -75,16 +96,113 @@ public class RoutPlanningFrame extends javax.swing.JFrame implements PropertyCha
 
         Panel.setBackground(new java.awt.Color(153, 153, 255));
 
-        districtsLabel.setText("jLabel1");
+        jCheckBox1.setText("Popup Text Displayed");
 
-        X.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        X.setText("X");
+        jTabbedPane1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel2.setText(":");
+        jPanel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        Y.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        Y.setText("Y");
+        disrtictListField.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jScrollPane2.setViewportView(disrtictListField);
+
+        routNameField.setText("jTextField1");
+
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton2.setText("ΑΠΟΘΗΚΕΥΣΗ ΔΡΟΜΟΛΟΓΙΟΥ");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE))
+        );
+
+        day_1Field.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        day_1Field.setText("ΔΕΥΤΕΡΑ");
+
+        day_2Field.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        day_2Field.setText("ΤΡΙΤΗ");
+
+        day_3Field.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        day_3Field.setText("ΤΕΤΑΡΤΗ");
+
+        day_4Field.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        day_4Field.setText("ΠΕΠΜΠΤΗ");
+
+        day_5Field.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        day_5Field.setText("ΠΑΡΑΣΚΕΥΗ");
+
+        day_6Field.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        day_6Field.setText("ΣΑΒΒΑΤΟ");
+
+        day_7Field.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        day_7Field.setText("ΚΥΡΙΑΚΗ");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(day_1Field)
+                    .addComponent(day_2Field)
+                    .addComponent(day_4Field)
+                    .addComponent(day_5Field)
+                    .addComponent(day_6Field)
+                    .addComponent(day_7Field)
+                    .addComponent(day_3Field))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(routNameField)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44)
+                .addComponent(routNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(day_1Field, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(day_2Field)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(day_3Field)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(day_4Field)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(day_5Field)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(day_6Field)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(day_7Field)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jTabbedPane1.addTab("ΝΕΟ ΔΡΟΜΟΛΟΓΙΟ", jPanel1);
 
         jButton1.setText("jButton1");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -98,38 +216,27 @@ public class RoutPlanningFrame extends javax.swing.JFrame implements PropertyCha
         PanelLayout.setHorizontalGroup(
             PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelLayout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(districtsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jCheckBox1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jTabbedPane1)
                     .addGroup(PanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(X)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(Y, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(PanelLayout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(jButton1)))
-                .addContainerGap(162, Short.MAX_VALUE))
+                        .addComponent(jButton1)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         PanelLayout.setVerticalGroup(
             PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(districtsLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(83, 83, 83)
-                .addGroup(PanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(X, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(Y))
-                .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(654, Short.MAX_VALUE))
+                .addComponent(jCheckBox1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addGap(3, 3, 3)
+                .addComponent(jTabbedPane1)
+                .addContainerGap())
         );
-
-        PanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {X, Y, jLabel2});
 
         getContentPane().add(Panel);
 
@@ -138,7 +245,13 @@ public class RoutPlanningFrame extends javax.swing.JFrame implements PropertyCha
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         imagePanel.clearChosenLots();
+        showChosenDistricts(new HashSet());
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Rout rout = collectRoutInformation();
+        routController.saveRout(rout);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -146,12 +259,24 @@ public class RoutPlanningFrame extends javax.swing.JFrame implements PropertyCha
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Panel;
-    private javax.swing.JLabel X;
-    private javax.swing.JLabel Y;
-    private javax.swing.JLabel districtsLabel;
+    private javax.swing.JCheckBox day_1Field;
+    private javax.swing.JCheckBox day_2Field;
+    private javax.swing.JCheckBox day_3Field;
+    private javax.swing.JCheckBox day_4Field;
+    private javax.swing.JCheckBox day_5Field;
+    private javax.swing.JCheckBox day_6Field;
+    private javax.swing.JCheckBox day_7Field;
+    private javax.swing.JList<String> disrtictListField;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JPanel mapPanel;
+    private javax.swing.JTextField routNameField;
     // End of variables declaration//GEN-END:variables
 
     private void myInitialization() {
@@ -170,8 +295,16 @@ public class RoutPlanningFrame extends javax.swing.JFrame implements PropertyCha
         mapPanel.setLayout(new java.awt.BorderLayout());
         mapPanel.add(imagePanel, java.awt.BorderLayout.WEST);
         
-        Vector<Polygon> polys = new Vector<Polygon>();
-        lots = new HashMap<Integer, ArrayList<String>>();
+        popupFont = new Font("Tahoma", Font.BOLD, 20);
+        
+        districtsListModel = new DefaultListModel();
+        
+        disrtictListField.setModel(districtsListModel);
+        
+        routController = new RoutController();
+        
+        Vector<Polygon> polys = new Vector<>();
+        lots = new HashMap<>();
         
         int[] x;
         int[] y;
@@ -222,7 +355,7 @@ public class RoutPlanningFrame extends javax.swing.JFrame implements PropertyCha
         
         lots.put(3, lot_3);
 
-        //--ΑΓΙΟΣ ΔΗΜΗΤΡΙΟΣ, ΑΛΙΜΟΣ, ΔΑΦΝΗ, ΝΕΑ ΣΜΥΡΝΗ, ΠΑΛΑΙΟ ΦΑΛΗΡΟ
+        //--ΑΓΙΟΣ ΔΗΜΗΤΡΙΟΣ, ΑΛΙΜΟΣ, ΔΑΦΝΗ, ΥΜΗΤΤΟΣ,  ΝΕΑ ΣΜΥΡΝΗ, ΠΑΛΑΙΟ ΦΑΛΗΡΟ
         x = new int[]{412, 407, 398, 395, 383, 380, 373, 338, 337, 324, 321, 322, 322, 326, 329, 334, 339, 354, 396, 414, 423, 427, 435, 440, 447, 454, 463, 472, 477, 487, 490, 497, 483, 471, 463, 462, 470, 470, 462, 459, 452, 448, 448, 452, 452, 422, 417, 412};
         y = new int[]{700, 700, 691, 685, 679, 673, 666, 634, 629, 622, 622, 617, 610, 606, 605, 594, 592, 575, 538, 555, 546, 544, 538, 536, 536, 534, 535, 533, 530, 538, 545, 555, 560, 576, 582, 586, 604, 651, 670, 670, 671, 674, 678, 686, 696, 701, 698, 700};
         
@@ -232,6 +365,7 @@ public class RoutPlanningFrame extends javax.swing.JFrame implements PropertyCha
         lot_4.add("ΑΓΙΟΣ ΔΗΜΗΤΡΙΟΣ");
         lot_4.add("ΑΛΙΜΟΣ");
         lot_4.add("ΔΑΦΝΗ");
+        lot_4.add("ΥΜΗΤΤΟΣ");
         lot_4.add("ΝΕΑ ΣΜΥΡΝΗ");
         lot_4.add("ΠΑΛΑΙΟ ΦΑΛΗΡΟ");
         lots.put(4, lot_4);
@@ -261,13 +395,14 @@ public class RoutPlanningFrame extends javax.swing.JFrame implements PropertyCha
         
         lots.put(6, lot_6);
 
-        //--ΑΓΙΟΣ ΙΩΑΝΝΗΣ ΡΕΝΤΗΣ, NIKAIA, ΚΟΡΥΔΑΛΛΟΣ, ΑΓΙΑ ΒΑΡΒΑΡΑ
+        //--ΑΙΓΑΛΕΩ, ΑΓΙΟΣ ΙΩΑΝΝΗΣ ΡΕΝΤΗΣ, NIKAIA, ΚΟΡΥΔΑΛΛΟΣ, ΑΓΙΑ ΒΑΡΒΑΡΑ
         x = new int[]{328, 316, 323, 320, 328, 319, 306, 298, 289, 279, 276, 266, 258, 252, 249, 251, 250, 244, 238, 230, 223, 212, 205, 189, 183, 183, 185, 184, 173, 168, 163, 155, 149, 145, 135, 141, 155, 165, 177, 181, 175, 177, 183, 189, 197, 207, 218, 225, 230, 241, 247, 254, 257, 266, 270, 277, 277, 276, 280, 284, 304, 323, 342, 340, 350, 340, 328};
         y = new int[]{461, 474, 482, 490, 499, 513, 527, 528, 541, 541, 532, 527, 523, 523, 517, 508, 505, 503, 504, 513, 513, 512, 511, 510, 504, 489, 484, 465, 458, 452, 447, 441, 437, 429, 416, 410, 412, 410, 412, 408, 393, 384, 382, 384, 384, 385, 385, 394, 399, 398, 403, 406, 401, 402, 399, 395, 386, 384, 371, 368, 384, 392, 405, 409, 418, 439, 461};
         
         polys.add(new Polygon(x, y, x.length));
         
         ArrayList<String> lot_7 = new ArrayList<>();
+        lot_7.add("ΑΙΓΑΛΕΩ");
         lot_7.add("ΑΓΙΑ ΒΑΡΒΑΡΑ");
         lot_7.add("ΑΓΙΟΣ ΙΩΑΝΝΗΣ ΡΕΝΤΗΣ");
         lot_7.add("ΚΟΡΥΔΑΛΛΟΣ");
@@ -332,7 +467,7 @@ public class RoutPlanningFrame extends javax.swing.JFrame implements PropertyCha
         lot_12.add("ΚΑΜΑΤΕΡΟ");
         lots.put(12, lot_12);
 
-        //--ΑΝΩ ΛΙΟΣΙΑ, ΖΕΦΥΡΙ, ΦΥΛΗ
+        //--ΑΝΩ ΛΙΟΣΙΑ, ΖΕΦΥΡΙ, 
         x = new int[]{408, 396, 393, 362, 355, 351, 343, 338, 324, 313, 304, 296, 286, 275, 261, 244, 216, 209, 207, 222, 224, 218, 216, 223, 233, 242, 278, 300, 320, 337, 337, 347, 350, 369, 373, 385, 398, 412, 417, 416, 410, 408, 401, 394, 394, 398, 405, 406, 398, 403, 403, 414, 415, 411,};
         y = new int[]{197, 197, 190, 190, 194, 202, 202, 200, 200, 198, 208, 217, 216, 224, 231, 257, 241, 229, 208, 163, 155, 133, 92, 78, 69, 67, 49, 48, 38, 34, 34, 31, 33, 34, 31, 16, 15, 11, 24, 31, 34, 49, 56, 85, 101, 107, 112, 118, 126, 134, 139, 145, 172, 182};
         
@@ -342,7 +477,7 @@ public class RoutPlanningFrame extends javax.swing.JFrame implements PropertyCha
         
         lot_13.add("ΑΝΩ ΛΙΟΣΙΑ");
         lot_13.add("ΖΕΦΥΡΙ");
-        lot_13.add("ΦΥΛΗ");
+
         lots.put(13, lot_13);
 
         //--ΑΧΑΡΝΕΣ, ΘΡΑΚΟΜΑΚΕΔΟΝΕΣ
@@ -358,7 +493,7 @@ public class RoutPlanningFrame extends javax.swing.JFrame implements PropertyCha
         
         lots.put(14, lot_14);
 
-        //--ΝΕΑ ΧΑΛΚΗΔΟΝΑ, ΝΕΑ ΦΙΛΑΔΕΛΦΙΑ, ΜΕΤΑΜΟΡΦΩΣΗ, ΗΡΑΚΛΕΙΟ, ΛΥΚΟΒΡΥΣΗ, ΠΕΥΚΗ
+        //--ΝΕΑ ΧΑΛΚΗΔΟΝΑ, ΝΕΑ ΦΙΛΑΔΕΛΦΙΑ, ΜΕΤΑΜΟΡΦΩΣΗ, ΗΡΑΚΛΕΙΟ, ΝΕΑ ΙΩΝΙΑ ΛΥΚΟΒΡΥΣΗ, ΠΕΥΚΗ
         x = new int[]{404, 429, 431, 434, 443, 445, 442, 446, 454, 464, 476, 480, 485, 490, 508, 516, 524, 531, 542, 552, 558, 579, 590, 594, 590, 597, 609, 617, 611, 600, 594, 583, 575, 564, 561, 554, 562, 563, 545, 536, 530, 518, 509, 500, 489, 475, 466, 453, 449, 435};
         y = new int[]{348, 301, 297, 284, 269, 254, 246, 237, 232, 223, 208, 193, 186, 183, 159, 153, 146, 142, 148, 147, 144, 151, 152, 158, 171, 177, 180, 187, 201, 215, 234, 234, 239, 244, 253, 262, 275, 299, 289, 296, 295, 306, 299, 298, 304, 298, 290, 300, 308, 315};
         
@@ -370,11 +505,12 @@ public class RoutPlanningFrame extends javax.swing.JFrame implements PropertyCha
         lot_15.add("ΝΕΑ ΦΙΛΑΔΕΛΦΙΑ");
         lot_15.add("ΜΕΤΑΜΟΡΦΩΣΗ");
         lot_15.add("ΗΡΑΚΛΕΙΟ");
+        lot_15.add("ΝΕΑ ΙΩΝΙΑ");
         lot_15.add("ΛΥΚΟΒΡΥΣΗ");
         lot_15.add("ΠΕΥΚΗ");
         lots.put(15, lot_15);
 
-        //--ΜΑΡΟΥΣΙ
+        //--ΜΑΡΟΥΣΙ ΜΕΛΙΣΣΙΑ
         x = new int[]{617, 611, 600, 594, 583, 575, 564, 561, 554, 562, 563, 579, 584, 600, 618, 623, 632, 646, 654, 664, 671, 676, 689, 687, 680, 689, 689, 686, 675, 654, 648, 633};
         y = new int[]{187, 201, 215, 234, 234, 239, 244, 253, 262, 275, 299, 313, 312, 292, 295, 294, 296, 296, 294, 288, 280, 265, 256, 233, 226, 216, 205, 200, 199, 187, 187, 190};
         
@@ -383,6 +519,7 @@ public class RoutPlanningFrame extends javax.swing.JFrame implements PropertyCha
         ArrayList<String> lot_16 = new ArrayList<>();
         
         lot_16.add("ΜΑΡΟΥΣΙ");
+        lot_16.add("ΜΕΛΙΣΣΙΑ");
         lots.put(16, lot_16);
         //-----
 
@@ -399,7 +536,7 @@ public class RoutPlanningFrame extends javax.swing.JFrame implements PropertyCha
         lot_17.add("ΠΟΛΙΤΕΙΑ");
         lots.put(17, lot_17);
 
-        //-----ΑΓΙΟΣ ΣΤΕΦΑΝΟΣ ΑΝΟΙΞΙΗ ΔΙΟΝΥΣΟΣ ΔΡΟΣΙΑ ΡΟΔΟΠΟΛΗ ΣΤΑΜΑΤΑ
+        //-----ΑΓΙΟΣ ΣΤΕΦΑΝΟΣ ΑΝΟΙΞΙΗ ΔΙΟΝΥΣΟΣ ΔΡΟΣΙΑ ΕΚΑΛΗ ΡΟΔΟΠΟΛΗ ΣΤΑΜΑΤΑ
         x = new int[]{868, 857, 817, 776, 753, 751, 741, 729, 723, 701, 685, 673, 669, 671, 868};
         y = new int[]{171, 168, 138, 107, 82, 75, 77, 86, 86, 57, 40, 27, 11, 0, 0};
         polys.add(new Polygon(x, y, x.length));
@@ -409,12 +546,13 @@ public class RoutPlanningFrame extends javax.swing.JFrame implements PropertyCha
         lot_18.add("ΑΝΟΙΞΙΗ");
         lot_18.add("ΔΙΟΝΥΣΟΣ");
         lot_18.add("ΔΡΟΣΙΑ");
+        lot_18.add("ΕΚΑΛΗ");
         lot_18.add("ΚΡΥΟΝΕΡΙ");
         lot_18.add("ΡΟΔΟΠΟΛΗ");
         lot_18.add("ΣΤΑΜΑΤΑ");
         lots.put(18, lot_18);
 
-        //--ΠΕΝΤΕΛΗ
+        //--ΠΕΝΤΕΛΗ ΝΕΑ ΠΕΝΤΕΛΗ
         x = new int[]{868, 863, 854, 846, 826, 822, 813, 804, 797, 780, 761, 736, 700, 689, 687, 680, 689, 689, 686, 695, 700, 710, 716, 746, 763, 791, 817, 857, 868};
         y = new int[]{253, 253, 251, 254, 261, 270, 275, 275, 269, 262, 267, 229, 259, 256, 233, 226, 216, 205, 200, 192, 184, 184, 176, 175, 160, 148, 138, 168, 171};
         
@@ -423,10 +561,10 @@ public class RoutPlanningFrame extends javax.swing.JFrame implements PropertyCha
         ArrayList<String> lot_19 = new ArrayList<>();
         
         lot_19.add("ΠΕΝΤΕΛΗ");
-        
+        lot_19.add("ΝΕΑ ΠΕΝΤΕΛΗ");
         lots.put(19, lot_19);
 
-        //-----ΑΝΘΟΥΣΑ, ΓΕΡΑΚΑΣ, ΓΛΥΚΑ ΝΕΡΑ, ΠΑΛΛΗΝΗ
+        //-----ΑΝΘΟΥΣΑ, ΓΕΡΑΚΑΣ, ΓΛΥΚΑ ΝΕΡΑ, ΠΑΛΛΗΝΗ ,ΣΤΑΥΡΟΣ
         x = new int[]{868, 859, 848, 851, 846, 826, 822, 813, 804, 797, 780, 761, 749, 738, 722, 730, 718, 721, 721, 715, 705, 697, 697, 707, 705, 710, 710, 715, 720, 724, 739, 772, 787, 786, 796, 806, 817, 835, 843, 856, 868};
         y = new int[]{345, 348, 283, 277, 254, 261, 270, 275, 275, 269, 262, 267, 279, 293, 321, 328, 366, 375, 380, 389, 391, 406, 414, 432, 441, 449, 464, 467, 466, 470, 470, 470, 454, 448, 418, 427, 432, 444, 436, 437, 429};
         polys.add(new Polygon(x, y, x.length));
@@ -434,35 +572,39 @@ public class RoutPlanningFrame extends javax.swing.JFrame implements PropertyCha
         ArrayList<String> lot_20 = new ArrayList<>();
         lot_20.add("ΑΝΘΟΥΣΑ");
         lot_20.add("ΓΕΡΑΚΑΣ");
+        lot_20.add("ΣΤΑΥΡΟΣ");
         lot_20.add("ΓΛΥΚΑ ΝΕΡΑ");
         lot_20.add("ΠΑΛΛΗΝΗ");
         
         lots.put(20, lot_20);
 
-        //-----ΧΑΛΑΝΔΡΙ, ΨΥΧΙΚΟ, ΒΡΙΛΗΣΣΙΑ
+        //-----ΧΑΛΑΝΔΡΙ, ΨΥΧΙΚΟ, ΝΕΟ ΨΥΧΙΚΟ, ΒΡΙΛΗΣΙΑ ,ΦΙΛΟΘΕΗ
         x = new int[]{536, 545, 563, 579, 584, 600, 618, 623, 632, 646, 654, 664, 671, 676, 689, 700, 736, 761, 749, 738, 722, 709, 692, 681, 660, 642, 629, 578, 568, 557, 549, 532, 519, 517, 522, 519, 519, 526, 531, 532, 536};
         y = new int[]{296, 289, 299, 313, 312, 292, 295, 294, 296, 296, 294, 288, 280, 265, 256, 259, 229, 267, 279, 293, 321, 334, 321, 326, 333, 357, 367, 392, 384, 399, 392, 399, 383, 375, 365, 355, 342, 333, 328, 323, 296};
         polys.add(new Polygon(x, y, x.length));
         
         ArrayList<String> lot_21 = new ArrayList<>();
+        lot_21.add("ΒΡΙΛΗΣΙΑ");
         lot_21.add("ΧΑΛΑΝΔΡΙ");
         lot_21.add("ΨΥΧΙΚΟ");
-        lot_21.add("ΒΡΙΛΗΣΣΙΑ ΝΕΡΑ");
+        lot_21.add("ΝΕΟ ΨΥΧΙΚΟ");
+        lot_21.add("ΦΙΛΟΘΕΗ");
         
         lots.put(21, lot_21);
 
-        //-----ΑΓΙΑ ΠΑΡΑΣΚΕΥΗ, ΠΑΠΑΓΟΣ
+        //-----ΑΓΙΑ ΠΑΡΑΣΚΕΥΗ, ΧΟΛΑΡΓΟΣ,  ΠΑΠΑΓΟΣ
         x = new int[]{722, 730, 718, 721, 721, 715, 705, 697, 697, 707, 705, 710, 710, 699, 678, 665, 658, 650, 614, 597, 566, 568, 572, 576, 587, 574, 578, 629, 642, 660, 681, 692, 709, 722};
         y = new int[]{321, 328, 366, 375, 380, 389, 391, 406, 414, 432, 441, 449, 464, 477, 468, 476, 474, 478, 486, 483, 446, 440, 437, 429, 419, 399, 392, 367, 357, 333, 326, 321, 334, 321};
         polys.add(new Polygon(x, y, x.length));
         
         ArrayList<String> lot_22 = new ArrayList<>();
         lot_22.add("ΑΓΙΑ ΠΑΡΑΣΚΕΥΗ");
+        lot_22.add("ΧΟΛΑΡΓΟΣ");
         lot_22.add("ΠΑΠΑΓΟΣ");
         
         lots.put(22, lot_22);
 
-        //-----ΒΥΡΩΝΑΣ, ΚΑΙΣΑΡΙΑΝΗ, ΖΩΓΡΑΦΟΥ
+        //-----ΒΥΡΩΝΑΣ, ΚΑΙΣΑΡΙΑΝΗ, ΖΩΓΡΑΦΟΣ
         x = new int[]{612, 617, 631, 651, 651, 659, 662, 663, 655, 655, 665, 658, 650, 614, 597, 566, 537, 506, 504, 513, 511, 502, 490, 497, 496, 487, 474, 477, 487, 490, 497, 517, 524, 526, 539, 547, 564, 574, 612};
         y = new int[]{598, 591, 578, 570, 555, 539, 521, 507, 497, 493, 476, 474, 478, 486, 483, 446, 443, 458, 461, 476, 481, 484, 481, 499, 505, 507, 518, 530, 538, 545, 555, 554, 563, 568, 590, 592, 596, 598, 598};
         polys.add(new Polygon(x, y, x.length));
@@ -470,7 +612,7 @@ public class RoutPlanningFrame extends javax.swing.JFrame implements PropertyCha
         ArrayList<String> lot_23 = new ArrayList<>();
         lot_23.add("ΒΥΡΩΝΑΣ");
         lot_23.add("ΚΑΙΣΑΡΙΑΝΗ");
-        lot_23.add("ΖΩΓΡΑΦΟΥ");
+        lot_23.add("ΖΩΓΡΑΦΟΣ");
         lots.put(23, lot_23);
 
         //-----ΑΘΗΝΑ,ΓΑΛΑΤΣΙ
@@ -481,7 +623,7 @@ public class RoutPlanningFrame extends javax.swing.JFrame implements PropertyCha
         ArrayList<String> lot_24 = new ArrayList<>();
         lot_24.add("ΑΘΗΝΑ");
         lot_24.add("ΓΑΛΑΤΣΙ");
-     
+        
         lots.put(24, lot_24);
 
 //----------
@@ -489,52 +631,64 @@ public class RoutPlanningFrame extends javax.swing.JFrame implements PropertyCha
         imagePanel.setPolygons(polys);
         imagePanel.setFill(Color.GREEN);
         
-        imagePanel.addPropertyChangeListener(this);
-        
     }
     
-    @Override
-    public void propertyChange(PropertyChangeEvent arg0) {
-        System.out.println("new value-" + arg0.getNewValue());
-        if (arg0.getSource().equals(imagePanel)) {
-            if (arg0.getNewValue() != null) {//otehrwise, when i close the frame, it throws nullPointExcept. because getNewArgoument is null
-                int index = (Integer) arg0.getNewValue();
-                
-                if (index > -1) {
-                    
-                    Iterator it = lots.entrySet().iterator();
-                    while (it.hasNext()) {
-                        Map.Entry pair = (Map.Entry) it.next();
-                        
-                        districtsLabel.setText(pair.getValue().toString());
-                        it.remove(); // avoids a ConcurrentModificationException
-                    }
-
-                    // aaa.setText(lots.get(lot).toString());
-                    //   rent.setText(prices.get(index));
-                    //   status.setText(statuses.get(index));
+    public void showChosenDistricts(HashSet<Integer> chosenLots) {
+        districtsListModel.clear();
+        ArrayList<String> dl;
+        for (Integer key : lots.keySet()) {
+            if (chosenLots.contains(key)) {
+                dl = lots.get(key);
+                for (String district : dl) {
+                    districtsListModel.addElement(district);
                 }
             }
         }
     }
     
-    public void showChosenDistricts(HashSet<Integer> chosenLots) {
-        for (Integer key : lots.keySet()) {
-            if (chosenLots.contains(key)) {
-                System.out.println(lots.get(key)); 
-            }
+    public void hidePopup() {
+        if (popup != null) {
+            popup.hide();
         }
     }
-
-    // delete those 3 methods after
-    public void showX(int x) {
+    
+    public void showHoveredLot(int currentLot, MouseEvent e) {
         
-        X.setText(String.valueOf(x));
+        if (popup != null) {
+            popup.hide();
+        }
+        if (currentLot > -1 && jCheckBox1.isSelected()) {
+            
+            ArrayList districtsList = lots.get(currentLot);
+            DefaultListModel listModel = new DefaultListModel();
+            JList districts = new JList(listModel);
+            districts.setFont(popupFont);
+            for (Object disrtict : districtsList) {
+                listModel.addElement(disrtict.toString());
+            }
+            
+            popup = PopupFactory.getSharedInstance().getPopup(e.getComponent(), districts, e.getXOnScreen() + 20, e.getYOnScreen() + 20);
+            popup.show();
+            
+        } else {
+            
+        }
+        
     }
     
-    public void showY(int y) {
-        Y.setText(String.valueOf(y));
+    private Rout collectRoutInformation() {
+        System.out.println("need checcking here- collectRoutInformation ");
+        Rout rout = new Rout();
+        rout.setName(routNameField.getText());
+        rout.setLotSet(imagePanel.getChosenLots());
+        rout.setDay_1(day_1Field.isSelected());
+        rout.setDay_2(day_2Field.isSelected());
+        rout.setDay_3(day_3Field.isSelected());
+        rout.setDay_4(day_4Field.isSelected());
+        rout.setDay_5(day_5Field.isSelected());
+        rout.setDay_6(day_6Field.isSelected());
+        rout.setDay_7(day_7Field.isSelected());
+        
+        return rout;
     }
-
-//--------
 }

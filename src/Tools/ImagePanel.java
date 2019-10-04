@@ -52,6 +52,10 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
 
     }
 
+    public HashSet getChosenLots() {
+        return chosenLots;
+    }
+
     public void setPolygons(Vector<Polygon> polygons) {
         this.polys = polygons;
     }
@@ -120,7 +124,7 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
 
     public void clearChosenLots() {
         chosenLots.clear();
-      repaint();
+        repaint();
     }
 
     // unused mouse
@@ -133,6 +137,7 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
     }
 
     public void mouseExited(MouseEvent e) {
+        routPlanningFrame.hidePopup();
     }
 
     public void mousePressed(MouseEvent e) {
@@ -145,10 +150,17 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
 
     @Override
     public void mouseMoved(MouseEvent e) {
+        int currentLot = -1;
+        for (int i = 0; i < polys.size(); i++) {
+            if (polys.get(i).contains(e.getX(), e.getY())) {
 
-        int x = e.getX();
-        routPlanningFrame.showX(x);
-        int y = e.getY();
-        routPlanningFrame.showY(y);
+                currentLot = i;
+
+                // repaint();
+                break; // no need to keep checking
+            }
+        }
+        routPlanningFrame.showHoveredLot(currentLot, e);
+
     }
 }
