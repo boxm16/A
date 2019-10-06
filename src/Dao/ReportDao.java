@@ -38,7 +38,7 @@ public class ReportDao {
         String itemQuery = "INSERT INTO item (product_id, item_code, item_year, cleaning, storing, mending, receiving_report_id, note, status)"
                 + " VALUES (?,?,?,?,?,?,?,?,?);";
         try (PreparedStatement ps_report = connection.prepareStatement(reportQuery);
-                PreparedStatement ps_item = connection.prepareCall(itemQuery);
+                PreparedStatement ps_item = connection.prepareStatement(itemQuery);
                 Statement last_report_id_st = connection.createStatement();) {
             ps_report.setString(1, getStringFromDate(report.getDate()));
             ps_report.setInt(2, report.getNumber());
@@ -74,7 +74,7 @@ public class ReportDao {
                 }
                 ps_item.setInt(7, increment_number);
                 ps_item.setString(8, item.getNote());
-                ps_item.setString(9, "received");
+                ps_item.setString(9, "processing");
                 ps_item.addBatch();
             }
             ps_item.executeBatch();
@@ -93,5 +93,5 @@ public class ReportDao {
 
         return stringDate;
     }
-
-}
+    
+  } 

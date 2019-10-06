@@ -168,7 +168,7 @@ public class CustomerDao {
             Logger.getLogger(CustomerDao.class.getName()).log(Level.SEVERE, null, ex);
 
         }
-         System.out.println("fdfdf"+customer.getDistrict());
+        System.out.println("fdfdf" + customer.getDistrict());
     }
 
     public void editCustomer(Customer customer) {
@@ -201,5 +201,31 @@ public class CustomerDao {
 
         }
 
+    }
+
+    public ArrayList<Customer> getReadyToGoCustomers() {
+        ArrayList<Customer> readyToGoCustomers = new ArrayList<>();
+        String query = "SELECT * FROM alladin1.customer "
+                + "Inner JOIN report ON customer.customer_id=report.customer_id "
+                + "INNER JOIN alladin1.item ON report.id=item.receiving_report_id "
+                + "WHERE NOT EXISTS (SELECT receiving_report_id FROM item where report.id=item.receiving_report_id and status='processing') "
+                + "GROUP BY customer.customer_id;";
+
+        try (Statement statement = connection.createStatement()) {
+            ResultSet rs = statement.executeQuery(query);
+            while (rs.next()) {
+                Customer customer = new Customer();
+                customer.setId(rs.getInt("customer_id"));
+                customer.setLastName(rs.getString("last_name"));
+                customer.setFirstName(rs.getString("first_name"));
+
+                readyToGoCustomers.add(customer);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CustomerDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return readyToGoCustomers;
     }
 }

@@ -12,7 +12,8 @@ import java.util.HashSet;
  * @author Michail Sitmalidis
  */
 public class Rout {
-    
+
+    private int id;
     private String name;
     private boolean day_1;
     private boolean day_2;
@@ -22,6 +23,10 @@ public class Rout {
     private boolean day_6;
     private boolean day_7;
     private HashSet<Integer> lotSet;
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -57,6 +62,10 @@ public class Rout {
 
     public void setLotSet(HashSet<Integer> lotSet) {
         this.lotSet = lotSet;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {
@@ -96,6 +105,5 @@ public class Rout {
     }
 
    
-    
-    
+
 }

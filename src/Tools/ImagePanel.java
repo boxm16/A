@@ -56,6 +56,10 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
         return chosenLots;
     }
 
+    public void setChosenLots(HashSet<Integer> chosenLots) {
+        this.chosenLots = chosenLots;
+    }
+
     public void setPolygons(Vector<Polygon> polygons) {
         this.polys = polygons;
     }
@@ -75,11 +79,11 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
 
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, this.alpha));
         g2.setColor(this.fill);
-        if (this.currentMap > -1) {
-            for (Integer lot : chosenLots) {
-                g2.fillPolygon(this.polys.get(lot));
-            }
+
+        for (Integer lot : chosenLots) {
+            g2.fillPolygon(this.polys.get(lot));
         }
+
     }
     //delete
     ArrayList<Integer> x = new ArrayList<>();
@@ -127,6 +131,11 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
         repaint();
     }
 
+    public void redraw(HashSet<Integer> routlotSet) {
+        chosenLots = routlotSet;
+        repaint();
+    }
+
     // unused mouse
     public void mouseReleased(MouseEvent e) {
 
@@ -163,4 +172,5 @@ public class ImagePanel extends JPanel implements MouseListener, MouseMotionList
         routPlanningFrame.showHoveredLot(currentLot, e);
 
     }
+
 }

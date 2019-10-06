@@ -7,6 +7,8 @@ package Controllers;
 
 import Dao.RoutDao;
 import Models.Rout;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -15,6 +17,7 @@ import Models.Rout;
 public class RoutController {
 
     RoutDao routDao;
+    ArrayList<Rout> existingRouts;
 
     public RoutController() {
         routDao = new RoutDao();
@@ -23,4 +26,19 @@ public class RoutController {
     public void saveRout(Rout rout) {
         routDao.saveRout(rout);
     }
+
+    public ArrayList<Rout> getExistingRouts() {
+        existingRouts = routDao.getExistingRouts();
+
+        return existingRouts;
+    }
+
+    public void deleteRout(int rout_id) {
+        routDao.deleteRout(rout_id);
+    }
+
+    public Rout getRout(int routId) {
+      return  routDao.getRout(routId);
+    }
+
 }

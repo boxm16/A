@@ -86,16 +86,6 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         RootPanel = new javax.swing.JPanel();
         customerCardsTabbedPane = new javax.swing.JTabbedPane();
-        customerCardTab = new javax.swing.JPanel();
-        calculationDisplayPanel = new javax.swing.JPanel();
-        subTotalLabel = new javax.swing.JLabel();
-        subTotalSum = new javax.swing.JLabel();
-        fpaLabel = new javax.swing.JLabel();
-        fpaSum = new javax.swing.JLabel();
-        totalLabel = new javax.swing.JLabel();
-        totalSum = new javax.swing.JLabel();
-        processButton = new javax.swing.JButton();
-        customerCardPanel = new javax.swing.JPanel();
         newReceivingTab = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         receivingDatePicker = new com.toedter.calendar.JDateChooser();
@@ -107,6 +97,17 @@ public class MainFrame extends javax.swing.JFrame {
         receivingItemsPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         receivingItemsTable = new javax.swing.JTable();
+        customerCardTab = new javax.swing.JPanel();
+        calculationDisplayPanel = new javax.swing.JPanel();
+        subTotalLabel = new javax.swing.JLabel();
+        subTotalSum = new javax.swing.JLabel();
+        fpaLabel = new javax.swing.JLabel();
+        fpaSum = new javax.swing.JLabel();
+        totalLabel = new javax.swing.JLabel();
+        totalSum = new javax.swing.JLabel();
+        processButton = new javax.swing.JButton();
+        customerCardPanel = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
         customerArchiveTab = new javax.swing.JPanel();
         HeadPanel = new javax.swing.JPanel();
         CombinedPanel = new javax.swing.JPanel();
@@ -187,93 +188,6 @@ public class MainFrame extends javax.swing.JFrame {
         RootPanel.setPreferredSize(new java.awt.Dimension(1280, 1024));
 
         customerCardsTabbedPane.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-
-        subTotalLabel.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
-        subTotalLabel.setText("ΜΕΡΙΚΟ ΣΥΝΟΛΟ:");
-
-        subTotalSum.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
-        subTotalSum.setText("0.0");
-
-        fpaLabel.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
-        fpaLabel.setText("ΦΠΑ:");
-
-        fpaSum.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
-        fpaSum.setText("0.0");
-
-        totalLabel.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
-        totalLabel.setText("ΤΕΛΙΚΟ ΣΥΝΟΛΟ:");
-
-        totalSum.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        totalSum.setText("0.0");
-
-        processButton.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        processButton.setText("PROCESS");
-
-        javax.swing.GroupLayout calculationDisplayPanelLayout = new javax.swing.GroupLayout(calculationDisplayPanel);
-        calculationDisplayPanel.setLayout(calculationDisplayPanelLayout);
-        calculationDisplayPanelLayout.setHorizontalGroup(
-            calculationDisplayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(calculationDisplayPanelLayout.createSequentialGroup()
-                .addComponent(subTotalLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(subTotalSum, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(fpaLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(fpaSum)
-                .addGap(58, 58, 58)
-                .addComponent(totalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(totalSum, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(processButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        calculationDisplayPanelLayout.setVerticalGroup(
-            calculationDisplayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(subTotalLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(subTotalSum, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(fpaSum, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(fpaLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(calculationDisplayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(totalSum, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(processButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(totalLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        customerCardPanel.setBackground(new java.awt.Color(0, 255, 0));
-
-        javax.swing.GroupLayout customerCardPanelLayout = new javax.swing.GroupLayout(customerCardPanel);
-        customerCardPanel.setLayout(customerCardPanelLayout);
-        customerCardPanelLayout.setHorizontalGroup(
-            customerCardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        customerCardPanelLayout.setVerticalGroup(
-            customerCardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 371, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout customerCardTabLayout = new javax.swing.GroupLayout(customerCardTab);
-        customerCardTab.setLayout(customerCardTabLayout);
-        customerCardTabLayout.setHorizontalGroup(
-            customerCardTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerCardTabLayout.createSequentialGroup()
-                .addGroup(customerCardTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(customerCardPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(calculationDisplayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(810, 810, 810))
-        );
-        customerCardTabLayout.setVerticalGroup(
-            customerCardTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerCardTabLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(calculationDisplayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(customerCardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(7, 7, 7))
-        );
-
-        customerCardsTabbedPane.addTab("ΚΑΡΤΕΛΑ", customerCardTab);
 
         receivingDatePicker.setDateFormatString("dd/MM/yyyy");
         receivingDatePicker.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
@@ -413,11 +327,111 @@ public class MainFrame extends javax.swing.JFrame {
 
         customerCardsTabbedPane.addTab("ΝΕΑ ΠΑΡΑΛΑΒΗ", newReceivingTab);
 
+        subTotalLabel.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        subTotalLabel.setText("ΜΕΡΙΚΟ ΣΥΝΟΛΟ:");
+
+        subTotalSum.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        subTotalSum.setText("0.0");
+
+        fpaLabel.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        fpaLabel.setText("ΦΠΑ:");
+
+        fpaSum.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        fpaSum.setText("0.0");
+
+        totalLabel.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
+        totalLabel.setText("ΤΕΛΙΚΟ ΣΥΝΟΛΟ:");
+
+        totalSum.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        totalSum.setText("0.0");
+
+        processButton.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        processButton.setText("PROCESS");
+
+        javax.swing.GroupLayout calculationDisplayPanelLayout = new javax.swing.GroupLayout(calculationDisplayPanel);
+        calculationDisplayPanel.setLayout(calculationDisplayPanelLayout);
+        calculationDisplayPanelLayout.setHorizontalGroup(
+            calculationDisplayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(calculationDisplayPanelLayout.createSequentialGroup()
+                .addComponent(subTotalLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(subTotalSum, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(fpaLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(fpaSum)
+                .addGap(58, 58, 58)
+                .addComponent(totalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(totalSum, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(processButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        calculationDisplayPanelLayout.setVerticalGroup(
+            calculationDisplayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(subTotalLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(subTotalSum, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(fpaSum, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(fpaLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(calculationDisplayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(totalSum, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(processButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(totalLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        customerCardPanel.setBackground(new java.awt.Color(0, 255, 0));
+
+        javax.swing.GroupLayout customerCardPanelLayout = new javax.swing.GroupLayout(customerCardPanel);
+        customerCardPanel.setLayout(customerCardPanelLayout);
+        customerCardPanelLayout.setHorizontalGroup(
+            customerCardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        customerCardPanelLayout.setVerticalGroup(
+            customerCardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 371, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout customerCardTabLayout = new javax.swing.GroupLayout(customerCardTab);
+        customerCardTab.setLayout(customerCardTabLayout);
+        customerCardTabLayout.setHorizontalGroup(
+            customerCardTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerCardTabLayout.createSequentialGroup()
+                .addGroup(customerCardTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(customerCardPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(calculationDisplayPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(810, 810, 810))
+        );
+        customerCardTabLayout.setVerticalGroup(
+            customerCardTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerCardTabLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(calculationDisplayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(customerCardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(7, 7, 7))
+        );
+
+        customerCardsTabbedPane.addTab("ΚΑΡΤΕΛΑ", customerCardTab);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1275, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 462, Short.MAX_VALUE)
+        );
+
+        customerCardsTabbedPane.addTab("ΠΑΡΑΔΟΣΗ", jPanel3);
+
         javax.swing.GroupLayout customerArchiveTabLayout = new javax.swing.GroupLayout(customerArchiveTab);
         customerArchiveTab.setLayout(customerArchiveTabLayout);
         customerArchiveTabLayout.setHorizontalGroup(
             customerArchiveTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1293, Short.MAX_VALUE)
+            .addGap(0, 1275, Short.MAX_VALUE)
         );
         customerArchiveTabLayout.setVerticalGroup(
             customerArchiveTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -562,7 +576,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
 
         findButton.setFont(new java.awt.Font("Tahoma", 0, 20)); // NOI18N
-        findButton.setText("ΒΡΕΣ ΠΕΛΑΤΗ ΜΕ ΚΩΔΙΚΟ");
+        findButton.setText("ΒΡΕΣ ΠΕΛΑΤΗ");
         findButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 findButtonActionPerformed(evt);
@@ -597,9 +611,10 @@ public class MainFrame extends javax.swing.JFrame {
                                 .addGap(111, 111, 111)
                                 .addComponent(lastNameField))
                             .addGroup(CombinedPanelLayout.createSequentialGroup()
-                                .addComponent(findButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(customerIdField, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(findButton, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(customerIdField, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(CombinedPanelLayout.createSequentialGroup()
                                 .addComponent(firstNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1109,19 +1124,14 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(RootPanelLayout.createSequentialGroup()
                 .addGroup(RootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(RootPanelLayout.createSequentialGroup()
-                        .addGroup(RootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(RootPanelLayout.createSequentialGroup()
-                                .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(HeadPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1243, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, RootPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(customerCardsTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 1298, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(HeadPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1243, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(37, Short.MAX_VALUE))
+            .addComponent(customerCardsTabbedPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         RootPanelLayout.setVerticalGroup(
             RootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1548,6 +1558,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

@@ -65,4 +65,8 @@ public class CustomerController {
 
     }
 
+    public ArrayList<Customer> getReadyToGoCustomers() {
+        return customerDao.getReadyToGoCustomers();
+    }
+
 }

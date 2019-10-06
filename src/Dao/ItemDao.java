@@ -154,6 +154,10 @@ public class ItemDao {
         if (item.getLength() != null && item.getWidth() != null) {//αφου διαστασεις εχουν καταχωρηθει, πλεον ειναι ετοιμο γα παραδοση
             query = "UPDATE item SET mending_charge=?, status='ready' WHERE item_code=? and item_year=?;";
         }
+        if (!item.isForCleaning() && !item.isForStoring()) {//αφου δεν ειναι ουτε για καθαρισμα, ουτε για φυλαξη, ειναι ετοιμο για παραδοση
+            query = "UPDATE item SET mending_charge=?, status='ready' WHERE item_code=? and item_year=?;";
+
+        }
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setBigDecimal(1, item.getMendingCharge());
             preparedStatement.setInt(2, item.getCode());
