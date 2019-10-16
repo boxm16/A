@@ -9,9 +9,11 @@ import Controllers.CustomerController;
 import Controllers.ItemController;
 import Controllers.AddressController;
 import Controllers.ReportController;
+import Controllers.RoutController;
 import Models.Customer;
 import Models.Item;
 import Models.Report;
+import Models.Rout;
 import Tools.MyTableModel;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -24,10 +26,13 @@ import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.EventListener;
 import java.util.HashMap;
+import java.util.Locale;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -50,6 +55,7 @@ public class MainFrame extends javax.swing.JFrame {
     ItemController itemController;
     ReportController reportController;
     AddressController addressController;
+    RoutController routController;
     
     JTableHeader receivingItemsTableHeader;
     DefaultTableModel receivingItemsTableModel;
@@ -61,6 +67,8 @@ public class MainFrame extends javax.swing.JFrame {
     ItemListener alternativeDistrictFieldItemSelectionListener;
     ItemListener postalCodeFieldItemSelectionListener;
     ItemListener alternativePostalCodeFieldItemSelectionListener;
+    
+    DefaultListModel availableDaysModel;
 
     /**
      * Creates new form MainFrame
@@ -108,6 +116,11 @@ public class MainFrame extends javax.swing.JFrame {
         processButton = new javax.swing.JButton();
         customerCardPanel = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jButton3 = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        availableDaysList = new javax.swing.JList<>();
+        jButton4 = new javax.swing.JButton();
         customerArchiveTab = new javax.swing.JPanel();
         HeadPanel = new javax.swing.JPanel();
         CombinedPanel = new javax.swing.JPanel();
@@ -414,15 +427,58 @@ public class MainFrame extends javax.swing.JFrame {
 
         customerCardsTabbedPane.addTab("ΚΑΡΤΕΛΑ", customerCardTab);
 
+        jDateChooser1.setDateFormatString("d MMM, yyyy");
+        jDateChooser1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+
+        jButton3.setText("jButton3");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jScrollPane4.setViewportView(availableDaysList);
+
+        jButton4.setText("FIND AVAILABLE TOURS");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1275, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(186, 186, 186)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 572, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(203, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 462, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(13, 13, 13)
+                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(114, Short.MAX_VALUE))
         );
 
         customerCardsTabbedPane.addTab("ΠΑΡΑΔΟΣΗ", jPanel3);
@@ -1172,6 +1228,7 @@ public class MainFrame extends javax.swing.JFrame {
         itemController = new ItemController();
         reportController = new ReportController();
         addressController = new AddressController();
+        routController = new RoutController();
         
         focusInColor = new Color(255, 255, 0);
         focusOutColor = new Color(240, 240, 240);
@@ -1226,6 +1283,8 @@ public class MainFrame extends javax.swing.JFrame {
             }
             
         };
+        
+        availableDaysModel = new DefaultListModel();
     }
 
     private void findButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_findButtonActionPerformed
@@ -1450,10 +1509,32 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
         RoutPlanningFrame routPlanningFrame = new RoutPlanningFrame();
         routPlanningFrame.setVisible(true);
 
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        Dimension d = new Dimension(300, 50);
+        jDateChooser1.getJCalendar().getMonthChooser().setPreferredSize(d);
+        Locale forLangLocale = Locale.forLanguageTag("el-GR");
+        jDateChooser1.getJCalendar().setLocale(forLangLocale);
+        repaint();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        String district = districtField.getText();
+        availableDaysModel.clear();
+        ArrayList<String> availableDays;
+        availableDays = routController.getAvailableRoutForDistrict(district);
+        Collections.sort(availableDays);
+        
+        for (String day : availableDays) {
+            availableDaysModel.addElement(day);
+        }
+        availableDaysList.setModel(availableDaysModel);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1513,6 +1594,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel alternativeStreetLabel3;
     private javax.swing.JLabel alternativeStreetLabel4;
     private javax.swing.JTextField alternativeStreetNumberField;
+    private javax.swing.JList<String> availableDaysList;
     private javax.swing.JTextField bellNameField;
     private javax.swing.JPanel buttonsPanel;
     private javax.swing.JPanel calculationDisplayPanel;
@@ -1548,6 +1630,9 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel fpaSum;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -1563,6 +1648,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JFormattedTextField landLineField;
     private javax.swing.JLabel landLineLabel;
     private javax.swing.JTextField lastNameField;

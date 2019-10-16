@@ -392,7 +392,7 @@ public class RoutPlanningFrame extends javax.swing.JFrame {
         int selected = existingRoutsField.getSelectedIndex();
         int rout_id = existingRouts.get(selected).getId();
         routController.deleteRout(rout_id);
-        
+
         loadExistingRouts();
 
     }//GEN-LAST:event_deleteRoutButtonActionPerformed
@@ -404,18 +404,22 @@ public class RoutPlanningFrame extends javax.swing.JFrame {
             /*   Rout rout=existingRouts.get(index);
             imagePanel.redraw(rout.getLotSet());
              */
-            Rout rout = existingRouts.get(index);
-            Rout routFromDB = routController.getRout(rout.getId());
+            if (index > -1) {
+                Rout rout = existingRouts.get(index);
+                Rout routFromDB = routController.getRout(rout.getId());
 
-            day_1Field1.setSelected(rout.isDay_1());
-            day_2Field1.setSelected(rout.isDay_2());
-            day_3Field1.setSelected(rout.isDay_3());
-            day_4Field1.setSelected(rout.isDay_4());
-            day_5Field1.setSelected(rout.isDay_5());
-            day_6Field1.setSelected(rout.isDay_6());
-            day_7Field1.setSelected(rout.isDay_7());
-            
-            imagePanel.redraw(routFromDB.getLotSet());
+                day_1Field1.setSelected(rout.isDay_1());
+                day_2Field1.setSelected(rout.isDay_2());
+                day_3Field1.setSelected(rout.isDay_3());
+                day_4Field1.setSelected(rout.isDay_4());
+                day_5Field1.setSelected(rout.isDay_5());
+                day_6Field1.setSelected(rout.isDay_6());
+                day_7Field1.setSelected(rout.isDay_7());
+
+                imagePanel.redraw(routFromDB.getLotSet());
+            } else {
+                imagePanel.redraw(new HashSet());
+            }
 //i know this is stupid. but try whith those 2 line above, you`ll see what is really creay. I couldnt figure it out
         }
     }//GEN-LAST:event_existingRoutsFieldValueChanged

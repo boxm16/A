@@ -111,7 +111,7 @@ public class RoutDao {
     }
 
     public Rout getRout(int routId) {
-        String query = "SELECT * FROM rout WHERE id="+routId+"";
+        String query = "SELECT * FROM rout WHERE id=" + routId + "";
         String lotQuery = "SELECT lot FROM rout_lot WHERE rout=?";
         Rout rout = null;
         try (Statement statement = connection.createStatement();
@@ -144,6 +144,35 @@ public class RoutDao {
 
         }
         return rout;
+    }
+
+    public ArrayList<Rout> getAvailableRoutsForDistrict(String district) {
+
+        ArrayList<Rout> availableRouts = new ArrayList<>();
+        String query = "SELECT *  FROM rout "
+                + "INNER JOIN rout_lot ON rout.id=rout_lot.rout "
+                + "INNER JOIN post_box ON rout_lot.lot=post_box.lot "
+                + "WHERE post_box.district='" + district + "' "
+                + "GROUP BY rout.id";
+        try (Statement statement = connection.createStatement()) {
+            ResultSet rs = statement.executeQuery(query);
+            while (rs.next()) {
+                Rout rout = new Rout();
+                rout.setId(rs.getInt("id"));
+                rout.setName(rs.getString("name"));
+                rout.setDay_1(rs.getBoolean("day_1"));
+                rout.setDay_2(rs.getBoolean("day_2"));
+                rout.setDay_3(rs.getBoolean("day_3"));
+                rout.setDay_4(rs.getBoolean("day_4"));
+                rout.setDay_5(rs.getBoolean("day_5"));
+                rout.setDay_6(rs.getBoolean("day_6"));
+                rout.setDay_7(rs.getBoolean("day_7"));
+                availableRouts.add(rout);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ItemDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return availableRouts;
     }
 
 }
