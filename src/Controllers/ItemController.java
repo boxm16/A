@@ -24,7 +24,7 @@ public class ItemController {
         itemDao = new ItemDao();
     }
 
-    public ArrayList<Item> getCustomerItems(int customerId) {
+    private ArrayList<Item> getCustomerItems(int customerId) {
         ArrayList<Item> customerItems;
 
         customerItems = itemDao.getCustomerItems(customerId);
@@ -63,6 +63,32 @@ public class ItemController {
         }
 
         return customerItems;
+    }
+
+    public ArrayList<Item> getCustomerItemsForCard(int customerId) {
+        ArrayList<Item> itemsForCard = new ArrayList<>();
+        ArrayList<Item> customerItems = getCustomerItems(customerId);
+
+        for (Item item : customerItems) {
+            if (item.getStatus().equals("processing") | item.getStatus().equals("ready")) {
+                itemsForCard.add(item);
+
+            }
+        }
+        return itemsForCard;
+    }
+
+    public ArrayList<Item> getCustomerItemsForOnRoutCard(int customerId) {
+        ArrayList<Item> itemsForOnRoutCard = new ArrayList<>();
+        ArrayList<Item> customerItems = getCustomerItems(customerId);
+
+        for (Item item : customerItems) {
+            if (item.getStatus().equals("on_rout")) {
+                itemsForOnRoutCard.add(item);
+
+            }
+        }
+        return itemsForOnRoutCard;
     }
 
     public boolean itemCodeRegisteredInDb(int itemCode) {

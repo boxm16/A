@@ -5,10 +5,8 @@
  */
 package Controllers;
 
-
 import Dao.ReportDao;
 import Models.Report;
-
 
 /**
  *
@@ -27,5 +25,10 @@ public class ReportController {
         reportDao.saveReport(report);
     }
 
-    
+    public int insertDeliveryReport(Report report) {
+
+        int reportId = reportDao.insertDeliveryReport(report);
+        return reportId;
+    }
+
 }

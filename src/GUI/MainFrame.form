@@ -336,23 +336,22 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="customerCardPanel" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="calculationDisplayPanel" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="calculationDisplayPanel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="customerCardPanel" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="810" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
+                              <Component id="calculationDisplayPanel" min="-2" pref="98" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="calculationDisplayPanel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="customerCardPanel" max="32767" attributes="0"/>
-                              <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                              <Component id="customerCardPanel" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -364,85 +363,34 @@
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="subTotalLabel" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="subTotalSum" min="-2" pref="128" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="fpaLabel" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jPanel5" max="32767" attributes="0"/>
+                                      <Component id="jPanel6" max="32767" attributes="0"/>
+                                  </Group>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="fpaSum" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
-                                  <Component id="totalLabel" min="-2" pref="298" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="totalSum" min="-2" pref="146" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="processButton" max="32767" attributes="0"/>
+                                  <Component id="processButton" min="-2" pref="202" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="subTotalLabel" alignment="0" max="32767" attributes="0"/>
-                              <Component id="subTotalSum" alignment="1" max="32767" attributes="0"/>
-                              <Component id="fpaSum" alignment="1" max="32767" attributes="0"/>
-                              <Component id="fpaLabel" alignment="1" max="32767" attributes="0"/>
-                              <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                  <Component id="totalSum" alignment="3" min="-2" pref="58" max="-2" attributes="0"/>
-                                  <Component id="processButton" alignment="3" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="jPanel6" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="processButton" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
                               </Group>
-                              <Component id="totalLabel" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Component class="javax.swing.JLabel" name="subTotalLabel">
-                          <Properties>
-                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="Tahoma" size="30" style="0"/>
-                            </Property>
-                            <Property name="text" type="java.lang.String" value="&#x39c;&#x395;&#x3a1;&#x399;&#x39a;&#x39f; &#x3a3;&#x3a5;&#x39d;&#x39f;&#x39b;&#x39f;:"/>
-                          </Properties>
-                        </Component>
-                        <Component class="javax.swing.JLabel" name="subTotalSum">
-                          <Properties>
-                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="Tahoma" size="30" style="0"/>
-                            </Property>
-                            <Property name="text" type="java.lang.String" value="0.0"/>
-                          </Properties>
-                        </Component>
-                        <Component class="javax.swing.JLabel" name="fpaLabel">
-                          <Properties>
-                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="Tahoma" size="30" style="0"/>
-                            </Property>
-                            <Property name="text" type="java.lang.String" value="&#x3a6;&#x3a0;&#x391;:"/>
-                          </Properties>
-                        </Component>
-                        <Component class="javax.swing.JLabel" name="fpaSum">
-                          <Properties>
-                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="Tahoma" size="30" style="0"/>
-                            </Property>
-                            <Property name="text" type="java.lang.String" value="0.0"/>
-                          </Properties>
-                        </Component>
-                        <Component class="javax.swing.JLabel" name="totalLabel">
-                          <Properties>
-                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="Tahoma" size="30" style="1"/>
-                            </Property>
-                            <Property name="text" type="java.lang.String" value="&#x3a4;&#x395;&#x39b;&#x399;&#x39a;&#x39f; &#x3a3;&#x3a5;&#x39d;&#x39f;&#x39b;&#x39f;:"/>
-                          </Properties>
-                        </Component>
-                        <Component class="javax.swing.JLabel" name="totalSum">
-                          <Properties>
-                            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                              <Font name="Tahoma" size="36" style="1"/>
-                            </Property>
-                            <Property name="text" type="java.lang.String" value="0.0"/>
-                          </Properties>
-                        </Component>
                         <Component class="javax.swing.JButton" name="processButton">
                           <Properties>
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -450,7 +398,187 @@
                             </Property>
                             <Property name="text" type="java.lang.String" value="PROCESS"/>
                           </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="processButtonActionPerformed"/>
+                          </Events>
                         </Component>
+                        <Container class="javax.swing.JPanel" name="jPanel5">
+                          <Properties>
+                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                                <LineBorder/>
+                              </Border>
+                            </Property>
+                          </Properties>
+
+                          <Layout>
+                            <DimensionLayout dim="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="routButtonsPanel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="availableRoutsList" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                            </DimensionLayout>
+                            <DimensionLayout dim="1">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="routButtonsPanel" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="availableRoutsList" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jLabel6" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                            </DimensionLayout>
+                          </Layout>
+                          <SubComponents>
+                            <Component class="javax.swing.JLabel" name="jLabel6">
+                              <Properties>
+                                <Property name="horizontalAlignment" type="int" value="0"/>
+                                <Property name="text" type="java.lang.String" value="&#x394;&#x399;&#x391;&#x39b;&#x395;&#x39e;&#x395; &#x394;&#x3a1;&#x39f;&#x39c;&#x39f;&#x39b;&#x39f;&#x393;&#x399;&#x39f;"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JComboBox" name="availableRoutsList">
+                              <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="30" style="0"/>
+                                </Property>
+                                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                                  <StringArray count="0"/>
+                                </Property>
+                              </Properties>
+                              <AuxValues>
+                                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                              </AuxValues>
+                            </Component>
+                            <Container class="javax.swing.JPanel" name="routButtonsPanel">
+
+                              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
+                              <SubComponents>
+                                <Component class="javax.swing.JButton" name="jButton3">
+                                  <Properties>
+                                    <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;center&gt;&#x392;&#x3a1;&#x395;&#x3a3; &#x394;&#x3a1;&#x39f;&#x39c;&#x39f;&#x39b;&#x39f;&#x393;&#x399;&#x391; &#x393;&#x399;&#x391; &lt;br&gt; &#x395;&#x39d;&#x39d;&#x391;&#x39b;&#x391;&#x39a;&#x3a4;&#x399;&#x39a;&#x397; &#x394;&#x399;&#x395;&#x3a5;&#x398;&#x3a5;&#x39d;&#x3a3;&#x397;&lt;/center&gt;&lt;/html&gt;"/>
+                                  </Properties>
+                                  <Events>
+                                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+                                  </Events>
+                                  <Constraints>
+                                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                                      <CardConstraints cardName="card22"/>
+                                    </Constraint>
+                                  </Constraints>
+                                </Component>
+                                <Component class="javax.swing.JButton" name="jButton4">
+                                  <Properties>
+                                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                                      <Color blue="33" green="33" red="ff" type="rgb"/>
+                                    </Property>
+                                    <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;center&gt;&#x392;&#x3a1;&#x395;&#x3a3; &#x394;&#x3a1;&#x39f;&#x39c;&#x39f;&#x39b;&#x39f;&#x393;&#x399;&#x391; &#x393;&#x399;&#x391; &lt;br&gt; &#x3a0;&#x3a1;&#x3a9;&#x3a4;&#x397; &#x394;&#x399;&#x395;&#x3a5;&#x398;&#x3a5;&#x39d;&#x3a3;&#x397;&lt;/center&gt;&lt;/html&gt;"/>
+                                  </Properties>
+                                  <Events>
+                                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
+                                  </Events>
+                                  <Constraints>
+                                    <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
+                                      <CardConstraints cardName="card33"/>
+                                    </Constraint>
+                                  </Constraints>
+                                </Component>
+                              </SubComponents>
+                            </Container>
+                          </SubComponents>
+                        </Container>
+                        <Container class="javax.swing.JPanel" name="jPanel6">
+                          <Properties>
+                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                                <LineBorder/>
+                              </Border>
+                            </Property>
+                          </Properties>
+
+                          <Layout>
+                            <DimensionLayout dim="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                                      <Component id="subTotalLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="subTotalSum" min="-2" pref="76" max="-2" attributes="0"/>
+                                      <EmptySpace pref="171" max="32767" attributes="0"/>
+                                      <Component id="fpaLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="fpaSum" min="-2" pref="76" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
+                                      <Component id="totalLabel" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="totalSum" min="-2" pref="104" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                            </DimensionLayout>
+                            <DimensionLayout dim="1">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="totalLabel" pref="42" max="32767" attributes="0"/>
+                                  <Component id="totalSum" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="subTotalLabel" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="subTotalSum" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="fpaLabel" max="32767" attributes="0"/>
+                                  <Component id="fpaSum" alignment="1" max="32767" attributes="0"/>
+                              </Group>
+                            </DimensionLayout>
+                          </Layout>
+                          <SubComponents>
+                            <Component class="javax.swing.JLabel" name="totalSum">
+                              <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="32" style="0"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="0.0"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="subTotalSum">
+                              <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="24" style="0"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="0.0"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="fpaLabel">
+                              <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="24" style="0"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="&#x3a6;&#x3a0;&#x391;:"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="fpaSum">
+                              <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="24" style="0"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="0.0"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="subTotalLabel">
+                              <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="24" style="0"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="&#x39c;&#x395;&#x3a1;&#x399;&#x39a;&#x39f; &#x3a3;&#x3a5;&#x39d;&#x39f;&#x39b;&#x39f;:"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JLabel" name="totalLabel">
+                              <Properties>
+                                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                  <Font name="Tahoma" size="32" style="0"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="&#x3a4;&#x395;&#x39b;&#x399;&#x39a;&#x39f; &#x3a3;&#x3a5;&#x39d;&#x39f;&#x39b;&#x39f;:"/>
+                              </Properties>
+                            </Component>
+                          </SubComponents>
+                        </Container>
                       </SubComponents>
                     </Container>
                     <Container class="javax.swing.JPanel" name="customerCardPanel">
@@ -463,12 +591,12 @@
                       <Layout>
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="1287" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <EmptySpace min="0" pref="371" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="452" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                       </Layout>
@@ -478,8 +606,8 @@
                 <Container class="javax.swing.JPanel" name="jPanel3">
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                      <JTabbedPaneConstraints tabName="&#x3a0;&#x391;&#x3a1;&#x391;&#x394;&#x39f;&#x3a3;&#x397;">
-                        <Property name="tabTitle" type="java.lang.String" value="&#x3a0;&#x391;&#x3a1;&#x391;&#x394;&#x39f;&#x3a3;&#x397;"/>
+                      <JTabbedPaneConstraints tabName="&#x394;&#x3a1;&#x39f;&#x39c;&#x39f;&#x39b;&#x39f;&#x393;&#x399;&#x39c;&#x395;&#x39d;&#x391; &#x3a4;&#x395;&#x39c;&#x391;&#x3a7;&#x399;&#x391;">
+                        <Property name="tabTitle" type="java.lang.String" value="&#x394;&#x3a1;&#x39f;&#x39c;&#x39f;&#x39b;&#x39f;&#x393;&#x399;&#x39c;&#x395;&#x39d;&#x391; &#x3a4;&#x395;&#x39c;&#x391;&#x3a7;&#x399;&#x391;"/>
                       </JTabbedPaneConstraints>
                     </Constraint>
                   </Constraints>
@@ -487,65 +615,22 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="186" max="-2" attributes="0"/>
-                                      <Component id="jButton3" min="-2" pref="129" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="jDateChooser1" alignment="0" min="-2" pref="572" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jScrollPane4" min="-2" pref="270" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                              <Component id="jButton4" min="-2" pref="189" max="-2" attributes="0"/>
-                              <EmptySpace pref="203" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jScrollPane4" min="-2" pref="1255" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="20" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jDateChooser1" min="-2" pref="50" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="jButton3" min="-2" pref="50" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jScrollPane4" min="-2" pref="324" max="-2" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                                              <Component id="jButton4" min="-2" pref="36" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                  </Group>
-                              </Group>
-                              <EmptySpace pref="114" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="jScrollPane4" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="31" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
-                      <Properties>
-                        <Property name="dateFormatString" type="java.lang.String" value="d MMM, yyyy"/>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Tahoma" size="36" style="0"/>
-                        </Property>
-                      </Properties>
-                    </Component>
-                    <Component class="javax.swing.JButton" name="jButton3">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="jButton3"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
-                      </Events>
-                    </Component>
                     <Container class="javax.swing.JScrollPane" name="jScrollPane4">
                       <AuxValues>
                         <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
@@ -553,26 +638,20 @@
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                       <SubComponents>
-                        <Component class="javax.swing.JList" name="availableDaysList">
+                        <Component class="javax.swing.JTable" name="jTable1">
                           <Properties>
-                            <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-                              <StringArray count="0"/>
+                            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                              <Table columnCount="4" rowCount="4">
+                                <Column editable="false" title="&#x39a;&#x3a9;&#x394;&#x399;&#x39a;&#x39f;&#x3a3; &#x3a0;&#x3a1;&#x39f;&#x399;&#x39f;&#x39d;&#x3a4;&#x39f;&#x3a3;" type="java.lang.Object"/>
+                                <Column editable="false" title="&#x3a0;&#x395;&#x3a1;&#x399;&#x393;&#x3a1;&#x391;&#x3a6;&#x397;" type="java.lang.Object"/>
+                                <Column editable="false" title="Title 3" type="java.lang.Object"/>
+                                <Column editable="false" title="Title 4" type="java.lang.Object"/>
+                              </Table>
                             </Property>
                           </Properties>
-                          <AuxValues>
-                            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-                          </AuxValues>
                         </Component>
                       </SubComponents>
                     </Container>
-                    <Component class="javax.swing.JButton" name="jButton4">
-                      <Properties>
-                        <Property name="text" type="java.lang.String" value="FIND AVAILABLE TOURS"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
-                      </Events>
-                    </Component>
                   </SubComponents>
                 </Container>
                 <Container class="javax.swing.JPanel" name="customerArchiveTab">
@@ -1375,7 +1454,7 @@
                                       <Component id="alternativeFloorLabel4" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                       <Component id="alternativeFloorField" min="-2" pref="46" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="138" max="-2" attributes="0"/>
                                       <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Component id="alternativeBellNameField" min="-2" pref="296" max="-2" attributes="0"/>

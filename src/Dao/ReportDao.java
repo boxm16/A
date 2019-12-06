@@ -93,5 +93,43 @@ public class ReportDao {
 
         return stringDate;
     }
-    
-  } 
+
+    public int insertDeliveryReport(Report report) {
+        int reportId = 0;
+        String reportQuery = "INSERT INTO report (date, customer_id, type) "
+                + "VALUES (?,?,?);";
+        String last_report_id_query = "SELECT MAX(id) AS AUTO_INCREMENT FROM report";
+        String itemQuery = "UPDATE item SET delivery_report_id=?, status=? WHERE item_code=? and item_year=?;";
+        try (PreparedStatement ps_report = connection.prepareStatement(reportQuery);
+                PreparedStatement ps_item = connection.prepareStatement(itemQuery);
+                Statement last_report_id_st = connection.createStatement();) {
+            ps_report.setString(1, getStringFromDate(report.getDate()));
+            //   ps_report.setInt(2, report.getNumber());
+            ps_report.setInt(2, report.getCustomer().getId());
+            ps_report.setString(3, report.getType().toString());
+            ps_report.execute();
+
+            ResultSet rs = last_report_id_st.executeQuery(last_report_id_query);
+
+            while (rs.next()) {
+                reportId = rs.getInt("AUTO_INCREMENT");
+            }
+            for (Item item : report.getItems()) {
+
+                ps_item.setInt(1, reportId);
+                ps_item.setString(2, "on_rout");
+                ps_item.setInt(3, item.getCode());
+                ps_item.setInt(4, item.getYear());
+
+                ps_item.addBatch();
+            }
+            ps_item.executeBatch();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ItemDao.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+        return reportId;
+    }
+
+}

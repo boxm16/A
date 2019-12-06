@@ -20,18 +20,18 @@ import javax.swing.JOptionPane;
  * @author Michail Sitmalidis
  */
 public class ReceivingItemFrame extends javax.swing.JFrame {
-    
+
     MainFrame mainFrame;
     ProductController productController;
     ItemController itemController;
     Color focusInColor;
     Color focusOutColor;
-    
+
     public ReceivingItemFrame() {
         initComponents();
         myInitialization();
     }
-    
+
     public ReceivingItemFrame(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         productController = new ProductController();
@@ -39,7 +39,7 @@ public class ReceivingItemFrame extends javax.swing.JFrame {
         initComponents();
         myInitialization();
         fillProductFields();
-        
+
     }
 
     /**
@@ -530,7 +530,7 @@ public class ReceivingItemFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_productIdFieldFocusLost
 
     private void productIdFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_productIdFieldKeyReleased
-        
+
         productIdInputValid();
 
     }//GEN-LAST:event_productIdFieldKeyReleased
@@ -542,7 +542,7 @@ public class ReceivingItemFrame extends javax.swing.JFrame {
             productIdField.setBackground(focusOutColor);
             productDescriptionField.setBackground(focusOutColor);
             productIdErrorLabel.setText("");
-            
+
         }
 
     }//GEN-LAST:event_productDescriptionFieldItemStateChanged
@@ -565,7 +565,7 @@ public class ReceivingItemFrame extends javax.swing.JFrame {
 
     private void itemCodeFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_itemCodeFieldKeyPressed
         if (evt.getKeyCode() == 10) {
-            
+
             cleaningField.requestFocus();
         }
     }//GEN-LAST:event_itemCodeFieldKeyPressed
@@ -580,7 +580,7 @@ public class ReceivingItemFrame extends javax.swing.JFrame {
             } else {
                 cleaningField.setSelected(true);
             }
-            
+
         }
         if (evt.getKeyCode() == 10) {
             storingField.requestFocus();
@@ -613,7 +613,7 @@ public class ReceivingItemFrame extends javax.swing.JFrame {
             } else {
                 storingField.setSelected(true);
             }
-            
+
         }
         if (evt.getKeyCode() == 10) {
             mendingField.requestFocus();
@@ -636,7 +636,7 @@ public class ReceivingItemFrame extends javax.swing.JFrame {
             } else {
                 mendingField.setSelected(true);
             }
-            
+
         }
         if (evt.getKeyCode() == 10) {
             noteField.requestFocus();
@@ -677,11 +677,11 @@ public class ReceivingItemFrame extends javax.swing.JFrame {
     private void productDescriptionFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_productDescriptionFieldFocusLost
         if (productDescriptionField.getSelectedIndex() == -1) {
             productDescriptionField.setBackground(Color.red);
-            
+
         } else {
             productIdField.setBackground(focusOutColor);
             productDescriptionField.setBackground(focusOutColor);
-            
+
         }
     }//GEN-LAST:event_productDescriptionFieldFocusLost
 
@@ -689,18 +689,18 @@ public class ReceivingItemFrame extends javax.swing.JFrame {
         itemCodeInputValid();
 
     }//GEN-LAST:event_itemCodeFieldFocusLost
-    
+
     private boolean itemCodeInputValid() {
         boolean valid = false;
         String id = itemCodeField.getText().trim();
         if (id.length() < 5) {
-            
+
             itemIdErrorLabel.setText("ΚΩΔΙΚΟΣ ΤΕΜΑΧΙΟΥ ΠΡΕΠΕΙ ΝΑ ΕΧΕΙ 5 ΨΗΦΙΑ");
             itemCodeField.setBackground(Color.red);
-            
+
         } else {
             itemCodeField.setBackground(focusOutColor);
-            
+
             valid = true;
         }
         return valid;
@@ -759,15 +759,15 @@ public class ReceivingItemFrame extends javax.swing.JFrame {
         hiddenComboBox.removeAllItems();
         productDescriptionField.removeAllItems();
         ArrayList<Product> products = productController.getProducts();
-        
+
         for (Product product : products) {
             hiddenComboBox.addItem(String.valueOf(product.getId()));//it could be an array, or arrayList, i suppose
             productDescriptionField.addItem(product.getDescription());
-            
+
         }
-        
+
     }
-    
+
     public boolean productIdInputValid() {
         boolean valid = false;
         if (!productIdField.getText().equals("")) {
@@ -780,16 +780,16 @@ public class ReceivingItemFrame extends javax.swing.JFrame {
                 productIdField.setBackground(new Color(255, 255, 255));
             } else {
                 productIdField.setBackground(Color.red);
-                
+
             }
         } else {
             productDescriptionField.setSelectedIndex(-1);
             productIdField.setBackground(Color.red);
-            
+
         }
         return valid;
     }
-    
+
     private boolean productChosen() {
         boolean chosen = false;
         if (productDescriptionField.getSelectedIndex() != -1) {
@@ -800,12 +800,12 @@ public class ReceivingItemFrame extends javax.swing.JFrame {
                     "ΔΕΝ ΕΧΕΙ ΓΙΝΕΙ ΕΠΙΛΟΓΗ ΠΡΟΙΟΝΤΟΣ",
                     "ΛΑΘΟΣ ΠΡΟΙΟΝ",
                     JOptionPane.ERROR_MESSAGE);
-            
+
         }
-        
+
         return chosen;
     }
-    
+
     private boolean itemCodeGoodToGo() {
         boolean goodToGo = false;
         switch (1) {
@@ -820,7 +820,7 @@ public class ReceivingItemFrame extends javax.swing.JFrame {
                     );
                     break;
                 }
-            
+
             case 2:
                 if (itemCodeRegisteredInDb()) {
                     JOptionPane.showMessageDialog(null,
@@ -850,36 +850,36 @@ public class ReceivingItemFrame extends javax.swing.JFrame {
         }
         return goodToGo;
     }
-    
+
     private boolean itemCodeRegisteredInDb() {
         int itemCode = Integer.parseInt(itemCodeField.getText().toString());
-       // int itemYear=Integer.parseInt(itemYearField.)
+        // int itemYear=Integer.parseInt(itemYearField.)
 //not worried about exception, field is checked by itemCodeInputValid in  switch above
         return itemController.itemCodeRegisteredInDb(itemCode);
-        
+
     }
-    
+
     private boolean itemCodeRegisteredInReceivingReport() {
-        
+
         String itemCodeInput = itemCodeField.getText();//again, not worried about input, `cous its checked before
-        int rowCount = mainFrame.receivingItemsTableModel.getRowCount();
-        
+        int rowCount = mainFrame.getReceivingItemsTableModel().getRowCount();
+
         if (rowCount > 0) {
-            
+
             for (int x = 0; x < rowCount; x++) {
-                
-                String itemCodeInTable = mainFrame.receivingItemsTableModel.getValueAt(x, 2).toString();
+
+                String itemCodeInTable = mainFrame.getReceivingItemsTableModel().getValueAt(x, 2).toString();
                 System.out.println(itemCodeInTable);
                 if (itemCodeInput.equals(itemCodeInTable)) {
                     return true;
                 }
-                
+
             }
-            
+
         }
         return false;
     }
-    
+
     private boolean serviceChosen() {
         if (cleaningField.isSelected() || storingField.isSelected() || mendingField.isSelected()) {
             return true;
@@ -894,9 +894,9 @@ public class ReceivingItemFrame extends javax.swing.JFrame {
             mendingField.setBackground(Color.red);
             return false;
         }
-        
+
     }
-    
+
     private Item collectItemInformation() {
         Item item = new Item();
         item.setId(Integer.parseInt(productIdField.getText()));
@@ -908,17 +908,17 @@ public class ReceivingItemFrame extends javax.swing.JFrame {
         item.setNote(noteField.getText());
         return item;
     }
-    
+
     private boolean noteFieldInputValid() {
         System.out.println("need some work here-noteFieldInputValid");
         return true;
     }
-    
+
     private void returnFocusToItemField() {
-        
+
         itemCodeField.requestFocus();
         itemCodeField.setCaretPosition(itemCodeField.getText().trim().length());
-   //"I wanted to set carret to the end of text inside, but somehow its not working";
+        //"I wanted to set carret to the end of text inside, but somehow its not working";
     }
-    
+
 }

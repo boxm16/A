@@ -5,6 +5,7 @@
  */
 package Dao;
 
+import Models.Report;
 import Models.Rout;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -173,6 +174,43 @@ public class RoutDao {
             Logger.getLogger(ItemDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return availableRouts;
+    }
+
+    public int getD_Rout(int routId, String date) {
+        int dRoutId = 0;
+        String query = "SELECT id FROM d_rout WHERE rout_id=" + routId + " and date='" + date + "'";
+        try (Statement statement = connection.createStatement()) {
+            ResultSet rs = statement.executeQuery(query);
+            while (rs.next()) {
+                dRoutId = rs.getInt("id");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ItemDao.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+
+        return dRoutId;
+
+    }
+
+    public void insertDRout(int routId, String date) {
+        String query = "INSERT INTO d_rout (rout_id, date) VALUES (" + routId + ", '" + date + "');";
+        try (Statement statement = connection.createStatement()) {
+            statement.execute(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(ItemDao.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+    }
+
+    public void insertDRout_Report(int DRoutId, int report_id) {
+        String query = "INSERT INTO d_rout_report (d_rout_id, report_id) VALUES (" + DRoutId + "," + report_id + ")";
+        try (Statement statement = connection.createStatement()) {
+            statement.execute(query);
+        } catch (SQLException ex) {
+            Logger.getLogger(ItemDao.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
     }
 
 }

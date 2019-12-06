@@ -55,8 +55,10 @@ public class ItemDao {
                 item.setForStoring(rs.getBoolean("storing"));
                 item.setForMending(rs.getBoolean("mending"));
 
+                item.setMendingCharge(rs.getBigDecimal("mending_charge"));
                 item.setReceivingReportId(rs.getInt("receiving_report_id"));
                 item.setStatus(rs.getString("status"));
+                item.setDeliveryReportId(rs.getInt("delivery_report_id"));
                 item.setNote(rs.getString("note"));
                 customerItems.add(item);
             }

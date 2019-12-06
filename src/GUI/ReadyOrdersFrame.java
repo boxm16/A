@@ -115,9 +115,9 @@ public class ReadyOrdersFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_customersTableKeyPressed
 
     private void customersTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customersTableMouseClicked
-    if(evt.getClickCount()==2){
-    displayCustomer();
-    }
+        if (evt.getClickCount() == 2) {
+            displayCustomer();
+        }
     }//GEN-LAST:event_customersTableMouseClicked
 
     private void myInitialization() {
@@ -138,6 +138,8 @@ public class ReadyOrdersFrame extends javax.swing.JFrame {
             int customer_id = (int) customersTable.getValueAt(selectedRow, 0);
             mainFrame.dispalyCustomerById(customer_id);
             mainFrame.fillTables();
+            mainFrame.showCardTab();
+            mainFrame.showRoutButton1();
             this.dispose();
         }
     }
