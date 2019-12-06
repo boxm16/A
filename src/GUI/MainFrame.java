@@ -473,16 +473,18 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         customerCardPanel.setBackground(new java.awt.Color(0, 255, 0));
+        customerCardPanel.setMaximumSize(new java.awt.Dimension(600, 600));
+        customerCardPanel.setPreferredSize(new java.awt.Dimension(1000, 191));
 
         javax.swing.GroupLayout customerCardPanelLayout = new javax.swing.GroupLayout(customerCardPanel);
         customerCardPanel.setLayout(customerCardPanelLayout);
         customerCardPanelLayout.setHorizontalGroup(
             customerCardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1287, Short.MAX_VALUE)
+            .addGap(0, 1252, Short.MAX_VALUE)
         );
         customerCardPanelLayout.setVerticalGroup(
             customerCardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 452, Short.MAX_VALUE)
+            .addGap(0, 287, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout customerCardTabLayout = new javax.swing.GroupLayout(customerCardTab);
@@ -492,7 +494,9 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(customerCardTabLayout.createSequentialGroup()
                 .addGroup(customerCardTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(calculationDisplayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(customerCardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(customerCardTabLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(customerCardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1252, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         customerCardTabLayout.setVerticalGroup(
@@ -500,8 +504,8 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, customerCardTabLayout.createSequentialGroup()
                 .addComponent(calculationDisplayPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(customerCardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(customerCardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(71, Short.MAX_VALUE))
         );
 
         customerCardsTabbedPane.addTab("ΚΑΡΤΕΛΑ", customerCardTab);
@@ -756,7 +760,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(firstNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 38, Short.MAX_VALUE)
-                    .addComponent(firstNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(firstNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(landLineLabel)
@@ -925,7 +929,7 @@ public class MainFrame extends javax.swing.JFrame {
                             .addComponent(alternativeStreetLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(12, 12, 12)
                         .addGroup(addressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(districtPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(districtPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
                             .addGroup(addressPanelLayout.createSequentialGroup()
                                 .addComponent(streetField, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1278,7 +1282,7 @@ public class MainFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(4, 4, 4)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 968, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 904, Short.MAX_VALUE))
         );
 
         pack();
