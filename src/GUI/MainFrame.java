@@ -96,17 +96,6 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         RootPanel = new javax.swing.JPanel();
         customerCardsTabbedPane = new javax.swing.JTabbedPane();
-        newReceivingTab = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        receivingDatePicker = new com.toedter.calendar.JDateChooser();
-        receivingReportNumberField = new javax.swing.JFormattedTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        addItemButton = new javax.swing.JButton();
-        saveReceivingReportButton = new javax.swing.JButton();
-        receivingItemsPanel = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        receivingItemsTable = new javax.swing.JTable();
         customerCardTab = new javax.swing.JPanel();
         calculationDisplayPanel = new javax.swing.JPanel();
         processButton = new javax.swing.JButton();
@@ -124,9 +113,21 @@ public class MainFrame extends javax.swing.JFrame {
         subTotalLabel = new javax.swing.JLabel();
         totalLabel = new javax.swing.JLabel();
         customerCardPanel = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
+        newReceivingTab = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        receivingDatePicker = new com.toedter.calendar.JDateChooser();
+        receivingReportNumberField = new javax.swing.JFormattedTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        addItemButton = new javax.swing.JButton();
+        saveReceivingReportButton = new javax.swing.JButton();
+        receivingItemsPanel = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        receivingItemsTable = new javax.swing.JTable();
+        onRoutItems = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        onRoutItemsTable = new javax.swing.JTable();
+        onRoutPanel = new javax.swing.JPanel();
         customerArchiveTab = new javax.swing.JPanel();
         HeadPanel = new javax.swing.JPanel();
         CombinedPanel = new javax.swing.JPanel();
@@ -207,144 +208,6 @@ public class MainFrame extends javax.swing.JFrame {
         RootPanel.setPreferredSize(new java.awt.Dimension(1280, 1024));
 
         customerCardsTabbedPane.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-
-        receivingDatePicker.setDateFormatString("dd/MM/yyyy");
-        receivingDatePicker.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-
-        try {
-            receivingReportNumberField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        receivingReportNumberField.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
-        receivingReportNumberField.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                receivingReportNumberFieldKeyPressed(evt);
-            }
-        });
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setText("ΗΜΕΡΟΜΗΝΙΑ");
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel2.setText("ΑΡΙΘΜΟΣ ΔΕΛΤΙΟΥ");
-
-        addItemButton.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        addItemButton.setText("ΠΡΟΣΘΕΣΗ ΤΕΜΑΧΙΟΥ");
-        addItemButton.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                addItemButtonItemStateChanged(evt);
-            }
-        });
-        addItemButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addItemButtonActionPerformed(evt);
-            }
-        });
-        addItemButton.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                addItemButtonKeyPressed(evt);
-            }
-        });
-
-        saveReceivingReportButton.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        saveReceivingReportButton.setText("ΑΠΟΘΗΚΕΥΣΗ ΔΕΛΤΙΟΥ");
-        saveReceivingReportButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveReceivingReportButtonActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(receivingDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(receivingReportNumberField, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(addItemButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(saveReceivingReportButton)
-                .addGap(26, 26, 26))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(1, 1, 1)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(receivingReportNumberField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(3, 3, 3)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(receivingDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(addItemButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(saveReceivingReportButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(1, 1, 1))))
-        );
-
-        receivingItemsPanel.setBackground(new java.awt.Color(153, 153, 255));
-        receivingItemsPanel.setLayout(new javax.swing.BoxLayout(receivingItemsPanel, javax.swing.BoxLayout.LINE_AXIS));
-
-        receivingItemsTable.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
-        receivingItemsTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID", "ΠΕΡΙΓΡΑΦΗ ΠΡΟΙΟΝΤΟΣ", "ΚΩΔΙΚΟΣ ΤΕΜΑΧΙΟΥ", "ΚΑΘΑΡΙΣΜΑ", "ΦΥΛΑΞΗ", "ΕΠΙΔΙΟΡΘΩΣΗ", "ΣΗΜΕΙΩΜΑ"
-            }
-        ));
-        receivingItemsTable.setColumnSelectionAllowed(true);
-        receivingItemsTable.setEnabled(false);
-        receivingItemsTable.setRowHeight(36);
-        jScrollPane2.setViewportView(receivingItemsTable);
-        receivingItemsTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        if (receivingItemsTable.getColumnModel().getColumnCount() > 0) {
-            receivingItemsTable.getColumnModel().getColumn(0).setPreferredWidth(60);
-            receivingItemsTable.getColumnModel().getColumn(0).setMaxWidth(70);
-            receivingItemsTable.getColumnModel().getColumn(1).setPreferredWidth(200);
-            receivingItemsTable.getColumnModel().getColumn(2).setPreferredWidth(100);
-            receivingItemsTable.getColumnModel().getColumn(2).setMaxWidth(200);
-            receivingItemsTable.getColumnModel().getColumn(3).setPreferredWidth(100);
-            receivingItemsTable.getColumnModel().getColumn(3).setMaxWidth(200);
-            receivingItemsTable.getColumnModel().getColumn(4).setPreferredWidth(100);
-            receivingItemsTable.getColumnModel().getColumn(4).setMaxWidth(200);
-            receivingItemsTable.getColumnModel().getColumn(5).setPreferredWidth(100);
-            receivingItemsTable.getColumnModel().getColumn(5).setMaxWidth(200);
-        }
-
-        receivingItemsPanel.add(jScrollPane2);
-
-        javax.swing.GroupLayout newReceivingTabLayout = new javax.swing.GroupLayout(newReceivingTab);
-        newReceivingTab.setLayout(newReceivingTabLayout);
-        newReceivingTabLayout.setHorizontalGroup(
-            newReceivingTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(newReceivingTabLayout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(receivingItemsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        newReceivingTabLayout.setVerticalGroup(
-            newReceivingTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(newReceivingTabLayout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(receivingItemsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
-        customerCardsTabbedPane.addTab("ΝΕΑ ΠΑΡΑΛΑΒΗ", newReceivingTab);
 
         processButton.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         processButton.setText("PROCESS");
@@ -510,7 +373,146 @@ public class MainFrame extends javax.swing.JFrame {
 
         customerCardsTabbedPane.addTab("ΚΑΡΤΕΛΑ", customerCardTab);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        receivingDatePicker.setDateFormatString("dd/MM/yyyy");
+        receivingDatePicker.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+
+        try {
+            receivingReportNumberField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        receivingReportNumberField.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        receivingReportNumberField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                receivingReportNumberFieldKeyPressed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setText("ΗΜΕΡΟΜΗΝΙΑ");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel2.setText("ΑΡΙΘΜΟΣ ΔΕΛΤΙΟΥ");
+
+        addItemButton.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        addItemButton.setText("ΠΡΟΣΘΕΣΗ ΤΕΜΑΧΙΟΥ");
+        addItemButton.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                addItemButtonItemStateChanged(evt);
+            }
+        });
+        addItemButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addItemButtonActionPerformed(evt);
+            }
+        });
+        addItemButton.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                addItemButtonKeyPressed(evt);
+            }
+        });
+
+        saveReceivingReportButton.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        saveReceivingReportButton.setText("ΑΠΟΘΗΚΕΥΣΗ ΔΕΛΤΙΟΥ");
+        saveReceivingReportButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveReceivingReportButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(receivingDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(receivingReportNumberField, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(addItemButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(saveReceivingReportButton)
+                .addGap(26, 26, 26))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(1, 1, 1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(receivingReportNumberField, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(3, 3, 3)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(receivingDatePicker, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(addItemButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(saveReceivingReportButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(1, 1, 1))))
+        );
+
+        receivingItemsPanel.setBackground(new java.awt.Color(153, 153, 255));
+        receivingItemsPanel.setLayout(new javax.swing.BoxLayout(receivingItemsPanel, javax.swing.BoxLayout.LINE_AXIS));
+
+        receivingItemsTable.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        receivingItemsTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "ΠΕΡΙΓΡΑΦΗ ΠΡΟΙΟΝΤΟΣ", "ΚΩΔΙΚΟΣ ΤΕΜΑΧΙΟΥ", "ΚΑΘΑΡΙΣΜΑ", "ΦΥΛΑΞΗ", "ΕΠΙΔΙΟΡΘΩΣΗ", "ΣΗΜΕΙΩΜΑ"
+            }
+        ));
+        receivingItemsTable.setColumnSelectionAllowed(true);
+        receivingItemsTable.setEnabled(false);
+        receivingItemsTable.setRowHeight(36);
+        jScrollPane2.setViewportView(receivingItemsTable);
+        receivingItemsTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        if (receivingItemsTable.getColumnModel().getColumnCount() > 0) {
+            receivingItemsTable.getColumnModel().getColumn(0).setPreferredWidth(60);
+            receivingItemsTable.getColumnModel().getColumn(0).setMaxWidth(70);
+            receivingItemsTable.getColumnModel().getColumn(1).setPreferredWidth(200);
+            receivingItemsTable.getColumnModel().getColumn(2).setPreferredWidth(100);
+            receivingItemsTable.getColumnModel().getColumn(2).setMaxWidth(200);
+            receivingItemsTable.getColumnModel().getColumn(3).setPreferredWidth(100);
+            receivingItemsTable.getColumnModel().getColumn(3).setMaxWidth(200);
+            receivingItemsTable.getColumnModel().getColumn(4).setPreferredWidth(100);
+            receivingItemsTable.getColumnModel().getColumn(4).setMaxWidth(200);
+            receivingItemsTable.getColumnModel().getColumn(5).setPreferredWidth(100);
+            receivingItemsTable.getColumnModel().getColumn(5).setMaxWidth(200);
+        }
+
+        receivingItemsPanel.add(jScrollPane2);
+
+        javax.swing.GroupLayout newReceivingTabLayout = new javax.swing.GroupLayout(newReceivingTab);
+        newReceivingTab.setLayout(newReceivingTabLayout);
+        newReceivingTabLayout.setHorizontalGroup(
+            newReceivingTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(newReceivingTabLayout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 1262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(receivingItemsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        newReceivingTabLayout.setVerticalGroup(
+            newReceivingTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(newReceivingTabLayout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(receivingItemsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        customerCardsTabbedPane.addTab("ΝΕΑ ΠΑΡΑΛΑΒΗ", newReceivingTab);
+
+        onRoutItemsTable.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        onRoutItemsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -529,30 +531,45 @@ public class MainFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane4.setViewportView(jTable1);
+        onRoutItemsTable.setRowHeight(36);
+        jScrollPane4.setViewportView(onRoutItemsTable);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 1255, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 20, Short.MAX_VALUE))
+        javax.swing.GroupLayout onRoutPanelLayout = new javax.swing.GroupLayout(onRoutPanel);
+        onRoutPanel.setLayout(onRoutPanelLayout);
+        onRoutPanelLayout.setHorizontalGroup(
+            onRoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 31, Short.MAX_VALUE))
+        onRoutPanelLayout.setVerticalGroup(
+            onRoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 96, Short.MAX_VALUE)
         );
 
-        customerCardsTabbedPane.addTab("ΔΡΟΜΟΛΟΓΙΜΕΝΑ ΤΕΜΑΧΙΑ", jPanel3);
+        javax.swing.GroupLayout onRoutItemsLayout = new javax.swing.GroupLayout(onRoutItems);
+        onRoutItems.setLayout(onRoutItemsLayout);
+        onRoutItemsLayout.setHorizontalGroup(
+            onRoutItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(onRoutItemsLayout.createSequentialGroup()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 1216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 10, Short.MAX_VALUE))
+            .addComponent(onRoutPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        onRoutItemsLayout.setVerticalGroup(
+            onRoutItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, onRoutItemsLayout.createSequentialGroup()
+                .addComponent(onRoutPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        customerCardsTabbedPane.addTab("ΔΡΟΜΟΛΟΓΙΜΕΝΑ ΤΕΜΑΧΙΑ", onRoutItems);
 
         javax.swing.GroupLayout customerArchiveTabLayout = new javax.swing.GroupLayout(customerArchiveTab);
         customerArchiveTab.setLayout(customerArchiveTabLayout);
         customerArchiveTabLayout.setHorizontalGroup(
             customerArchiveTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1275, Short.MAX_VALUE)
+            .addGap(0, 1226, Short.MAX_VALUE)
         );
         customerArchiveTabLayout.setVerticalGroup(
             customerArchiveTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -687,6 +704,11 @@ public class MainFrame extends javax.swing.JFrame {
                 customerIdFieldMouseClicked(evt);
             }
         });
+        customerIdField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                customerIdFieldActionPerformed(evt);
+            }
+        });
         customerIdField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 customerIdFieldKeyPressed(evt);
@@ -760,7 +782,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(firstNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 38, Short.MAX_VALUE)
-                    .addComponent(firstNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE))
+                    .addComponent(firstNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(CombinedPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(landLineLabel)
@@ -929,7 +951,7 @@ public class MainFrame extends javax.swing.JFrame {
                             .addComponent(alternativeStreetLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(12, 12, 12)
                         .addGroup(addressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(districtPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 580, Short.MAX_VALUE)
+                            .addComponent(districtPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(addressPanelLayout.createSequentialGroup()
                                 .addComponent(streetField, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1243,16 +1265,19 @@ public class MainFrame extends javax.swing.JFrame {
         RootPanelLayout.setHorizontalGroup(
             RootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(RootPanelLayout.createSequentialGroup()
-                .addGroup(RootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(RootPanelLayout.createSequentialGroup()
-                        .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(HeadPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1243, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(RootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, RootPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(customerCardsTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addGroup(RootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(RootPanelLayout.createSequentialGroup()
+                            .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(HeadPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1243, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(37, Short.MAX_VALUE))
-            .addComponent(customerCardsTabbedPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         RootPanelLayout.setVerticalGroup(
             RootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1605,6 +1630,10 @@ public class MainFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_processButtonActionPerformed
 
+    private void customerIdFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerIdFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_customerIdFieldActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1712,7 +1741,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
@@ -1720,7 +1748,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTable1;
     private javax.swing.JFormattedTextField landLineField;
     private javax.swing.JLabel landLineLabel;
     private javax.swing.JTextField lastNameField;
@@ -1733,6 +1760,9 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel newCustomerEditCustomerPanel;
     private javax.swing.JPanel newReceivingTab;
     private javax.swing.JTextArea noteField;
+    private javax.swing.JPanel onRoutItems;
+    private javax.swing.JTable onRoutItemsTable;
+    private javax.swing.JPanel onRoutPanel;
     private javax.swing.JTextField postalCodeField;
     private javax.swing.JButton processButton;
     private com.toedter.calendar.JDateChooser receivingDatePicker;
@@ -2117,6 +2147,7 @@ public class MainFrame extends javax.swing.JFrame {
     public void fillTables() {
         fillCardTable();
         loadAvailableRouts();
+        fillOnRoutItemsCard();
         /*
 System.out.println("maybe to drop switch, and fille all the table simultaniously, don know yet");
 
@@ -2577,8 +2608,97 @@ System.out.println("maybe to drop switch, and fille all the table simultaniously
     private void fillOnRoutItemsCard() {
         ArrayList<Item> items = itemController.getCustomerItemsForOnRoutCard(Integer.parseInt(customerIdField.getText()));
 
-       
+    
         
-        
+        DefaultTableModel onRoutItemsTableModel = new DefaultTableModel();
+
+        Object[] columns = new Object[19];
+
+        columns[0] = "ΚΩΔΙΚΟΣ ΠΡΟΙΟΝΤΟΣ";
+        columns[1] = "ΠΕΡΙΓΡΑΦΗ";
+        columns[2] = "ΚΩΔΙΚΟΣ ΤΕΜΑΧΙΟΥ";
+        columns[3] = "ΧΡΟΝΙΑ";
+        columns[4] = "ΚΑΘΑΡΙΣΜΑ";
+        columns[5] = "ΦΥΛΑΞΗ";
+        columns[6] = "ΕΠΙΔΙΟΘΡΩΣΗ";
+        columns[7] = "ΣΗΜΕΙΩΜΑ";
+
+        columns[8] = "ΤΙΜΗ ΓΙΑ ΚΑΘΑΡΙΣΜΑ";
+        columns[9] = "ΤΙΜΗ ΓΙΑ ΦΥΛΑΞΗ";
+
+        columns[10] = "ΜΗΚΟΣ";
+        columns[11] = "ΠΛΑΟΤΟΣ";
+        columns[12] = "ΤΕΤΡΑΓΩΝΙΚΑ";
+
+        columns[13] = "ΧΡΕΩΣΗ ΓΙΑ ΚΑΘΑΡΙΣΜΑ";
+        columns[14] = "ΧΡΕΩΣΗ ΓΙΑ ΦΥΛΑΞΗ";
+        columns[15] = "ΧΡΕΩΣΗ ΓΙΑ ΕΠΙΔΙΟΡΘΩΣΗ";
+
+        columns[16] = "ΣΥΝΟΛΟ ΧΡΕΩΣΗΣ ΤΕΜΑΧΙΟΥ";
+        columns[17] = "ΚΑΤΑΣΤΑΣΗ";
+        columns[18] = "ΔΙΑΛΟΓΗ";
+        onRoutItemsTableModel.setColumnIdentifiers(columns);
+
+        for (Item item : items) {
+            Object[] row = new Object[19];
+
+            row[0] = item.getId();
+            row[1] = item.getDescription();
+            row[2] = item.getCode();
+            row[3] = item.getYear();
+            if (item.isForCleaning()) {
+                row[4] = "*";
+            } else {
+                row[4] = "-";
+            }
+            if (item.isForStoring()) {
+                row[5] = "*";
+            } else {
+                row[5] = "-";
+            }
+            if (item.isForMending()) {
+                row[6] = "*";
+            } else {
+                row[6] = "-";
+            }
+
+            row[7] = item.getNote();
+
+            row[8] = item.getCleaningPrice();
+            row[9] = item.getStoringPrice();
+
+            if (item.getLength() != null) {
+                BigDecimal length, width, square;
+                row[10] = length = item.getLength();
+                row[11] = width = item.getWidth();
+                square = length.multiply(width);
+                row[12] = square.setScale(2, RoundingMode.HALF_EVEN);
+            } else {
+                row[10] = "N/A";
+                row[11] = "N/A";
+                row[12] = "N/A";
+            }
+            BigDecimal cleaningCharge, storingCharge, mendingCharge, s, totalCharge;
+            row[13] = cleaningCharge = item.getCleaningCharge();
+            row[14] = storingCharge = item.getStoringCharge();
+            row[15] = mendingCharge = item.getMendingCharge();
+            totalCharge = storingCharge.add(cleaningCharge).add(mendingCharge);
+            row[16] = totalCharge;
+            row[17] = item.getStatus();
+           /* boolean status;
+            if (item.getStatus().equals("ready")) {
+                row[18] = status = Boolean.TRUE;
+            } else {
+                row[18] = status = Boolean.FALSE;
+            }
+*/
+            onRoutItemsTableModel.addRow(row);
+        }
+       onRoutItemsTable.setModel(onRoutItemsTableModel);
+     
+        //   pack();
+//if i dont put it, MainFrame shrinks to is original dimensions, even if i have it to full screen
+      //  countTotal(cardTableModel);
     }
+ 
 }
