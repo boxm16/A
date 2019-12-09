@@ -205,9 +205,9 @@ public class CustomerDao {
 
     public ArrayList<Customer> getReadyToGoCustomers() {
         ArrayList<Customer> readyToGoCustomers = new ArrayList<>();
-        String query = "SELECT * FROM alladin1.customer "
+        String query = "SELECT * FROM customer "
                 + "Inner JOIN report ON customer.customer_id=report.customer_id "
-                + "INNER JOIN alladin1.item ON report.id=item.receiving_report_id "
+                + "INNER JOIN item ON report.id=item.receiving_report_id "
                 + "WHERE NOT EXISTS (SELECT receiving_report_id FROM item where report.id=item.receiving_report_id and (status='processing' OR status='on_rout')) "
                 + "GROUP BY customer.customer_id;";
 

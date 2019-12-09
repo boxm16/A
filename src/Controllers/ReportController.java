@@ -7,6 +7,9 @@ package Controllers;
 
 import Dao.ReportDao;
 import Models.Report;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 
 /**
  *
@@ -29,6 +32,13 @@ public class ReportController {
 
         int reportId = reportDao.insertDeliveryReport(report);
         return reportId;
+    }
+
+    public HashMap<Integer, Report> getReportsForDate(Date date) {
+
+        HashMap<Integer, Report> reports = reportDao.getReportsForDate(date);
+
+        return reports;
     }
 
 }

@@ -128,6 +128,9 @@ public class MainFrame extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         onRoutItemsTable = new javax.swing.JTable();
         onRoutPanel = new javax.swing.JPanel();
+        onRoutPanel1 = new javax.swing.JPanel();
+        onRoutLabel1 = new javax.swing.JLabel();
+        onRoutPanel2 = new javax.swing.JPanel();
         customerArchiveTab = new javax.swing.JPanel();
         HeadPanel = new javax.swing.JPanel();
         CombinedPanel = new javax.swing.JPanel();
@@ -202,6 +205,7 @@ public class MainFrame extends javax.swing.JFrame {
         measurementButton = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -534,16 +538,45 @@ public class MainFrame extends javax.swing.JFrame {
         onRoutItemsTable.setRowHeight(36);
         jScrollPane4.setViewportView(onRoutItemsTable);
 
-        javax.swing.GroupLayout onRoutPanelLayout = new javax.swing.GroupLayout(onRoutPanel);
-        onRoutPanel.setLayout(onRoutPanelLayout);
-        onRoutPanelLayout.setHorizontalGroup(
-            onRoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+        onRoutPanel.setLayout(new java.awt.CardLayout());
+
+        onRoutPanel1.setBackground(new java.awt.Color(102, 153, 255));
+
+        onRoutLabel1.setText("jLabel10");
+
+        javax.swing.GroupLayout onRoutPanel1Layout = new javax.swing.GroupLayout(onRoutPanel1);
+        onRoutPanel1.setLayout(onRoutPanel1Layout);
+        onRoutPanel1Layout.setHorizontalGroup(
+            onRoutPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(onRoutPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(onRoutLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 516, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(698, Short.MAX_VALUE))
         );
-        onRoutPanelLayout.setVerticalGroup(
-            onRoutPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 96, Short.MAX_VALUE)
+        onRoutPanel1Layout.setVerticalGroup(
+            onRoutPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(onRoutPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(onRoutLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
+                .addContainerGap())
         );
+
+        onRoutPanel.add(onRoutPanel1, "card2");
+
+        onRoutPanel2.setBackground(new java.awt.Color(255, 102, 0));
+
+        javax.swing.GroupLayout onRoutPanel2Layout = new javax.swing.GroupLayout(onRoutPanel2);
+        onRoutPanel2.setLayout(onRoutPanel2Layout);
+        onRoutPanel2Layout.setHorizontalGroup(
+            onRoutPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1226, Short.MAX_VALUE)
+        );
+        onRoutPanel2Layout.setVerticalGroup(
+            onRoutPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 73, Short.MAX_VALUE)
+        );
+
+        onRoutPanel.add(onRoutPanel2, "card3");
 
         javax.swing.GroupLayout onRoutItemsLayout = new javax.swing.GroupLayout(onRoutItems);
         onRoutItems.setLayout(onRoutItemsLayout);
@@ -551,15 +584,15 @@ public class MainFrame extends javax.swing.JFrame {
             onRoutItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(onRoutItemsLayout.createSequentialGroup()
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 1216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 10, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addComponent(onRoutPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         onRoutItemsLayout.setVerticalGroup(
             onRoutItemsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, onRoutItemsLayout.createSequentialGroup()
                 .addComponent(onRoutPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1260,6 +1293,14 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        jButton5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jButton5.setText("<html>ΔΡΟΜΟΛΟΓΙΑ <br>ΤΗΣ ΗΜΕΡΑΣ</html>");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout RootPanelLayout = new javax.swing.GroupLayout(RootPanel);
         RootPanel.setLayout(RootPanelLayout);
         RootPanelLayout.setHorizontalGroup(
@@ -1269,15 +1310,17 @@ public class MainFrame extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, RootPanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(customerCardsTabbedPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                    .addGroup(RootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(RootPanelLayout.createSequentialGroup()
-                            .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(HeadPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1243, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(HeadPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1243, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(37, Short.MAX_VALUE))
+            .addGroup(RootPanelLayout.createSequentialGroup()
+                .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(231, 231, 231))
         );
         RootPanelLayout.setVerticalGroup(
             RootPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1287,7 +1330,10 @@ public class MainFrame extends javax.swing.JFrame {
                     .addGroup(RootPanelLayout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(RootPanelLayout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(jButton5)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(HeadPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1634,6 +1680,11 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_customerIdFieldActionPerformed
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+         DayRoutsFrame dayRoutsFrame=new DayRoutsFrame(this);
+        dayRoutsFrame.setVisible(true);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1730,6 +1781,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -1762,7 +1814,10 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextArea noteField;
     private javax.swing.JPanel onRoutItems;
     private javax.swing.JTable onRoutItemsTable;
+    private javax.swing.JLabel onRoutLabel1;
     private javax.swing.JPanel onRoutPanel;
+    private javax.swing.JPanel onRoutPanel1;
+    private javax.swing.JPanel onRoutPanel2;
     private javax.swing.JTextField postalCodeField;
     private javax.swing.JButton processButton;
     private com.toedter.calendar.JDateChooser receivingDatePicker;
