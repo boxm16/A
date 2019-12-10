@@ -5,8 +5,11 @@
  */
 package Tools;
 
+import Controllers.ReportController;
+import GUI.DayRoutsFrame;
 import Models.Item;
 import Models.Report;
+import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -15,12 +18,20 @@ import javax.swing.table.DefaultTableModel;
  */
 public class NewJPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form NewJPanel
-     */
-    public NewJPanel(Report report) {
+    ReportController reportController;
+    DayRoutsFrame frame;
+
+    public NewJPanel() {
         initComponents();
+        init();
+    }
+
+    public NewJPanel(DayRoutsFrame frame, Report report) {
+        this.frame = frame;
+        initComponents();
+        init();
         fillReport(report);
+
     }
 
     /**
@@ -45,6 +56,7 @@ public class NewJPanel extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 255, 0), 5));
 
         name_surname.setEditable(false);
@@ -101,6 +113,11 @@ public class NewJPanel extends javax.swing.JPanel {
         jButton1.setBackground(new java.awt.Color(255, 0, 0));
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton1.setText("CancelReport");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -109,7 +126,6 @@ public class NewJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
@@ -132,7 +148,8 @@ public class NewJPanel extends javax.swing.JPanel {
                                 .addComponent(landline_phone, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(mobile_phone, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 309, Short.MAX_VALUE)))
+                        .addGap(0, 309, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -156,11 +173,21 @@ public class NewJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(floor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(name_on_bell, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(87, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void init() {
+
+        reportController = new ReportController();
+
+    }
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        reportController.cancelReport(report_id.getText());
+        frame.loadReports();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -186,33 +213,36 @@ public class NewJPanel extends javax.swing.JPanel {
         name_on_bell.setText(report.getCustomer().getBellName());
         landline_phone.setText(report.getCustomer().getLandlinePhone());
         mobile_phone.setText(report.getCustomer().getMobilePhone());
+        report_id.setText(String.valueOf(report.getId()));
 
         DefaultTableModel model = new DefaultTableModel();
         for (Item item : report.getItems()) {
-             Object[] column = new Object[8];
-            column[0]="Description";
-            column[1]="ΚΩΔΙΚΟΣ";
-            column[2]="ΧΡΩΝΙΑ";
-            column[3]="ΜΗΚΟΣ";
-            column[4]="ΠΛΑΤΟΣ";
-            column[5]="";
-            column[6]="";
-            column[7]="";
-          
+            Object[] column = new Object[9];
+            column[0] = "Description";
+            column[1] = "ΘΕΣΗ";
+            column[2] = "ΚΩΔΙΚΟΣ";
+            column[3] = "ΧΡΩΝΙΑ";
+            column[4] = "ΜΗΚΟΣ";
+            column[5] = "ΠΛΑΤΟΣ";
+            column[6] = "ΚΑΘΑΡΙΣΜΑ";
+            column[7] = "ΦΥΛΑΞΗ";
+            column[8] = "ΕΠΙΔΙΟΡΘΩΣΗ";
+
             model.setColumnIdentifiers(column);
-            
-            String[] row = new String[8];
+
+            String[] row = new String[9];
             row[0] = item.getDescription();
-            row[1] = String.valueOf(item.getCode());
-            row[2] = String.valueOf(item.getYear());
-            row[3] = String.valueOf(item.getLength());
-            row[4] = String.valueOf(item.getWidth());
-            row[5] = String.valueOf(item.getCleaningCharge());
-            row[6] = String.valueOf(item.getStoringCharge());
-            row[7] = String.valueOf(item.getMendingCharge());
+            row[1] = "ΧΧΧΧ";
+            row[2] = String.valueOf(item.getCode());
+            row[3] = String.valueOf(item.getYear());
+            row[4] = String.valueOf(item.getLength());
+            row[5] = String.valueOf(item.getWidth());
+            row[6] = String.valueOf(item.getCleaningCharge());
+            row[7] = String.valueOf(item.getStoringCharge());
+            row[8] = String.valueOf(item.getMendingCharge());
             model.addRow(row);
         }
-       
+
         jTable1.setModel(model);
     }
 }

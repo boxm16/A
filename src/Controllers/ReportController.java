@@ -41,4 +41,11 @@ public class ReportController {
         return reports;
     }
 
+    public void cancelReport(String reportId) {
+   
+        reportDao.cancelReport(reportId);
+    
+    
+    }
+
 }

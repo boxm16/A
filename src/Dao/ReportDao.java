@@ -221,4 +221,18 @@ public class ReportDao {
 
     }
 
+    public void cancelReport(String reportId) {
+
+        String reportQuery = "UPDATE report SET status='canceled' WHERE id=?;";
+        try (PreparedStatement ps_report = connection.prepareStatement(reportQuery)) {
+            ps_report.setString(1, reportId);
+
+            ps_report.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(ItemDao.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+
+    }
+
 }
