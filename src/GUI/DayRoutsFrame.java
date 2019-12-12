@@ -193,7 +193,7 @@ public class DayRoutsFrame extends javax.swing.JFrame {
         for (Report report : reports.values()) {
 
             NewJPanel jp = new NewJPanel(this, report);
-
+           // jp.hideDeliveryReceiptPanel();
             jPanel1.add(jp);
 
         }

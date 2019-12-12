@@ -42,10 +42,13 @@ public class ReportController {
     }
 
     public void cancelReport(String reportId) {
-   
+
         reportDao.cancelReport(reportId);
-    
-    
+
+    }
+
+    public void deliverReport(String reportId, String deliveryReceiptNumber) {
+        reportDao.deliverReport(reportId, deliveryReceiptNumber);
     }
 
 }

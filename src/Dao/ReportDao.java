@@ -235,4 +235,19 @@ public class ReportDao {
 
     }
 
+    public void deliverReport(String reportId, String deliveryReceiptNumber) {
+
+        String reportQuery = "UPDATE report SET status='delivered', number=? WHERE id=?;";
+        try (PreparedStatement ps_report = connection.prepareStatement(reportQuery)) {
+            ps_report.setString(1, deliveryReceiptNumber);
+            ps_report.setString(2, reportId);
+
+            ps_report.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(ItemDao.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+
+    }
+
 }
