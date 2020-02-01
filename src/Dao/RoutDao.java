@@ -7,6 +7,8 @@ package Dao;
 
 import Models.Report;
 import Models.Rout;
+import java.beans.PropertyVetoException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -154,7 +156,7 @@ public class RoutDao {
                 + "INNER JOIN rout_lot ON rout.id=rout_lot.rout "
                 + "INNER JOIN post_box ON rout_lot.lot=post_box.lot "
                 + "WHERE post_box.district='" + district + "' "
-                + "GROUP BY rout.id";
+                + ";";
         try (Statement statement = connection.createStatement()) {
             ResultSet rs = statement.executeQuery(query);
             while (rs.next()) {

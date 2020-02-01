@@ -5,6 +5,8 @@
  */
 package Dao;
 
+import java.beans.PropertyVetoException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,6 +27,7 @@ public class AddressDao {
     public AddressDao() {
 
         connection = DataBaseConnection.getDBCInstance().getConnection();
+
     }
 
     public ArrayList<String> getDistrictList() {

@@ -139,7 +139,7 @@ public class ReadyOrdersFrame extends javax.swing.JFrame {
             mainFrame.dispalyCustomerById(customer_id);
             mainFrame.fillTables();
             mainFrame.showCardTab();
-            mainFrame.showRoutButton1();
+
             this.dispose();
         }
     }

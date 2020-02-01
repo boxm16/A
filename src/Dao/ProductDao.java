@@ -6,6 +6,8 @@
 package Dao;
 
 import Models.Product;
+import java.beans.PropertyVetoException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,13 +21,13 @@ import java.util.logging.Logger;
  * @author Michail Sitmalidis
  */
 public class ProductDao {
-    
+
     Connection connection;
-    
+
     public ProductDao() {
-        connection = DataBaseConnection.getDBCInstance().getConnection();
+              connection = DataBaseConnection.getDBCInstance().getConnection();
     }
-    
+
     public ArrayList<Product> getProducts() {
         ArrayList<Product> products = new ArrayList<>();
         String query = "SELECT * FROM product;";
@@ -41,10 +43,10 @@ public class ProductDao {
             }
         } catch (SQLException ex) {
             Logger.getLogger(ItemDao.class.getName()).log(Level.SEVERE, null, ex);
-            
+
         }
-        
+
         return products;
     }
-    
+
 }

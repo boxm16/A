@@ -289,7 +289,7 @@ public class NewJPanel extends javax.swing.JPanel {
         district_street_num.setText(report.getCustomer().getDistrict() + ", " + report.getCustomer().getStreet());
         postal_code.setText(report.getCustomer().getPostalCode());
         floor.setText(report.getCustomer().getFloor());
-        name_on_bell.setText(report.getCustomer().getBellName());
+        name_on_bell.setText(report.getCustomer().getDoorbellName());
         landline_phone.setText(report.getCustomer().getLandlinePhone());
         mobile_phone.setText(report.getCustomer().getMobilePhone());
         report_id.setText(String.valueOf(report.getId()));

@@ -12,26 +12,41 @@ package Models;
 public class Customer {
 
     private int id;
+
+    private String emailIdentifier;
+    private String password;
+    private String status;
+
     private String firstName;
     private String lastName;
     private String landlinePhone;
     private String mobilePhone;
-    private String note;
 
     private String street;
     private String district;
     private String floor;
     private String postalCode;
-    private String bellName;
+    private String doorbellName;
 
-    private String alternativeStreet;
-    private String alternativeDistrict;
-    private String alternativeFloor;
-    private String alternativePostalCode;
-    private String alternativeBellName;
+    private String latitude;
+    private String longitude;
+
+    private String note;
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void setEmailIdentifier(String emailIdentifier) {
+        this.emailIdentifier = emailIdentifier;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public void setFirstName(String firstName) {
@@ -50,10 +65,6 @@ public class Customer {
         this.mobilePhone = mobilePhone;
     }
 
-    public void setNote(String note) {
-        this.note = note;
-    }
-
     public void setStreet(String street) {
         this.street = street;
     }
@@ -70,32 +81,36 @@ public class Customer {
         this.postalCode = postalCode;
     }
 
-    public void setBellName(String bellName) {
-        this.bellName = bellName;
+    public void setDoorbellName(String doorbellName) {
+        this.doorbellName = doorbellName;
     }
 
-    public void setAlternativeStreet(String alternativeStreet) {
-        this.alternativeStreet = alternativeStreet;
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
     }
 
-    public void setAlternativeDistrict(String alternativeDistrict) {
-        this.alternativeDistrict = alternativeDistrict;
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
     }
 
-    public void setAlternativeFloor(String alternativeFloor) {
-        this.alternativeFloor = alternativeFloor;
-    }
-
-    public void setAlternativePostalCode(String alternativePostalCode) {
-        this.alternativePostalCode = alternativePostalCode;
-    }
-
-    public void setAlternativeBellName(String alternativeBellName) {
-        this.alternativeBellName = alternativeBellName;
+    public void setNote(String note) {
+        this.note = note;
     }
 
     public int getId() {
         return id;
+    }
+
+    public String getEmailIdentifier() {
+        return emailIdentifier;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getStatus() {
+        return status;
     }
 
     public String getFirstName() {
@@ -114,10 +129,6 @@ public class Customer {
         return mobilePhone;
     }
 
-    public String getNote() {
-        return note;
-    }
-
     public String getStreet() {
         return street;
     }
@@ -134,30 +145,20 @@ public class Customer {
         return postalCode;
     }
 
-    public String getBellName() {
-        return bellName;
+    public String getDoorbellName() {
+        return doorbellName;
     }
 
-    public String getAlternativeStreet() {
-        return alternativeStreet;
+    public String getLatitude() {
+        return latitude;
     }
 
-    public String getAlternativeDistrict() {
-        return alternativeDistrict;
+    public String getLongitude() {
+        return longitude;
     }
 
-    public String getAlternativeFloor() {
-        return alternativeFloor;
+    public String getNote() {
+        return note;
     }
-
-    public String getAlternativePostalCode() {
-        return alternativePostalCode;
-    }
-
-    public String getAlternativeBellName() {
-        return alternativeBellName;
-    }
-    
-    
 
 }

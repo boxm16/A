@@ -3,6 +3,7 @@ package Dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -34,13 +35,13 @@ public class DataBaseConnection {
                 System.out.println("----Creating a connection.----");
 
                 String driver = "com.mysql.cj.jdbc.Driver";
-                String url = "jdbc:mysql://localhost/alladin1?useSSL=false";
-                String username = "root";
-                String password = "athina2004";
+                String url = "jdbc:mysql://remotemysql.com/2cMB8HiJvS?useSSL=false";
+                String username = "2cMB8HiJvS";
+                String password = "rcYF70B1fj";
                 Class.forName(driver);
                 connection = DriverManager.getConnection(url, username, password);
 
-                System.out.println("----Database connection established.----");
+                System.out.println("----Database connection established.----"+new Date());
 
             } catch (ClassNotFoundException | SQLException ex) {
 

@@ -6,6 +6,8 @@
 package Dao;
 
 import Models.Item;
+import java.beans.PropertyVetoException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,6 +26,7 @@ public class ItemDao {
     Connection connection;
 
     public ItemDao() {
+
         connection = DataBaseConnection.getDBCInstance().getConnection();
     }
 

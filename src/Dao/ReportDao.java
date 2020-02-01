@@ -8,6 +8,8 @@ package Dao;
 import Models.Customer;
 import Models.Item;
 import Models.Report;
+import java.beans.PropertyVetoException;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -31,7 +33,7 @@ public class ReportDao {
     Connection connection;
 
     public ReportDao() {
-        connection = DataBaseConnection.getDBCInstance().getConnection();
+            connection = DataBaseConnection.getDBCInstance().getConnection();
     }
 
     public void saveReport(Report report) {
@@ -167,7 +169,7 @@ public class ReportDao {
                 String district = rs.getString("district");
                 String postal_code = rs.getString("postal_code");
                 String floor = rs.getString("floor");
-                String bell_name = rs.getString("bell_name");
+                String bell_name = rs.getString("doorbell_name");
                 String note = rs.getString("customer.note");
                 String product_description = rs.getString("product_description");
                 int item_code = rs.getInt("item_code");
@@ -194,7 +196,7 @@ public class ReportDao {
                     customer.setStreet(street);
                     customer.setPostalCode(postal_code);
                     customer.setFloor(floor);
-                    customer.setBellName(bell_name);
+                    customer.setDoorbellName(bell_name);
                     report.setCustomer(customer);
                     reports.put(id, report);
                 }
