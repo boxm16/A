@@ -26,8 +26,7 @@ public class AddressDao {
 
     public AddressDao() {
 
-        connection = DataBaseConnection.getDBCInstance().getConnection();
-
+            connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
     }
 
     public ArrayList<String> getDistrictList() {

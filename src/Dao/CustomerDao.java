@@ -26,7 +26,7 @@ public class CustomerDao {
     Connection connection;
 
     public CustomerDao() {
-        connection = DataBaseConnection.getDBCInstance().getConnection();
+        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
     }
 
     public Customer getCustomerById(int id) {

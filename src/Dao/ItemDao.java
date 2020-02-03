@@ -27,7 +27,7 @@ public class ItemDao {
 
     public ItemDao() {
 
-        connection = DataBaseConnection.getDBCInstance().getConnection();
+        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
     }
 
     public ArrayList<Item> getCustomerItems(int customerId) {

@@ -25,7 +25,7 @@ public class ProductDao {
     Connection connection;
 
     public ProductDao() {
-              connection = DataBaseConnection.getDBCInstance().getConnection();
+        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
     }
 
     public ArrayList<Product> getProducts() {

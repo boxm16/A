@@ -28,7 +28,7 @@ public class RoutDao {
     Connection connection;
 
     public RoutDao() {
-        connection = DataBaseConnection.getDBCInstance().getConnection();
+        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
     }
 
     public void saveRout(Rout rout) {

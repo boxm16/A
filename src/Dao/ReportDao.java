@@ -33,7 +33,7 @@ public class ReportDao {
     Connection connection;
 
     public ReportDao() {
-            connection = DataBaseConnection.getDBCInstance().getConnection();
+        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
     }
 
     public void saveReport(Report report) {
