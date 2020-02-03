@@ -25,10 +25,11 @@ public class ProductDao {
     Connection connection;
 
     public ProductDao() {
-        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
     }
 
     public ArrayList<Product> getProducts() {
+        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
+
         ArrayList<Product> products = new ArrayList<>();
         String query = "SELECT * FROM product;";
         try (Statement statement = connection.createStatement()) {

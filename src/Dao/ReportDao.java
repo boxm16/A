@@ -33,10 +33,10 @@ public class ReportDao {
     Connection connection;
 
     public ReportDao() {
-        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
     }
 
     public void saveReport(Report report) {
+        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
 
         String reportQuery = "INSERT INTO report (date, number, customer_id, type, status) "
                 + "VALUES (?,?,?,?,?);";
@@ -102,6 +102,8 @@ public class ReportDao {
     }
 
     public int insertDeliveryReport(Report report) {
+        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
+
         int reportId = 0;
         String reportQuery = "INSERT INTO report (date, customer_id, type, status) "
                 + "VALUES (?,?,?,?);";
@@ -141,6 +143,8 @@ public class ReportDao {
     }
 
     public HashMap<Integer, Report> getReportsForDate(Date date) {
+        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
+
         HashMap<Integer, Report> reports = new HashMap<>();
 
         //   ArrayList<Report> reports = new ArrayList<>();
@@ -224,6 +228,7 @@ public class ReportDao {
     }
 
     public void cancelReport(String reportId) {
+        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
 
         String reportQuery = "UPDATE report SET status='canceled' WHERE id=?;";
         try (PreparedStatement ps_report = connection.prepareStatement(reportQuery)) {

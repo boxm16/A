@@ -26,10 +26,11 @@ public class AddressDao {
 
     public AddressDao() {
 
-            connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
     }
 
     public ArrayList<String> getDistrictList() {
+        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
+
         ArrayList<String> districtsList = new ArrayList<>();
         String query = " SELECT district FROM post_box  GROUP BY district ORDER BY MAX(district) ASC";
         try (Statement statement = connection.createStatement()) {
@@ -47,6 +48,7 @@ public class AddressDao {
     }
 
     public ArrayList<String> getPostalCodesList(String district) {
+        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
 
         ArrayList<String> postal_codesList = new ArrayList<>();
         String query = " SELECT postal_code FROM post_box WHERE district='" + district + "'  "

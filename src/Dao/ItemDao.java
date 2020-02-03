@@ -27,10 +27,11 @@ public class ItemDao {
 
     public ItemDao() {
 
-        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
     }
 
     public ArrayList<Item> getCustomerItems(int customerId) {
+        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
+
         ArrayList<Item> customerItems = new ArrayList<Item>();
         String itemListQuery = "SELECT * FROM item "
                 + "INNER JOIN product ON item.product_id=product.product_id "
@@ -74,6 +75,8 @@ public class ItemDao {
     }
 
     public boolean itemCodeRegisteredInDb(int itemCode) {
+        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
+
         boolean registered = false;
         String query = "SELECT * FROM item WHERE item_code=" + itemCode + ";";
         try (Statement statement = connection.createStatement()) {
@@ -88,6 +91,8 @@ public class ItemDao {
     }
 
     public Item getItemByCode(String code, String year) {
+        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
+
         Item item = null;
         String query = "SELECT * FROM item "
                 + "INNER JOIN product ON item.product_id=product.product_id"
@@ -134,6 +139,7 @@ public class ItemDao {
     }
 
     public void updateItemDimensions(Item item) {
+        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
 
         String query = "UPDATE item SET length=?, width=? WHERE item_code=? and item_year=?;";
 
@@ -154,6 +160,8 @@ public class ItemDao {
     }
 
     public void updateItemMendingCharge(Item item) {
+        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
+
         String query = "UPDATE item SET mending_charge=? WHERE item_code=? and item_year=?;";
 
         if (item.getLength() != null && item.getWidth() != null) {//αφου διαστασεις εχουν καταχωρηθει, πλεον ειναι ετοιμο γα παραδοση

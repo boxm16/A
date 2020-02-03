@@ -26,10 +26,11 @@ public class CustomerDao {
     Connection connection;
 
     public CustomerDao() {
-        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
     }
 
     public Customer getCustomerById(int id) {
+        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
+
         Customer customer = null;
         String query = "SELECT * FROM customer WHERE id=" + id + ";";
         try (Statement statement = connection.createStatement()) {
@@ -67,6 +68,7 @@ public class CustomerDao {
     }
 
     public ArrayList<Customer> getCustomersByLastName(String lastName) {
+        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
 
         ArrayList<Customer> customers = new ArrayList<>();
         String query = "SELECT id, first_name, last_name, landline_phone, mobile_phone, street, district "
@@ -95,6 +97,8 @@ public class CustomerDao {
     }
 
     public ArrayList<Customer> getCustomerByLandLineNumber(String landLine) {
+        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
+
         ArrayList<Customer> customers = new ArrayList<>();
         String query = "SELECT id, first_name, last_name, landline_phone, mobile_phone, street, district "
                 + "FROM customer WHERE landline_phone LIKE ?;";
@@ -121,6 +125,8 @@ public class CustomerDao {
     }
 
     public ArrayList<Customer> getCustomerByMobileNumber(String mobile) {
+        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
+
         ArrayList<Customer> customers = new ArrayList<>();
         String query = "SELECT id, first_name, last_name, landline_phone, mobile_phone, street, district "
                 + "FROM customer WHERE mobile_phone LIKE ?;";
@@ -147,6 +153,8 @@ public class CustomerDao {
     }
 
     public void saveCustomer(Customer customer) {
+        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
+
         String query = "INSERT INTO customer (email_identifier, password, status, "
                 + "last_name, first_name, landline_phone, mobile_phone, note, "
                 + "street, district, postal_code, floor, bell_name, "
@@ -177,6 +185,7 @@ public class CustomerDao {
     }
 
     public void editCustomer(Customer customer) {
+        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
 
         String query = "UPDATE customer SET last_name=?, first_name=?, landline_phone=?, mobile_phone=?, note=?,"
                 + " street=?, district=?, postal_code=?, floor=?, bell_name=?,"
@@ -205,6 +214,8 @@ public class CustomerDao {
     }
 
     public ArrayList<Customer> getReadyToGoCustomers() {
+        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
+
         ArrayList<Customer> readyToGoCustomers = new ArrayList<>();
         String query = "SELECT * FROM customer "
                 + "Inner JOIN report ON customer.id=report.customer_id "

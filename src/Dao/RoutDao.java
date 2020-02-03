@@ -28,10 +28,11 @@ public class RoutDao {
     Connection connection;
 
     public RoutDao() {
-        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
     }
 
     public void saveRout(Rout rout) {
+        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
+
         String routQuery = "INSERT INTO rout (name, day_1, day_2, day_3, day_4, day_5, day_6, day_7)"
                 + " VALUES (?,?,?,?,?,?,?,?);";
         String last_rout_id_query = "SELECT MAX(id) AS AUTO_INCREMENT FROM rout";
@@ -67,6 +68,8 @@ public class RoutDao {
     }
 
     public ArrayList<Rout> getExistingRouts() {
+        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
+
         ArrayList<Rout> existingRouts = new ArrayList<>();
         String query = "SELECT * FROM rout";
         String lotQuery = "SELECT lot FROM rout_lot WHERE rout=?";
@@ -104,6 +107,8 @@ public class RoutDao {
     }
 
     public void deleteRout(int rout_id) {
+        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
+
         String query = "DELETE FROM rout WHERE id=" + rout_id + "";
         try (Statement statement = connection.createStatement()) {
             statement.execute(query);
@@ -114,6 +119,8 @@ public class RoutDao {
     }
 
     public Rout getRout(int routId) {
+        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
+
         String query = "SELECT * FROM rout WHERE id=" + routId + "";
         String lotQuery = "SELECT lot FROM rout_lot WHERE rout=?";
         Rout rout = null;
@@ -150,6 +157,7 @@ public class RoutDao {
     }
 
     public ArrayList<Rout> getAvailableRoutsForDistrict(String district) {
+        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
 
         ArrayList<Rout> availableRouts = new ArrayList<>();
         String query = "SELECT *  FROM rout "
@@ -179,6 +187,8 @@ public class RoutDao {
     }
 
     public int getD_Rout(int routId, String date) {
+        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
+
         int dRoutId = 0;
         String query = "SELECT id FROM d_rout WHERE rout_id=" + routId + " and date='" + date + "'";
         try (Statement statement = connection.createStatement()) {
@@ -196,6 +206,8 @@ public class RoutDao {
     }
 
     public void insertDRout(int routId, String date) {
+        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
+
         String query = "INSERT INTO d_rout (rout_id, date) VALUES (" + routId + ", '" + date + "');";
         try (Statement statement = connection.createStatement()) {
             statement.execute(query);
@@ -206,6 +218,8 @@ public class RoutDao {
     }
 
     public void insertDRout_Report(int DRoutId, int report_id) {
+        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
+
         String query = "INSERT INTO d_rout_report (d_rout_id, report_id) VALUES (" + DRoutId + "," + report_id + ")";
         try (Statement statement = connection.createStatement()) {
             statement.execute(query);
