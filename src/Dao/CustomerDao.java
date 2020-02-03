@@ -157,7 +157,7 @@ public class CustomerDao {
 
         String query = "INSERT INTO customer (email_identifier, password, status, "
                 + "last_name, first_name, landline_phone, mobile_phone, note, "
-                + "street, district, postal_code, floor, bell_name, "
+                + "street, district, postal_code, floor, doorbell_name) "
                 + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?);";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, customer.getEmailIdentifier());

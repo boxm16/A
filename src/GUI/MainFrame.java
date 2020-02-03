@@ -52,24 +52,24 @@ import javax.swing.table.TableCellRenderer;
  * @author Michail Sitmalidis
  */
 public class MainFrame extends javax.swing.JFrame {
-
+    
     private Scheduler scheduler;
-
+    
     private CustomerController customerController;
     private ItemController itemController;
     private ReportController reportController;
     private AddressController addressController;
     private RoutController routController;
-
+    
     private JTableHeader receivingItemsTableHeader;
     private DefaultTableModel receivingItemsTableModel;
     private JTextField receivingDatePickerTextField;
     private Color focusInColor;
     private Color focusOutColor;
-
+    
     private ItemListener districtFieldItemSelectionListener;
     private ItemListener postalCodeFieldItemSelectionListener;
-
+    
     private DefaultComboBoxModel availableRoutsModel;
     private MyTableModel cardTableModel;
 
@@ -171,12 +171,14 @@ public class MainFrame extends javax.swing.JFrame {
         streetField = new javax.swing.JTextField();
         alternativeFloorLabel3 = new javax.swing.JLabel();
         alternativeBellNameLabel1 = new javax.swing.JLabel();
-        bellNameField = new javax.swing.JTextField();
+        doorbellNameField = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         noteField = new javax.swing.JTextArea();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        emailField = new javax.swing.JTextField();
         floorField = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        emailStatusField = new javax.swing.JTextField();
         menuPanel = new javax.swing.JPanel();
         measurementButton = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -670,22 +672,9 @@ public class MainFrame extends javax.swing.JFrame {
 
         customerIdField.setEditable(false);
         customerIdField.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
-        customerIdField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                customerIdFieldFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                customerIdFieldFocusLost(evt);
-            }
-        });
         customerIdField.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 customerIdFieldMouseClicked(evt);
-            }
-        });
-        customerIdField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                customerIdFieldActionPerformed(evt);
             }
         });
         customerIdField.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -884,8 +873,8 @@ public class MainFrame extends javax.swing.JFrame {
         alternativeBellNameLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         alternativeBellNameLabel1.setText("ΟΝΟΜΑ ΣΤΟ ΚΟΥΔΟΥΝΟΙ");
 
-        bellNameField.setEditable(false);
-        bellNameField.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        doorbellNameField.setEditable(false);
+        doorbellNameField.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
 
         noteField.setEditable(false);
         noteField.setColumns(20);
@@ -897,10 +886,17 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("E-mail");
 
-        jTextField1.setText("jTextField1");
+        emailField.setEditable(false);
+        emailField.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
 
         floorField.setEditable(false);
         floorField.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel8.setText("Email Status");
+
+        emailStatusField.setEditable(false);
+        emailStatusField.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
 
         javax.swing.GroupLayout addressPanelLayout = new javax.swing.GroupLayout(addressPanel);
         addressPanel.setLayout(addressPanelLayout);
@@ -909,11 +905,6 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(addressPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(addressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(addressPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 422, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(addressPanelLayout.createSequentialGroup()
                         .addGroup(addressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(districtLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -928,20 +919,28 @@ public class MainFrame extends javax.swing.JFrame {
                                 .addContainerGap())))
                     .addGroup(addressPanelLayout.createSequentialGroup()
                         .addGroup(addressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(addressPanelLayout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addressPanelLayout.createSequentialGroup()
+                                .addGap(11, 11, 11)
+                                .addComponent(alternativeAddressLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(addressChangeButtonsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addressPanelLayout.createSequentialGroup()
                                 .addComponent(alternativeFloorLabel3)
                                 .addGap(38, 38, 38)
                                 .addComponent(floorField)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(alternativeBellNameLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(bellNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(doorbellNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addressPanelLayout.createSequentialGroup()
-                                .addGap(11, 11, 11)
-                                .addComponent(alternativeAddressLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(addressChangeButtonsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(emailStatusField)))
                         .addContainerGap())))
         );
         addressPanelLayout.setVerticalGroup(
@@ -962,14 +961,16 @@ public class MainFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(addressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(addressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(bellNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(doorbellNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(alternativeBellNameLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(floorField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(alternativeFloorLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(addressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(addressPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(emailField)
+                    .addComponent(emailStatusField)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -1100,7 +1101,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
+        
         RoutPlanningFrame routPlanningFrame = new RoutPlanningFrame();
         routPlanningFrame.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -1118,17 +1119,17 @@ public class MainFrame extends javax.swing.JFrame {
     private void dontChangeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dontChangeButtonActionPerformed
         CardLayout changeButtonCard = (CardLayout) addressChangeButtonsPanel.getLayout();
         changeButtonCard.show(addressChangeButtonsPanel, "YES");
-
+        
         CardLayout districtCard = (CardLayout) districtPanel.getLayout();
         districtCard.show(districtPanel, "NO");
         changePanel.setVisible(false);
     }//GEN-LAST:event_dontChangeButtonActionPerformed
 
     private void changeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeButtonActionPerformed
-
+        
         CardLayout changeButtonCard = (CardLayout) addressChangeButtonsPanel.getLayout();
         changeButtonCard.show(addressChangeButtonsPanel, "NO");
-
+        
         showChangeDistrictPanel();
     }//GEN-LAST:event_changeButtonActionPerformed
 
@@ -1149,32 +1150,20 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_customerIdFieldKeyTyped
 
     private void customerIdFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_customerIdFieldKeyPressed
-
+        
         if (customerIdField.isEditable() && evt.getKeyCode() == 10 && customerIdInputValid()) {
             int id = Integer.parseInt(customerIdField.getText());
             dispalyCustomerById(id);
             fillTables();
-
+            
         }
     }//GEN-LAST:event_customerIdFieldKeyPressed
-
-    private void customerIdFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerIdFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_customerIdFieldActionPerformed
 
     private void customerIdFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customerIdFieldMouseClicked
         if (evt.getClickCount() == 2) {
             openFindUserFields();
         }
     }//GEN-LAST:event_customerIdFieldMouseClicked
-
-    private void customerIdFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_customerIdFieldFocusLost
-
-    }//GEN-LAST:event_customerIdFieldFocusLost
-
-    private void customerIdFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_customerIdFieldFocusGained
-
-    }//GEN-LAST:event_customerIdFieldFocusGained
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         saveAndCancelButtonsActions();
@@ -1192,20 +1181,20 @@ public class MainFrame extends javax.swing.JFrame {
                 customer.setId(Integer.parseInt(customerIdField.getText().trim()));//i guess, no need for trim(), but, just in case
                 customerController.editCustomer(customer);
             }
-
+            
             saveAndCancelButtonsActions();
         }
     }//GEN-LAST:event_saveNewCustomerButtonActionPerformed
 
     private void editCustomerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editCustomerButtonActionPerformed
-
+        
         makeSearchFieldsEditable();
         makeFieldsEditable();
         customerIdField.setEditable(false);
-
+        
         CardLayout card = (CardLayout) buttonsPanel.getLayout();
         card.show(buttonsPanel, "card2");
-
+        
         addressChangeButtonsPanel.setVisible(true);
         loadDistrictComboBoxes();
     }//GEN-LAST:event_editCustomerButtonActionPerformed
@@ -1216,32 +1205,32 @@ public class MainFrame extends javax.swing.JFrame {
         makeFieldsEditable();
         customerIdField.setEditable(false);
         loadDistrictComboBoxes();
-
+        
         CardLayout card = (CardLayout) buttonsPanel.getLayout();
         card.show(buttonsPanel, "card2");
-
+        
         showChangeDistrictPanel();
     }//GEN-LAST:event_newCustomerButtonActionPerformed
 
     private void mobileFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_mobileFieldKeyPressed
         if (mobileField.isEditable() && evt.getKeyCode() == 10) {
             String mobile = mobileField.getText().trim();
-
+            
             ArrayList<Customer> customers = customerController.getCustomerByMobileNumber(mobile);
             SearchFrame searchFrame = new SearchFrame(this, customers);
             searchFrame.setVisible(true);
-
+            
         }
     }//GEN-LAST:event_mobileFieldKeyPressed
 
     private void landLineFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_landLineFieldKeyPressed
         if (landLineField.isEditable() && evt.getKeyCode() == 10) {
             String landLine = landLineField.getText().trim();
-
+            
             ArrayList<Customer> customers = customerController.getCustomerByLandLineNumber(landLine);
             SearchFrame searchFrame = new SearchFrame(this, customers);
             searchFrame.setVisible(true);
-
+            
         }
     }//GEN-LAST:event_landLineFieldKeyPressed
 
@@ -1252,21 +1241,21 @@ public class MainFrame extends javax.swing.JFrame {
     private void lastNameFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_lastNameFieldKeyPressed
         if (lastNameField.isEditable() && evt.getKeyCode() == 10) {
             String lastName = lastNameField.getText().trim();
-
+            
             ArrayList<Customer> customers = customerController.getCustomerByLastName(lastName);
             SearchFrame searchFrame = new SearchFrame(this, customers);
             searchFrame.setVisible(true);
-
+            
         }
     }//GEN-LAST:event_lastNameFieldKeyPressed
 
     private void saveReceivingReportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveReceivingReportButtonActionPerformed
-
+        
         if (reportGoodToGo()) {
             Report report = collectReceivingReportInformation();
             reportController.saveReport(report);
             cleanReceivingReport();
-
+            
         }
     }//GEN-LAST:event_saveReceivingReportButtonActionPerformed
 
@@ -1303,23 +1292,23 @@ public class MainFrame extends javax.swing.JFrame {
         fillTables();
 
     }//GEN-LAST:event_processButtonActionPerformed
-
+    
     private void myInitialization() {
         customerController = new CustomerController();
         itemController = new ItemController();
         reportController = new ReportController();
         addressController = new AddressController();
         routController = new RoutController();
-
+        
         focusInColor = new Color(255, 255, 0);
         focusOutColor = new Color(240, 240, 240);
-
+        
         Font headerFont = new Font("Tahoma", Font.BOLD, 14);
         receivingItemsTableHeader = receivingItemsTable.getTableHeader();
         receivingItemsTableHeader.setFont(headerFont);
-
+        
         receivingItemsTableModel = (DefaultTableModel) receivingItemsTable.getModel();
-
+        
         receivingDatePicker.setDate(new Date());
         receivingDatePickerTextField = (JTextField) receivingDatePicker.getComponent(1);
         receivingDatePickerTextField.setEditable(false);
@@ -1332,9 +1321,9 @@ public class MainFrame extends javax.swing.JFrame {
                     districFieldItemSeleceted(evt);
                 }
             }
-
+            
         };
-
+        
         postalCodeFieldItemSelectionListener = new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED)//to fire only when item is selecet, otherwise event is fired 2 time, because, first /some/ item is disselected, and then some another item is selleceted
@@ -1342,12 +1331,12 @@ public class MainFrame extends javax.swing.JFrame {
                     postalCodeFieldItemSeleceted(evt);
                 }
             }
-
+            
         };
-
+        
         availableRoutsModel = new DefaultComboBoxModel();
     }
-
+    
     private void saveAndCancelButtonsActions() {
         makeSearchFieldsUneditable();
         makeFieldsUneditable();
@@ -1355,11 +1344,11 @@ public class MainFrame extends javax.swing.JFrame {
         cleanFields();
         CardLayout card = (CardLayout) buttonsPanel.getLayout();
         card.show(buttonsPanel, "card1");
-
+        
         changeDistrictField.removeItemListener(districtFieldItemSelectionListener);
         addressChangeButtonsPanel.setVisible(false);
         dontChangeButton.doClick();
-
+        
         hideChangeDistrictPanel();
     }
 
@@ -1410,7 +1399,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel alternativeFloorLabel3;
     private javax.swing.JLabel alternativeStreetLabel3;
     private javax.swing.JComboBox<String> availableRoutsList;
-    private javax.swing.JTextField bellNameField;
     private javax.swing.JPanel buttonsPanel;
     private javax.swing.JPanel calculationDisplayPanel;
     private javax.swing.JButton cancelButton;
@@ -1428,7 +1416,10 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel districtPanel;
     private javax.swing.JButton dontChangeButton;
     private javax.swing.JPanel dontChangePanel;
+    private javax.swing.JTextField doorbellNameField;
     private javax.swing.JButton editCustomerButton;
+    private javax.swing.JTextField emailField;
+    private javax.swing.JTextField emailStatusField;
     private javax.swing.JButton findButton;
     private javax.swing.JTextField firstNameField;
     private javax.swing.JLabel firstNameLabel;
@@ -1444,6 +1435,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
@@ -1451,7 +1443,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JFormattedTextField landLineField;
     private javax.swing.JLabel landLineLabel;
     private javax.swing.JTextField lastNameField;
@@ -1487,32 +1478,32 @@ public class MainFrame extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void makeFieldsEditable() {
-
+        
         firstNameField.setEditable(true);
-
+        
         noteField.setEditable(true);
         streetField.setEditable(true);
         streetField.setEditable(true);
         floorField.setEditable(true);
-        bellNameField.setEditable(true);
-
+        doorbellNameField.setEditable(true);
+        
     }
-
+    
     private void makeFieldsUneditable() {
-
+        
         firstNameField.setEditable(false);
-
+        
         noteField.setEditable(false);
         streetField.setEditable(false);
         changeDistrictField.setEditable(false);
         changePostalCodeField.setEditable(false);
         floorField.setEditable(false);
-        bellNameField.setEditable(false);
-
+        doorbellNameField.setEditable(false);
+        
     }
-
+    
     public void dispalyCustomerById(int id) {
-
+        
         if (customerController.checkCustomerById(id)) {
             Customer customer = customerController.getCustomerById(id);
             makeSearchFieldsUneditable();
@@ -1522,68 +1513,70 @@ public class MainFrame extends javax.swing.JFrame {
 //do nothing
         }
     }
-
+    
     private void displayCustomer(Customer customer) {
         customerIdField.setText(Integer.toString(customer.getId()));
         lastNameField.setText(customer.getLastName());
         firstNameField.setText(customer.getFirstName());
         landLineField.setText(customer.getLandlinePhone());
         mobileField.setText(customer.getMobilePhone());
-        noteField.setText(customer.getNote());
-
+        
         districtField.setText(customer.getDistrict());
-        streetField.setText(customer.getStreet());
-
         postalCodeField.setText(customer.getPostalCode());
-
+        streetField.setText(customer.getStreet());
         floorField.setText(customer.getFloor());
-        bellNameField.setText(customer.getDoorbellName());
-
+        doorbellNameField.setText(customer.getDoorbellName());
+        noteField.setText(customer.getNote());
+        
+        emailField.setText(customer.getEmailIdentifier());
+        emailStatusField.setText(customer.getStatus());
+        
     }
-
+    
     private void makeSearchFieldsEditable() {
         customerIdField.setEditable(true);
         lastNameField.setEditable(true);
         landLineField.setEditable(true);
         mobileField.setEditable(true);
     }
-
+    
     private void makeSearchFieldsUneditable() {
         customerIdField.setEditable(false);
         lastNameField.setEditable(false);
         landLineField.setEditable(false);
         mobileField.setEditable(false);
     }
-
+    
     private void cleanFields() {
-
+        
         customerCardPanel.removeAll();//removing receiving card`s table
         customerCardPanel.repaint();
-
+        
         customerIdField.setText("");
-
+        
         lastNameField.setText("");
         firstNameField.setText("");
         landLineField.setText("");
         mobileField.setText("");
-        noteField.setText("");
-
+        
         districtField.setText("");
         postalCodeField.setText("");
         changeDistrictField.removeAllItems();
         changePostalCodeField.removeAllItems();
         streetField.setText("");
         floorField.setText("");
-        bellNameField.setText("");
-
-        postalCodeField.setText("");
-
+        doorbellNameField.setText("");
+        
+        noteField.setText("");
+        emailField.setText("");
+        emailStatusField.setText("");
+        
     }
-
+    
     private boolean customerIdInputValid() {
         boolean valid = true;
         customerIdField.setText(customerIdField.getText().trim());
-
+        
         if (customerIdField.getText().equals("")) {
             JOptionPane.showMessageDialog(new javax.swing.JFrame(),
                     "ΠΕΔΙΟ 'ID ΠΕΛΑΤΗ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΙΝΑΙ ΑΔΙΟ.",
@@ -1603,24 +1596,24 @@ public class MainFrame extends javax.swing.JFrame {
                 customerIdField.setBackground(Color.red);
                 break;
             }
-
+            
         }
-
+        
         return valid;
     }
-
+    
     private boolean customerInputsValid() {
         boolean valid = true;
         if (!lastNameInputValid() || !firstNameInputeValid() || !noteInputValid()
                 || !streetInputValid()
                 || !districtInputValid() || !postalCodeInputValid()
-                || !floorInputValid() || !bellNameInputValid()) {
+                || !floorInputValid() || !doorbellNameInputValid()) {
             valid = false;
         }
-
+        
         return valid;
     }
-
+    
     private Customer collectCustomerInformation() {
         Customer customer = new Customer();
         customer.setLastName(lastNameField.getText().trim());
@@ -1628,11 +1621,11 @@ public class MainFrame extends javax.swing.JFrame {
         customer.setLandlinePhone(landLineField.getText());
         customer.setMobilePhone(mobileField.getText());
         customer.setNote(noteField.getText().trim());
-
+        
         if (changePanel.isVisible()) {
             if (changeDistrictField.getSelectedIndex() != -1) {
                 customer.setDistrict(changeDistrictField.getSelectedItem().toString());
-
+                
             } else {
                 customer.setDistrict("");
             }
@@ -1641,19 +1634,19 @@ public class MainFrame extends javax.swing.JFrame {
             } else {
                 customer.setPostalCode("");
             }
-
+            
         } else {
             customer.setDistrict(districtField.getText().trim());
             customer.setPostalCode(postalCodeField.getText().trim());
         }
-
+        
         customer.setStreet(streetField.getText());
         customer.setFloor(floorField.getText());
-        customer.setDoorbellName(bellNameField.getText().trim());
-
+        customer.setDoorbellName(doorbellNameField.getText().trim());
+        
         return customer;
     }
-
+    
     private boolean lastNameInputValid() {
         boolean valid = true;
         String lastName = lastNameField.getText().trim();
@@ -1672,13 +1665,13 @@ public class MainFrame extends javax.swing.JFrame {
             valid = false;
         }
         return valid;
-
+        
     }
-
+    
     private boolean firstNameInputeValid() {
         boolean valid = true;
         String firstName = firstNameField.getText().trim();
-
+        
         if (firstName.length() > 45) {
             JOptionPane.showMessageDialog(new JFrame(),
                     "ΠΕΔΙΟ 'ΟΝΟΜΑ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΧΕΙ ΠΑΝΩ ΑΠΟ 45 ΓΡΑΜΜΑΤΑ",
@@ -1688,11 +1681,11 @@ public class MainFrame extends javax.swing.JFrame {
         }
         return valid;
     }
-
+    
     private boolean noteInputValid() {
         boolean valid = true;
         String note = noteField.getText().trim();
-
+        
         if (note.length() > 250) {
             JOptionPane.showMessageDialog(new JFrame(),
                     "ΠΕΔΙΟ 'ΣΗΜΕΙΩΜΑ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΧΕΙ ΠΑΝΩ ΑΠΟ 250 ΓΡΑΜΜΑΤΑ",
@@ -1702,28 +1695,28 @@ public class MainFrame extends javax.swing.JFrame {
         }
         return valid;
     }
-
+    
     private boolean streetInputValid() {
         boolean valid = true;
         System.out.println("streetInputValid-MainFrame- i think no need for this anymore");
         return valid;
     }
-
+    
     private boolean districtInputValid() {
         boolean valid = true;
         System.out.println("districtInputValid-MainFrame- i think no need for this anymore");
-
+        
         return valid;
-
+        
     }
-
+    
     private boolean postalCodeInputValid() {
         boolean valid = true;
         System.out.println("postalCodeInputValid-MainFrame- i think no need for this anymore");
-
+        
         return valid;
     }
-
+    
     private boolean floorInputValid() {
         boolean valid = true;
         System.out.println("need to change field for combobox with floors -10 to 100 with δομα and υπογειο ");
@@ -1737,11 +1730,11 @@ public class MainFrame extends javax.swing.JFrame {
         }
         return valid;
     }
-
-    private boolean bellNameInputValid() {
+    
+    private boolean doorbellNameInputValid() {
         boolean valid = true;
-        String bellName = bellNameField.getText().trim();
-
+        String bellName = doorbellNameField.getText().trim();
+        
         if (bellName.length() > 60) {
             JOptionPane.showMessageDialog(new JFrame(),
                     "ΠΕΔΙΟ 'ΟΝΟΜΑ ΣΤΟ ΚΟΥΔΟΥΝΙ' ΔΕΝ ΜΠΟΡΕΙ ΝΑ ΕΧΕΙ ΠΑΝΩ ΑΠΟ 60 ΓΡΑΜΜΑΤΑ",
@@ -1751,25 +1744,7 @@ public class MainFrame extends javax.swing.JFrame {
         }
         return valid;
     }
-
-    private boolean alternativeStreetInputValid() {
-        boolean valid = true;
-        System.out.println("alternativeStreetInputValid-no need anymore");
-        return valid;
-    }
-
-    private boolean alternativeDistrictInputValid() {
-        boolean valid = true;
-        System.out.println("alternativeDistrictInputValid-no need anymore");
-        return valid;
-    }
-
-    private boolean alternativePostalCodeInputValid() {
-        boolean valid = true;
-        System.out.println("alternativeDistrictInputValid-no need anymore");
-        return valid;
-    }
-
+    
     public void fillTables() {
         fillCardTable();
         loadAvailableRouts();
@@ -1791,13 +1766,13 @@ System.out.println("maybe to drop switch, and fille all the table simultaniously
         }
          */
     }
-
+    
     private void fillCardTable() {
         customerCardPanel.removeAll();
         cardTableModel = new MyTableModel();
-
+        
         Object[] columns = new Object[19];
-
+        
         columns[0] = "ΚΩΔΙΚΟΣ ΠΡΟΙΟΝΤΟΣ";
         columns[1] = "ΠΕΡΙΓΡΑΦΗ";
         columns[2] = "ΚΩΔΙΚΟΣ ΤΕΜΑΧΙΟΥ";
@@ -1806,28 +1781,28 @@ System.out.println("maybe to drop switch, and fille all the table simultaniously
         columns[5] = "ΦΥΛΑΞΗ";
         columns[6] = "ΕΠΙΔΙΟΘΡΩΣΗ";
         columns[7] = "ΣΗΜΕΙΩΜΑ";
-
+        
         columns[8] = "ΤΙΜΗ ΓΙΑ ΚΑΘΑΡΙΣΜΑ";
         columns[9] = "ΤΙΜΗ ΓΙΑ ΦΥΛΑΞΗ";
-
+        
         columns[10] = "ΜΗΚΟΣ";
         columns[11] = "ΠΛΑΟΤΟΣ";
         columns[12] = "ΤΕΤΡΑΓΩΝΙΚΑ";
-
+        
         columns[13] = "ΧΡΕΩΣΗ ΓΙΑ ΚΑΘΑΡΙΣΜΑ";
         columns[14] = "ΧΡΕΩΣΗ ΓΙΑ ΦΥΛΑΞΗ";
         columns[15] = "ΧΡΕΩΣΗ ΓΙΑ ΕΠΙΔΙΟΡΘΩΣΗ";
-
+        
         columns[16] = "ΣΥΝΟΛΟ ΧΡΕΩΣΗΣ ΤΕΜΑΧΙΟΥ";
         columns[17] = "ΚΑΤΑΣΤΑΣΗ";
         columns[18] = "ΔΙΑΛΟΓΗ";
         cardTableModel.setColumnIdentifiers(columns);
-
+        
         ArrayList<Item> items = itemController.getCustomerItemsForCard(Integer.parseInt(customerIdField.getText()));
-
+        
         for (Item item : items) {
             Object[] row = new Object[19];
-
+            
             row[0] = item.getId();
             row[1] = item.getDescription();
             row[2] = item.getCode();
@@ -1847,12 +1822,12 @@ System.out.println("maybe to drop switch, and fille all the table simultaniously
             } else {
                 row[6] = "-";
             }
-
+            
             row[7] = item.getNote();
-
+            
             row[8] = item.getCleaningPrice();
             row[9] = item.getStoringPrice();
-
+            
             if (item.getLength() != null) {
                 BigDecimal length, width, square;
                 row[10] = length = item.getLength();
@@ -1877,11 +1852,11 @@ System.out.println("maybe to drop switch, and fille all the table simultaniously
             } else {
                 row[18] = status = Boolean.FALSE;
             }
-
+            
             cardTableModel.addRow(row, status);
         }
         JScrollPane sc = (JScrollPane) createTable(cardTableModel);
-
+        
         customerCardPanel.add(sc);
         customerCardPanel.setLayout(new BoxLayout(customerCardPanel, BoxLayout.LINE_AXIS));
         //You have added a new component. The contentPane will be invalid, and needs repainting
@@ -1893,7 +1868,7 @@ System.out.println("maybe to drop switch, and fille all the table simultaniously
 //if i dont put it, MainFrame shrinks to is original dimensions, even if i have it to full screen
         countTotal(cardTableModel);
     }
-
+    
     private JComponent createTable(DefaultTableModel model) {
 //do not ask much about this, i don know how it works
         JTable table = new JTable(model) {
@@ -1907,18 +1882,18 @@ System.out.println("maybe to drop switch, and fille all the table simultaniously
                     int modelRow = convertRowIndexToModel(row);
                     String status = (String) getModel().getValueAt(modelRow, 17);
                     boolean ready = (boolean) getModel().getValueAt(modelRow, 18);
-
+                    
                     if (status.equals("processing")) {
                         //model.setValueAt(false, modelRow, 17);
                         c.setBackground(Color.RED);
                     }
-
+                    
                     if (ready) {
                         c.setBackground(Color.GREEN);
                     }
-
+                    
                 }
-
+                
                 if (isRowSelected(row)) {
                     //   c.setBackground(getBackground());
                     int modelRow = convertRowIndexToModel(row);
@@ -1926,29 +1901,29 @@ System.out.println("maybe to drop switch, and fille all the table simultaniously
                     if (!"ready".equals(status)) {
                         // model.setValueAt(false, modelRow, 17);
                         c.setBackground(Color.PINK);
-
+                        
                     }
-
+                    
                 }
-
+                
                 return c;
             }
         };
-
+        
         table.getModel().addTableModelListener(
                 new TableModelListener() {
-
+            
             public void tableChanged(TableModelEvent evt) {
                 countTotal((DefaultTableModel) table.getModel());
             }
         }
         );
-
+        
         table.setPreferredScrollableViewportSize(table.getPreferredSize());
         table.setRowHeight(36);
-
+        
         table.setFont(new java.awt.Font("Tahoma", 0, 30));
-
+        
         table.changeSelection(0, 0, false, false);
         table.setAutoCreateRowSorter(true);
         // table.setAutoResizeMode(AUTO_RESIZE_OFF);
@@ -1958,12 +1933,12 @@ System.out.println("maybe to drop switch, and fille all the table simultaniously
         scrollPane.setPreferredSize(new Dimension(scrollPane.getPreferredSize().width, scrollPaneHeigth));
         return scrollPane;
     }
-
+    
     private void countTotal(DefaultTableModel model) {
-
+        
         int rowCount = model.getRowCount();
         BigDecimal subTotal = BigDecimal.ZERO;
-
+        
         for (int x = 0; x < rowCount; x++) {
             if (!Boolean.valueOf(model.getValueAt(x, 18).toString())) {
                 continue;
@@ -1973,17 +1948,17 @@ System.out.println("maybe to drop switch, and fille all the table simultaniously
             subTotal = subTotal.setScale(2, RoundingMode.HALF_EVEN);
         }
         subTotalSum.setText(subTotal.toString());
-
+        
         BigDecimal fpa = subTotal.multiply(new BigDecimal(24).divide(new BigDecimal(100)));
         fpa = fpa.setScale(2, RoundingMode.HALF_EVEN);
         fpaSum.setText(fpa.toString());
-
+        
         BigDecimal total = subTotal.add(fpa);
         total.setScale(2, RoundingMode.HALF_EVEN);
         totalSum.setText(total.toString());
-
+        
     }
-
+    
     public void addItemToReceivingItemsTable(Item item) {
         String[] row = new String[7];
         row[0] = String.valueOf(item.getId());
@@ -2005,19 +1980,19 @@ System.out.println("maybe to drop switch, and fille all the table simultaniously
             row[5] = "-";
         }
         row[6] = item.getNote();
-
+        
         receivingItemsTableModel.addRow(row);
     }
-
+    
     private Report collectReceivingReportInformation() {
-
+        
         Report report = new Report();
         report.setType(Report.Type.RECEIVING);
         report.getCustomer().setId(Integer.parseInt(customerIdField.getText().toString()));
         report.setDate(receivingDatePicker.getDate());
         report.setNumber(Integer.parseInt(receivingReportNumberField.getText()));
         DefaultTableModel model = (DefaultTableModel) receivingItemsTable.getModel();
-
+        
         for (int x = 0; x < model.getRowCount(); x++) {
             Item item = new Item();
             item.setId(Integer.parseInt(model.getValueAt(x, 0).toString()));
@@ -2040,10 +2015,10 @@ System.out.println("maybe to drop switch, and fille all the table simultaniously
             item.setNote(model.getValueAt(x, 6).toString());
             report.getItems().add(item);
         }
-
+        
         return report;
     }
-
+    
     private boolean reportGoodToGo() {
         if (customerIdInputValid() && receivingReportNumberGoodToGo() && receivingReportTableGoodToGo()) {
             int customerId = Integer.parseInt(customerIdField.getText());
@@ -2052,13 +2027,13 @@ System.out.println("maybe to drop switch, and fille all the table simultaniously
             } else {
                 return false;
             }
-
+            
         } else {
             return false;
         }
-
+        
     }
-
+    
     private boolean receivingReportNumberGoodToGo() {
         if (receivingReportNumberField.getText().trim().length() > 0) {
             return true;
@@ -2070,12 +2045,12 @@ System.out.println("maybe to drop switch, and fille all the table simultaniously
             receivingReportNumberField.requestFocus();
             return false;
         }
-
+        
     }
-
+    
     private boolean receivingReportTableGoodToGo() {
         if (receivingItemsTable.getModel().getRowCount() > 0) {
-
+            
             return true;
         } else {
             JOptionPane.showMessageDialog(null, "ΠΡΕΠΕΙ ΝΑ ΥΠΑΡΧΕΙ ΤΟΥΛΑΧΙΣΤΟΝ ΕΝΑ ΤΕΜΑΧΙΟ ΣΤΟ ΔΕΛΤΙΟ ΠΑΡΑΛΑΒΗΣ",
@@ -2086,13 +2061,13 @@ System.out.println("maybe to drop switch, and fille all the table simultaniously
             return false;
         }
     }
-
+    
     private void cleanReceivingReport() {
         receivingReportNumberField.setText("");
         receivingItemsTableModel.setRowCount(0);
         cleanFields();
     }
-
+    
     private void openFindUserFields() {
         cleanFields();
         makeFieldsUneditable();
@@ -2100,19 +2075,21 @@ System.out.println("maybe to drop switch, and fille all the table simultaniously
         CardLayout card = (CardLayout) buttonsPanel.getLayout();
         card.show(buttonsPanel, "card1");
     }
-
+    
     private void loadDistrictComboBoxes() {
-
+        
+   
+        
         ArrayList<String> districtsList = addressController.getDistrictsList();
         for (String district : districtsList) {
             changeDistrictField.addItem(district);
-            changeDistrictField.setSelectedIndex(-1);
-
+            changeDistrictField.setSelectedIndex(-1);//why on hell did i do this???
+            
         }
         //adding listener now, and not before, because otherwise it works the moment field is loaded, and i dont want this to happen, i want it to start listeneing after field is loaded
         changeDistrictField.addItemListener(districtFieldItemSelectionListener);
     }
-
+    
     private void districFieldItemSeleceted(ItemEvent evt) {
         changePostalCodeField.removeAllItems();
         String district = evt.getItem().toString();
@@ -2123,77 +2100,77 @@ System.out.println("maybe to drop switch, and fille all the table simultaniously
         changePostalCodeField.setSelectedIndex(-1);
         changePostalCodeField.addItemListener(postalCodeFieldItemSelectionListener);
     }
-
+    
     private void postalCodeFieldItemSeleceted(ItemEvent evt) {
         System.out.println("postalCodeFieldItemSeleceted-dont need for now");
     }
-
+    
     private void alternativePostalCodeFieldItemSeleceted(ItemEvent evt) {
         System.out.println("alternativePostalCodeFieldItemSeleceted- dont need for now");
     }
-
+    
     private void showChangeDistrictPanel() {
         CardLayout districtCard = (CardLayout) districtPanel.getLayout();
         districtCard.show(districtPanel, "YES");
         changePanel.setVisible(true);
     }
-
+    
     private void hideChangeDistrictPanel() {
         CardLayout districtCard = (CardLayout) districtPanel.getLayout();
         districtCard.show(districtPanel, "NO");
         changePanel.setVisible(false);
     }
-
+    
     private void loadAvailableRouts() {
         String district = districtField.getText();
         availableRoutsModel.removeAllElements();
         ArrayList<String> availableRouts;
         availableRouts = routController.getAvailableRoutForDistrict(district);
         Collections.sort(availableRouts);
-
+        
         for (String day : availableRouts) {
             availableRoutsModel.addElement(day);
-
+            
         }
         availableRoutsList.setModel(availableRoutsModel);
     }
-
+    
     public void showCardTab() {
         customerCardsTabbedPane.setSelectedIndex(1);
     }
-
+    
     private Report collectDeliveryReportInformation() {
         Report report = new Report();
         report.setType(Report.Type.DELIVERY);
         report.getCustomer().setId(Integer.parseInt(customerIdField.getText()));
         int rowCount = cardTableModel.getRowCount();
         for (int x = 0; x < rowCount; x++) {
-
+            
             if ((boolean) cardTableModel.getValueAt(x, 18)) {
                 Item item = new Item();
                 item.setCode((int) cardTableModel.getValueAt(x, 2));
                 item.setYear((int) cardTableModel.getValueAt(x, 3));
                 item.setCleaningCharge((BigDecimal) cardTableModel.getValueAt(x, 13));
                 item.setStoringCharge((BigDecimal) cardTableModel.getValueAt(x, 14));
-
+                
                 report.getItems().add(item);
             }
-
+            
         }
         return report;
     }
-
+    
     public DefaultTableModel getReceivingItemsTableModel() {
         return receivingItemsTableModel;
     }
-
+    
     private void fillOnRoutItemsCard() {
         ArrayList<Item> items = itemController.getCustomerItemsForOnRoutCard(Integer.parseInt(customerIdField.getText()));
-
+        
         DefaultTableModel onRoutItemsTableModel = new DefaultTableModel();
-
+        
         Object[] columns = new Object[19];
-
+        
         columns[0] = "ΚΩΔΙΚΟΣ ΠΡΟΙΟΝΤΟΣ";
         columns[1] = "ΠΕΡΙΓΡΑΦΗ";
         columns[2] = "ΚΩΔΙΚΟΣ ΤΕΜΑΧΙΟΥ";
@@ -2202,26 +2179,26 @@ System.out.println("maybe to drop switch, and fille all the table simultaniously
         columns[5] = "ΦΥΛΑΞΗ";
         columns[6] = "ΕΠΙΔΙΟΘΡΩΣΗ";
         columns[7] = "ΣΗΜΕΙΩΜΑ";
-
+        
         columns[8] = "ΤΙΜΗ ΓΙΑ ΚΑΘΑΡΙΣΜΑ";
         columns[9] = "ΤΙΜΗ ΓΙΑ ΦΥΛΑΞΗ";
-
+        
         columns[10] = "ΜΗΚΟΣ";
         columns[11] = "ΠΛΑΟΤΟΣ";
         columns[12] = "ΤΕΤΡΑΓΩΝΙΚΑ";
-
+        
         columns[13] = "ΧΡΕΩΣΗ ΓΙΑ ΚΑΘΑΡΙΣΜΑ";
         columns[14] = "ΧΡΕΩΣΗ ΓΙΑ ΦΥΛΑΞΗ";
         columns[15] = "ΧΡΕΩΣΗ ΓΙΑ ΕΠΙΔΙΟΡΘΩΣΗ";
-
+        
         columns[16] = "ΣΥΝΟΛΟ ΧΡΕΩΣΗΣ ΤΕΜΑΧΙΟΥ";
         columns[17] = "ΚΑΤΑΣΤΑΣΗ";
         columns[18] = "ΔΙΑΛΟΓΗ";
         onRoutItemsTableModel.setColumnIdentifiers(columns);
-
+        
         for (Item item : items) {
             Object[] row = new Object[19];
-
+            
             row[0] = item.getId();
             row[1] = item.getDescription();
             row[2] = item.getCode();
@@ -2241,12 +2218,12 @@ System.out.println("maybe to drop switch, and fille all the table simultaniously
             } else {
                 row[6] = "-";
             }
-
+            
             row[7] = item.getNote();
-
+            
             row[8] = item.getCleaningPrice();
             row[9] = item.getStoringPrice();
-
+            
             if (item.getLength() != null) {
                 BigDecimal length, width, square;
                 row[10] = length = item.getLength();
@@ -2280,5 +2257,5 @@ System.out.println("maybe to drop switch, and fille all the table simultaniously
 //if i dont put it, MainFrame shrinks to is original dimensions, even if i have it to full screen
         //  countTotal(cardTableModel);
     }
-
+    
 }
