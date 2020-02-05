@@ -50,6 +50,13 @@ public class SearchFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+                formWindowLostFocus(evt);
+            }
+        });
 
         display.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         JTableHeader header = display.getTableHeader();
@@ -143,6 +150,10 @@ public class SearchFrame extends javax.swing.JFrame {
             displaySelectedCustomer();
         }
     }//GEN-LAST:event_displayKeyPressed
+
+    private void formWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowLostFocus
+       this.dispose();
+    }//GEN-LAST:event_formWindowLostFocus
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

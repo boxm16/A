@@ -92,6 +92,13 @@ public class RoutPlanningFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+                formWindowLostFocus(evt);
+            }
+        });
         getContentPane().setLayout(new javax.swing.BoxLayout(getContentPane(), javax.swing.BoxLayout.LINE_AXIS));
 
         mapPanel.setBackground(new java.awt.Color(153, 255, 153));
@@ -423,6 +430,10 @@ public class RoutPlanningFrame extends javax.swing.JFrame {
 //i know this is stupid. but try whith those 2 line above, you`ll see what is really creay. I couldnt figure it out
         }
     }//GEN-LAST:event_existingRoutsFieldValueChanged
+
+    private void formWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowLostFocus
+        this.dispose();
+    }//GEN-LAST:event_formWindowLostFocus
 
     /**
      * @param args the command line arguments

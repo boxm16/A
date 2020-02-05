@@ -23,8 +23,13 @@ public class AddressController {
         addressDao = new AddressDao();
     }
 
-    public ArrayList<String> getDistrictsList() {
-        ArrayList<String> districtsList = addressDao.getDistrictList();
+    public HashMap<String, ArrayList> getDistrictsList() {
+        HashMap<String, ArrayList> districtsList = addressDao.getDistrictList();
+       Iterator it=districtsList.entrySet().iterator();
+       while(it.hasNext()){
+           Map.Entry pair=(Map.Entry)it.next();
+           System.out.println(pair.getKey());
+       }
         return districtsList;
     }
 

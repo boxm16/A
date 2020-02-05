@@ -13,6 +13,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,15 +30,26 @@ public class AddressDao {
 
     }
 
-    public ArrayList<String> getDistrictList() {
+    public HashMap<String, ArrayList> getDistrictList() {
         connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
-
-        ArrayList<String> districtsList = new ArrayList<>();
-        String query = " SELECT district FROM post_box  GROUP BY district ORDER BY MAX(district) ASC";
+//i use linkedHashMap because it preserve insertion order, while simple hashMap does 
+        LinkedHashMap<String, ArrayList> districtsList = new LinkedHashMap<>();
+        String query = " SELECT district, postal_code FROM post_box   GROUP BY district, postal_code ORDER BY district ASC, postal_code ASC;";
         try (Statement statement = connection.createStatement()) {
             ResultSet rs = statement.executeQuery(query);
             while (rs.next()) {
-                districtsList.add(rs.getString("district"));
+                String district = rs.getString("district");
+                String postal_code = rs.getString("postal_code");
+
+                if (districtsList.containsKey(district)) {
+                    districtsList.get(district).add(postal_code);
+                } else {
+                    ArrayList<String> postal_codes = new ArrayList();
+                    postal_codes.add(postal_code);
+
+                    districtsList.put(district, postal_codes);
+
+                }
 
             }
 
@@ -44,6 +57,7 @@ public class AddressDao {
             Logger.getLogger(ItemDao.class.getName()).log(Level.SEVERE, null, ex);
 
         }
+
         return districtsList;
     }
 

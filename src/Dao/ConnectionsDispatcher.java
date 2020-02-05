@@ -23,32 +23,36 @@ public class ConnectionsDispatcher {
 
     private static ConnectionsDispatcher CD_Instance;
 
-    private final String DRIVER_CLASS = "com.mysql.cj.jdbc.Driver";
-    private final String URL = "jdbc:mysql://remotemysql.com/2cMB8HiJvS?useSSL=false";
-    private final String USER = "2cMB8HiJvS";
-    private final String PASSWORD = "rcYF70B1fj";
-    private final int minutes = 5;
+    private static final String DRIVER_CLASS = "com.mysql.cj.jdbc.Driver";
+    private static final String URL = "jdbc:mysql://remotemysql.com/2cMB8HiJvS?useSSL=false";
+    private static final String USER = "2cMB8HiJvS";
+    private static final String PASSWORD = "rcYF70B1fj";
+    private static final int MINUTES = 5;
+    private final int delay = 0;
+    private static Date timeStamp;
     private static LinkedList<Connection> connectionsStack = new LinkedList();
     private Timer timer;
 
     private ConnectionsDispatcher() {
+        timeStamp = new Date();
 
         connectionsStack = new LinkedList();
         connectionsStack.add(openConnection());
         connectionsStack.add(openConnection());
 
         timer = new Timer();
-        timer.schedule(new ConnectionRenewal(), minutes * 60000, minutes * 60000);
+        timer.schedule(new ConnectionRenewal(), delay, MINUTES * 60000);
     }
 
     public static ConnectionsDispatcher getDispatcherInstance() {
         if (CD_Instance == null) {
             CD_Instance = new ConnectionsDispatcher();
+
         }
         return CD_Instance;
     }
 
-    private Connection openConnection() {
+    private static Connection openConnection() {
         Connection connection = null;
         try {
             Class.forName(DRIVER_CLASS);
@@ -60,15 +64,32 @@ public class ConnectionsDispatcher {
     }
 
     public static Connection getConnection() {
-
+        //if a connection wasnt requested for more than time that is defined in Timer (MINUTES)
+        //(usually this happens when computer goes to sleep, so Timer dont fire his run method)
+        //i need to close all connections in connectionsStack, clear the stack and refill it with new connections
+        if (new Date().getTime() - timeStamp.getTime() > (MINUTES * 60000) + 1) {
+            for (Connection connection : connectionsStack) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(ConnectionsDispatcher.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            connectionsStack.clear();
+            connectionsStack.add(openConnection());
+            connectionsStack.add(openConnection());
+        }
         return connectionsStack.peekLast();
     }
 
     private class ConnectionRenewal extends TimerTask {
 
+        @Override
         public void run() {
             System.out.println(new Date() + " Time for new connection!");
             System.out.println("Connections in connections Stack before renewal: " + connectionsStack.size());
+            timeStamp = new Date();
+
             if (connectionsStack.size() < 2) {
                 connectionsStack.add(openConnection());
             }
@@ -77,6 +98,7 @@ public class ConnectionsDispatcher {
             System.out.println("Connections in connections Stack after renewal: " + connectionsStack.size());
 
             try {
+
                 closingConnection.close();
             } catch (SQLException ex) {
                 Logger.getLogger(ConnectionsDispatcher.class.getName()).log(Level.SEVERE, null, ex);

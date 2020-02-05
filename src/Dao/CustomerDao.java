@@ -188,9 +188,8 @@ public class CustomerDao {
         connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
 
         String query = "UPDATE customer SET last_name=?, first_name=?, landline_phone=?, mobile_phone=?, note=?,"
-                + " street=?, district=?, postal_code=?, floor=?, bell_name=?,"
-                + " alternative_street=?, alternative_district=?, alternative_postal_code=?, alternative_floor=?, alternative_bell_name=?"
-                + " WHERE customer_id=?";
+                + " street=?, district=?, postal_code=?, floor=?, doorbell_name=?"
+                + " WHERE id=?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, customer.getLastName());
             preparedStatement.setString(2, customer.getFirstName());
@@ -203,7 +202,7 @@ public class CustomerDao {
             preparedStatement.setString(9, customer.getFloor());
             preparedStatement.setString(10, customer.getDoorbellName());
 
-            preparedStatement.setInt(16, customer.getId());
+            preparedStatement.setInt(11, customer.getId());
             preparedStatement.execute();
 
         } catch (SQLException ex) {

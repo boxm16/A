@@ -22,7 +22,7 @@ public class Scheduler {
     public Scheduler() {
         task = new TimerTask() {
             public void run() {
-                connection = DataBaseConnection.getDBCInstance().getConnection();
+              //  connection = DataBaseConnection.getDBCInstance().getConnection();
             }
         };
 
