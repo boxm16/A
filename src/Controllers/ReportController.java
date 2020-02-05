@@ -10,6 +10,7 @@ import Models.Report;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  *
@@ -49,6 +50,18 @@ public class ReportController {
 
     public void deliverReport(String reportId, String deliveryReceiptNumber) {
         reportDao.deliverReport(reportId, deliveryReceiptNumber);
+    }
+
+    public void createPickUpReport(Report report) {
+        reportDao.createPickUpReport(report);
+    }
+
+    public void deleteReport(int report_id) {
+        reportDao.deleteReport(report_id);
+    }
+
+    public LinkedHashMap<Integer, String> getSceduledPickUpList(int customer_id) {
+        return reportDao.getScheduledPickUpList(customer_id);
     }
 
 }

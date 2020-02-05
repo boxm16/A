@@ -21,6 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -62,8 +63,8 @@ public class ReportDao {
 
                 ps_item.setInt(1, item.getId());
                 ps_item.setInt(2, item.getCode());
-                ps_item.setString(3, "2019");
-                System.out.println("need work here too ReportDao- 59");
+                ps_item.setString(3, "2020");
+                System.out.println("need work here too ReportDao for year");
                 if (item.isForCleaning()) {
                     ps_item.setInt(4, 1);
                 } else {
@@ -254,6 +255,67 @@ public class ReportDao {
             Logger.getLogger(ItemDao.class.getName()).log(Level.SEVERE, null, ex);
 
         }
+
+    }
+
+    public void createPickUpReport(Report report) {
+
+        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
+
+        String reportQuery = "INSERT INTO report(date, number, customer_id, type, status, route_id) "
+                + "VALUES(?,?,?,?,?,?);";
+
+        try (PreparedStatement ps_report = connection.prepareStatement(reportQuery)) {
+            ps_report.setString(1, getStringFromDate(report.getDate()));
+            ps_report.setInt(2, report.getNumber());
+            ps_report.setInt(3, report.getCustomer().getId());
+            ps_report.setString(4, report.getType().toString());
+            ps_report.setString(5, "scheduled");
+            ps_report.setInt(6, report.getRoute_id());
+            ps_report.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(ItemDao.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+
+    }
+
+    public void deleteReport(int report_id) {
+        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
+
+        String reportQuery = "DELETE FROM report WHERE id=? ;";
+        try (PreparedStatement ps_report = connection.prepareStatement(reportQuery)) {
+            ps_report.setInt(1, report_id);
+            ps_report.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(ItemDao.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+    }
+
+    public LinkedHashMap<Integer, String> getScheduledPickUpList(int customer_id) {
+        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
+
+        LinkedHashMap<Integer, String> scheduledPickUpList = new LinkedHashMap();
+        String reportQuery = "SELECT report.id, date, name FROM report"
+                + " INNER JOIN rout ON rout.id=report.route_id"
+                + " WHERE report.status='scheduled' AND report.type='PICKUP' AND report.customer_id=?; ";
+        try (PreparedStatement ps_report = connection.prepareStatement(reportQuery)) {
+            ps_report.setInt(1, customer_id);
+            ResultSet rs = ps_report.executeQuery();
+            while (rs.next()) {
+                int report_id = rs.getInt("id");
+                String date = rs.getString("date");
+                String name = rs.getString("name");
+                String scheduledRoute = date + "-" + name;
+                scheduledPickUpList.put(report_id, scheduledRoute);
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ItemDao.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+        return scheduledPickUpList;
 
     }
 

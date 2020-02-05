@@ -5,8 +5,8 @@
  */
 package GUI;
 
-import Controllers.RoutController;
-import Models.Rout;
+import Controllers.RouteController;
+import Models.Route;
 import Tools.ImagePanel;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -40,8 +40,8 @@ public class RoutPlanningFrame extends javax.swing.JFrame {
     private Font popupFont;
 
     DefaultListModel districtsListModel;
-    RoutController routController;
-    ArrayList<Rout> existingRouts;
+    RouteController routController;
+    ArrayList<Route> existingRouts;
     DefaultListModel existingRoutsModel;
 
     public RoutPlanningFrame() {
@@ -389,7 +389,7 @@ public class RoutPlanningFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_cleanMapButtonActionPerformed
 
     private void SaveRoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveRoutButtonActionPerformed
-        Rout rout = collectRoutInformation();
+        Route rout = collectRoutInformation();
         routController.saveRout(rout);
         loadExistingRouts();
         cleanMapButton.doClick();
@@ -408,12 +408,12 @@ public class RoutPlanningFrame extends javax.swing.JFrame {
 
         if (!evt.getValueIsAdjusting()) {
             int index = existingRoutsField.getSelectedIndex();
-            /*   Rout rout=existingRouts.get(index);
+            /*   Route rout=existingRouts.get(index);
             imagePanel.redraw(rout.getLotSet());
              */
             if (index > -1) {
-                Rout rout = existingRouts.get(index);
-                Rout routFromDB = routController.getRout(rout.getId());
+                Route rout = existingRouts.get(index);
+                Route routFromDB = routController.getRout(rout.getId());
 
                 day_1Field1.setSelected(rout.isDay_1());
                 day_2Field1.setSelected(rout.isDay_2());
@@ -493,7 +493,7 @@ public class RoutPlanningFrame extends javax.swing.JFrame {
         districtsListModel = new DefaultListModel();
         disrtictListField.setModel(districtsListModel);
 
-        routController = new RoutController();
+        routController = new RouteController();
 
         loadExistingRouts();
 
@@ -870,9 +870,9 @@ public class RoutPlanningFrame extends javax.swing.JFrame {
 
     }
 
-    private Rout collectRoutInformation() {
+    private Route collectRoutInformation() {
         System.out.println("need checcking here- collectRoutInformation ");
-        Rout rout = new Rout();
+        Route rout = new Route();
         rout.setName(routNameField.getText());
         rout.setLotSet(imagePanel.getChosenLots());
         rout.setDay_1(day_1Field.isSelected());
@@ -891,7 +891,7 @@ public class RoutPlanningFrame extends javax.swing.JFrame {
 
         existingRoutsModel = new DefaultListModel();
         existingRoutsField.setModel(existingRoutsModel);
-        for (Rout rout : existingRouts) {
+        for (Route rout : existingRouts) {
             existingRoutsModel.addElement(rout.getName());
         }
     }

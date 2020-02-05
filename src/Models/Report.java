@@ -15,15 +15,18 @@ import java.util.Date;
 public class Report {
 
     private int id;
-
-    public enum Type {
-        RECEIVING, DELIVERY
-    }
-    private Type type;
     private Date date;
     private int number;
     private Customer customer;
+
+    public enum Type {
+        PICKUP, DELIVERY
+    }
+
+    private Type type;
+
     private ArrayList<Item> items;
+    private int route_id;
 
     public Report() {
         customer = new Customer();
@@ -77,5 +80,15 @@ public class Report {
     public ArrayList<Item> getItems() {
         return items;
     }
+
+    public void setRoute_id(int route_id) {
+        this.route_id = route_id;
+    }
+
+    public int getRoute_id() {
+        return route_id;
+    }
+    
+    
 
 }

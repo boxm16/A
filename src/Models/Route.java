@@ -11,7 +11,7 @@ import java.util.HashSet;
  *
  * @author Michail Sitmalidis
  */
-public class Rout {
+public class Route {
 
     private int id;
     private String name;

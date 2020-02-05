@@ -6,7 +6,7 @@
 package Dao;
 
 import Models.Report;
-import Models.Rout;
+import Models.Route;
 import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.sql.Connection;
@@ -23,14 +23,14 @@ import java.util.logging.Logger;
  *
  * @author Michail Sitmalidis
  */
-public class RoutDao {
+public class RouteDao {
 
     Connection connection;
 
-    public RoutDao() {
+    public RouteDao() {
     }
 
-    public void saveRout(Rout rout) {
+    public void saveRout(Route rout) {
         connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
 
         String routQuery = "INSERT INTO rout (name, day_1, day_2, day_3, day_4, day_5, day_6, day_7)"
@@ -67,18 +67,18 @@ public class RoutDao {
         }
     }
 
-    public ArrayList<Rout> getExistingRouts() {
+    public ArrayList<Route> getExistingRouts() {
         connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
 
-        ArrayList<Rout> existingRouts = new ArrayList<>();
+        ArrayList<Route> existingRouts = new ArrayList<>();
         String query = "SELECT * FROM rout";
         String lotQuery = "SELECT lot FROM rout_lot WHERE rout=?";
-        Rout rout;
+        Route rout;
         try (Statement statement = connection.createStatement();
                 PreparedStatement ps = connection.prepareStatement(lotQuery);) {
             ResultSet rs = statement.executeQuery(query);
             while (rs.next()) {
-                rout = new Rout();
+                rout = new Route();
                 rout.setId(rs.getInt("id"));
                 rout.setName(rs.getString("name"));
                 rout.setDay_1(rs.getBoolean("day_1"));
@@ -118,17 +118,17 @@ public class RoutDao {
         }
     }
 
-    public Rout getRout(int routId) {
+    public Route getRout(int routId) {
         connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
 
         String query = "SELECT * FROM rout WHERE id=" + routId + "";
         String lotQuery = "SELECT lot FROM rout_lot WHERE rout=?";
-        Rout rout = null;
+        Route rout = null;
         try (Statement statement = connection.createStatement();
                 PreparedStatement ps = connection.prepareStatement(lotQuery);) {
             ResultSet rs = statement.executeQuery(query);
             while (rs.next()) {
-                rout = new Rout();
+                rout = new Route();
                 rout.setId(rs.getInt("id"));
                 rout.setName(rs.getString("name"));
                 rout.setDay_1(rs.getBoolean("day_1"));
@@ -156,19 +156,19 @@ public class RoutDao {
         return rout;
     }
 
-    public ArrayList<Rout> getAvailableRoutsForDistrict(String district) {
+    public ArrayList<Route> getAvailableRoutsForDistrict(String postal_code) {
         connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
 
-        ArrayList<Rout> availableRouts = new ArrayList<>();
+        ArrayList<Route> availableRouts = new ArrayList<>();
         String query = "SELECT *  FROM rout "
                 + "INNER JOIN rout_lot ON rout.id=rout_lot.rout "
                 + "INNER JOIN post_box ON rout_lot.lot=post_box.lot "
-                + "WHERE post_box.district='" + district + "' "
+                + "WHERE post_box.postal_code='" + postal_code + "' "
                 + ";";
         try (Statement statement = connection.createStatement()) {
             ResultSet rs = statement.executeQuery(query);
             while (rs.next()) {
-                Rout rout = new Rout();
+                Route rout = new Route();
                 rout.setId(rs.getInt("id"));
                 rout.setName(rs.getString("name"));
                 rout.setDay_1(rs.getBoolean("day_1"));

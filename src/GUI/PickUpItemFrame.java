@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
  *
  * @author Michail Sitmalidis
  */
-public class ReceivingItemFrame extends javax.swing.JFrame {
+public class PickUpItemFrame extends javax.swing.JFrame {
 
     MainFrame mainFrame;
     ProductController productController;
@@ -27,12 +27,12 @@ public class ReceivingItemFrame extends javax.swing.JFrame {
     Color focusInColor;
     Color focusOutColor;
 
-    public ReceivingItemFrame() {
+    public PickUpItemFrame() {
         initComponents();
         myInitialization();
     }
 
-    public ReceivingItemFrame(MainFrame mainFrame) {
+    public PickUpItemFrame(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
         productController = new ProductController();
         itemController = new ItemController();
@@ -662,7 +662,7 @@ public class ReceivingItemFrame extends javax.swing.JFrame {
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         if (productChosen() && itemCodeGoodToGo() && serviceChosen() && noteFieldInputValid()) {
             Item receivedItem = collectItemInformation();
-            mainFrame.addItemToReceivingItemsTable(receivedItem);
+            mainFrame.addItemToPickUpItemsTable(receivedItem);
             this.dispose();
         }
     }//GEN-LAST:event_submitButtonActionPerformed
@@ -835,7 +835,7 @@ public class ReceivingItemFrame extends javax.swing.JFrame {
                     goodToGo = true;
                 }
             case 3:
-                if (itemCodeRegisteredInReceivingReport()) {
+                if (itemCodeRegisteredInPickUpReport()) {
                     JOptionPane.showMessageDialog(null,
                             "Ο ΚΩΔΙΚΟΣ ΤΕΜΑΧΙΟΥ ΗΔΗ ΕΧΕΙ ΚΑΤΑΧΩΡΗΘΗ ΣΤΟ ΔΕΛΤΙΟ",
                             "ΛΑΘΟΣ ΚΩΔΙΚΟΣ ΤΕΜΑΧΙΟΥ",
@@ -859,16 +859,16 @@ public class ReceivingItemFrame extends javax.swing.JFrame {
 
     }
 
-    private boolean itemCodeRegisteredInReceivingReport() {
+    private boolean itemCodeRegisteredInPickUpReport() {
 
         String itemCodeInput = itemCodeField.getText();//again, not worried about input, `cous its checked before
-        int rowCount = mainFrame.getReceivingItemsTableModel().getRowCount();
+        int rowCount = mainFrame.getPickUpItemsTableModel().getRowCount();
 
         if (rowCount > 0) {
 
             for (int x = 0; x < rowCount; x++) {
 
-                String itemCodeInTable = mainFrame.getReceivingItemsTableModel().getValueAt(x, 2).toString();
+                String itemCodeInTable = mainFrame.getPickUpItemsTableModel().getValueAt(x, 2).toString();
                 System.out.println(itemCodeInTable);
                 if (itemCodeInput.equals(itemCodeInTable)) {
                     return true;
