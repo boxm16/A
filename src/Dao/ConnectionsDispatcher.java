@@ -14,6 +14,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -28,6 +29,7 @@ public class ConnectionsDispatcher {
     private static final String USER = "2cMB8HiJvS";
     private static final String PASSWORD = "rcYF70B1fj";
     private static final int MINUTES = 5;
+
     private final int delay = 0;
     private static Date timeStamp;
     private static LinkedList<Connection> connectionsStack = new LinkedList();
@@ -59,6 +61,11 @@ public class ConnectionsDispatcher {
             connection = DriverManager.getConnection(URL, USER, PASSWORD);
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(ConnectionsDispatcher.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(new javax.swing.JFrame(),
+                    "ΔΕΝ ΥΠΑΡΧΕΙ ΣΥΝΔΕΣΗ ΜΕ ΤΗ ΒΑΣΗ, ΣΥΣΤΗΜΑ ΠΡΟΣΠΑΘΕΙ ΝΑ ΦΙΑΞΕΙ ΣΥΝΔΕΣΗ.",
+                    "DATABASE CONNECTION ERROR",
+                    JOptionPane.ERROR_MESSAGE);
+            getConnection();
         }
         return connection;
     }
@@ -68,18 +75,22 @@ public class ConnectionsDispatcher {
         //(usually this happens when computer goes to sleep, so Timer dont fire his run method)
         //i need to close all connections in connectionsStack, clear the stack and refill it with new connections
         if (new Date().getTime() - timeStamp.getTime() > (MINUTES * 60000) + 1) {
-            for (Connection connection : connectionsStack) {
-                try {
-                    connection.close();
-                } catch (SQLException ex) {
-                    Logger.getLogger(ConnectionsDispatcher.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            connectionsStack.clear();
-            connectionsStack.add(openConnection());
-            connectionsStack.add(openConnection());
+            renewConnectionsStack();
         }
         return connectionsStack.peekLast();
+    }
+
+    private static void renewConnectionsStack() {
+        for (Connection connection : connectionsStack) {
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(ConnectionsDispatcher.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        connectionsStack.clear();
+        connectionsStack.add(openConnection());
+        connectionsStack.add(openConnection());
     }
 
     private class ConnectionRenewal extends TimerTask {

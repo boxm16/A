@@ -5,9 +5,12 @@
  */
 package GUI;
 
-import Models.Customer;
+import Controllers.ReportController;
+import Models.Report;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -20,20 +23,17 @@ import javax.swing.table.JTableHeader;
  *
  * @author Michail Sitmalidis
  */
-public class SearchFrame extends javax.swing.JFrame {
+public class ScheduledPickUpFrame extends javax.swing.JFrame {
 
     MainFrame mainFrame;
+    ReportController reportController;
 
-
-    /**
-     * Creates new form SearchFrame
-     */
-    public SearchFrame(MainFrame mainFrame, ArrayList<Customer> customers) {
-
+    public ScheduledPickUpFrame(MainFrame mainFrame) {
         this.mainFrame = mainFrame;
+        reportController = new ReportController();
         initComponents();
+        myInitialization();
         initEscapeAction();
-        displayCustomers(customers);
     }
 
     /**
@@ -45,11 +45,11 @@ public class SearchFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         display = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setResizable(false);
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
             }
@@ -58,7 +58,12 @@ public class SearchFrame extends javax.swing.JFrame {
             }
         });
 
-        display.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("<html><center>ΠΡΟΓΡΑΜΜΑΤΙΣΜΕΝΑ PICK-UPs</center></html>");
+        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        display.setFont(new java.awt.Font("Tahoma", 0, 24));
         JTableHeader header = display.getTableHeader();
         header.setFont(new java.awt.Font("Tahoma", 0, 24));
         display.setModel(new javax.swing.table.DefaultTableModel(
@@ -66,26 +71,18 @@ public class SearchFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "ΕΠΙΘΕΤΟ", "ΟΝΟΜΑ", "ΣΤΑΘΕΡΟ", "ΚΙΝΗΤΟ", "ΟΔΟΣ", "ΠΕΡΙΟΧΗ"
+                "ID ΠΕΛΑΤΗ", "ΗΜΕΡΟΜΗΝΙΑ", "ΕΠΙΘΕΤΟ", "ΟΝΟΜΑ"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        display.setRowHeight(32);
-        display.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        display.setRowHeight(40);
         display.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 displayMouseClicked(evt);
@@ -98,29 +95,72 @@ public class SearchFrame extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(display);
         if (display.getColumnModel().getColumnCount() > 0) {
-            display.getColumnModel().getColumn(0).setPreferredWidth(80);
-            display.getColumnModel().getColumn(1).setPreferredWidth(350);
-            display.getColumnModel().getColumn(2).setPreferredWidth(200);
-            display.getColumnModel().getColumn(3).setPreferredWidth(150);
-            display.getColumnModel().getColumn(4).setPreferredWidth(150);
-            display.getColumnModel().getColumn(5).setPreferredWidth(200);
-            display.getColumnModel().getColumn(6).setPreferredWidth(150);
+            display.getColumnModel().getColumn(0).setPreferredWidth(10);
+            display.getColumnModel().getColumn(1).setResizable(false);
+            display.getColumnModel().getColumn(1).setPreferredWidth(100);
+            display.getColumnModel().getColumn(2).setResizable(false);
+            display.getColumnModel().getColumn(2).setPreferredWidth(300);
+            display.getColumnModel().getColumn(3).setResizable(false);
+            display.getColumnModel().getColumn(3).setPreferredWidth(200);
         }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1280, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 986, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 138, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void displayKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_displayKeyPressed
+        if (evt.getKeyCode() == 10) {
+            displaySelectedCustomer();
+        }
+    }//GEN-LAST:event_displayKeyPressed
+
+    private void displayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_displayMouseClicked
+        if (evt.getClickCount() == 2) {
+            displaySelectedCustomer();
+        }
+    }//GEN-LAST:event_displayMouseClicked
+
+    private void formWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowLostFocus
+        this.dispose();
+    }//GEN-LAST:event_formWindowLostFocus
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable display;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    // End of variables declaration//GEN-END:variables
+
+    private void myInitialization() {
+        DefaultTableModel model = (DefaultTableModel) display.getModel();
+        ArrayList<Report> reports = reportController.getPickUpReports();
+        for (Report report : reports) {
+            Object[] row = new Object[4];
+            row[0] = report.getCustomer().getId();
+            DateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
+            String date = dateFormat.format(report.getDate());
+            row[1] = date;
+            row[2] = report.getCustomer().getLastName();
+            row[3] = report.getCustomer().getFirstName();
+            model.addRow(row);
+        }
+    }
 
     private void initEscapeAction() {
         KeyStroke escapeKeyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE,
@@ -135,47 +175,6 @@ public class SearchFrame extends javax.swing.JFrame {
         getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(escapeKeyStroke,
                 "ESCAPE");
         getRootPane().getActionMap().put("ESCAPE", escapeAction);
-
-    }
-
-    private void displayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_displayMouseClicked
-
-        if (evt.getClickCount() == 2) {
-            displaySelectedCustomer();
-        }
-    }//GEN-LAST:event_displayMouseClicked
-
-    private void displayKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_displayKeyPressed
-        if (evt.getKeyCode() == 10) {
-            displaySelectedCustomer();
-        }
-    }//GEN-LAST:event_displayKeyPressed
-
-    private void formWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowLostFocus
-       this.dispose();
-    }//GEN-LAST:event_formWindowLostFocus
-
-
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable display;
-    private javax.swing.JScrollPane jScrollPane1;
-    // End of variables declaration//GEN-END:variables
-
-    private void displayCustomers(ArrayList<Customer> customers) {
-        DefaultTableModel model = (DefaultTableModel) display.getModel();
-        for (Customer customer : customers) {
-            Object[] row = new Object[7];
-            row[0] = customer.getId();
-            row[1] = customer.getLastName();
-            row[2] = customer.getFirstName();
-            row[3] = customer.getLandlinePhone();
-            row[4] = customer.getMobilePhone();
-            row[5] = customer.getStreet();
-            row[6] = customer.getDistrict();
-            model.addRow(row);
-
-        }
-
     }
 
     private void displaySelectedCustomer() {
@@ -184,6 +183,7 @@ public class SearchFrame extends javax.swing.JFrame {
             int customer_id = (int) display.getValueAt(selectedRow, 0);
             mainFrame.dispalyCustomerById(customer_id);
             mainFrame.fillTables();
+            mainFrame.showNewPickUpTab();
             this.dispose();
         }
     }

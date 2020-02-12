@@ -22,41 +22,42 @@ import java.util.HashSet;
  * @author Michail Sitmalidis
  */
 public class RouteController {
-
+    
     RouteDao routeDao;
     ArrayList<Route> existingRoutes;
     ArrayList<Integer> availableRoutesId;
     ArrayList<String> availableRoutesDate;
-
+    
     public RouteController() {
         routeDao = new RouteDao();
         availableRoutesId = new ArrayList<>();
         availableRoutesDate = new ArrayList<>();
-
+        
     }
-
+    
     public void saveRout(Route rout) {
         routeDao.saveRout(rout);
     }
-
+    
     public ArrayList<Route> getExistingRouts() {
         existingRoutes = routeDao.getExistingRouts();
-
+        
         return existingRoutes;
     }
-
+    
     public void deleteRout(int rout_id) {
         routeDao.deleteRout(rout_id);
     }
-
+    
     public Route getRout(int routId) {
         return routeDao.getRout(routId);
     }
-
+    
     public ArrayList<String> getAvailableRoutForDistrict(String postal_code) {
         ArrayList<Route> availableRouts = routeDao.getAvailableRoutsForDistrict(postal_code);
         ZoneId athensZone = ZoneId.of("Europe/Athens");
-        LocalDate fromDate = LocalDate.now(athensZone);
+        LocalDate now = LocalDate.now(athensZone);
+        LocalDate fromDate = now.plusDays(1);//counting after tomorrow
         LocalDate tillDate = fromDate.plusDays(14);
         ArrayList<String> availableDays = new ArrayList<>();
         availableRoutesId.clear();
@@ -64,10 +65,10 @@ public class RouteController {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/YYYY");
         DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("YYYY-MM-dd");
         for (Route rout : availableRouts) {
-
+            
             for (LocalDate x = fromDate; x.isBefore(tillDate); x = x.plusDays(1)) {
                 if (x.getDayOfWeek() == DayOfWeek.MONDAY && rout.isDay_1()) {
-
+                    
                     availableDays.add(formatter.format(x) + "-ΔΕΥΤΕΡΑ " + ":" + rout.getName());
                     availableRoutesId.add(rout.getId());
                     availableRoutesDate.add(formatter2.format(x));
@@ -102,18 +103,18 @@ public class RouteController {
                     availableRoutesId.add(rout.getId());
                     availableRoutesDate.add(formatter2.format(x));
                 }
-
+                
             }
         }
-
+        
         return availableDays;
     }
-
+    
     public int insertDRout(int index) {
         int dRoutId = 0;
         int routId = availableRoutesId.get(index);
         String date = availableRoutesDate.get(index);
-
+        
         dRoutId = routeDao.getD_Rout(routId, date);
         if (dRoutId == 0) {
             routeDao.insertDRout(routId, date);
@@ -121,18 +122,18 @@ public class RouteController {
         dRoutId = routeDao.getD_Rout(routId, date);
         return dRoutId;
     }
-
+    
     public void inserDRout_Report(int DRoutId, int reportId) {
-
+        
         routeDao.insertDRout_Report(DRoutId, reportId);
     }
-
+    
     public int getChosenRouteId(int index) {
         return availableRoutesId.get(index);
     }
-
+    
     public Date getChosenRouteDate(int index) {
-
+        
         return Date.valueOf(availableRoutesDate.get(index));
     }
 }

@@ -6,6 +6,7 @@
 package Tools;
 
 import Controllers.ReportController;
+import GUI.MainFrame;
 
 /**
  *
@@ -13,11 +14,12 @@ import Controllers.ReportController;
  */
 public class ScheduledPickUpPanel extends javax.swing.JPanel {
 
+    MainFrame mainFrame;
     int report_id;
     ReportController reportController;
 
-    public ScheduledPickUpPanel(int report_id, String route) {
-
+    public ScheduledPickUpPanel(MainFrame mainFrame, int report_id, String route) {
+        this.mainFrame = mainFrame;
         reportController = new ReportController();
         initComponents();
         this.report_id = report_id;
@@ -64,13 +66,14 @@ public class ScheduledPickUpPanel extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-            .addComponent(deletScheduledPickUp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(scheduledPickUpLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(scheduledPickUpLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(deletScheduledPickUp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void deletScheduledPickUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletScheduledPickUpActionPerformed
         reportController.deleteReport(report_id);
+        mainFrame.displayScheduledPickUps();
     }//GEN-LAST:event_deletScheduledPickUpActionPerformed
 
 

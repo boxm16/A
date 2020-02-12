@@ -124,7 +124,7 @@ public class ReadyOrdersFrame extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) customersTable.getModel();
         ArrayList<Customer> readyToGoCustomers = customerController.getReadyToGoCustomers();
         for (Customer customer : readyToGoCustomers) {
-            Object[] row = new Object[7];
+            Object[] row = new Object[3];
             row[0] = customer.getId();
             row[1] = customer.getLastName();
             row[2] = customer.getFirstName();

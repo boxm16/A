@@ -16,46 +16,48 @@ import javax.swing.JOptionPane;
  * @author Michail Sitmalidis
  */
 public class CustomerController {
-    
+
     CustomerDao customerDao;
-    
+
     public CustomerController() {
         customerDao = new CustomerDao();
     }
-    
+
     public Customer getCustomerById(int id) {
-        
+
         Customer customer = customerDao.getCustomerById(id);
         return customer;
     }
-    
+
     public ArrayList<Customer> getCustomerByLastName(String lastName) {
         ArrayList<Customer> customers = customerDao.getCustomersByLastName(lastName);
         return customers;
     }
-    
+
     public ArrayList<Customer> getCustomerByLandLineNumber(String landLine) {
         ArrayList<Customer> customers = customerDao.getCustomerByLandLineNumber(landLine);
         return customers;
     }
-    
+
     public ArrayList<Customer> getCustomerByMobileNumber(String mobile) {
         ArrayList<Customer> customers = customerDao.getCustomerByMobileNumber(mobile);
         return customers;
     }
-    
-    public void saveNewCustomer(Customer customer) {
+
+    public String saveNewCustomer(Customer customer) {
         String identifier = NewCustomerIdentifier.getIdentifier();
         customer.setEmailIdentifier(identifier);
         customer.setPassword(identifier);
         customer.setStatus("temporary");
         customerDao.saveCustomer(customer);
+        return identifier;//i return identifier so i can load new customer again for display,
+        //  because he doesnt have id yet
     }
-    
+
     public void editCustomer(Customer customer) {
         customerDao.editCustomer(customer);
     }
-    
+
     public boolean checkCustomerById(int id) {
         Customer customer = getCustomerById(id);
         if (customer == null) {
@@ -67,16 +69,20 @@ public class CustomerController {
         } else {
             return true;
         }
-        
+
     }
-    
+
     public ArrayList<Customer> getReadyToGoCustomers() {
         return customerDao.getReadyToGoCustomers();
     }
 
-
-
     public void initConnection() {
-     }
-    
+    }
+
+    public Customer getCustomerByIdentifier(String identifier) {
+        Customer customer = new Customer();
+        customer = customerDao.getCustomerByIdentifier(identifier);
+        return customer;
+    }
+
 }

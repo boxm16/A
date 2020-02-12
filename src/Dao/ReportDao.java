@@ -17,6 +17,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -36,11 +37,11 @@ public class ReportDao {
     public ReportDao() {
     }
 
-    public void saveReport(Report report) {
+    public void createAndSavePickUpReport(Report report) {
         connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
 
-        String reportQuery = "INSERT INTO report (date, number, customer_id, type, status) "
-                + "VALUES (?,?,?,?,?);";
+        String reportQuery = "INSERT INTO report (date, number, customer_id, type, status, rout_id) "
+                + "VALUES (?,?,?,?,?,?);";
         String last_report_id_query = "SELECT MAX(id) AS AUTO_INCREMENT FROM report";
         String itemQuery = "INSERT INTO item (product_id, item_code, item_year, cleaning, storing, mending, receiving_report_id, note, status)"
                 + " VALUES (?,?,?,?,?,?,?,?,?);";
@@ -52,6 +53,7 @@ public class ReportDao {
             ps_report.setInt(3, report.getCustomer().getId());
             ps_report.setString(4, report.getType().toString());
             ps_report.setString(5, "completed");
+            ps_report.setInt(5, 0);
             ps_report.execute();
 
             ResultSet rs = last_report_id_st.executeQuery(last_report_id_query);
@@ -152,12 +154,12 @@ public class ReportDao {
         String string_date = getStringFromDate(date);
 
         String reportQuery = "SELECT first_name, last_name, landline_phone, mobile_phone,    "
-                + "street, district, floor, postal_code, bell_name, customer.note, "
+                + "street, district, floor, postal_code, doorbell_name, customer.note, "
                 + "product_description, item_code, item_year, length, width, "
                 + "cleaning_charge, storing_charge, mending_charge,"
-                + " id   "
+                + " customer.id   "
                 + " FROM customer  "
-                + "INNER JOIN report r ON customer.customer_id=r.customer_id "
+                + "INNER JOIN report r ON customer.id=r.customer_id "
                 + "INNER JOIN item i ON i.delivery_report_id=r.id "
                 + "INNER JOIN product p ON p.product_id=i.product_id "
                 + "WHERE r.date='" + string_date + "' and r.status='scheduled';";
@@ -316,6 +318,135 @@ public class ReportDao {
 
         }
         return scheduledPickUpList;
+
+    }
+
+    public void savePickUpReport(Report report) {
+
+        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
+
+        String reportQuery = "UPDATE report SET  number=?, status=? WHERE id=?";
+        String itemQuery = "INSERT INTO item (product_id, item_code, item_year, cleaning, storing, mending, receiving_report_id, note, status)"
+                + " VALUES (?,?,?,?,?,?,?,?,?);";
+        try (PreparedStatement ps_report = connection.prepareStatement(reportQuery);
+                PreparedStatement ps_item = connection.prepareStatement(itemQuery)) {
+            ps_report.setInt(1, report.getNumber());
+            ps_report.setString(2, "completed");
+            ps_report.setInt(3, report.getId());
+            ps_report.execute();
+            for (Item item : report.getItems()) {
+
+                ps_item.setInt(1, item.getId());
+                ps_item.setInt(2, item.getCode());
+                ps_item.setString(3, "2020");
+                System.out.println("need work here too ReportDao for year");
+                if (item.isForCleaning()) {
+                    ps_item.setInt(4, 1);
+                } else {
+                    ps_item.setInt(4, 0);
+                }
+                if (item.isForStoring()) {
+                    ps_item.setInt(5, 1);
+                } else {
+                    ps_item.setInt(5, 0);
+                }
+                if (item.isForMending()) {
+                    ps_item.setInt(6, 1);
+                } else {
+                    ps_item.setInt(6, 0);
+                }
+                ps_item.setInt(7, report.getId());
+                ps_item.setString(8, item.getNote());
+                ps_item.setString(9, "processing");
+                ps_item.addBatch();
+            }
+            ps_item.executeBatch();
+        } catch (SQLException ex) {
+            Logger.getLogger(ItemDao.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+
+    }
+
+    public ArrayList<Report> getScheduledPickUps() {
+
+        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
+
+        ArrayList<Report> scheduledPickUps = new ArrayList();
+
+        String reportQuery = "SELECT  date, customer.id, last_name, first_name FROM report"
+                + " INNER JOIN customer ON report.customer_id=customer.id"
+                + " WHERE report.status='scheduled' AND report.type='PICKUP' ORDER BY date; ";
+        try (PreparedStatement ps_report = connection.prepareStatement(reportQuery)) {
+            ResultSet rs = ps_report.executeQuery();
+            while (rs.next()) {
+                Report report = new Report();
+
+                String string_date = rs.getString("date");
+                DateFormat formatter = new SimpleDateFormat("yy-mm-dd");
+                Date date = null;
+                try {
+                    date = formatter.parse(string_date);
+                } catch (ParseException ex) {
+                    Logger.getLogger(ReportDao.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                report.setDate(date);
+
+                Customer customer = new Customer();
+                customer.setId(rs.getInt("id"));
+                customer.setLastName(rs.getString("last_name"));
+                customer.setFirstName(rs.getString("first_name"));
+
+                report.setCustomer(customer);
+
+                scheduledPickUps.add(report);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ItemDao.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
+        return scheduledPickUps;
+
+    }
+
+    public void saveAndCreateDeliveryReport(Report report) {
+
+        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
+
+        String reportQuery = "INSERT INTO report (date, number, customer_id, type, status, route_id) "
+                + "VALUES (?,?,?,?,?,?);";
+        String last_report_id_query = "SELECT MAX(id) AS AUTO_INCREMENT FROM report";
+        String itemQuery = "UPDATE item SET delivery_report_id=?, status=? WHERE item_code=? and item_year=?";
+        try (PreparedStatement ps_report = connection.prepareStatement(reportQuery);
+                PreparedStatement ps_item = connection.prepareStatement(itemQuery);
+                Statement last_report_id_st = connection.createStatement();) {
+            ps_report.setString(1, getStringFromDate(report.getDate()));
+            ps_report.setInt(2, report.getNumber());
+            ps_report.setInt(3, report.getCustomer().getId());
+            ps_report.setString(4, report.getType().toString());
+            ps_report.setString(5, "scheduled");
+            ps_report.setInt(6, report.getRoute_id());
+            ps_report.execute();
+
+            ResultSet rs = last_report_id_st.executeQuery(last_report_id_query);
+            int increment_number = 0;
+            while (rs.next()) {
+                increment_number = rs.getInt("AUTO_INCREMENT");
+            }
+            for (Item item : report.getItems()) {
+
+                ps_item.setInt(1, increment_number);
+                ps_item.setString(2, "delivery_scheduled");
+                ps_item.setInt(3, item.getCode());
+                ps_item.setInt(4, item.getYear());
+                ps_item.addBatch();
+            }
+            ps_item.executeBatch();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ItemDao.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
 
     }
 

@@ -70,7 +70,8 @@ public class ItemController {
         ArrayList<Item> customerItems = getCustomerItems(customerId);
 
         for (Item item : customerItems) {
-            if (item.getStatus().equals("processing") | item.getStatus().equals("ready")) {
+            //if all statuses are valid here, why do i need to check it
+            if (item.getStatus().equals("processing") | item.getStatus().equals("ready")| item.getStatus().equals("delivery_scheduled")) {
                 itemsForCard.add(item);
 
             }

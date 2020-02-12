@@ -25,8 +25,12 @@ public class ReportController {
 
     }
 
-    public void saveReport(Report report) {
-        reportDao.saveReport(report);
+    public void savePickUpReport(Report report) {
+        if (report.getId() == 0) {
+            reportDao.createAndSavePickUpReport(report);
+        }
+
+        reportDao.savePickUpReport(report);
     }
 
     public int insertDeliveryReport(Report report) {
@@ -62,6 +66,14 @@ public class ReportController {
 
     public LinkedHashMap<Integer, String> getSceduledPickUpList(int customer_id) {
         return reportDao.getScheduledPickUpList(customer_id);
+    }
+
+    public ArrayList<Report> getPickUpReports() {
+        return reportDao.getScheduledPickUps();
+    }
+
+    public void createAndSaveDeliveryReport(Report report) {
+        reportDao.saveAndCreateDeliveryReport(report);
     }
 
 }
