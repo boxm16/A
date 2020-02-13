@@ -145,19 +145,112 @@ public class ReportDao {
         return reportId;
     }
 
-    public HashMap<Integer, Report> getReportsForDate(Date date) {
+    public ArrayList<Report> getAllDeliveryReports() {
         connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
 
-        HashMap<Integer, Report> reports = new HashMap<>();
+        //HashMap<Integer, Report> reports = new HashMap<>();
+        ArrayList<Integer> IDs = new ArrayList();
+        ArrayList<Report> reports = new ArrayList<>();
 
-        //   ArrayList<Report> reports = new ArrayList<>();
+        String reportQuery = "SELECT first_name, last_name, landline_phone, mobile_phone,    "
+                + "street, district, floor, postal_code, doorbell_name, customer.note, "
+                + "product_description, item_code, item_year, length, width, "
+                + "cleaning_charge, storing_charge, mending_charge,"
+                + " r.id, date   "
+                + " FROM customer  "
+                + "INNER JOIN report r ON customer.id=r.customer_id "
+                + "INNER JOIN item i ON i.delivery_report_id=r.id "
+                + "INNER JOIN product p ON p.product_id=i.product_id "
+                + "WHERE r.status='scheduled' ORDER BY date, r.id;";
+        try (Statement statement = connection.createStatement()) {
+            ResultSet rs = statement.executeQuery(reportQuery);
+
+            while (rs.next()) {
+
+                String first_name = rs.getString("first_name");
+                String last_name = rs.getString("last_name");
+                String landline_phone = rs.getString("landline_phone");
+                String mobile_phone = rs.getString("mobile_phone");
+                String street = rs.getString("street");
+                String district = rs.getString("district");
+                String postal_code = rs.getString("postal_code");
+                String floor = rs.getString("floor");
+                String bell_name = rs.getString("doorbell_name");
+                String note = rs.getString("customer.note");
+                String product_description = rs.getString("product_description");
+                int item_code = rs.getInt("item_code");
+                int item_year = rs.getInt("item_year");
+                BigDecimal length = rs.getBigDecimal("length");
+                BigDecimal width = rs.getBigDecimal("width");
+
+                BigDecimal cleaning_charge = rs.getBigDecimal("cleaning_charge");
+                BigDecimal storing_charge = rs.getBigDecimal("storing_charge");
+                BigDecimal mending_charge = rs.getBigDecimal("mending_charge");
+                int id = rs.getInt("id");
+                String strDate = rs.getString("date");
+                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                Date date = formatter.parse(strDate);
+
+                Report report = new Report();
+                report.setDate(date);
+                report.setId(id);
+                if (!IDs.contains(id)) {
+
+                    Customer customer = new Customer();
+
+                    customer.setFirstName(first_name);
+                    customer.setLastName(last_name);
+                    customer.setLandlinePhone(landline_phone);
+                    customer.setMobilePhone(mobile_phone);
+                    customer.setDistrict(district);
+                    customer.setStreet(street);
+                    customer.setPostalCode(postal_code);
+                    customer.setFloor(floor);
+                    customer.setDoorbellName(bell_name);
+                    report.setCustomer(customer);
+
+                    IDs.add(id);
+                    reports.add(report);
+                }
+
+                Item item = new Item();
+                item.setDescription(product_description);
+                item.setCode(item_code);
+                item.setYear(item_year);
+                item.setLength(length);
+                item.setWidth(width);
+                item.setCleaningCharge(cleaning_charge);
+                item.setStoringCharge(storing_charge);
+                item.setMendingCharge(mending_charge);
+
+                int index = IDs.indexOf(id);
+                reports.get(index).getItems().add(item);
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ItemDao.class.getName()).log(Level.SEVERE, null, ex);
+
+        } catch (ParseException ex) {
+            Logger.getLogger(ReportDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return reports;
+    }
+
+    public ArrayList<Report> getDeliveryReportsForDate(Date date) {
+        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
+
+        // HashMap<Integer, Report> reports = new HashMap<>();
+        ArrayList<Integer> IDs = new ArrayList();
+        ArrayList<Report> reports = new ArrayList<>();
+
         String string_date = getStringFromDate(date);
 
         String reportQuery = "SELECT first_name, last_name, landline_phone, mobile_phone,    "
                 + "street, district, floor, postal_code, doorbell_name, customer.note, "
                 + "product_description, item_code, item_year, length, width, "
                 + "cleaning_charge, storing_charge, mending_charge,"
-                + " customer.id   "
+                + "  r.id  "
                 + " FROM customer  "
                 + "INNER JOIN report r ON customer.id=r.customer_id "
                 + "INNER JOIN item i ON i.delivery_report_id=r.id "
@@ -187,11 +280,14 @@ public class ReportDao {
                 BigDecimal cleaning_charge = rs.getBigDecimal("cleaning_charge");
                 BigDecimal storing_charge = rs.getBigDecimal("storing_charge");
                 BigDecimal mending_charge = rs.getBigDecimal("mending_charge");
+
                 int id = rs.getInt("id");
 
                 Report report = new Report();
                 report.setId(id);
-                if (!reports.containsKey(id)) {
+                report.setDate(date);
+
+                if (!IDs.contains(id)) {
 
                     Customer customer = new Customer();
 
@@ -205,7 +301,9 @@ public class ReportDao {
                     customer.setFloor(floor);
                     customer.setDoorbellName(bell_name);
                     report.setCustomer(customer);
-                    reports.put(id, report);
+
+                    IDs.add(id);
+                    reports.add(report);
                 }
 
                 Item item = new Item();
@@ -218,7 +316,8 @@ public class ReportDao {
                 item.setStoringCharge(storing_charge);
                 item.setMendingCharge(mending_charge);
 
-                reports.get(id).getItems().add(item);
+                int index = IDs.indexOf(id);
+                reports.get(index).getItems().add(item);
 
             }
 
@@ -234,10 +333,15 @@ public class ReportDao {
         connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
 
         String reportQuery = "UPDATE report SET status='canceled' WHERE id=?;";
-        try (PreparedStatement ps_report = connection.prepareStatement(reportQuery)) {
+        String itemQuery = "UPDATE item SET status='ready' WHERE delivery_report_id=?;";
+        try (PreparedStatement ps_report = connection.prepareStatement(reportQuery);
+                PreparedStatement item_report = connection.prepareStatement(itemQuery);) {
             ps_report.setString(1, reportId);
 
             ps_report.execute();
+
+            item_report.setString(1, reportId);
+            item_report.execute();
         } catch (SQLException ex) {
             Logger.getLogger(ItemDao.class.getName()).log(Level.SEVERE, null, ex);
 
@@ -246,13 +350,19 @@ public class ReportDao {
     }
 
     public void deliverReport(String reportId, String deliveryReceiptNumber) {
+        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
 
         String reportQuery = "UPDATE report SET status='delivered', number=? WHERE id=?;";
-        try (PreparedStatement ps_report = connection.prepareStatement(reportQuery)) {
+        String itemQuery = "UPDATE item SET status='delivered' WHERE delivery_report_id=?;";
+        try (PreparedStatement ps_report = connection.prepareStatement(reportQuery);
+                PreparedStatement item_report = connection.prepareStatement(itemQuery)) {
             ps_report.setString(1, deliveryReceiptNumber);
             ps_report.setString(2, reportId);
 
             ps_report.execute();
+
+            item_report.setString(1, reportId);
+            item_report.execute();
         } catch (SQLException ex) {
             Logger.getLogger(ItemDao.class.getName()).log(Level.SEVERE, null, ex);
 

@@ -39,9 +39,9 @@ public class ReportController {
         return reportId;
     }
 
-    public HashMap<Integer, Report> getReportsForDate(Date date) {
+    public ArrayList<Report> getDeliveryReportsForDate(Date date) {
 
-        HashMap<Integer, Report> reports = reportDao.getReportsForDate(date);
+        ArrayList<Report> reports = reportDao.getDeliveryReportsForDate(date);
 
         return reports;
     }
@@ -74,6 +74,10 @@ public class ReportController {
 
     public void createAndSaveDeliveryReport(Report report) {
         reportDao.saveAndCreateDeliveryReport(report);
+    }
+
+    public ArrayList< Report> getaAllDeliveryReports() {
+        return reportDao.getAllDeliveryReports();
     }
 
 }
