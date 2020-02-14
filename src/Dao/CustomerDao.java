@@ -219,7 +219,7 @@ public class CustomerDao {
         String query = "SELECT customer.id, last_name, first_name FROM customer "
                 + "Inner JOIN report ON customer.id=report.customer_id "
                 + "INNER JOIN item ON report.id=item.receiving_report_id "
-                + "WHERE NOT EXISTS (SELECT receiving_report_id FROM item where report.id=item.receiving_report_id and (status='processing' OR status='on_rout')) "
+                + "WHERE NOT EXISTS (SELECT receiving_report_id FROM item where report.id=item.receiving_report_id and (status='processing' OR status='delivery_scheduled' OR status='delivered')) "
                 + "GROUP BY customer.id;";
         
         try (Statement statement = connection.createStatement()) {

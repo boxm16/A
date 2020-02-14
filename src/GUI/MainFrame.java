@@ -2581,7 +2581,7 @@ System.out.println("maybe to drop switch, and fille all the table simultaniously
         availableRoutsModel.removeAllElements();
         ArrayList<String> availableRouts;
         availableRouts = routeController.getAvailableRoutForDistrict(postal_code);
-        Collections.sort(availableRouts);
+      
 
         for (String day : availableRouts) {
             availableRoutsModel.addElement(day);
