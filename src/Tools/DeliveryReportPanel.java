@@ -11,8 +11,11 @@ import Models.Item;
 import Models.Report;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -57,7 +60,7 @@ public class DeliveryReportPanel extends javax.swing.JPanel {
         deliveryReceiptNumber = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        total_sum = new javax.swing.JTextField();
+        totalSum = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -133,9 +136,10 @@ public class DeliveryReportPanel extends javax.swing.JPanel {
             }
         });
 
-        total_sum.setEditable(false);
-        total_sum.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        total_sum.setText("TotalSum");
+        totalSum.setEditable(false);
+        totalSum.setBackground(new java.awt.Color(51, 255, 51));
+        totalSum.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        totalSum.setText("TotalSum");
 
         javax.swing.GroupLayout deliveryReceiptPanelLayout = new javax.swing.GroupLayout(deliveryReceiptPanel);
         deliveryReceiptPanel.setLayout(deliveryReceiptPanelLayout);
@@ -147,7 +151,7 @@ public class DeliveryReportPanel extends javax.swing.JPanel {
                 .addComponent(jButton2))
             .addGroup(deliveryReceiptPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(total_sum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(totalSum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1))
         );
@@ -156,7 +160,7 @@ public class DeliveryReportPanel extends javax.swing.JPanel {
             .addGroup(deliveryReceiptPanelLayout.createSequentialGroup()
                 .addGroup(deliveryReceiptPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(total_sum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(totalSum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addGroup(deliveryReceiptPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(deliveryReceiptNumber, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
@@ -176,6 +180,8 @@ public class DeliveryReportPanel extends javax.swing.JPanel {
 
         jLabel6.setText("ΟΝΟΜΑ ΣΤΟ ΚΟΥΔΟΥΝΙ");
 
+        date.setEditable(false);
+        date.setBackground(new java.awt.Color(255, 255, 51));
         date.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
 
         jLabel7.setText("Σ.Τ.");
@@ -196,11 +202,7 @@ public class DeliveryReportPanel extends javax.swing.JPanel {
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(district_street_num, javax.swing.GroupLayout.PREFERRED_SIZE, 532, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(31, 31, 31)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(name_surname, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -208,7 +210,8 @@ public class DeliveryReportPanel extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(landline_phone, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel8))))
+                                .addComponent(jLabel8))
+                            .addComponent(district_street_num)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -226,11 +229,13 @@ public class DeliveryReportPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(date)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(postal_code, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 42, Short.MAX_VALUE))
-                    .addComponent(mobile_phone))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 18, Short.MAX_VALUE)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(postal_code, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(mobile_phone, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(deliveryReceiptPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2))
         );
@@ -241,14 +246,15 @@ public class DeliveryReportPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(mobile_phone)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(name_surname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(landline_phone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(mobile_phone)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -368,10 +374,11 @@ public class DeliveryReportPanel extends javax.swing.JPanel {
     private javax.swing.JTextField name_surname;
     private javax.swing.JTextField postal_code;
     private javax.swing.JTextField report_id;
-    private javax.swing.JTextField total_sum;
+    private javax.swing.JTextField totalSum;
     // End of variables declaration//GEN-END:variables
 
     private void fillReport(Report report) {
+        BigDecimal totalCharge = new BigDecimal(0);
         name_surname.setText(report.getCustomer().getLastName() + " " + report.getCustomer().getFirstName());
         district_street_num.setText(report.getCustomer().getDistrict() + ", " + report.getCustomer().getStreet());
         postal_code.setText(report.getCustomer().getPostalCode());
@@ -386,36 +393,62 @@ public class DeliveryReportPanel extends javax.swing.JPanel {
         date.setText(strDate);
 
         DefaultTableModel model = new DefaultTableModel();
+        Object[] column = new Object[11];
+        column[0] = "Description";
+        column[1] = "ΘΕΣΗ";
+        column[2] = "ΚΩΔΙΚΟΣ";
+        column[3] = "ΧΡΩΝΙΑ";
+        column[4] = "ΜΗΚΟΣ";
+        column[5] = "ΠΛΑΤΟΣ";
+        column[6] = "ΤΕΤΡΑΓΩΝΙΚΑ";
+        column[7] = "ΚΑΘΑΡΙΣΜΑ";
+        column[8] = "ΦΥΛΑΞΗ";
+        column[9] = "ΕΠΙΔΙΟΡΘΩΣΗ";
+        column[10] = "ΣΥΝΟΛΟ";
+        model.setColumnIdentifiers(column);
+
         for (Item item : report.getItems()) {
-            Object[] column = new Object[9];
-            column[0] = "Description";
-            column[1] = "ΘΕΣΗ";
-            column[2] = "ΚΩΔΙΚΟΣ";
-            column[3] = "ΧΡΩΝΙΑ";
-            column[4] = "ΜΗΚΟΣ";
-            column[5] = "ΠΛΑΤΟΣ";
-            column[6] = "ΚΑΘΑΡΙΣΜΑ";
-            column[7] = "ΦΥΛΑΞΗ";
-            column[8] = "ΕΠΙΔΙΟΡΘΩΣΗ";
 
-            model.setColumnIdentifiers(column);
-
-            String[] row = new String[9];
+            Object[] row = new Object[11];
             row[0] = item.getDescription();
             row[1] = "ΧΧΧΧ";
             row[2] = String.valueOf(item.getCode());
             row[3] = String.valueOf(item.getYear());
-            row[4] = String.valueOf(item.getLength());
-            row[5] = String.valueOf(item.getWidth());
-            row[6] = String.valueOf(item.getCleaningCharge());
-            row[7] = String.valueOf(item.getStoringCharge());
-            row[8] = String.valueOf(item.getMendingCharge());
+
+            BigDecimal length, width, square;
+            row[4] = length = item.getLength();
+            row[5] = width = item.getWidth();
+            row[6] = square = length.multiply(width).setScale(2, RoundingMode.HALF_EVEN);
+
+            BigDecimal cleaningCharge, storingCharge, mendingCharge, itemCharge;
+            if (item.isForCleaning()) {
+                row[7] = cleaningCharge = item.getCleaningPrice().multiply(square).setScale(2, RoundingMode.HALF_EVEN);;
+            } else {
+                row[7] = cleaningCharge = new BigDecimal(0);
+            }
+
+            if (item.isForStoring()) {
+                row[8] = storingCharge = item.getStoringPrice().multiply(square).setScale(2, RoundingMode.HALF_EVEN);
+            } else {
+                row[8] = storingCharge = new BigDecimal(0);
+            }
+
+            if (item.getMendingCharge() != null) {
+                row[9] = mendingCharge = item.getMendingCharge().setScale(2, RoundingMode.HALF_EVEN);
+            } else {
+                row[9] = mendingCharge = new BigDecimal(0);
+            }
+
+            itemCharge = storingCharge.add(cleaningCharge).add(mendingCharge);
+            row[10] = itemCharge;
+            totalCharge = totalCharge.add(itemCharge);
             model.addRow(row);
         }
 
         JTable table = new JTable();
-
         table.setModel(model);
+
+        totalSum.setText(totalCharge.toString());
 
         jPanel2.setLayout(new BorderLayout());
         jPanel2.add(table.getTableHeader(), BorderLayout.NORTH);
@@ -426,4 +459,5 @@ public class DeliveryReportPanel extends javax.swing.JPanel {
     public void hideDeliveryReceiptPanel() {
         deliveryReceiptPanel.hide();
     }
+
 }

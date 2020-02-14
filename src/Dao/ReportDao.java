@@ -155,7 +155,8 @@ public class ReportDao {
         String reportQuery = "SELECT first_name, last_name, landline_phone, mobile_phone,    "
                 + "street, district, floor, postal_code, doorbell_name, customer.note, "
                 + "product_description, item_code, item_year, length, width, "
-                + "cleaning_charge, storing_charge, mending_charge,"
+                + "cleaning, storing, "
+                + "cleaning_price, storing_price, mending_charge, "
                 + " r.id, date   "
                 + " FROM customer  "
                 + "INNER JOIN report r ON customer.id=r.customer_id "
@@ -182,9 +183,11 @@ public class ReportDao {
                 int item_year = rs.getInt("item_year");
                 BigDecimal length = rs.getBigDecimal("length");
                 BigDecimal width = rs.getBigDecimal("width");
+                boolean cleaning = rs.getBoolean("cleaning");
+                boolean storing = rs.getBoolean("storing");
 
-                BigDecimal cleaning_charge = rs.getBigDecimal("cleaning_charge");
-                BigDecimal storing_charge = rs.getBigDecimal("storing_charge");
+                BigDecimal cleaning_price = rs.getBigDecimal("cleaning_price");
+                BigDecimal storing_price = rs.getBigDecimal("storing_price");
                 BigDecimal mending_charge = rs.getBigDecimal("mending_charge");
                 int id = rs.getInt("id");
                 String strDate = rs.getString("date");
@@ -219,8 +222,10 @@ public class ReportDao {
                 item.setYear(item_year);
                 item.setLength(length);
                 item.setWidth(width);
-                item.setCleaningCharge(cleaning_charge);
-                item.setStoringCharge(storing_charge);
+                item.setForCleaning(cleaning);
+                item.setForStoring(storing);
+                item.setCleaningPrice(cleaning_price);
+                item.setStoringPrice(storing_price);
                 item.setMendingCharge(mending_charge);
 
                 int index = IDs.indexOf(id);
@@ -249,7 +254,8 @@ public class ReportDao {
         String reportQuery = "SELECT first_name, last_name, landline_phone, mobile_phone,    "
                 + "street, district, floor, postal_code, doorbell_name, customer.note, "
                 + "product_description, item_code, item_year, length, width, "
-                + "cleaning_charge, storing_charge, mending_charge,"
+                + "cleaning, storing, "
+                + "cleaning_price, storing_price, mending_charge, "
                 + "  r.id  "
                 + " FROM customer  "
                 + "INNER JOIN report r ON customer.id=r.customer_id "
@@ -276,9 +282,10 @@ public class ReportDao {
                 int item_year = rs.getInt("item_year");
                 BigDecimal length = rs.getBigDecimal("length");
                 BigDecimal width = rs.getBigDecimal("width");
-
-                BigDecimal cleaning_charge = rs.getBigDecimal("cleaning_charge");
-                BigDecimal storing_charge = rs.getBigDecimal("storing_charge");
+                boolean cleaning = rs.getBoolean("cleaning");
+                boolean storing = rs.getBoolean("storing");
+                BigDecimal cleaning_price = rs.getBigDecimal("cleaning_price");
+                BigDecimal storing_price = rs.getBigDecimal("storing_price");
                 BigDecimal mending_charge = rs.getBigDecimal("mending_charge");
 
                 int id = rs.getInt("id");
@@ -312,8 +319,10 @@ public class ReportDao {
                 item.setYear(item_year);
                 item.setLength(length);
                 item.setWidth(width);
-                item.setCleaningCharge(cleaning_charge);
-                item.setStoringCharge(storing_charge);
+                item.setForCleaning(cleaning);
+                item.setForStoring(storing);
+                item.setCleaningPrice(cleaning_price);
+                item.setStoringPrice(storing_price);
                 item.setMendingCharge(mending_charge);
 
                 int index = IDs.indexOf(id);
