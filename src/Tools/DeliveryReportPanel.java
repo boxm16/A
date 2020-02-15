@@ -411,7 +411,7 @@ public class DeliveryReportPanel extends javax.swing.JPanel {
 
             Object[] row = new Object[11];
             row[0] = item.getDescription();
-            row[1] = "ΧΧΧΧ";
+            row[1] = item.getSpot();
             row[2] = String.valueOf(item.getCode());
             row[3] = String.valueOf(item.getYear());
 

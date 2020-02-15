@@ -46,6 +46,7 @@ public class ItemDao {
 
                 item.setId(rs.getInt("product_id"));
                 item.setDescription(rs.getString("product_description"));
+                item.setSpot(rs.getString("spot"));
                 item.setCode(rs.getInt("item_code"));
                 item.setYear(rs.getInt("item_year"));
                 item.setCleaningPrice(rs.getBigDecimal("cleaning_price"));
@@ -107,6 +108,7 @@ public class ItemDao {
 
                 item.setId(rs.getInt("product_id"));
                 item.setDescription(rs.getString("product_description"));
+                item.setSpot(rs.getString("spot"));
                 item.setCode(rs.getInt("item_code"));
                 item.setYear(rs.getInt("item_year"));
                 item.setCleaningPrice(rs.getBigDecimal("cleaning_price"));

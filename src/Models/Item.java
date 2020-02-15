@@ -12,6 +12,7 @@ import java.math.BigDecimal;
  * @author Michail Sitmalidis
  */
 public class Item extends Product {
+    private String spot;
 
     private int code;
     private int year;
@@ -142,6 +143,14 @@ public class Item extends Product {
 
     public int getYear() {
         return year;
+    }
+
+    public String getSpot() {
+        return spot;
+    }
+
+    public void setSpot(String spot) {
+        this.spot = spot;
     }
 
 }

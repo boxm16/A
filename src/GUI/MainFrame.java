@@ -2216,7 +2216,7 @@ System.out.println("maybe to drop switch, and fille all the table simultaniously
         customerCardPanel.removeAll();
         cardTableModel = new MyTableModel();
 
-        Object[] columns = new Object[19];
+        Object[] columns = new Object[20];
 
         columns[0] = "ΚΩΔΙΚΟΣ ΠΡΟΙΟΝΤΟΣ";
         columns[1] = "ΠΕΡΙΓΡΑΦΗ";
@@ -2241,12 +2241,13 @@ System.out.println("maybe to drop switch, and fille all the table simultaniously
         columns[16] = "ΣΥΝΟΛΟ ΧΡΕΩΣΗΣ ΤΕΜΑΧΙΟΥ";
         columns[17] = "ΚΑΤΑΣΤΑΣΗ";
         columns[18] = "ΔΙΑΛΟΓΗ";
+        columns[19]="aba";
         cardTableModel.setColumnIdentifiers(columns);
 
         ArrayList<Item> items = itemController.getCustomerItemsForCard(Integer.parseInt(customerIdField.getText()));
 
         for (Item item : items) {
-            Object[] row = new Object[19];
+            Object[] row = new Object[20];
 
             row[0] = item.getId();
             row[1] = item.getDescription();
@@ -2297,6 +2298,7 @@ System.out.println("maybe to drop switch, and fille all the table simultaniously
             } else {
                 row[18] = status = Boolean.FALSE;
             }
+            row[19]=item.getSpot();
 
             cardTableModel.addRow(row, status);
         }

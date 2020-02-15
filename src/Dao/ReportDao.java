@@ -154,7 +154,7 @@ public class ReportDao {
 
         String reportQuery = "SELECT first_name, last_name, landline_phone, mobile_phone,    "
                 + "street, district, floor, postal_code, doorbell_name, customer.note, "
-                + "product_description, item_code, item_year, length, width, "
+                + "product_description, spot, item_code, item_year, length, width, "
                 + "cleaning, storing, "
                 + "cleaning_price, storing_price, mending_charge, "
                 + " r.id, date   "
@@ -179,6 +179,7 @@ public class ReportDao {
                 String bell_name = rs.getString("doorbell_name");
                 String note = rs.getString("customer.note");
                 String product_description = rs.getString("product_description");
+                String spot = rs.getString("spot");
                 int item_code = rs.getInt("item_code");
                 int item_year = rs.getInt("item_year");
                 BigDecimal length = rs.getBigDecimal("length");
@@ -218,6 +219,7 @@ public class ReportDao {
 
                 Item item = new Item();
                 item.setDescription(product_description);
+                item.setSpot(spot);
                 item.setCode(item_code);
                 item.setYear(item_year);
                 item.setLength(length);
@@ -253,7 +255,7 @@ public class ReportDao {
 
         String reportQuery = "SELECT first_name, last_name, landline_phone, mobile_phone,    "
                 + "street, district, floor, postal_code, doorbell_name, customer.note, "
-                + "product_description, item_code, item_year, length, width, "
+                + "product_description, spot, item_code, item_year, length, width, "
                 + "cleaning, storing, "
                 + "cleaning_price, storing_price, mending_charge, "
                 + "  r.id  "
@@ -278,6 +280,7 @@ public class ReportDao {
                 String bell_name = rs.getString("doorbell_name");
                 String note = rs.getString("customer.note");
                 String product_description = rs.getString("product_description");
+                String spot = rs.getString("spot");
                 int item_code = rs.getInt("item_code");
                 int item_year = rs.getInt("item_year");
                 BigDecimal length = rs.getBigDecimal("length");
@@ -315,6 +318,7 @@ public class ReportDao {
 
                 Item item = new Item();
                 item.setDescription(product_description);
+                item.setSpot(spot);
                 item.setCode(item_code);
                 item.setYear(item_year);
                 item.setLength(length);
