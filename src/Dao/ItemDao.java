@@ -143,16 +143,17 @@ public class ItemDao {
     public void updateItemDimensions(Item item) {
         connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
 
-        String query = "UPDATE item SET length=?, width=? WHERE item_code=? and item_year=?;";
+        String query = "UPDATE item SET length=?, width=?, spot=? WHERE item_code=? and item_year=?;";
 
         if (!item.isForMending() || (item.isForMending() && item.getMendingCharge() != null)) {//εαν den ειναι για επιδιορωθση 'η ε'ιναι και εχει γινει επιδιορθωση, πλεον ειναι ετοιμο γα παραδοση
-            query = "UPDATE item SET length=?, width=?, status='ready' WHERE item_code=? and item_year=?;";
+            query = "UPDATE item SET length=?, width=?, spot=?, status='ready' WHERE item_code=? and item_year=?;";
         }
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setBigDecimal(1, item.getLength());
             preparedStatement.setBigDecimal(2, item.getWidth());
-            preparedStatement.setInt(3, item.getCode());
-            preparedStatement.setInt(4, item.getYear());
+            preparedStatement.setString(3, item.getSpot());
+            preparedStatement.setInt(4, item.getCode());
+            preparedStatement.setInt(5, item.getYear());
             preparedStatement.execute();
 
         } catch (SQLException ex) {
@@ -184,6 +185,23 @@ public class ItemDao {
 
         }
 
+    }
+
+    public void updateItemSpot(Item item) {
+        connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
+
+        String query = "UPDATE item SET spot=? WHERE item_code=? and item_year=?;";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, item.getSpot());
+            preparedStatement.setInt(2, item.getCode());
+            preparedStatement.setInt(3, item.getYear());
+            preparedStatement.execute();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ItemDao.class.getName()).log(Level.SEVERE, null, ex);
+
+        }
     }
 
 }

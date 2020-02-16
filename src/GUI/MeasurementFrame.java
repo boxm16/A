@@ -61,11 +61,17 @@ public class MeasurementFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         lengthPanel = new javax.swing.JPanel();
+        itemSpotField = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         mendingChargePanel = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         mendingChargeErrorLabel = new javax.swing.JLabel();
         mendingChargeButton = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        spotField = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        saveSpotButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -134,24 +140,51 @@ public class MeasurementFrame extends javax.swing.JFrame {
         lengthPanel.setBackground(new java.awt.Color(102, 255, 102));
         lengthPanel.setLayout(new javax.swing.BoxLayout(lengthPanel, javax.swing.BoxLayout.LINE_AXIS));
 
+        itemSpotField.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        itemSpotField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                itemSpotFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                itemSpotFieldFocusLost(evt);
+            }
+        });
+        itemSpotField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                itemSpotFieldKeyPressed(evt);
+            }
+        });
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        jLabel6.setText("ΘΕΣΗ ΣΤΗΝ ΑΠΟΘΗΚΗ");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(96, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 108, Short.MAX_VALUE)
+                .addComponent(widthErrorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3))
-                        .addGap(33, 33, 33)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(itemSpotField, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lengthPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(widthPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(saveButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(widthErrorLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lengthErrorLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel3))
+                                .addGap(33, 33, 33)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lengthPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(widthPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lengthErrorLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(saveButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -167,9 +200,13 @@ public class MeasurementFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4)
                     .addComponent(widthPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(widthErrorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(itemSpotField))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -221,10 +258,69 @@ public class MeasurementFrame extends javax.swing.JFrame {
                 .addComponent(mendingChargeErrorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(mendingChargeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addContainerGap(165, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("ΕΠΙΔΙΟΡΘΩΣΗ", jPanel2);
+
+        spotField.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        spotField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                spotFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                spotFieldFocusLost(evt);
+            }
+        });
+        spotField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                spotFieldKeyPressed(evt);
+            }
+        });
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 30)); // NOI18N
+        jLabel7.setText("ΘΕΣΗ ΣΤΗΝ ΑΠΟΘΗΚΗ");
+
+        saveSpotButton.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
+        saveSpotButton.setText("ΑΠΟΘΗΚΕΥΣΗ");
+        saveSpotButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveSpotButtonActionPerformed(evt);
+            }
+        });
+        saveSpotButton.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                saveSpotButtonKeyPressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(saveSpotButton, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(spotField, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(77, 77, 77)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(spotField, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(saveSpotButton, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(156, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("ΘΕΣΗ", jPanel3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -252,18 +348,18 @@ public class MeasurementFrame extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(itemYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(itemYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(itemCodeField, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jLabel2)
+                    .addComponent(itemCodeField, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(itemCodeErrorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTabbedPane1)
                 .addContainerGap())
         );
 
@@ -275,6 +371,7 @@ public class MeasurementFrame extends javax.swing.JFrame {
         if (evt.getKeyCode() == 10) {
             lengthField.requestFocus();
             mendingChargeField.requestFocus();
+            spotField.requestFocus();
         }
     }//GEN-LAST:event_itemCodeFieldKeyPressed
 
@@ -298,11 +395,13 @@ public class MeasurementFrame extends javax.swing.JFrame {
             // item.setYear(Integer.parseInt(itemYear.getSelectedItem().toString()));
             item.setLength(new BigDecimal(lengthField.getText()));
             item.setWidth(new BigDecimal(widthField.getText()));
+            item.setSpot(itemSpotField.getText());
             itemController.updateItemDimensions(item);
         }
         itemCodeField.setValue(null);
         lengthField.setText("");
         widthField.setText("");
+        itemSpotField.setText("");
         itemCodeField.requestFocus();
     }//GEN-LAST:event_saveButtonActionPerformed
 
@@ -315,6 +414,76 @@ public class MeasurementFrame extends javax.swing.JFrame {
         mendingChargeField.setText("");
         itemCodeField.requestFocus();
     }//GEN-LAST:event_mendingChargeButtonActionPerformed
+
+    private void itemSpotFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_itemSpotFieldKeyPressed
+        if (evt.getKeyCode() == 10) {
+            saveButton.requestFocus();
+
+        }
+    }//GEN-LAST:event_itemSpotFieldKeyPressed
+
+    private void itemSpotFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_itemSpotFieldFocusGained
+        itemSpotField.setBackground(focusInColor);        // TODO add your handling code here:
+    }//GEN-LAST:event_itemSpotFieldFocusGained
+
+    private void itemSpotFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_itemSpotFieldFocusLost
+        itemSpotField.setBackground(focusOutColor);
+    }//GEN-LAST:event_itemSpotFieldFocusLost
+
+    private void spotFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_spotFieldFocusGained
+        spotField.setBackground(focusInColor);
+    }//GEN-LAST:event_spotFieldFocusGained
+
+    private void spotFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_spotFieldFocusLost
+        spotField.setBackground(focusOutColor);
+    }//GEN-LAST:event_spotFieldFocusLost
+
+    private void spotFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_spotFieldKeyPressed
+        if (evt.getKeyCode() == 10) {
+            saveSpotButton.requestFocus();
+
+        }
+    }//GEN-LAST:event_spotFieldKeyPressed
+
+    private void saveSpotButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveSpotButtonActionPerformed
+
+        if (itemCodeInputValid()) {//first i check code input
+            item = itemController.getItemByCode(itemCodeField.getText().trim(), itemYear.getSelectedItem().toString());
+            if (item != null) {
+                item.setSpot(spotField.getText());
+                itemController.updateItemSpot(item);
+
+                itemCodeField.setValue(null);
+                spotField.setText("");
+                itemCodeField.requestFocus();
+            } else {
+                JOptionPane.showMessageDialog(null,
+                        "Ο ΚΩΔΙΚΟΣ ΤΕΜΑΧΙΟΥ ΠΡΕΠΕΙ ΝΑ ΕΧΕΙ 5 ΨΗΦΙΑ",
+                        "ΛΑΘΟΣ ΚΩΔΙΚΟΣ ΤΕΜΑΧΙΟΥ",
+                        JOptionPane.ERROR_MESSAGE
+                );
+
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "Ο ΚΩΔΙΚΟΣ ΤΕΜΑΧΙΟΥ ΔΕΝ ΥΠΑΡΧΕΙ ΣΤΗ ΒΑΣΗ",
+                    "ΛΑΘΟΣ ΚΩΔΙΚΟΣ ΤΕΜΑΧΙΟΥ",
+                    JOptionPane.ERROR_MESSAGE
+            );
+
+            itemCodeField.setBackground(Color.red);
+            itemCodeErrorLabel.setText("Ο ΚΩΔΙΚΟΣ ΤΕΜΑΧΙΟΥ ΔΕΝ ΥΠΑΡΧΕΙ ΣΤΗ ΒΑΣΗ");
+            itemCodeField.requestFocus();
+
+        }
+
+
+    }//GEN-LAST:event_saveSpotButtonActionPerformed
+
+    private void saveSpotButtonKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_saveSpotButtonKeyPressed
+        saveSpotButton.doClick();
+    }//GEN-LAST:event_saveSpotButtonKeyPressed
 
     /**
      * @param args the command line arguments
@@ -378,7 +547,8 @@ public class MeasurementFrame extends javax.swing.JFrame {
         widthField.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 if (evt.getKeyCode() == 10) {
-                    saveButton.requestFocus();
+                    itemSpotField.requestFocus();
+
                 }
             }
         });
@@ -417,14 +587,18 @@ public class MeasurementFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel itemCodeErrorLabel;
     private javax.swing.JFormattedTextField itemCodeField;
+    private javax.swing.JTextField itemSpotField;
     private javax.swing.JComboBox<String> itemYear;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lengthErrorLabel;
     private javax.swing.JPanel lengthPanel;
@@ -432,6 +606,8 @@ public class MeasurementFrame extends javax.swing.JFrame {
     private javax.swing.JLabel mendingChargeErrorLabel;
     private javax.swing.JPanel mendingChargePanel;
     private javax.swing.JButton saveButton;
+    private javax.swing.JButton saveSpotButton;
+    private javax.swing.JTextField spotField;
     private javax.swing.JLabel widthErrorLabel;
     private javax.swing.JPanel widthPanel;
     // End of variables declaration//GEN-END:variables
@@ -652,7 +828,7 @@ public class MeasurementFrame extends javax.swing.JFrame {
 
             case 4:
                 if (item.getMendingCharge() != null) {
-                    int result = JOptionPane.showConfirmDialog(null, "ΧΗ ΕΠΙΔΙΟΡΘΩΣΗ  ΗΔΗ ΕΧΕΙ ΧΡΕΩΘΕΙ, ΘΕΣ ΝΑ ΤΟ ΑΛΛΑΞΕΙΣ?", "ΕΠΙΔΙΟΡΘΩΣΗ ΧΡΕΟΜΕΝΟ",
+                    int result = JOptionPane.showConfirmDialog(null, "Η ΕΠΙΔΙΟΡΘΩΣΗ  ΗΔΗ ΕΧΕΙ ΧΡΕΩΘΕΙ, ΘΕΣ ΝΑ ΤΟ ΑΛΛΑΞΕΙΣ?", "ΕΠΙΔΙΟΡΘΩΣΗ ΧΡΕΟΜΕΝΟ",
                             JOptionPane.YES_NO_OPTION,
                             JOptionPane.QUESTION_MESSAGE);
                     if (result == JOptionPane.YES_OPTION) {

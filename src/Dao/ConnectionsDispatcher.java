@@ -65,7 +65,7 @@ public class ConnectionsDispatcher {
                     "ΔΕΝ ΥΠΑΡΧΕΙ ΣΥΝΔΕΣΗ ΜΕ ΤΗ ΒΑΣΗ, ΣΥΣΤΗΜΑ ΠΡΟΣΠΑΘΕΙ ΝΑ ΦΙΑΞΕΙ ΣΥΝΔΕΣΗ.",
                     "DATABASE CONNECTION ERROR",
                     JOptionPane.ERROR_MESSAGE);
-            getConnection();
+            renewConnectionsStack();
         }
         return connection;
     }

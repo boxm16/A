@@ -71,7 +71,7 @@ public class ItemController {
 
         for (Item item : customerItems) {
             //if all statuses are valid here, why do i need to check it
-            if (item.getStatus().equals("processing") | item.getStatus().equals("ready")| item.getStatus().equals("delivery_scheduled")) {
+            if (item.getStatus().equals("processing") | item.getStatus().equals("ready") | item.getStatus().equals("delivery_scheduled")) {
                 itemsForCard.add(item);
 
             }
@@ -107,6 +107,10 @@ public class ItemController {
 
     public void updateItemMendingCharge(Item item) {
         itemDao.updateItemMendingCharge(item);
+    }
+
+    public void updateItemSpot(Item item) {
+        itemDao.updateItemSpot(item);
     }
 
 }
