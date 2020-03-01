@@ -40,10 +40,10 @@ public class ConnectionsDispatcher {
 
         connectionsStack = new LinkedList();
         connectionsStack.add(openConnection());
-        connectionsStack.add(openConnection());
 
         timer = new Timer();
         timer.schedule(new ConnectionRenewal(), delay, MINUTES * 60000);
+
     }
 
     public static ConnectionsDispatcher getDispatcherInstance() {
@@ -80,7 +80,7 @@ public class ConnectionsDispatcher {
         return connectionsStack.peekLast();
     }
 
-    private static void renewConnectionsStack() {
+    public static void renewConnectionsStack() {
         for (Connection connection : connectionsStack) {
             try {
                 connection.close();
@@ -89,8 +89,9 @@ public class ConnectionsDispatcher {
             }
         }
         connectionsStack.clear();
-        connectionsStack.add(openConnection());
-        connectionsStack.add(openConnection());
+        while (connectionsStack.size() < 2) {
+            connectionsStack.add(openConnection());
+        }
     }
 
     private class ConnectionRenewal extends TimerTask {
@@ -101,10 +102,10 @@ public class ConnectionsDispatcher {
             System.out.println("Connections in connections Stack before renewal: " + connectionsStack.size());
             timeStamp = new Date();
 
-            if (connectionsStack.size() < 2) {
+            while (connectionsStack.size() < 2) {
                 connectionsStack.add(openConnection());
             }
-            connectionsStack.add(openConnection());
+      
             Connection closingConnection = connectionsStack.removeFirst();
             System.out.println("Connections in connections Stack after renewal: " + connectionsStack.size());
 

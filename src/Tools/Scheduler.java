@@ -5,8 +5,11 @@
  */
 package Tools;
 
-import Dao.DataBaseConnection;
-import java.sql.Connection;
+import Controllers.CustomerController;
+import Dao.ConnectionsDispatcher;
+import GUI.MainFrame;
+
+import java.util.HashMap;
 import java.util.TimerTask;
 import java.util.Timer;
 
@@ -16,23 +19,41 @@ import java.util.Timer;
  */
 public class Scheduler {
 
-    Connection connection;
-    TimerTask task;
+    MainFrame mainFrame;
+    private CustomerController customerController;
 
-    public Scheduler() {
+    private TimerTask task;
+    private final int DELAY = 0;
+    private final int PERIOD = 1 * 30000;
+
+    public Scheduler(MainFrame mainFrame) {
+        this.mainFrame = mainFrame;
+        customerController = new CustomerController();
         task = new TimerTask() {
             public void run() {
-              //  connection = DataBaseConnection.getDBCInstance().getConnection();
+                HashMap<String, String> pendingConfirmationRequests = customerController.getPendingConfirmationRequests();
+                if (pendingConfirmationRequests.size() > 0) {
+                    customerController.sendConfirmationRequests(pendingConfirmationRequests);
+
+                }
+                int connectionsCount = customerController.getConectionsCount();
+                mainFrame.showConnectionsCountOnMainFrameHeader(connectionsCount);
+                if (connectionsCount == 0) {
+                    mainFrame.connectionRed();
+                    ConnectionsDispatcher.getDispatcherInstance().renewConnectionsStack();
+
+                } else {
+                    mainFrame.connectionGreen();
+                }
             }
         };
 
     }
 
-    public void startConnectionScheduler() {
+    public void startEmailCheckerScheduler() {
         Timer timer = new Timer("ConnectionTimer");
 
-        int delay = 1000;
-        timer.schedule(task, delay);
+        timer.schedule(task, DELAY, PERIOD);
     }
 
 }

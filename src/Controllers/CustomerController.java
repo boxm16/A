@@ -7,8 +7,10 @@ package Controllers;
 
 import Dao.CustomerDao;
 import Models.Customer;
+import Tools.Mail;
 import Tools.NewCustomerIdentifier;
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,10 +19,12 @@ import javax.swing.JOptionPane;
  */
 public class CustomerController {
 
-    CustomerDao customerDao;
+    private CustomerDao customerDao;
+    private Mail mail;
 
     public CustomerController() {
         customerDao = new CustomerDao();
+        mail = new Mail();
     }
 
     public Customer getCustomerById(int id) {
@@ -83,6 +87,22 @@ public class CustomerController {
         Customer customer = new Customer();
         customer = customerDao.getCustomerByIdentifier(identifier);
         return customer;
+    }
+
+    public HashMap<String, String> getPendingConfirmationRequests() {
+        return customerDao.getPendingConfirmationRequests();
+    }
+
+    public void sendConfirmationRequests(HashMap<String, String> pendingConfirmationRequests) {
+
+        for (String email : pendingConfirmationRequests.keySet()) {
+            mail.confirmationMail(email, pendingConfirmationRequests.get(email));
+            customerDao.sendConfirmationRequests(email);
+        }
+    }
+
+    public int getConectionsCount() {
+        return customerDao.getConnectionsCount();
     }
 
 }
