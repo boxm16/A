@@ -342,7 +342,7 @@ public class ReportDao {
 
     }
 
-    public void cancelReport(String reportId) {
+    public void cancelDeliveryReport(String reportId) {
         connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
 
         String reportQuery = "UPDATE report SET status='canceled' WHERE id=?;";
@@ -405,10 +405,10 @@ public class ReportDao {
 
     }
 
-    public void deleteReport(int report_id) {
+    public void cancelPickUpReport(int report_id) {
         connection = ConnectionsDispatcher.getDispatcherInstance().getConnection();
 
-        String reportQuery = "DELETE FROM report WHERE id=? ;";
+        String reportQuery = "UPDATE report SET status='canceled' WHERE id=? ;";
         try (PreparedStatement ps_report = connection.prepareStatement(reportQuery)) {
             ps_report.setInt(1, report_id);
             ps_report.execute();

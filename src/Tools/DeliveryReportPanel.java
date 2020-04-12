@@ -330,7 +330,7 @@ public class DeliveryReportPanel extends javax.swing.JPanel {
         int dialogButton = JOptionPane.YES_NO_OPTION;
         int dialogResult = JOptionPane.showConfirmDialog(this, "ΕΙΣΑΙ ΣΙΓΟΥΡΟΣ ΟΤΙ ΘΕΛΕΙΣ ΑΚΥΡΩΣΕΙΣ DELIVERY REPORT???", "ΠΡΟΣΟΧΗ", dialogButton);
         if (dialogResult == 0) {
-            reportController.cancelReport(report_id.getText());
+            reportController.cancelDeliveryReport(report_id.getText());
             frame.loadReports();
         } else {
             //DO NOTHING

@@ -96,8 +96,9 @@ public class CustomerController {
     public void sendConfirmationRequests(HashMap<String, String> pendingConfirmationRequests) {
 
         for (String email : pendingConfirmationRequests.keySet()) {
-            mail.confirmationMail(email, pendingConfirmationRequests.get(email));
-            customerDao.sendConfirmationRequests(email);
+            if (mail.confirmationMailSent(email, pendingConfirmationRequests.get(email))) {
+                customerDao.sendConfirmationRequests(email);
+            }
         }
     }
 

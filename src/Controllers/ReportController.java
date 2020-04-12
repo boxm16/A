@@ -46,9 +46,9 @@ public class ReportController {
         return reports;
     }
 
-    public void cancelReport(String reportId) {
+    public void cancelDeliveryReport(String reportId) {
 
-        reportDao.cancelReport(reportId);
+        reportDao.cancelDeliveryReport(reportId);
 
     }
 
@@ -60,8 +60,8 @@ public class ReportController {
         reportDao.createPickUpReport(report);
     }
 
-    public void deleteReport(int report_id) {
-        reportDao.deleteReport(report_id);
+    public void cancelPickUpReport(int report_id) {
+        reportDao.cancelPickUpReport(report_id);
     }
 
     public LinkedHashMap<Integer, String> getSceduledPickUpList(int customer_id) {

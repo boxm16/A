@@ -15,18 +15,16 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-
 /**
  *
  * @author Michail Sitmalidis
  */
-
 public class Mail {
 
     final String username = "boxm1313@gmail.com";
     final String password = "athina2004";
 
-    public void confirmationMail(String email, String url_token) {
+    public boolean confirmationMailSent(String email, String url_token) {
         Properties prop = new Properties();
         prop.put("mail.smtp.host", "smtp.gmail.com");
         prop.put("mail.smtp.port", "587");
@@ -48,16 +46,17 @@ public class Mail {
                     Message.RecipientType.TO,
                     InternetAddress.parse(email)
             );
-         
 
             message.setSubject("Registration Confirmation");
             message.setText("Dear Customer,"
                     + "\n\n Click the link to confirm your registration:" + url_token);
 
             Transport.send(message);
+            return true;
+
         } catch (MessagingException e) {
             e.printStackTrace();
         }
-
+        return false;
     }
 }

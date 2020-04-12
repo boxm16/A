@@ -72,7 +72,7 @@ public class ScheduledPickUpPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void deletScheduledPickUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletScheduledPickUpActionPerformed
-        reportController.deleteReport(report_id);
+        reportController.cancelPickUpReport(report_id);
         mainFrame.displayScheduledPickUps();
     }//GEN-LAST:event_deletScheduledPickUpActionPerformed
 
